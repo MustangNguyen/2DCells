@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UpdateManager : Singleton<UpdateManager>
 {
-    private EnemyCell[] transformsPool;
+    [SerializeField] private EnemyCell[] transformsPool;
     public int poolIndex = 0;
     public int maximumPool = 1000;
     public int enemiesCount = 0;
@@ -22,26 +22,29 @@ public class UpdateManager : Singleton<UpdateManager>
     // }
     private void FixedUpdate()
     {
-        for (int i = 0; i < transformPoolCount; i++)
+        for (int i = 0; i < maximumPool; i++)
         {
+            if (transformsPool[i] == null) continue;
             transformsPool[i].CellUpdate();
         }
     }
-    public void AddCellsToPool(EnemyCell transform){
-        while(true){
-            if (poolIndex >= maximumPool)
-                poolIndex = 0;
-            if (transformsPool[poolIndex] == null)
+    public void AddCellToPool(EnemyCell enemyCell)
+    {
+        for (int i = 0; i < enemiesCount+1; i++)
+        {
+            if (transformsPool[i] == null)
             {
-                transformsPool[poolIndex] = transform;
-                poolIndex++;
-
+                transformsPool[i] = enemyCell;
+                poolIndex = i;
+                transformPoolCount++;
                 enemiesCount++;
                 break;
             }
-            else{
-                poolIndex++;
-            }
         }
+    }
+    public void RemoveCellFromPool(int index){
+        transformsPool[index] = null;
+        transformPoolCount--;
+        enemiesCount--;
     }
 }

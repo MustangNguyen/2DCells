@@ -10,14 +10,14 @@ public class EnemiesSpawner : Spawner
     [SerializeField] private Transform playerPosition;
     [SerializeField] private float spawnRadius = 15f;
 
-    private int poolIndex = 0;
+    private int enemiesSpawned = 0;
     protected override void Start() {
         base.Start();
         SpawnEnemies();
     }
     private void Update()
     {
-        poolIndex = UpdateManager.Instance.poolIndex;
+        enemiesSpawned = UpdateManager.Instance.enemiesCount;
     }
     protected override void SpawnEnemies()
     {
@@ -26,10 +26,11 @@ public class EnemiesSpawner : Spawner
     }
     private IEnumerator IESpawnSchedule()
     {
-        while (poolIndex < GameManager.Instance.maximumEnemies - 1)
+        while (true)
         {
             yield return new WaitForSeconds(spawnTime);
-            LeanPool.Spawn(enemy, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
+            if(enemiesSpawned < GameManager.Instance.maximumEnemies - 1)
+                LeanPool.Spawn(enemy, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
         }
     }
 }

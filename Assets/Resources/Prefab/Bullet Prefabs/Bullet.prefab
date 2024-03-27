@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2780789226879735258}
-  - component: {fileID: 8052184893418366444}
   - component: {fileID: 1275779362687362555}
   - component: {fileID: 4301685307907571168}
   - component: {fileID: -794996422577281913}
-  m_Layer: 0
+  - component: {fileID: 2277018407206519518}
+  m_Layer: 14
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,22 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8052184893418366444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309796950434619821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ae912de1f88f242abb803d877c8f84, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 2
-  damage: 20
-  isProjectile: 1
-  rigidbody2d: {fileID: 1275779362687362555}
 --- !u!50 &1275779362687362555
 Rigidbody2D:
   serializedVersion: 4
@@ -137,7 +121,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 309796950434619821}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -165,3 +149,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0017065704, y: 0.000000059604645}
   m_Size: {x: 0.109817326, y: 0.24633849}
   m_Direction: 0
+--- !u!114 &2277018407206519518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309796950434619821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003954c53e2c7614c8c7749b0d5ce806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 20
+  damage: 20
+  timeExist: 2
+  isProjectile: 1
+  rigidbody2d: {fileID: 1275779362687362555}

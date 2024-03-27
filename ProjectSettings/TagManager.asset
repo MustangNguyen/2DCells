@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - PlayerCell
+  - EnemyCell
+  - Ally
+  - Gun
+  - Bullet
+  - Neutral
+  - Bullet1
+  - Bullet2
   layers:
   - Default
   - TransparentFX
@@ -20,8 +27,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Bullet
+  - Gun
   - 
   - 
   - 
@@ -47,4 +54,13 @@ TagManager:
     locked: 0
   - name: Cells
     uniqueID: 3481725199
+    locked: 0
+  - name: PlayerCells
+    uniqueID: 3137664253
+    locked: 0
+  - name: Bullet
+    uniqueID: 3571054507
+    locked: 0
+  - name: Gun
+    uniqueID: 3874270155
     locked: 0

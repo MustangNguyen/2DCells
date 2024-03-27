@@ -2,39 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using System.ComponentModel.Design;
 
 public class CellGun : MonoBehaviour
 {
-    [SerializeField] protected Bullet bulletPrefab;
+    [SerializeField] public Bullet bulletPrefab;
     [SerializeField] protected Transform bulletHolder;
     [SerializeField] protected bool isFirstGun = true;    
     [SerializeField] protected float fireRate = 1f;
     protected bool isGunReady = true;
 
     protected void Start(){
-        if (isFirstGun)
+        if (isFirstGun){
             InputManager.Instance.onFire += SetFire;
-        else
+        }
+        else{
             InputManager.Instance.onFire2 += SetFire;
+        }
     }
-    void Update()
+    protected void Update()
     {
         GunRotation();
     }
-    protected void SetFire(){
-        StartCoroutine(Reload());
+    protected virtual void SetFire(){
+        if(isGunReady){
+            isGunReady = false;
+            StartCoroutine(Reload());
+        }
         
     }
-    protected IEnumerator Reload(){
-        if(isGunReady){
-            Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder);
-            bullet.SetBullet(transform);
-            isGunReady = false;
-        }
-        yield return new WaitForSeconds(fireRate);
+    protected virtual IEnumerator Reload()
+    {
+        Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder);
+        if(isFirstGun)
+            bullet.gameObject.tag = "Bullet1";
+        else
+            bullet.gameObject.tag = "Bullet2";
+        bullet.SetBullet(transform);
+        yield return new WaitForSeconds(1 / fireRate);
         isGunReady = true;
     }
-    public void GunRotation(){
+    public virtual void GunRotation(){
         Vector3 distance = InputManager.Instance.mouseWorldPosition - transform.position;
         distance.Normalize();
         float rotateZ = Mathf.Atan2(distance.y,distance.x)*Mathf.Rad2Deg;
