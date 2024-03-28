@@ -7,11 +7,13 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float bulletSpeed = 20f;
     [SerializeField] protected int damage = 20;
+    [SerializeField] protected Elements elements;
     [SerializeField] protected float timeExist = 2f;
     [SerializeField] protected bool isProjectile = true;
     [SerializeField] protected Rigidbody2D rigidbody2d;
 
     public int Damage {get => damage;}
+    public Elements Elements {get => elements;}
     protected virtual void Awake(){
         rigidbody2d = GetComponent<Rigidbody2D>();
         if(rigidbody2d == null){

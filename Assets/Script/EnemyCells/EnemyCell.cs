@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Lean.Pool;
 using TMPro;
+using UnityEngine.Scripting.APIUpdating;
 
 public class EnemyCell : CellsBase
 {
@@ -30,24 +31,23 @@ public class EnemyCell : CellsBase
         if(healPoint<=0){
             OnDead();
         }
-
+    
     }
     public void movement(){
-        Vector3 moveDirection = GameManager.Instance.playerPosition.transform.position - transform.position;
-        Vector3.Normalize(moveDirection);
-        rigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
+        Vector3 moveDirection = (GameManager.Instance.playerPosition.transform.position - transform.position).normalized;
+        //rigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
+        rigidbody2d.velocity = moveDirection * moveSpeed;
     }
-    protected override void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        base.OnCollisionEnter2D(other);
         string damageSource = other.gameObject.tag;
         switch (damageSource)
         {
             case "Bullet1":
-                healPoint -= GameManager.Instance.cellGun1.bulletPrefab.Damage;
+                healPoint -= DamageCalculator.Instance.DamageTake(cellArmor,GameManager.Instance.cellGun2.bulletPrefab.Damage,GameManager.Instance.cellGun2.bulletPrefab.Elements);
                 break;
             case "Bullet2":
-                healPoint -= GameManager.Instance.cellGun1.bulletPrefab.Damage;
+                healPoint -= DamageCalculator.Instance.DamageTake(cellArmor,GameManager.Instance.cellGun2.bulletPrefab.Damage,GameManager.Instance.cellGun2.bulletPrefab.Elements);
                 break;
             default:
                 healPoint -= 0;

@@ -13,5 +13,8 @@ public enum ArmorType{
     None,
     Alloy,
     Bio,
+}
+public enum ShieldType{
+    None,
     Shield
 }

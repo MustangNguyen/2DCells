@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCell : CellsBase
 {
     [SerializeField] private Rigidbody2D playerRigidbody2d;
+    [SerializeField] private float pushBackForce = 1f;
     private bool isMoving = true;
     private float shipAngle = 0f;
     public float rotationInterpolation = 0.4f;
@@ -41,6 +42,15 @@ public class PlayerCell : CellsBase
         Vector2 moveDirection = InputManager.Instance.GetArrowButton();
         playerRigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
         //playerRigidbody2d.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "EnemyCell")
+        {
+            Vector2 collisionDirection = other.contacts[0].normal.normalized;
+            Debug.Log(collisionDirection * pushBackForce);
+            playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Force);
+        }
     }
     void GetRotation()
     {

@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Elements : MonoBehaviour
+[Serializable]
+public class Elements
 {
     public PrimaryElement element = PrimaryElement.physic;
 }

@@ -296,8 +296,8 @@ MonoBehaviour:
   healPoint: 200
   maxHealth: 200
   cellArmor:
-    armorType: 0
-    armorPoint: 0
+    armorType: 1
+    armorPoint: 10
   protectionPoint: 0
   defaultProtection: 0
   moveSpeed: 2
@@ -344,8 +344,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -813242097
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4e5815775bee94691858ce9272b15983, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -660,8 +660,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: -813242097
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &622084047497950211
 MonoBehaviour:
