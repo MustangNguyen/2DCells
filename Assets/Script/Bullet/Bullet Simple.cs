@@ -8,8 +8,8 @@ public class BulletSimple : Bullet
     {
         base.Awake();
     }
-    public override void SetBullet(Transform gunPosition)
+    public override void SetBullet(Transform gunPosition, float accuracy)
     {
-        base.SetBullet(gunPosition);
+        base.SetBullet(gunPosition, accuracy);
     }
 }

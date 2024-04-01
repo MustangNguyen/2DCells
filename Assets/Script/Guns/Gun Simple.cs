@@ -9,9 +9,9 @@ public class GunSimple : CellGun
     protected override void SetFire(){
         base.SetFire();
     }
-    protected override IEnumerator Reload()
+    protected override IEnumerator OnFire()
     {
-        base.Reload();
+        base.OnFire();
         yield return null;
     }
     public override void GunRotation(){

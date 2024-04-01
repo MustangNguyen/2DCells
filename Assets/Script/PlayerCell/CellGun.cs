@@ -10,6 +10,7 @@ public class CellGun : MonoBehaviour
     [SerializeField] protected Transform bulletHolder;
     [SerializeField] protected bool isFirstGun = true;    
     [SerializeField] protected float fireRate = 1f;
+    [SerializeField] protected float accuracy = 70f;
     protected bool isGunReady = true;
 
     protected void Start(){
@@ -27,18 +28,18 @@ public class CellGun : MonoBehaviour
     protected virtual void SetFire(){
         if(isGunReady){
             isGunReady = false;
-            StartCoroutine(Reload());
+            StartCoroutine(OnFire());
         }
         
     }
-    protected virtual IEnumerator Reload()
+    protected virtual IEnumerator OnFire()
     {
         Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder);
         if(isFirstGun)
             bullet.gameObject.tag = "Bullet1";
         else
             bullet.gameObject.tag = "Bullet2";
-        bullet.SetBullet(transform);
+        bullet.SetBullet(transform, accuracy);
         yield return new WaitForSeconds(1 / fireRate);
         isGunReady = true;
     }

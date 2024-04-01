@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
-
+using static GameStatic;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float bulletSpeed = 20f;
@@ -29,9 +28,13 @@ public class Bullet : MonoBehaviour
 
     }
 
-    public virtual void SetBullet(Transform gunPosition)
+    public virtual void SetBullet(Transform gunPosition, float accuracy)
     {
+        float spreadAngle = GUN_MAX_SPREAD_ANGLE - GUN_MAX_SPREAD_ANGLE / 100 * accuracy;
+        float randomAngle = Random.Range(-spreadAngle, spreadAngle + 1);
         Vector2 bulletDirection = InputManager.Instance.mouseWorldPosition - gunPosition.position;
+        Quaternion quaternion = Quaternion.Euler(0f,0f,randomAngle);
+        bulletDirection = quaternion * bulletDirection;
         bulletDirection.Normalize();
         rigidbody2d.AddForce(bulletDirection * bulletSpeed,ForceMode2D.Impulse);
         LeanTween.delayedCall(timeExist, () =>
