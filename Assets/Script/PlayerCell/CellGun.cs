@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
-using System.ComponentModel.Design;
+
 
 public class CellGun : MonoBehaviour
 {
@@ -10,7 +10,10 @@ public class CellGun : MonoBehaviour
     [SerializeField] protected Transform bulletHolder;
     [SerializeField] protected bool isFirstGun = true;    
     [SerializeField] protected float fireRate = 1f;
+    [Range(0f,100f)]
     [SerializeField] protected float accuracy = 70f;
+    [SerializeField] public float criticalRate = 30f;
+    [SerializeField] public float criticalMultiple = 2;
     protected bool isGunReady = true;
 
     protected void Start(){
@@ -35,6 +38,7 @@ public class CellGun : MonoBehaviour
     protected virtual IEnumerator OnFire()
     {
         Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder);
+
         if(isFirstGun)
             bullet.gameObject.tag = "Bullet1";
         else

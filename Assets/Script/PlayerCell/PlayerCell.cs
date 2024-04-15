@@ -48,7 +48,7 @@ public class PlayerCell : CellsBase
         if (other.gameObject.tag == "EnemyCell")
         {
             Vector2 collisionDirection = other.contacts[0].normal.normalized;
-            Debug.Log(collisionDirection * pushBackForce);
+            // Debug.Log(collisionDirection * pushBackForce);
             playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Force);
         }
     }

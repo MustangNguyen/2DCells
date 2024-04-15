@@ -5,22 +5,28 @@ using static GameStatic;
 
 public class DamageCalculator : Singleton<DamageCalculator>
 {
-    public int DamageTake(CellProtection cellProtection,int damageIncome, Elements elements){
+    public (int, int) DamageTake(CellProtection currentCellProtection, int baseCellArmor, int damageIncome, Elements elements)
+    {
+        Debug.Log("base armor:"+baseCellArmor);
+        int armorReduce = 0;
         int damageTaken = 0;
-        switch (cellProtection.armorType){
+        switch (currentCellProtection.armorType)
+        {
             case ArmorType.None:
                 damageTaken = damageIncome;
                 break;
             case ArmorType.Alloy:
-                damageTaken = (int)((float)damageIncome * (1 - (float)cellProtection.armorPoint / (float)(cellProtection.armorPoint + ARMOR_COEFFICIENT)));
+                damageTaken = (int)((float)damageIncome * (1 - (float)currentCellProtection.armorPoint / (float)(currentCellProtection.armorPoint + ARMOR_COEFFICIENT)));
                 break;
             case ArmorType.Bio:
-                damageTaken = damageIncome - cellProtection.armorPoint >= damageIncome / 10 ? damageIncome - cellProtection.armorPoint : damageIncome / 10;
+                armorReduce = damageIncome >= baseCellArmor / 20 ? damageIncome: baseCellArmor/20;
+                damageTaken = damageIncome - currentCellProtection.armorPoint >= damageIncome / 20 ? damageIncome - currentCellProtection.armorPoint : damageIncome / 20;
                 break;
             default:
                 damageTaken = int.MaxValue;
                 break;
         }
-        return damageTaken;
+        Debug.Log("armor reduce:"+armorReduce);
+        return (damageTaken, armorReduce);
     }
 }

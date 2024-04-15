@@ -12,6 +12,7 @@ TagManager:
   - Neutral
   - Bullet1
   - Bullet2
+  - WallObstacle
   layers:
   - Default
   - TransparentFX
@@ -19,14 +20,14 @@ TagManager:
   - 
   - Water
   - UI
+  - MapBorder
   - 
-  - Player
   - 
   - 
   - Enemy
   - 
   - 
-  - 
+  - Player
   - Bullet
   - Gun
   - 
@@ -63,4 +64,7 @@ TagManager:
     locked: 0
   - name: Gun
     uniqueID: 3874270155
+    locked: 0
+  - name: Status UI
+    uniqueID: 2913196945
     locked: 0

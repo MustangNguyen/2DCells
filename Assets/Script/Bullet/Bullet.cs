@@ -11,7 +11,17 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected bool isProjectile = true;
     [SerializeField] protected Rigidbody2D rigidbody2d;
 
-    public int Damage {get => damage;}
+    public int Damage
+    {
+        get
+        {
+            return damage;
+        }
+        set
+        {
+            damage = value;
+        }
+    }
     public Elements Elements {get => elements;}
     protected virtual void Awake(){
         rigidbody2d = GetComponent<Rigidbody2D>();
@@ -36,6 +46,7 @@ public class Bullet : MonoBehaviour
         Quaternion quaternion = Quaternion.Euler(0f,0f,randomAngle);
         bulletDirection = quaternion * bulletDirection;
         bulletDirection.Normalize();
+        transform.rotation = quaternion * gunPosition.rotation;
         rigidbody2d.AddForce(bulletDirection * bulletSpeed,ForceMode2D.Impulse);
         LeanTween.delayedCall(timeExist, () =>
         {
