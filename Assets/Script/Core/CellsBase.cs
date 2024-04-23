@@ -11,7 +11,6 @@ public class CellsBase : MonoBehaviour
     [SerializeField] protected int maxHealth = 200;
     [SerializeField] protected CellProtection baseCellArmor;
     [SerializeField] protected CellProtection currentArmor;
-    [SerializeField] protected int defaultProtection = 0;
     [SerializeField] protected float moveSpeed = 1f;
     [SerializeField] protected int lv = 1;
 

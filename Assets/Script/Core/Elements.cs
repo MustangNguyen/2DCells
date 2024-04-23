@@ -11,10 +11,16 @@ public class Elements
 public enum PrimaryElement{
     physic,
     fire,
-    ice,
+    wet,
     electric,
-    toxin
+    toxin,
+    earth
 }
 public enum SecondaryElement{
+    ice,
+
+}
+
+public enum Status{
     
 }

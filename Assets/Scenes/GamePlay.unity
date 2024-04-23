@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 272775833}
   - component: {fileID: 272775832}
   m_Layer: 13
-  m_Name: === Main Character
+  m_Name: === Mutation Cell
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,7 +243,6 @@ MonoBehaviour:
   currentArmor:
     armorType: 0
     armorPoint: 0
-  defaultProtection: 0
   moveSpeed: 4
   lv: 1
   playerRigidbody2d: {fileID: 272775833}
