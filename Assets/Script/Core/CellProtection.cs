@@ -7,7 +7,9 @@ public class CellProtection
 {
     
     public ArmorType armorType = ArmorType.None;
+    public ShieldType shieldType = ShieldType.None;
     public int armorPoint = 0;
+    public int shieldPoint = 0;
 }
 public enum ArmorType{
     None,
@@ -16,5 +18,7 @@ public enum ArmorType{
 }
 public enum ShieldType{
     None,
-    Shield
+    Proto,
+    Pulse
+
 }

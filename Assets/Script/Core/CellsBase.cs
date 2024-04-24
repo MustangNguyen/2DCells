@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +10,8 @@ public class CellsBase : MonoBehaviour
     [Header("Base Stat")]
     [SerializeField] protected int healPoint = 200;
     [SerializeField] protected int maxHealth = 200;
+    [SerializeField] protected int maxEnery = 200;
+    [SerializeField] protected int currentEnery = 200;
     [SerializeField] protected CellProtection baseCellArmor;
     [SerializeField] protected CellProtection currentArmor;
     [SerializeField] protected float moveSpeed = 1f;
@@ -37,4 +40,11 @@ public class CellsBase : MonoBehaviour
         }
         return armor;
     }
+}
+[Serializable]
+public enum Faction{
+    Hematos,
+    Neutroton,
+    Cytocell,
+    Carcino
 }

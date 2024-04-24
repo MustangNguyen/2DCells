@@ -71,6 +71,6 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Ignore files
+# Ignore database files
 TWODCELL_DATABSE.MDF
 TWODCELL_LOG.LDF

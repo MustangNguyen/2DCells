@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Mutation : CellsBase
 {
@@ -55,5 +56,24 @@ public class Mutation : CellsBase
     void GetRotation()
     {
         
+    }
+}
+
+[Serializable]
+public class MutationOOP
+{
+    [Header("Base Stat")]
+    public string mutationID;
+    public string mutationName;
+    public int maxHealth = 200;
+    public int maxEnery = 200;
+    public CellProtection baseCellProtection;
+    public float moveSpeed = 1f;
+    public int lv = 1;
+    public List<Ability> mutationAbilities;
+    public MutationOOP()
+    {
+        baseCellProtection = new CellProtection();
+        mutationAbilities = new List<Ability>();
     }
 }

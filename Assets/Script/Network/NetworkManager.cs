@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 
 public partial class NetworkManager : Singleton<NetworkManager> {
+
     private void Start() {
         GetDataFromServer();
     }
@@ -13,7 +14,7 @@ public partial class NetworkManager : Singleton<NetworkManager> {
     {
         StartCoroutine(CreateWebGetRequest(apiUrl, (string data) =>
         {
-            
+            DataManager.Instance.GetMutationData(data);
         }));
     }
 }

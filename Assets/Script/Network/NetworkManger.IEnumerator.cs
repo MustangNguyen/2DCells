@@ -18,17 +18,7 @@ public partial class NetworkManager {
             else{
                 string data = webRequest.downloadHandler.text;
                 Debug.Log(data);
-                // var listObject = new JSONObject(data).list;
-                // List<TestClass> testClassList= new();
-                // foreach(var item in listObject){
-                //     // testClass = JsonConvert.DeserializeObject<TestClass>(item.str);
-                //     testClass.HP = (int)item["HP"].n;
-                //     testClass.MP = (int)item["MP"].n;
-                //     testClass.Type = item["Type"].str;
-                //     testClass.ID = item["ID"].str;
-                //     Debug.Log(testClass.HP + " " + testClass.MP + " " + testClass.Type + " " + testClass.ID);
-                //     testClassList.Add(testClass);
-                // }
+
                 onComplete?.Invoke(data);
             }
         }
