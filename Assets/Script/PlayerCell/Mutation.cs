@@ -71,6 +71,7 @@ public class MutationOOP
     public float moveSpeed = 1f;
     public int lv = 1;
     public List<Ability> mutationAbilities;
+    public Faction faction;
     public MutationOOP()
     {
         baseCellProtection = new CellProtection();

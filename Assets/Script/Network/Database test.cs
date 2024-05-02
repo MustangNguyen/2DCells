@@ -7,39 +7,49 @@ using Newtonsoft.Json;
 
 public class Databasetest : MonoBehaviour
 {
-    string apiUrl = "https://localhost:44329/API/Values";
-    TestClass testClass = new();
-    private void Start() {
-        StartCoroutine(CreateWebGetRequest());
+    [System.Serializable]
+    public class User
+    {
+        public string userId;
+        public string userName;
+        public string password;
+        public int credit;
     }
-    IEnumerator CreateWebGetRequest(){
-        using(UnityWebRequest webRequest = UnityWebRequest.Get(apiUrl)){
-            yield return webRequest.SendWebRequest();
-            if(webRequest.result != UnityWebRequest.Result.Success){
-                Debug.Log("Error while fetch from API: " + webRequest.error);
+
+    void Start()
+    {
+        // UserDataOOP user = new UserDataOOP();
+        // user.userId = "userID123";
+        // user.userName = "exampleUser";
+        // user.password = "examplePassword";
+        // user.credit = 100;
+        // APIRequest request = new();
+        // request.url = "https://localhost:7121/api/Users";
+        // string jsonData = JsonConvert.SerializeObject(user);
+        // request.body = jsonData;
+        // StartCoroutine(PostUser(request));
+    }
+
+    IEnumerator PostUser(APIRequest apiRequest)
+    {
+        
+        using (UnityWebRequest request = UnityWebRequest.PostWwwForm(apiRequest.url, apiRequest.body))
+        {
+            request.SetRequestHeader("Content-Type", "application/json");
+            byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(apiRequest.body);
+            request.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
+            request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+
+            yield return request.SendWebRequest();
+
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(request.error);
             }
-            else{
-                string json = webRequest.downloadHandler.text;
-                Debug.Log(json);
-                // var listObject = new JSONObject(json).list;
-                // List<TestClass> testClassList= new();
-                // foreach(var item in listObject){
-                //     // testClass = JsonConvert.DeserializeObject<TestClass>(item.str);
-                //     testClass.HP = (int)item["HP"].n;
-                //     testClass.MP = (int)item["MP"].n;
-                //     testClass.Type = item["Type"].str;
-                //     testClass.ID = item["ID"].str;
-                //     Debug.Log(testClass.HP + " " + testClass.MP + " " + testClass.Type + " " + testClass.ID);
-                //     testClassList.Add(testClass);
-                // }
+            else
+            {
+                Debug.Log("User post complete! " + request.downloadHandler.text);
             }
         }
     }
-}
-[Serializable]
-public class TestClass{
-    public int HP;
-    public int MP;
-    public string Type;
-    public string ID;
 }

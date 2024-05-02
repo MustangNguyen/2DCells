@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Lean.Pool;
 using TMPro;
+using Unity.VisualScripting;
+using System;
 
 public class EnemyCell : CellsBase
 {
@@ -13,6 +15,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected Slider healthBar;
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected int index;
+    [SerializeField] protected Equipment equipment;
     protected override void Start()
     {
         base.Start();
@@ -85,4 +88,25 @@ public class EnemyCell : CellsBase
         UpdateManager.Instance.RemoveCellFromPool(index);
         LeanPool.Despawn(gameObject);
     }
+}
+[Serializable]
+public class EnemyCellOOP{
+    public string enemyId;
+    public string enemyName;
+    public int hp;
+    public int mp;
+    public CellProtection cellProtection;
+    public float moveSpeed;
+    public string abilityId;
+    public Faction faction;
+    public Equipment equipment;
+    public EnemyCellOOP(){
+        cellProtection =new CellProtection();
+    }
+}
+[Serializable]
+public enum Equipment{
+    None,
+    Melee,
+    Range
 }

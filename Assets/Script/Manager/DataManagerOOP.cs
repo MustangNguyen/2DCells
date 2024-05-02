@@ -7,5 +7,5 @@ using UnityEngine;
 public class DataManagerOOP
 {
     public List<MutationOOP> listMutations = new();
-    public List<EnemyCell> listEnemies = new();
+    public List<EnemyCellOOP> listEnemies = new();
 }
