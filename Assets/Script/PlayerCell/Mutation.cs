@@ -5,15 +5,20 @@ using System;
 
 public class Mutation : CellsBase
 {
-    [SerializeField] private Rigidbody2D playerRigidbody2d;
-    [SerializeField] private float pushBackForce = 1f;
-    [SerializeField] private string mutationId;
-    [SerializeField] private string mutationName;
-    private bool isMoving = true;
-    private float shipAngle = 0f;
+    [SerializeField] protected Rigidbody2D playerRigidbody2d;
+    [SerializeField] protected float pushBackForce = 1f;
+    [SerializeField] protected string mutationId;
+    [SerializeField] protected string mutationName;
+    protected bool isMoving = true;
+    protected float shipAngle = 0f;
     public float rotationInterpolation = 0.4f;
     public List<Ability> mutationAbilities;
-    private void FixedUpdate() {
+    protected override void Awake()
+    {
+        base.Awake();
+        playerRigidbody2d = GetComponent<Rigidbody2D>();
+    }
+    protected virtual void FixedUpdate() {
         isMoving = true;
         if(InputManager.Instance.GetArrowButton() == Vector3.zero){
             isMoving = false;
@@ -21,8 +26,11 @@ public class Mutation : CellsBase
         PlayerMovement();
         PlayerRotation();
     }
-    protected virtual void Start(){
-
+    protected override void Start(){
+        base.Start();
+        pushBackForce = 1000;
+        AddProperties();
+        ShowProterties();
     }
     public void PlayerRotation(){
         Vector2 lookDir = InputManager.Instance.GetArrowButton();
@@ -45,21 +53,25 @@ public class Mutation : CellsBase
             playerRigidbody2d.rotation = Mathf.Lerp(playerRigidbody2d.rotation, shipAngle, rotationInterpolation);
         }
     }
-    private void PlayerMovement(){
+    protected void PlayerMovement(){
         Vector2 moveDirection = InputManager.Instance.GetArrowButton();
         playerRigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
         //playerRigidbody2d.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
     }
-    private void OnCollisionEnter2D(Collision2D other)
+    protected void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "EnemyCell")
         {
+            healPoint -= 10;
+            EffectManager.Instance.ShowDamageInfict(10,4,transform);
+            GameManager.Instance.healthBar.AdjustHealth((float)healPoint/maxHealth,healPoint.ToString());
+
             Vector2 collisionDirection = other.contacts[0].normal.normalized;
-            // Debug.Log(collisionDirection * pushBackForce);
+            //Debug.Log(collisionDirection * pushBackForce);
             playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Force);
         }
     }
-    void GetRotation()
+    protected void GetRotation()
     {
         
     }
@@ -72,7 +84,15 @@ public class Mutation : CellsBase
             baseCellArmor = mutationOOP.baseCellProtection;
             moveSpeed = mutationOOP.moveSpeed;
             lv = mutationOOP.lv;
+            currentArmor.shieldPoint = baseCellArmor.shieldPoint;
+            healPoint = maxHealth;
+            currentEnery = maxEnery;
         }
+    }
+    protected void ShowProterties(){
+        GameManager.Instance.healthBar.shieldText.text = baseCellArmor.shieldPoint.ToString();
+        GameManager.Instance.healthBar.healthText.text = maxHealth.ToString();
+        GameManager.Instance.healthBar.energyText.text = maxEnery.ToString();
     }
 }
 

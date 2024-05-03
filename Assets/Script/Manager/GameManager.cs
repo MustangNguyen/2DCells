@@ -9,9 +9,10 @@ public class GameManager : Singleton<GameManager>
     public CellGun cellGun1;
     public CellGun cellGun2;
     public Camera currentCamera;
+    public MutationHealthBar healthBar;
     private void Start()
     {
-
+        
     }
     public (int, int) DamageManager(bool isCellGun1)
     {

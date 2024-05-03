@@ -80,7 +80,7 @@ public class EnemyCell : CellsBase
         {
             currentArmor.armorPoint = baseCellArmor.armorPoint;
         }
-        Debug.Log("fix armor: "+baseCellArmor.armorPoint);
+        //Debug.Log("fix armor: "+baseCellArmor.armorPoint);
     }
     protected void Init(){
         foreach(var enemy in DataManager.Instance.Data.listEnemies){

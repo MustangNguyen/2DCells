@@ -7,7 +7,7 @@ public class DamageCalculator : Singleton<DamageCalculator>
 {
     public (int, int) DamageTake(CellProtection currentCellProtection, int baseCellArmor, int damageIncome, Elements elements)
     {
-        Debug.Log("base armor:"+baseCellArmor);
+        //Debug.Log("base armor:"+baseCellArmor);
         int armorReduce = 0;
         int damageTaken = 0;
         switch (currentCellProtection.armorType)
@@ -26,7 +26,7 @@ public class DamageCalculator : Singleton<DamageCalculator>
                 damageTaken = int.MaxValue;
                 break;
         }
-        Debug.Log("armor reduce:"+armorReduce);
+        //Debug.Log("armor reduce:"+armorReduce);
         return (damageTaken, armorReduce);
     }
 }
