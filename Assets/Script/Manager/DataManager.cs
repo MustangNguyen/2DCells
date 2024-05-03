@@ -9,7 +9,8 @@ public class DataManager : Singleton<DataManager>
 
     private void Start() {
         NetworkManager.Instance.GetMutationDataFromServer();
-        NetworkManager.Instance.GetEnemyDataFromSever();
+        NetworkManager.Instance.GetEnemyDataFromServer();
+        NetworkManager.Instance.GetAbilityDataFromServer();
     }
 
     public void GetMutationData(string data){
@@ -70,5 +71,15 @@ public class DataManager : Singleton<DataManager>
             enemyCell.equipment = equipment;
             Data.listEnemies.Add(enemyCell);
         }   
+    }
+    public void GetAbilityData(string data){
+        JSONObject json = new JSONObject(data);
+        var listjson = json.list;
+        foreach(var item in listjson){
+            AbilityOOP abilityOOP = new AbilityOOP();
+            abilityOOP.abilityId = item["abilityId"].str;
+            abilityOOP.abilityName = item["abilityName"].str;
+            Data.listAbilities.Add(abilityOOP);
+        }
     }
 }

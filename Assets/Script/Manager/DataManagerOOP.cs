@@ -8,4 +8,5 @@ public class DataManagerOOP
 {
     public List<MutationOOP> listMutations = new();
     public List<EnemyCellOOP> listEnemies = new();
+    public List<AbilityOOP> listAbilities = new();
 }

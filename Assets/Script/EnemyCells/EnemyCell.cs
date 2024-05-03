@@ -12,6 +12,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [Space(10)]
     [Header("UI")]
+    [SerializeField] protected string enemyId;
     [SerializeField] protected Slider healthBar;
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected int index;
@@ -80,6 +81,13 @@ public class EnemyCell : CellsBase
             currentArmor.armorPoint = baseCellArmor.armorPoint;
         }
         Debug.Log("fix armor: "+baseCellArmor.armorPoint);
+    }
+    protected void Init(){
+        foreach(var enemy in DataManager.Instance.Data.listEnemies){
+            if(enemyId == enemy.enemyId){
+                
+            }
+        }
     }
 
     protected override void OnDead()

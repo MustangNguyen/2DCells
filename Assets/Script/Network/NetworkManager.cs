@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
 using static GameStatic;
+using UnityEngine.Video;
 
 public partial class NetworkManager : Singleton<NetworkManager>
 {
@@ -28,14 +29,21 @@ public partial class NetworkManager : Singleton<NetworkManager>
             DataManager.Instance.GetMutationData(data);
         }));
     }
-    public void GetEnemyDataFromSever(){
+    public void GetEnemyDataFromServer(){
         StartCoroutine(CreateWebGetRequest(HOST + GET_ENEMY_API,(string data) => 
         {
             DataManager.Instance.GetEnemydata(data);
         }));
     }
+    public void GetAbilityDataFromServer()
+    {
+        StartCoroutine(CreateWebGetRequest(HOST + GET_ABILITY_API, (string data) =>
+        {
+            DataManager.Instance.GetAbilityData(data);
+        }));
+    }
     #endregion
-    
+
     #region Post
     public void PostNewUserToServer(UserDataOOP newUser)
     {

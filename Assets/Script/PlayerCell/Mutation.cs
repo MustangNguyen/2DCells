@@ -7,9 +7,12 @@ public class Mutation : CellsBase
 {
     [SerializeField] private Rigidbody2D playerRigidbody2d;
     [SerializeField] private float pushBackForce = 1f;
+    [SerializeField] private string mutationId;
+    [SerializeField] private string mutationName;
     private bool isMoving = true;
     private float shipAngle = 0f;
     public float rotationInterpolation = 0.4f;
+    public List<Ability> mutationAbilities;
     private void FixedUpdate() {
         isMoving = true;
         if(InputManager.Instance.GetArrowButton() == Vector3.zero){
@@ -17,6 +20,9 @@ public class Mutation : CellsBase
         }
         PlayerMovement();
         PlayerRotation();
+    }
+    protected virtual void Start(){
+
     }
     public void PlayerRotation(){
         Vector2 lookDir = InputManager.Instance.GetArrowButton();
@@ -56,6 +62,17 @@ public class Mutation : CellsBase
     void GetRotation()
     {
         
+    }
+    protected void AddProperties(){
+        if(DataManager.Instance.Data.listMutations.Exists(x => x.mutationID == mutationId)){
+            MutationOOP mutationOOP = DataManager.Instance.Data.listMutations.Find(x => x.mutationID == mutationId);
+            mutationName = mutationOOP.mutationName;
+            maxHealth = mutationOOP.maxHealth;
+            maxEnery = mutationOOP.maxEnery;
+            baseCellArmor = mutationOOP.baseCellProtection;
+            moveSpeed = mutationOOP.moveSpeed;
+            lv = mutationOOP.lv;
+        }
     }
 }
 
