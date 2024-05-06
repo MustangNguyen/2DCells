@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 using Newtonsoft.Json;
 
 public partial class NetworkManager {
-    string apiUrl = "https://localhost:7121/api/Mutations";
+    //string apiUrl = "https://localhost:7121/api/Mutations";
 
     public IEnumerator CreateWebGetRequest(string requestAPI,Action<string> onComplete = null, Action onFail = null){
         using(UnityWebRequest webRequest = UnityWebRequest.Get(requestAPI)){

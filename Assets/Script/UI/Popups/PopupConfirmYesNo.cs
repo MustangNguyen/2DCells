@@ -21,13 +21,13 @@ public class PopupConfirmYesNo : Popups
 
     public void OnYesButtonClicked()
     {
-        _onResult?.Invoke(true);
+        //_onResult?.Invoke(true);
         Hide();
     }
 
     public void OnNoButtonClicked()
     {
-        _onResult?.Invoke(false);
+        //_onResult?.Invoke(false);
         Hide();
     }
     
@@ -80,8 +80,8 @@ public class PopupConfirmYesNo : Popups
 
     public static void Hide()
     {
-        if (GameStatic.IS_ANIMATING ) return;
-
+        //if (GameStatic.IS_ANIMATING ) return;
+        //Debug.Log("close");
         Instance.Disappear();
     }
     public override void Appear()

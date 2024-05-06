@@ -16,7 +16,7 @@ public class DamageCalculator : Singleton<DamageCalculator>
                 damageTaken = damageIncome;
                 break;
             case ArmorType.Alloy:
-                damageTaken = (int)((float)damageIncome * (1 - (float)currentCellProtection.armorPoint / (float)(currentCellProtection.armorPoint + ARMOR_COEFFICIENT)));
+                damageTaken = (int)((float)damageIncome * (1 - DamageReduceByArmorCalculator(currentCellProtection.armorPoint)));
                 break;
             case ArmorType.Bio:
                 armorReduce = damageIncome >= baseCellArmor / 20 ? damageIncome: baseCellArmor/20;

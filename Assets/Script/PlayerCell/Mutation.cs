@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 
 public class Mutation : CellsBase
 {
@@ -11,6 +12,8 @@ public class Mutation : CellsBase
     [SerializeField] protected string mutationName;
     protected bool isMoving = true;
     protected float shipAngle = 0f;
+    protected bool isDelaying = false;
+    protected float delayTime = 0;
     public float rotationInterpolation = 0.4f;
     public List<Ability> mutationAbilities;
     protected override void Awake()
@@ -25,12 +28,15 @@ public class Mutation : CellsBase
         }
         PlayerMovement();
         PlayerRotation();
+        ShieldRecharge();
+        ShieldDelay();
     }
     protected override void Start(){
         base.Start();
         pushBackForce = 1000;
         AddProperties();
         ShowProterties();
+        shieldRechargeRate = GameStatic.ShieldRechargeCalculator(baseCellArmor.shieldPoint);
     }
     public void PlayerRotation(){
         Vector2 lookDir = InputManager.Instance.GetArrowButton();
@@ -58,17 +64,52 @@ public class Mutation : CellsBase
         playerRigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
         //playerRigidbody2d.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
     }
+    
+    protected void ShieldRecharge(){
+        if (currentArmor.shieldPoint < baseCellArmor.shieldPoint && !isDelaying)
+        {
+            currentArmor.shieldPoint += (int)(shieldRechargeRate * Time.fixedDeltaTime);
+            if (currentArmor.shieldPoint > baseCellArmor.shieldPoint)
+                currentArmor.shieldPoint = baseCellArmor.shieldPoint;
+            GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint / baseCellArmor.shieldPoint, currentArmor.shieldPoint.ToString());
+        }
+    }
+
+    /* +++ ON CONSTRUCTION +++ */
     protected void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "EnemyCell")
         {
-            healPoint -= 10;
+            if(currentArmor.shieldPoint>0){
+
+                currentArmor.shieldPoint -=50;
+                if(currentArmor.shieldPoint<0)
+                    currentArmor.shieldPoint = 0;
+                GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
+                delayTime = GameStatic.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
+            }
+            else{
+
+                healPoint -= 10;
+                GameManager.Instance.healthBar.AdjustHealth((float)healPoint/maxHealth,healPoint.ToString());
+            }
             EffectManager.Instance.ShowDamageInfict(10,4,transform);
-            GameManager.Instance.healthBar.AdjustHealth((float)healPoint/maxHealth,healPoint.ToString());
 
             Vector2 collisionDirection = other.contacts[0].normal.normalized;
             //Debug.Log(collisionDirection * pushBackForce);
             playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Force);
+        }
+    }
+    protected void ShieldDelay()
+    {
+        if (delayTime > 0)
+        {
+            isDelaying = true;
+            delayTime -= Time.fixedDeltaTime;
+        }
+        else
+        {
+            isDelaying = false;
         }
     }
     protected void GetRotation()

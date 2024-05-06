@@ -24,4 +24,24 @@ public static class GameStatic
     public readonly static string GET_ENEMY_API = "/api/EnemyCells";
     public readonly static string GET_ABILITY_API = "/api/MutationAbilities";
     #endregion
+
+    public static float ShieldRechargeCalculator(int maxShield)
+    {
+        Debug.Log("Shield recharge rate: " + 5 * Mathf.Sqrt((float)maxShield));
+        return 5 * Mathf.Sqrt((float)maxShield);
+    }
+    public static float ShieldRechargeDelayCalculator(int currentShield)
+    {
+        if(currentShield>0){
+            Debug.Log("Shield recharge delay in: " +0.1f * Mathf.Sqrt((float)currentShield));
+            return 0.1f * Mathf.Sqrt((float)currentShield);
+        }
+        else{
+            Debug.Log("Shield depleted, recharge in: "+1 + 0.1f * Mathf.Sqrt((float)currentShield));
+            return 1 + 0.1f * Mathf.Sqrt((float)currentShield);
+        }
+    }
+    public static float DamageReduceByArmorCalculator(int armor){
+        return (float)armor / (float)(armor + ARMOR_COEFFICIENT);
+    }
 }

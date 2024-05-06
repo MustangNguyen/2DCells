@@ -816,17 +816,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1770005527404068220, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1527591633}
     - target: {fileID: 2203604856777871288, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
       propertyPath: m_Name
       value: === Canvas Popup
       objectReference: {fileID: 0}
     - target: {fileID: 4887314619507759100, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.3135216
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4887314619507759100, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4798695
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4887314619507759100, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
       propertyPath: m_LocalPosition.z
@@ -858,6 +862,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4887314619507759100, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5797447557975245641, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
+      propertyPath: m_RenderMode
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5797447557975245641, guid: 9b8a6109d98473a4fb006d1ef4aee234, type: 3}
