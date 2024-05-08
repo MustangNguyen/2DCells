@@ -295,19 +295,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healPoint: 200
   maxHealth: 200
+  maxEnery: 200
+  currentEnery: 200
   baseCellArmor:
     armorType: 1
+    shieldType: 0
     armorPoint: 50
+    shieldPoint: 0
   currentArmor:
     armorType: 0
+    shieldType: 0
     armorPoint: 0
-  defaultProtection: 0
+    shieldPoint: 0
   moveSpeed: 2
   lv: 1
+  faction: 0
   rigidbody2d: {fileID: 7972279139686672109}
+  enemyId: HEM_EMARI
   healthBar: {fileID: 3204548329667127057}
   healthText: {fileID: 5519259120346946660}
   index: 0
+  equipment: 0
 --- !u!212 &509484139380529113
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using Lean.Pool;
 using static GameStatic;
+using System;
+using Random = UnityEngine.Random;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] protected float bulletSpeed = 20f;
@@ -10,6 +12,9 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected float timeExist = 2f;
     [SerializeField] protected bool isProjectile = true;
     [SerializeField] protected Rigidbody2D rigidbody2d;
+    [SerializeField] protected string bulletId;
+    [SerializeField] protected string bulletTypeId;
+    [SerializeField] protected string bulletName;
 
     public int Damage
     {
@@ -36,6 +41,21 @@ public class Bullet : MonoBehaviour
     }
     private void Start() {
 
+        AddProperties();
+    }
+    public void AddProperties()
+    {
+        if(DataManager.Instance.Data.listBullet.Exists(x => x.bulletId == this.bulletId))
+        {
+            BulletOOP bulletOOP = DataManager.Instance.Data.listBullet.Find(x => x.bulletId == this.bulletId);
+            this.bulletName = bulletOOP.bulletName;
+            this.bulletSpeed = bulletOOP.bulletSpeed;
+            this.damage = bulletOOP.damage;
+            this.bulletTypeId = bulletOOP.bulletTypeId;
+            this.timeExist = bulletOOP.timeExist;
+           this.elements.primaryElement = bulletOOP.element.primaryElement;
+            //this.elements.secondaryElement = bulletOOP.element.secondaryElement;
+        }
     }
 
     public virtual void SetBullet(Transform gunPosition, float accuracy)
@@ -53,4 +73,15 @@ public class Bullet : MonoBehaviour
             LeanPool.Despawn(gameObject);
         });
     }
+}
+[Serializable]
+public class BulletOOP
+{
+    public string bulletId;
+    public string bulletName;
+    public string bulletTypeId;
+    public int damage;
+    public int timeExist;
+    public int bulletSpeed;
+    public Elements element = new();
 }

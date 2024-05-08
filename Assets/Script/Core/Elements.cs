@@ -6,9 +6,12 @@ using UnityEngine;
 [Serializable]
 public class Elements
 {
-    public PrimaryElement element = PrimaryElement.physic;
+    public PrimaryElement primaryElement = PrimaryElement.physic;
+
+    public SecondaryElement secondaryElement = SecondaryElement.none;
 }
 public enum PrimaryElement{
+    none,
     physic,
     fire,
     wet,
@@ -17,8 +20,8 @@ public enum PrimaryElement{
     earth
 }
 public enum SecondaryElement{
+    none,
     ice,
-
 }
 
 public enum Status{

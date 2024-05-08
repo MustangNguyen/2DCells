@@ -20,6 +20,7 @@ public class EnemyCell : CellsBase
     protected override void Start()
     {
         base.Start();
+        AddProperties();
     }
     protected override void OnEnable()
     {
@@ -89,7 +90,18 @@ public class EnemyCell : CellsBase
             }
         }
     }
-
+    protected void AddProperties()
+    {
+        if(DataManager.Instance.Data.listEnemies.Exists(x=> x.enemyId == this.enemyId))
+        {
+            EnemyCellOOP enemyCellOOP = DataManager.Instance.Data.listEnemies.Find(x => x.enemyId == this.enemyId);
+            this.maxHealth = enemyCellOOP.hp;
+            this.healPoint = this.maxHealth;
+            this.moveSpeed = enemyCellOOP.moveSpeed;
+            this.baseCellArmor.armorPoint = enemyCellOOP.cellProtection.armorPoint;
+            this.faction = enemyCellOOP.faction;
+        }
+    }
     protected override void OnDead()
     {
         base.OnDead();

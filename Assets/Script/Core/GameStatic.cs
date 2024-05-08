@@ -23,6 +23,7 @@ public static class GameStatic
     public readonly static string GET_MUTATION_API = "/api/Mutations";
     public readonly static string GET_ENEMY_API = "/api/EnemyCells";
     public readonly static string GET_ABILITY_API = "/api/MutationAbilities";
+    public readonly static string GET_BULLET_API = "/api/Bullets";
     #endregion
 
     public static float ShieldRechargeCalculator(int maxShield)
