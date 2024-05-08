@@ -42,6 +42,13 @@ public partial class NetworkManager : Singleton<NetworkManager>
             DataManager.Instance.GetAbilityData(data);
         }));
     }
+    public void GetBulletDataFromServer()
+    {
+        StartCoroutine(CreateWebGetRequest(HOST + GET_BULLET_API, (string data) =>
+        {
+            DataManager.Instance.GetBulletData(data);
+        }));
+    }
     #endregion
 
     #region Post

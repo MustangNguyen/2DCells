@@ -11,6 +11,7 @@ public class DataManager : Singleton<DataManager>
         NetworkManager.Instance.GetMutationDataFromServer();
         NetworkManager.Instance.GetEnemyDataFromServer();
         NetworkManager.Instance.GetAbilityDataFromServer();
+        NetworkManager.Instance.GetBulletDataFromServer();
     }
 
     public void GetMutationData(string data){
@@ -82,4 +83,30 @@ public class DataManager : Singleton<DataManager>
             Data.listAbilities.Add(abilityOOP);
         }
     }
+    public void GetBulletData(string data)
+    {
+        JSONObject json = new JSONObject(data);
+        var listjson  = json.list;
+        foreach(var item in listjson)
+        {
+            BulletOOP bulletOOP = new BulletOOP();
+            bulletOOP.bulletId = item["bulletId"].str;
+            bulletOOP.bulletName = item["bulletName"].str;
+            bulletOOP.bulletTypeId = item["bulletTypeId"].str;
+            bulletOOP.timeExist = (int)item["timeExist"].n;
+            bulletOOP.damage = (int)item["damage"].n;
+            bulletOOP.bulletSpeed = (int)item["bulletSpeed"].n;
+            Elements element = new();
+            PrimaryElement primaryElement;
+            SecondaryElement secondaryElement;
+            Enum.TryParse(item["element"].str, out primaryElement);
+            Enum.TryParse(item["element"].str, out secondaryElement);
+            element.primaryElement = primaryElement;
+            element.secondaryElement = secondaryElement;
+            bulletOOP.element.primaryElement = element.primaryElement;
+            bulletOOP.element.secondaryElement = element.secondaryElement;
+            Data.listBullet.Add(bulletOOP);
+        }
+    }
 }
+ 
