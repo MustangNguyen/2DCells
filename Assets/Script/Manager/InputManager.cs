@@ -14,12 +14,14 @@ public class InputManager : Singleton<InputManager>
     public bool isMouseClick2 = false;
     public Action onFire;
     public Action onFire2;
-    
+    public bool isOnPauseState = false;
     private void Update() {
-        GetMousePosition();
-        GetArrowButton();
-        GetMouseClick();
-        GetMouseHold();
+        if(!isOnPauseState){
+            GetMousePosition();
+            GetArrowButton();
+            GetMouseClick();
+            GetMouseHold();
+        }
     }
     public Vector3 GetMousePosition(){
         mouseWorldPosition = worldCamera.ScreenToWorldPoint(Input.mousePosition);

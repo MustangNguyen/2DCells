@@ -33,11 +33,11 @@ public static class GameStatic
     public static float ShieldRechargeDelayCalculator(int currentShield)
     {
         if(currentShield>0){
-            Debug.Log("Shield recharge delay in: " +0.1f * Mathf.Sqrt((float)currentShield));
+            // Debug.Log("Shield recharge delay in: " +0.1f * Mathf.Sqrt((float)currentShield));
             return 0.1f * Mathf.Sqrt((float)currentShield);
         }
         else{
-            Debug.Log("Shield depleted, recharge in: "+1 + 0.1f * Mathf.Sqrt((float)currentShield));
+            // Debug.Log("Shield depleted, recharge in: "+1 + 0.1f * Mathf.Sqrt((float)currentShield));
             return 1 + 0.1f * Mathf.Sqrt((float)currentShield);
         }
     }

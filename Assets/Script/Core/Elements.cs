@@ -6,7 +6,8 @@ using UnityEngine;
 [Serializable]
 public class Elements
 {
-    public PrimaryElement element = PrimaryElement.physic;
+    public PrimaryElement primaryElement = PrimaryElement.physic;
+    public SecondaryElement secondaryElement;
 }
 public enum PrimaryElement{
     physic,

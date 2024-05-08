@@ -17,6 +17,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected int index;
     [SerializeField] protected Equipment equipment;
+    [SerializeField] protected StateMachine stateMachine;
     protected override void Start()
     {
         base.Start();
@@ -33,16 +34,18 @@ public class EnemyCell : CellsBase
         currentArmor.armorType = baseCellArmor.armorType;
         currentArmor.armorPoint = BioArmorCalculating();
     }
-    public void CellUpdate()
-    {
+    public void CellUpdate(){
         healthBar.value = (float)healPoint / (float)maxHealth;
         healthText.text = healPoint.ToString();
+        StateMachineMonitor();
+    }
+    public void CellFixedUpdate()
+    {
         movement();
         if (healPoint <= 0)
         {
             OnDead();
         }
-
     }
     public void movement()
     {
@@ -59,14 +62,14 @@ public class EnemyCell : CellsBase
         switch (damageSource)
         {
             case "Bullet1":
-                finalDamage = GameManager.Instance.DamageManager(true);
+                finalDamage = DamageCalculator.Instance.DamageManager(true);
                 damageTaken = DamageCalculator.Instance.DamageTake(currentArmor, BioArmorCalculating(), finalDamage.Item1, GameManager.Instance.cellGun1.bulletPrefab.Elements);
                 healPoint -= damageTaken.Item1;
                 currentArmor.armorPoint -= damageTaken.Item2;
                 EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, finalDamage.Item2, transform);
                 break;
             case "Bullet2":
-                finalDamage = GameManager.Instance.DamageManager(false);
+                finalDamage = DamageCalculator.Instance.DamageManager(false);
                 damageTaken = DamageCalculator.Instance.DamageTake(currentArmor, BioArmorCalculating() , finalDamage.Item1, GameManager.Instance.cellGun2.bulletPrefab.Elements);
                 healPoint -= damageTaken.Item1;
                 currentArmor.armorPoint -= damageTaken.Item2;
@@ -81,6 +84,14 @@ public class EnemyCell : CellsBase
             currentArmor.armorPoint = baseCellArmor.armorPoint;
         }
         //Debug.Log("fix armor: "+baseCellArmor.armorPoint);
+    }
+    protected void StateMachineMonitor(){
+        if(rigidbody2d.velocity==Vector2.zero){
+            stateMachine.ChangeState(new EnemyStateIdle(this));
+        }
+        else if(rigidbody2d.velocity!=Vector2.zero){
+            stateMachine.ChangeState(new EnemyStateMove(this));
+        }
     }
     protected void Init(){
         foreach(var enemy in DataManager.Instance.Data.listEnemies){

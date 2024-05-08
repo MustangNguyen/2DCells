@@ -10,6 +10,7 @@ public class Mutation : CellsBase
     [SerializeField] protected float pushBackForce = 1f;
     [SerializeField] protected string mutationId;
     [SerializeField] protected string mutationName;
+    [SerializeField] protected StateMachine stateMachine;
     protected bool isMoving = true;
     protected float shipAngle = 0f;
     protected bool isDelaying = false;
@@ -19,7 +20,11 @@ public class Mutation : CellsBase
     protected override void Awake()
     {
         base.Awake();
+        stateMachine = GetComponent<StateMachine>();
         playerRigidbody2d = GetComponent<Rigidbody2D>();
+    }
+    protected virtual void Update(){
+        StateMachineMonitor();
     }
     protected virtual void FixedUpdate() {
         isMoving = true;
@@ -36,6 +41,7 @@ public class Mutation : CellsBase
         pushBackForce = 1000;
         AddProperties();
         ShowProterties();
+        stateMachine.ChangeState(new PlayerStateIdle(this));
         shieldRechargeRate = GameStatic.ShieldRechargeCalculator(baseCellArmor.shieldPoint);
     }
     public void PlayerRotation(){
@@ -61,8 +67,8 @@ public class Mutation : CellsBase
     }
     protected void PlayerMovement(){
         Vector2 moveDirection = InputManager.Instance.GetArrowButton();
-        playerRigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
-        //playerRigidbody2d.velocity = moveDirection * moveSpeed * Time.fixedDeltaTime;
+        //playerRigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
+        playerRigidbody2d.velocity = moveDirection * moveSpeed ;
     }
     
     protected void ShieldRecharge(){
@@ -72,6 +78,14 @@ public class Mutation : CellsBase
             if (currentArmor.shieldPoint > baseCellArmor.shieldPoint)
                 currentArmor.shieldPoint = baseCellArmor.shieldPoint;
             GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint / baseCellArmor.shieldPoint, currentArmor.shieldPoint.ToString());
+        }
+    }
+    protected void StateMachineMonitor(){
+        if(playerRigidbody2d.velocity==Vector2.zero){
+            stateMachine.ChangeState(new PlayerStateIdle(this));
+        }
+        else if(playerRigidbody2d.velocity!=Vector2.zero){
+            stateMachine.ChangeState(new PlayerStateMove(this));
         }
     }
 
@@ -85,8 +99,8 @@ public class Mutation : CellsBase
                 currentArmor.shieldPoint -=50;
                 if(currentArmor.shieldPoint<0)
                     currentArmor.shieldPoint = 0;
-                GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
                 delayTime = GameStatic.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
+                GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
             }
             else{
 
