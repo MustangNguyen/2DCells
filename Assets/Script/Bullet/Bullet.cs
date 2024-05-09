@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected float timeExist = 2f;
     [SerializeField] protected bool isProjectile = true;
     [SerializeField] protected Rigidbody2D rigidbody2d;
+    [SerializeField] protected BoxCollider2D bulletCollider2D;
     [SerializeField] protected string bulletId;
     [SerializeField] protected string bulletTypeId;
     [SerializeField] protected string bulletName;
@@ -57,7 +58,7 @@ public class Bullet : MonoBehaviour
             //this.elements.secondaryElement = bulletOOP.element.secondaryElement;
         }
     }
-
+    
     public virtual void SetBullet(Transform gunPosition, float accuracy)
     {
         float spreadAngle = GUN_MAX_SPREAD_ANGLE - GUN_MAX_SPREAD_ANGLE / 100 * accuracy;

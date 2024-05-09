@@ -36,12 +36,12 @@ public class EnemyCell : CellsBase
         currentArmor.armorPoint = BioArmorCalculating();
     }
     public void CellUpdate(){
-        healthBar.value = (float)healPoint / (float)maxHealth;
         healthText.text = healPoint.ToString();
-        StateMachineMonitor();
     }
     public void CellFixedUpdate()
     {
+        healthBar.value = (float)healPoint / (float)maxHealth;
+        StateMachineMonitor();
         movement();
         if (healPoint <= 0)
         {

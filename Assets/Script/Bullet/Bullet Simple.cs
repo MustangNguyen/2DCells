@@ -11,5 +11,10 @@ public class BulletSimple : Bullet
     public override void SetBullet(Transform gunPosition, float accuracy)
     {
         base.SetBullet(gunPosition, accuracy);
+        bulletCollider2D.enabled = true;
+        
+    }
+    private void OnCollisionEnter2D(Collision2D other) {
+        bulletCollider2D.enabled = false;
     }
 }

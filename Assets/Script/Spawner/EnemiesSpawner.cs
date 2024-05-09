@@ -32,7 +32,7 @@ public class EnemiesSpawner : Spawner
             yield return new WaitForSeconds(spawnTime);
             if(enemiesSpawned < GameManager.Instance.maximumEnemies - 1)
                 LeanPool.Spawn(enemy, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(spawnTime);
             if (enemiesSpawned < GameManager.Instance.maximumEnemies - 1)
                 LeanPool.Spawn(enemy2, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
         }

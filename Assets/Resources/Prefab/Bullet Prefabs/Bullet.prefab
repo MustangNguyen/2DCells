@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2780789226879735258}
   - component: {fileID: 1275779362687362555}
   - component: {fileID: 4301685307907571168}
-  - component: {fileID: -794996422577281913}
   - component: {fileID: 2277018407206519518}
+  - component: {fileID: 3759474731114508207}
   m_Layer: 14
   m_Name: Bullet
   m_TagString: Bullet
@@ -114,8 +114,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &-794996422577281913
-CapsuleCollider2D:
+--- !u!114 &2277018407206519518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309796950434619821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003954c53e2c7614c8c7749b0d5ce806, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 20
+  damage: 20
+  elements:
+    primaryElement: 1
+    secondaryElement: 0
+  timeExist: 2
+  isProjectile: 1
+  rigidbody2d: {fileID: 1275779362687362555}
+  bulletCollider2D: {fileID: 3759474731114508207}
+  bulletId: 
+  bulletTypeId: 
+  bulletName: 
+--- !u!61 &3759474731114508207
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,25 +170,16 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0017065704, y: 0.000000059604645}
-  m_Size: {x: 0.109817326, y: 0.24633849}
-  m_Direction: 0
---- !u!114 &2277018407206519518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309796950434619821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003954c53e2c7614c8c7749b0d5ce806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 20
-  damage: 20
-  elements:
-    element: 0
-  timeExist: 2
-  isProjectile: 1
-  rigidbody2d: {fileID: 1275779362687362555}
+  m_Offset: {x: 0, y: 0.0044065714}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.35555556, y: 0.35555556}
+    newSize: {x: 0.35555556, y: 0.35555556}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.06913209, y: 0.22776651}
+  m_EdgeRadius: 0

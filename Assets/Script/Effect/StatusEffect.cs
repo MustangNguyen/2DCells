@@ -15,9 +15,32 @@ public class StatusEffect : MonoBehaviour
     private void OnEnable()
     {
         currentStatusColor = statusText.color;
-        StartCoroutine(IEStatusFade());
+        // StartCoroutine(IEStatusFade());
+        //StatusFade();
+        LeanTween.delayedCall(1f,()=>{
+            LeanPool.Despawn(gameObject);
+        });
     }
+    public void StatusFade()
+    {
+        currentStatusColor = statusText.color;
+        LeanTween.delayedCall(0.01f, () =>
+        {
+            LeanTween.value(1f, 0f, 1).setOnUpdate((float value) =>
+            {
+            transform.Translate(new Vector3(0f, 1 / (float)numberOfFrames, 0f));
+            //transform.localPosition = new Vector3(0f, value, 0f);
+            currentStatusColor.a = 1f * value;
+            statusText.color = currentStatusColor;
+            }).setOnComplete(() =>
+            {
+            transform.Translate(Vector3.down);
+            currentStatusColor = Color.gray;
+            LeanPool.Despawn(gameObject);
+            });
+        });
 
+    }
     public IEnumerator IEStatusFade()
     {
         yield return new WaitForSeconds(0.01f);

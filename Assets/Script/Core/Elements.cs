@@ -6,22 +6,22 @@ using UnityEngine;
 [Serializable]
 public class Elements
 {
-    public PrimaryElement primaryElement = PrimaryElement.physic;
+    public PrimaryElement primaryElement = PrimaryElement.Physic;
 
-    public SecondaryElement secondaryElement = SecondaryElement.none;
+    public SecondaryElement secondaryElement = SecondaryElement.None;
 }
 public enum PrimaryElement{
-    none,
-    physic,
-    fire,
-    wet,
-    electric,
-    toxin,
-    earth
+    None,
+    Physic,
+    Fire,
+    Water,
+    Electric,
+    Toxin,
+    Earth
 }
 public enum SecondaryElement{
-    none,
-    ice,
+    None,
+    Ice,
 }
 
 public enum Status{

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7555219168721076958}
   - component: {fileID: 76875347195820983}
+  - component: {fileID: 8944892011326284046}
   m_Layer: 0
   m_Name: Status
   m_TagString: Untagged
@@ -50,6 +51,22 @@ MonoBehaviour:
   currentStatusColor: {r: 0, g: 0, b: 0, a: 0}
   fadeDuration: 1
   numberOfFrames: 24
+--- !u!111 &8944892011326284046
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673134252369942621}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5da0b90b16c46bc4c8c69eb6472d9359, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5da0b90b16c46bc4c8c69eb6472d9359, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3842803756082578593
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +204,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.0000011920929}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 253.11, y: 124.17}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6454183299408700262

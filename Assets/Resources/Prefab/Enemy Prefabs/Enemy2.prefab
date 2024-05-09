@@ -561,7 +561,8 @@ GameObject:
   - component: {fileID: 7035584098898131003}
   - component: {fileID: 405415554254351792}
   - component: {fileID: 843731323462224902}
-  - component: {fileID: 2011709233123686915}
+  - component: {fileID: 810420624178567813}
+  - component: {fileID: 2539127559160538056}
   m_Layer: 10
   m_Name: Enemy2
   m_TagString: EnemyCell
@@ -604,7 +605,7 @@ MonoBehaviour:
   baseCellArmor:
     armorType: 1
     shieldType: 0
-    armorPoint: 50
+    armorPoint: 100
     shieldPoint: 0
   currentArmor:
     armorType: 0
@@ -620,6 +621,7 @@ MonoBehaviour:
   healthText: {fileID: 4058430460571947321}
   index: 0
   equipment: 0
+  stateMachine: {fileID: 810420624178567813}
 --- !u!212 &405415554254351792
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -697,10 +699,23 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
---- !u!60 &2011709233123686915
-PolygonCollider2D:
+--- !u!114 &810420624178567813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584037886444065786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateName: 
+--- !u!61 &2539127559160538056
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -731,7 +746,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.000000059604645, y: 0.0008459985}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -741,17 +756,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.20140791, y: -0.0004724264}
-      - {x: 0.0010945797, y: -0.203125}
-      - {x: 0.20140815, y: -0.00038605928}
-      - {x: 0.0008585453, y: 0.20117188}
-    - - {x: -0.125, y: 0}
-      - {x: 0, y: 0.125}
-      - {x: 0.125, y: 0}
-      - {x: 0.001953125, y: -0.125}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 0.52498996, y: 0.5199142}
+  m_EdgeRadius: 0
 --- !u!1 &7220362211064874909
 GameObject:
   m_ObjectHideFlags: 0
