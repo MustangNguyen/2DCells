@@ -10,18 +10,23 @@ using System;
 public class EnemyCell : CellsBase
 {
     [SerializeField] protected Rigidbody2D rigidbody2d;
+    [SerializeField] protected Collider2D collider2d;
     [Space(10)]
     [Header("UI")]
     [SerializeField] protected string enemyId;
     [SerializeField] protected Slider healthBar;
     [SerializeField] protected TextMeshProUGUI healthText;
+    [SerializeField] protected SpriteRenderer model;
     [SerializeField] protected int index;
     [SerializeField] protected Equipment equipment;
     [SerializeField] protected StateMachine stateMachine;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected GameObject destroyAnimation;
     protected override void Start()
     {
         base.Start();
         AddProperties();
+        destroyAnimation.SetActive(false);
     }
     protected override void OnEnable()
     {
@@ -29,23 +34,28 @@ public class EnemyCell : CellsBase
         
         UpdateManager.Instance.AddCellToPool(this);
         index = UpdateManager.Instance.poolIndex;
+        Reset();
     }
     private void Reset() {
         healPoint = maxHealth;
         currentArmor.armorType = baseCellArmor.armorType;
         currentArmor.armorPoint = BioArmorCalculating();
+        model.color = new Color(1, 1, 1, 1);
+        collider2d.enabled = true;
     }
     public void CellUpdate(){
         healthText.text = healPoint.ToString();
+        stateMachine.StateMachineUpdate();
     }
     public void CellFixedUpdate()
     {
         healthBar.value = (float)healPoint / (float)maxHealth;
-        StateMachineMonitor();
         movement();
+        StateMachineMonitor();
+        stateMachine.StateMachineFixedUpdate();
         if (healPoint <= 0)
         {
-            OnDead();
+            
         }
     }
     public void movement()
@@ -93,6 +103,11 @@ public class EnemyCell : CellsBase
         else if(rigidbody2d.velocity!=Vector2.zero){
             stateMachine.ChangeState(new EnemyStateMove(this));
         }
+        if (healPoint <= 0)
+        {
+            stateMachine.ChangeState(new EnemyStateDestroy(this));
+        }
+        
     }
     protected void Init(){
         foreach(var enemy in DataManager.Instance.Data.listEnemies){
@@ -113,11 +128,16 @@ public class EnemyCell : CellsBase
             this.faction = enemyCellOOP.faction;
         }
     }
-    protected override void OnDead()
+    public override void OnDead()
     {
         base.OnDead();
         UpdateManager.Instance.RemoveCellFromPool(index);
-        LeanPool.Despawn(gameObject);
+        rigidbody2d.velocity = Vector3.zero;
+        collider2d.enabled = false;
+        destroyAnimation.SetActive(true);
+        animator.SetTrigger("Destroy");
+        model.color = new Color(0, 0, 0, 0);
+        LeanTween.delayedCall(0.5f, () => { LeanPool.Despawn(gameObject); });
     }
 }
 [Serializable]

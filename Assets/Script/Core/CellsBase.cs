@@ -33,7 +33,7 @@ public class CellsBase : MonoBehaviour
     protected virtual void Start(){
 
     }
-    protected virtual void OnDead(){
+    public virtual void OnDead(){
         
     }
     protected int BioArmorCalculating(){

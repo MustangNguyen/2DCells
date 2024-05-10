@@ -37,4 +37,7 @@ public class EnemiesSpawner : Spawner
                 LeanPool.Spawn(enemy2, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
         }
     }
+    public void Reposition(Transform transform){
+
+    }
 }

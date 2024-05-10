@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spawner : MonoBehaviour
+public class Spawner : Singleton<Spawner>
 {
     [SerializeField] protected float spawnTime = 1f;
     [SerializeField] protected Transform enemyHoder;

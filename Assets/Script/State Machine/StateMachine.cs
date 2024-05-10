@@ -4,6 +4,12 @@ public class StateMachine : MonoBehaviour
 {
     [SerializeField] private string currentStateName;
     private State currentState;
+    public void StateMachineUpdate() {
+        currentState?.LogicUpdate();
+    }
+    public void StateMachineFixedUpdate() {
+        currentState?.PhysicsUpdate();
+    }
     public void ChangeState(PlayerState newState)
     {
         if (currentState != null)

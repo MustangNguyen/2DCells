@@ -481,6 +481,7 @@ MonoBehaviour:
     listMutations: []
     listEnemies: []
     listAbilities: []
+    listBullet: []
 --- !u!1 &934152348
 GameObject:
   m_ObjectHideFlags: 0

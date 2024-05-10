@@ -279,6 +279,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6282817905543370000}
   - {fileID: 1329775222933861321}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -294,14 +295,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83042f7f5250d874ba3afcecd677bb45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healPoint: 200
-  maxHealth: 200
+  healPoint: 1
+  maxHealth: 1
   maxEnery: 200
   currentEnery: 200
   baseCellArmor:
-    armorType: 1
+    armorType: 2
     shieldType: 0
-    armorPoint: 50
+    armorPoint: 200
     shieldPoint: 0
   currentArmor:
     armorType: 0
@@ -312,12 +313,16 @@ MonoBehaviour:
   lv: 1
   faction: 0
   rigidbody2d: {fileID: 7972279139686672109}
+  collider2d: {fileID: 7927935831264846181}
   enemyId: HEM_EMARI
   healthBar: {fileID: 3204548329667127057}
   healthText: {fileID: 5519259120346946660}
+  model: {fileID: 509484139380529113}
   index: 0
   equipment: 0
   stateMachine: {fileID: 2404866790970904685}
+  animator: {fileID: 8771560774932421375}
+  destroyAnimation: {fileID: 436348718608249120}
 --- !u!212 &509484139380529113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -442,9 +447,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0068502873, y: 0}
+  m_Offset: {x: 0.00090798736, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1934327
+  m_Radius: 0.199375
 --- !u!1 &3141128402752406696
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +673,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -813242097
-  m_SortingOrder: 1
+  m_SortingOrder: 30
   m_TargetDisplay: 0
 --- !u!114 &622084047497950211
 MonoBehaviour:
@@ -860,3 +865,75 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1001 &4946401200589301649
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6274741266338684342}
+    m_Modifications:
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.042
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.021
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4803965821496301233, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+      propertyPath: m_Name
+      value: Destroy Smoke
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+--- !u!1 &436348718608249120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4803965821496301233, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+  m_PrefabInstance: {fileID: 4946401200589301649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6282817905543370000 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+  m_PrefabInstance: {fileID: 4946401200589301649}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8771560774932421375 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4404517834397859182, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
+  m_PrefabInstance: {fileID: 4946401200589301649}
+  m_PrefabAsset: {fileID: 0}
