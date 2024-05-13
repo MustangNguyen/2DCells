@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Are you sure ?
+  m_text: Back to Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9380d5ccf67be54dbc4f939e259f99c, type: 2}
   m_sharedMaterial: {fileID: 4208348833665236086, guid: a9380d5ccf67be54dbc4f939e259f99c, type: 2}
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Your change will apply ? '
+  m_text: Are you sure go back to Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a9380d5ccf67be54dbc4f939e259f99c, type: 2}
   m_sharedMaterial: {fileID: 4208348833665236086, guid: a9380d5ccf67be54dbc4f939e259f99c, type: 2}
@@ -723,10 +723,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 55
+  m_fontSize: 46.95
   m_fontSizeBase: 55
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0

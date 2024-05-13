@@ -6,4 +6,5 @@ using UnityEngine;
 public class GameSetting : ScriptableObject
 {
     public int gameFPS = 24;
+    public float gameVolume = 1f;
 }

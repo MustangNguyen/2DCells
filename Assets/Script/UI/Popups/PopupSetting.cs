@@ -4,15 +4,47 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Hellmade.Sound;
 
 public class PopupSetting : Popups
 {
     public static PopupSetting Instance;
+    [SerializeField] private Slider volumeSlider;
+    [SerializeField] private List<Button> button;
+    [SerializeField] private CustomButton yesButton;
+    [SerializeField] private CustomButton noButton;
+    private float _musicVolume;
+    private float _soundVolume;
+
+    public float MusicVolume
+    {
+        get { return _musicVolume; }
+        set
+        {
+            _musicVolume = value;
+            EazySoundManager.GlobalMusicVolume = value;
+        }
+    }
+
+    public float SoundVolume
+    {
+        get { return _soundVolume; }
+        set
+        {
+            _soundVolume = value;
+            EazySoundManager.GlobalSoundsVolume = value;
+            EazySoundManager.GlobalUISoundsVolume = value;
+        }
+    }
 
     private Action<bool> _onResult;
     void InitUI()
     {
-        // Frame.color = UserUIManager.Instance.GetCurrentUIColor();
+
+        volumeSlider.value = EazySoundManager.GlobalMusicVolume;
+        volumeSlider.onValueChanged.AddListener(OnChangeSliderMusic);
+        Debug.Log(EazySoundManager.GlobalMusicVolume);
+        Debug.Log(MusicVolume);
     }
 
     public void OnYesButtonClicked()
@@ -26,7 +58,34 @@ public class PopupSetting : Popups
         _onResult?.Invoke(false);
         Hide();
     }
-    
+    public void OnChangeSliderMusic(float value)
+    {
+        EazySoundManager.GlobalMusicVolume = value;
+        AudioManager.Instance.playerVolumeSetting.gameVolume = EazySoundManager.GlobalMusicVolume;
+        Debug.Log(EazySoundManager.GlobalMusicVolume);
+    }
+    public void OnUIColorChange(int id)
+    {
+        switch (id)
+        {
+            case 1:
+                UserUIManager.Instance.ChangeUIColor(GameStatic.CRITICAL_TIER_5_COLOR);
+                Frame.color = UserUIManager.Instance.currentUIColor;
+                break;
+            case 2:
+                UserUIManager.Instance.ChangeUIColor(GameStatic.USER_UI_COLOR_BLUE);
+                Frame.color = UserUIManager.Instance.currentUIColor;
+                break;
+            case 3:
+                UserUIManager.Instance.ChangeUIColor(GameStatic.USER_UI_COLOR_CYAN);
+                Frame.color = UserUIManager.Instance.currentUIColor;
+                break;
+            case 4:
+                UserUIManager.Instance.ChangeUIColor(GameStatic.USER_UI_COLOR_PURPLE);
+                Frame.color = UserUIManager.Instance.currentUIColor;
+                break;
+        }
+    }
 
 
     #region BASE POPUP 
