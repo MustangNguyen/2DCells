@@ -461,6 +461,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 443021837}
+  - {fileID: 493542837}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &323879962
@@ -585,12 +586,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8b2244f18231441b22667619368d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTime: 0.5
+  IsPersistence: 0
+  spawnTime: 0.2
   enemyHoder: {fileID: 1706902183}
-  enemy: {fileID: 1263794284896037523, guid: aed24096dbedc9f489c5eea13a00ceac, type: 3}
-  enemy2: {fileID: 5584037886444065786, guid: adf87a40760cb0547babb1b99da8c3ff, type: 3}
+  respawnDistance: 5
+  listEnemyCell: []
   playerPosition: {fileID: 272775831}
   spawnRadius: 15
+  campaignLevel: {fileID: 11400000, guid: 7584c712daef8a148abae5c346feaec2, type: 2}
+  currentWave: 0
+  waveDurationLeft: 0
 --- !u!1 &457926785
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +632,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2818758899710808709, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
   m_PrefabInstance: {fileID: 1516111393}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &493542836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 493542837}
+  - component: {fileID: 493542838}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &493542837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493542836}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 304880126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &493542838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 493542836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351573f82d0a0504295978a4b964867e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsPersistence: 0
+  respawnDistance: 5
 --- !u!1 &612692685
 GameObject:
   m_ObjectHideFlags: 0

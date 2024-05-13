@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class Spawner : Singleton<Spawner>
 {
-    [SerializeField] protected float spawnTime = 1f;
-    [SerializeField] protected Transform enemyHoder;
+    [SerializeField] private float respawnDistance = 20f;
     protected Transform spawnPos;
     protected virtual void Start(){
-        GameObject gameObject = new GameObject();
-        spawnPos = enemyHoder;
     }
     protected virtual void SpawnEnemies(){
 
@@ -24,5 +21,29 @@ public class Spawner : Singleton<Spawner>
         Vector3 position = new Vector3(spawnX, spawnY, 0);
         return position;
     }
-
+    public void Reposition(Transform transform){
+        Vector3 cameraLeftBottom = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, Camera.main.nearClipPlane));
+        Vector3 cameraRightTop = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, Camera.main.nearClipPlane));
+        float cameraLeft = cameraLeftBottom.x;
+        float cameraBottom = cameraLeftBottom.y;
+        float cameraRight = cameraRightTop.x;
+        float cameraTop = cameraRightTop.y;
+        float padding = cameraRight-Camera.main.transform.position.x-(cameraTop-Camera.main.transform.position.y);
+        if (transform.position.x < cameraLeft - respawnDistance)
+        {
+            transform.position = new Vector2(cameraRight + respawnDistance / 2, transform.position.y);
+        }
+        if (transform.position.x > cameraRight + respawnDistance)
+        {
+            transform.position = new Vector2(cameraLeft - respawnDistance / 2, transform.position.y);
+        }
+        if (transform.position.y < cameraBottom - respawnDistance - padding)
+        {
+            transform.position = new Vector2(transform.position.x, cameraTop + respawnDistance / 2);
+        }
+        if (transform.position.y > cameraTop + respawnDistance + padding)
+        {
+            transform.position = new Vector2(transform.position.x, cameraBottom - respawnDistance / 2);
+        }
+    }
 }
