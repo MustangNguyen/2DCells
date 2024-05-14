@@ -22,6 +22,9 @@ public class EnemyCell : CellsBase
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject destroyAnimation;
+    [Space(10)]
+    [Header("Wave")]
+    [SerializeField] public int wave;
     protected override void Start()
     {
         base.Start();
@@ -31,7 +34,6 @@ public class EnemyCell : CellsBase
     protected override void OnEnable()
     {
         base.OnEnable();
-        
         UpdateManager.Instance.AddCellToPool(this);
         index = UpdateManager.Instance.poolIndex;
         Reset();
@@ -46,6 +48,7 @@ public class EnemyCell : CellsBase
     public void CellUpdate(){
         healthText.text = healPoint.ToString();
         stateMachine.StateMachineUpdate();
+        Spawner.Instance.Reposition(this.transform);
     }
     public void CellFixedUpdate()
     {
@@ -109,13 +112,13 @@ public class EnemyCell : CellsBase
         }
         
     }
-    protected void Init(){
-        foreach(var enemy in DataManager.Instance.Data.listEnemies){
-            if(enemyId == enemy.enemyId){
+    // protected void Init(){
+    //     foreach(var enemy in DataManager.Instance.Data.listEnemies){
+    //         if(enemyId == enemy.enemyId){
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
     protected void AddProperties()
     {
         if(DataManager.Instance.Data.listEnemies.Exists(x=> x.enemyId == this.enemyId))
@@ -137,7 +140,10 @@ public class EnemyCell : CellsBase
         destroyAnimation.SetActive(true);
         animator.SetTrigger("Destroy");
         model.color = new Color(0, 0, 0, 0);
-        LeanTween.delayedCall(0.5f, () => { LeanPool.Despawn(gameObject); });
+
+        LeanTween.delayedCall(0.5f, () => { 
+            EnemySpawner.Instance.OnEnemyDestroy(this);
+            LeanPool.Despawn(gameObject); });
     }
 }
 [Serializable]

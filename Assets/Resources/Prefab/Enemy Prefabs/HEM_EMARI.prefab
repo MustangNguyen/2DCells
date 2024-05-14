@@ -254,13 +254,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6274741266338684342}
-  - component: {fileID: 1404272574764739513}
   - component: {fileID: 509484139380529113}
-  - component: {fileID: 7972279139686672109}
+  - component: {fileID: -3129199665608748248}
   - component: {fileID: 2404866790970904685}
+  - component: {fileID: 7972279139686672109}
   - component: {fileID: 7927935831264846181}
   m_Layer: 10
-  m_Name: Enemy
+  m_Name: HEM_EMARI
   m_TagString: EnemyCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -283,46 +283,6 @@ Transform:
   - {fileID: 1329775222933861321}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1404272574764739513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263794284896037523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83042f7f5250d874ba3afcecd677bb45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healPoint: 1
-  maxHealth: 1
-  maxEnery: 200
-  currentEnery: 200
-  baseCellArmor:
-    armorType: 2
-    shieldType: 0
-    armorPoint: 200
-    shieldPoint: 0
-  currentArmor:
-    armorType: 0
-    shieldType: 0
-    armorPoint: 0
-    shieldPoint: 0
-  moveSpeed: 2
-  lv: 1
-  faction: 0
-  rigidbody2d: {fileID: 7972279139686672109}
-  collider2d: {fileID: 7927935831264846181}
-  enemyId: HEM_EMARI
-  healthBar: {fileID: 3204548329667127057}
-  healthText: {fileID: 5519259120346946660}
-  model: {fileID: 509484139380529113}
-  index: 0
-  equipment: 0
-  stateMachine: {fileID: 2404866790970904685}
-  animator: {fileID: 8771560774932421375}
-  destroyAnimation: {fileID: 436348718608249120}
 --- !u!212 &509484139380529113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -375,6 +335,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3129199665608748248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263794284896037523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da489cfbfe64c1145b131f30df6c437e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healPoint: 200
+  maxHealth: 200
+  maxEnery: 200
+  currentEnery: 200
+  baseCellArmor:
+    armorType: 0
+    shieldType: 0
+    armorPoint: 0
+    shieldPoint: 0
+  currentArmor:
+    armorType: 0
+    shieldType: 0
+    armorPoint: 0
+    shieldPoint: 0
+  moveSpeed: 1
+  lv: 1
+  faction: 0
+  rigidbody2d: {fileID: 7972279139686672109}
+  collider2d: {fileID: 7927935831264846181}
+  enemyId: HEM_EMARI
+  healthBar: {fileID: 3204548329667127057}
+  healthText: {fileID: 5519259120346946660}
+  model: {fileID: 509484139380529113}
+  index: 0
+  equipment: 0
+  stateMachine: {fileID: 2404866790970904685}
+  animator: {fileID: 8771560774932421375}
+  destroyAnimation: {fileID: 436348718608249120}
+--- !u!114 &2404866790970904685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263794284896037523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateName: 
 --- !u!50 &7972279139686672109
 Rigidbody2D:
   serializedVersion: 4
@@ -402,19 +415,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2404866790970904685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1263794284896037523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStateName: 
 --- !u!58 &7927935831264846181
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -875,11 +875,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.042
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.021
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1410796802744038017, guid: 922b40d0dc37f594eb1e46cd157fe88f, type: 3}
       propertyPath: m_LocalPosition.z

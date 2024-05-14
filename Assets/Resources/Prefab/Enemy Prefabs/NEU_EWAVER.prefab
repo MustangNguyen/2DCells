@@ -558,13 +558,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8095781593832324573}
-  - component: {fileID: 7035584098898131003}
   - component: {fileID: 405415554254351792}
   - component: {fileID: 843731323462224902}
-  - component: {fileID: 810420624178567813}
   - component: {fileID: 2539127559160538056}
+  - component: {fileID: 87143013507893159}
+  - component: {fileID: 810420624178567813}
   m_Layer: 10
-  m_Name: Enemy2
+  m_Name: NEU_EWAVER
   m_TagString: EnemyCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -579,7 +579,7 @@ Transform:
   m_GameObject: {fileID: 5584037886444065786}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.62, y: -0.71, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -587,46 +587,6 @@ Transform:
   - {fileID: 6911785502760113239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7035584098898131003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584037886444065786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83042f7f5250d874ba3afcecd677bb45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healPoint: 200
-  maxHealth: 200
-  maxEnery: 200
-  currentEnery: 200
-  baseCellArmor:
-    armorType: 1
-    shieldType: 0
-    armorPoint: 100
-    shieldPoint: 0
-  currentArmor:
-    armorType: 0
-    shieldType: 0
-    armorPoint: 0
-    shieldPoint: 0
-  moveSpeed: 2
-  lv: 1
-  faction: 0
-  rigidbody2d: {fileID: 843731323462224902}
-  collider2d: {fileID: 2539127559160538056}
-  enemyId: NEU_EWAVER
-  healthBar: {fileID: 7843194746716017019}
-  healthText: {fileID: 4058430460571947321}
-  model: {fileID: 405415554254351792}
-  index: 0
-  equipment: 0
-  stateMachine: {fileID: 810420624178567813}
-  animator: {fileID: 1056000479836554749}
-  destroyAnimation: {fileID: 8147937529635761698}
 --- !u!212 &405415554254351792
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -706,19 +666,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &810420624178567813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584037886444065786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStateName: 
 --- !u!61 &2539127559160538056
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -764,6 +711,59 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.52498996, y: 0.5199142}
   m_EdgeRadius: 0
+--- !u!114 &87143013507893159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584037886444065786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74f2e02e3253d21469f7a7cac6c67c53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healPoint: 200
+  maxHealth: 200
+  maxEnery: 200
+  currentEnery: 200
+  baseCellArmor:
+    armorType: 0
+    shieldType: 0
+    armorPoint: 0
+    shieldPoint: 0
+  currentArmor:
+    armorType: 0
+    shieldType: 0
+    armorPoint: 0
+    shieldPoint: 0
+  moveSpeed: 1
+  lv: 1
+  faction: 1
+  rigidbody2d: {fileID: 843731323462224902}
+  collider2d: {fileID: 2539127559160538056}
+  enemyId: NEU_EWAVER
+  healthBar: {fileID: 7843194746716017019}
+  healthText: {fileID: 4058430460571947321}
+  model: {fileID: 405415554254351792}
+  index: 0
+  equipment: 0
+  stateMachine: {fileID: 810420624178567813}
+  animator: {fileID: 1056000479836554749}
+  destroyAnimation: {fileID: 8147937529635761698}
+--- !u!114 &810420624178567813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5584037886444065786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateName: 
 --- !u!1 &7220362211064874909
 GameObject:
   m_ObjectHideFlags: 0
