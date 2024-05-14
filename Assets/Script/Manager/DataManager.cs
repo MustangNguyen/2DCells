@@ -39,7 +39,6 @@ public class DataManager : Singleton<DataManager>
                 Ability tempAbility = new Ability();
                 tempAbility.abilityID = ability["abilityId"].str;
                 tempAbility.abilityName = ability["abilityName"].str;
-                tempAbility.mutationID = ability["mutationId"].str;
                 mutation.mutationAbilities.Add(tempAbility);
             }
             Data.listMutations.Add(mutation);

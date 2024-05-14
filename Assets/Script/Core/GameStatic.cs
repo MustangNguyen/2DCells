@@ -19,7 +19,7 @@ public static class GameStatic
     #endregion
 
     #region API
-    public readonly static string HOST = "https://twodcellcore20240513164925.azurewebsites.net";
+    public readonly static string HOST = "https://twodcellcore.azurewebsites.net";
     public readonly static string GET_MUTATION_API = "/api/Mutations";
     public readonly static string GET_ENEMY_API = "/api/EnemyCells";
     public readonly static string GET_ABILITY_API = "/api/MutationAbilities";
