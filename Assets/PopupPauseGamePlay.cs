@@ -21,6 +21,7 @@ public class PopupPauseGamePlay : Popups
 
     public void OnYesButtonClicked()
     {
+        SceneManager.LoadScene(GameStatic.MENU_SCENCE_NAME);
         GameManager.Instance.OnPauseClick();
         Hide();
     }
@@ -30,7 +31,6 @@ public class PopupPauseGamePlay : Popups
         GameManager.Instance.OnPauseClick();
         Hide();
     }
-    
     #endregion
 
     #region BASE POPUP 

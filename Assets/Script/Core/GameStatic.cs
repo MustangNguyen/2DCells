@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 public static class GameStatic
 {
@@ -16,6 +17,11 @@ public static class GameStatic
     public readonly static Color CRITICAL_TIER_5_COLOR = Color.red;
     public readonly static Color USER_UI_COLOR_BLUE = Color.blue;
     public readonly static Color USER_UI_COLOR_CYAN = Color.cyan;
+    public readonly static Color USER_UI_COLOR_PURPLE = new Color(0.627451f, 0.1254902f, 0.9411765f, 1f);
+    #endregion
+
+    #region GAMESCENCE
+    public readonly static string MENU_SCENCE_NAME = "MainMenu";
     #endregion
 
     #region API
