@@ -9,7 +9,7 @@ using UnityEngine.Video;
 
 public partial class NetworkManager : Singleton<NetworkManager>
 {
-
+    private AccessToken accessToken = new AccessToken();
     APIRequest apiRequest = new();
     void Start()
     {
@@ -52,6 +52,22 @@ public partial class NetworkManager : Singleton<NetworkManager>
     #endregion
 
     #region Post
+    public void PostRequestLogin(UserLogin userLogin,Action onComplete = null,Action onFail = null,Action onUnauthorized = null){
+        APIRequest aPIRequest = new();
+        apiRequest.url = HOST + POST_LOGIN_REQUEST;
+        string jsonData = JsonConvert.SerializeObject(userLogin);
+        apiRequest.body = jsonData;
+        StartCoroutine(CreateWebPostRequest(apiRequest,(string data)=>{
+            JSONObject json = new JSONObject(data);
+            accessToken.accessToken = json["accessToken"].str;
+            accessToken.refreshToken = json["refreshToken"].str;
+            onComplete?.Invoke();
+        },()=>{
+            onFail?.Invoke();
+        },()=>{
+            onUnauthorized?.Invoke();
+        },isRequireAuthorize:false));
+    }
     public void PostNewUserToServer(UserDataOOP newUser)
     {
         APIRequest apiRequest = new();

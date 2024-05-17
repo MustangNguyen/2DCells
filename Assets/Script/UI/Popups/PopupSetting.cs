@@ -62,7 +62,7 @@ public class PopupSetting : Popups
     {
         EazySoundManager.GlobalMusicVolume = value;
         AudioManager.Instance.playerVolumeSetting.gameVolume = EazySoundManager.GlobalMusicVolume;
-        Debug.Log(EazySoundManager.GlobalMusicVolume);
+        // Debug.Log(EazySoundManager.GlobalMusicVolume);
     }
     public void OnUIColorChange(int id)
     {

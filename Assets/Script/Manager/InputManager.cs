@@ -35,7 +35,7 @@ public class InputManager : Singleton<InputManager>
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         arrowDirection = new Vector3(horizontal, vertical, 0f);
-        return arrowDirection;
+        return arrowDirection.normalized;
     }
     public void GetMouseClick(){
         isMouseClick = Input.GetButtonDown("Fire1");

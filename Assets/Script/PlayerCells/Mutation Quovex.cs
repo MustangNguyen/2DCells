@@ -9,11 +9,11 @@ public class MutationQuovex : Mutation
         base.Awake();
         mutationId = "HEM_QUOVEX";
     }
-    protected override void Start()
-    {
-        base.Start();
-    }
-    protected override void FixedUpdate() {
-        base.FixedUpdate();
-    }
+    // protected override void Start()
+    // {
+    //     base.Start();
+    // }
+    // protected override void FixedUpdate() {
+    //     base.FixedUpdate();
+    // }
 }

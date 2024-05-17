@@ -2,16 +2,22 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class DataManager : Singleton<DataManager>
 {
     public DataManagerOOP Data = new();
+    public List<EnemyCell> listEnemyCell;
+    public List<Mutation> listMutation;
 
-    private void Start() {
+    private void Start()
+    {
         NetworkManager.Instance.GetMutationDataFromServer();
         NetworkManager.Instance.GetEnemyDataFromServer();
         NetworkManager.Instance.GetAbilityDataFromServer();
         NetworkManager.Instance.GetBulletDataFromServer();
+        listEnemyCell = Resources.LoadAll<EnemyCell>("Prefab/Enemy Prefabs").ToList();
+        listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
     }
 
     public void GetMutationData(string data){
@@ -24,7 +30,7 @@ public class DataManager : Singleton<DataManager>
             ArmorType armorType;
             Enum.TryParse(item["cellProtection"].str,out armorType);
             ShieldType shieldType;
-            Enum.TryParse(item["cellProtection"].str,out shieldType);
+            Enum.TryParse(item["shieldType"].str,out shieldType);
             mutation.baseCellProtection.armorType = armorType;
             mutation.baseCellProtection.armorPoint = (int)item["armor"].n;
             mutation.baseCellProtection.shieldType = shieldType;
@@ -56,11 +62,11 @@ public class DataManager : Singleton<DataManager>
             ArmorType armorType;
             Enum.TryParse(item["cellProtection"].str,out armorType);
             ShieldType shieldType;
-            Enum.TryParse(item["cellProtection"].str,out shieldType);
+            Enum.TryParse(item["shieldType"].str,out shieldType);
             enemyCell.cellProtection.armorType = armorType;
             enemyCell.cellProtection.armorPoint = (int)item["armor"].n;
             enemyCell.cellProtection.shieldType = shieldType;
-            enemyCell.cellProtection.shieldPoint = (int)item["armor"].n;
+            enemyCell.cellProtection.shieldPoint = (int)item["shield"].n;
             Faction faction;
             Enum.TryParse(item["factionId"].str,out faction);
             enemyCell.faction = faction;
@@ -69,6 +75,7 @@ public class DataManager : Singleton<DataManager>
             Equipment equipment;
             Enum.TryParse(item["equipment"].str, out equipment); 
             enemyCell.equipment = equipment;
+            enemyCell.bodyDamage = (int)item["bodyDamage"].n;
             Data.listEnemies.Add(enemyCell);
         }   
     }

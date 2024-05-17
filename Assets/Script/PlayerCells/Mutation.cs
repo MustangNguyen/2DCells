@@ -20,8 +20,6 @@ public class Mutation : CellsBase
     protected override void Awake()
     {
         base.Awake();
-        stateMachine = GetComponent<StateMachine>();
-        playerRigidbody2d = GetComponent<Rigidbody2D>();
     }
     protected virtual void Update(){
         StateMachineMonitor();
@@ -38,6 +36,8 @@ public class Mutation : CellsBase
     }
     protected override void Start(){
         base.Start();
+        stateMachine = GetComponent<StateMachine>();
+        playerRigidbody2d = GetComponent<Rigidbody2D>();
         pushBackForce = 1000;
         AddProperties();
         ShowProterties();
@@ -72,6 +72,8 @@ public class Mutation : CellsBase
     }
     
     protected void ShieldRecharge(){
+        // Debug.Log(isDelaying);
+        // Debug.Log(currentArmor.shieldPoint + " + " + baseCellArmor.shieldPoint);
         if (currentArmor.shieldPoint < baseCellArmor.shieldPoint && !isDelaying)
         {
             currentArmor.shieldPoint += (int)(shieldRechargeRate * Time.fixedDeltaTime);
@@ -137,6 +139,7 @@ public class Mutation : CellsBase
             maxHealth = mutationOOP.maxHealth;
             maxEnery = mutationOOP.maxEnery;
             baseCellArmor = mutationOOP.baseCellProtection;
+            currentArmor = new CellProtection(baseCellArmor);
             moveSpeed = mutationOOP.moveSpeed;
             lv = mutationOOP.lv;
             currentArmor.shieldPoint = baseCellArmor.shieldPoint;

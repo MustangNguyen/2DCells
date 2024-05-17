@@ -25,11 +25,16 @@ public static class GameStatic
     #endregion
 
     #region API
-    public readonly static string HOST = "https://twodcellcore.azurewebsites.net";
+    //HOST
+    public readonly static string HOST = "https://twodcellcore20240513164925.azurewebsites.net/";
+    //GET
     public readonly static string GET_MUTATION_API = "/api/Mutations";
     public readonly static string GET_ENEMY_API = "/api/EnemyCells";
     public readonly static string GET_ABILITY_API = "/api/MutationAbilities";
     public readonly static string GET_BULLET_API = "/api/Bullets";
+
+    //POST
+    public readonly static string POST_LOGIN_REQUEST = "/identity/login";
     #endregion
 
     public static float ShieldRechargeCalculator(int maxShield)

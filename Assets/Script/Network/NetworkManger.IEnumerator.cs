@@ -11,6 +11,7 @@ public partial class NetworkManager {
 
     public IEnumerator CreateWebGetRequest(string requestAPI,Action<string> onComplete = null, Action onFail = null){
         using(UnityWebRequest webRequest = UnityWebRequest.Get(requestAPI)){
+            webRequest.SetRequestHeader("Authorization","Bearer " + accessToken);
             yield return webRequest.SendWebRequest();
             if(webRequest.result != UnityWebRequest.Result.Success){
                 Debug.Log("Error while fetch from API: " + requestAPI + " " + webRequest.error);
@@ -23,7 +24,7 @@ public partial class NetworkManager {
             }
         }
     }
-    public IEnumerator CreateWebPostRequest(APIRequest apiRequest,Action<string> onComplete = null,Action onFail = null)
+    public IEnumerator CreateWebPostRequest(APIRequest apiRequest,Action<string> onComplete = null,Action onFail = null,Action onUnauthorized = null,bool isRequireAuthorize = true)
     {
         
         using (UnityWebRequest request = UnityWebRequest.PostWwwForm(apiRequest.url, apiRequest.body))
@@ -32,18 +33,31 @@ public partial class NetworkManager {
             byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(apiRequest.body);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-
+            if(isRequireAuthorize)
+                request.SetRequestHeader("Authorization","Bearer " + accessToken);
             yield return request.SendWebRequest();
-
+            long responseCode = request.responseCode;
             if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.Log(request.error);
+                if(responseCode == 401){
+                    Debug.Log("Error: Unauthorized");
+                    onUnauthorized?.Invoke();
+                }
+                else{
+                    Debug.Log(request.error);
+                    onFail?.Invoke();
+                }
             }
             else
             {
-                string data = request.downloadHandler.text;
-                Debug.Log("Post complete! " + data);
-                onComplete?.Invoke(data);
+                if(responseCode == 200){
+                    string data = request.downloadHandler.text;
+                    Debug.Log("Post complete! " + data);
+                    onComplete?.Invoke(data);
+                }
+                else {
+                    Debug.Log(request.downloadHandler.text);
+                }
             }
         }
     }

@@ -9,8 +9,10 @@ using System;
 
 public class EnemyCell : CellsBase
 {
+    [Header("Enemy Properties")]
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [SerializeField] protected Collider2D collider2d;
+    [SerializeField] protected int bodyDamage = 0;
     [Space(10)]
     [Header("UI")]
     [SerializeField] protected string enemyId;
@@ -46,9 +48,9 @@ public class EnemyCell : CellsBase
         collider2d.enabled = true;
     }
     public void CellUpdate(){
-        healthText.text = healPoint.ToString();
+        // healthText.text = healPoint.ToString();
         stateMachine.StateMachineUpdate();
-        Spawner.Instance.Reposition(this.transform);
+        Spawner.Instance.Reposition(transform);
     }
     public void CellFixedUpdate()
     {
@@ -129,6 +131,7 @@ public class EnemyCell : CellsBase
             this.moveSpeed = enemyCellOOP.moveSpeed;
             this.baseCellArmor.armorPoint = enemyCellOOP.cellProtection.armorPoint;
             this.faction = enemyCellOOP.faction;
+            this.bodyDamage = enemyCellOOP.bodyDamage;
         }
     }
     public override void OnDead()
@@ -160,6 +163,7 @@ public class EnemyCellOOP{
     public EnemyCellOOP(){
         cellProtection =new CellProtection();
     }
+    public int bodyDamage;
 }
 [Serializable]
 public enum Equipment{

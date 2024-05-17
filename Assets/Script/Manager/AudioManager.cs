@@ -13,12 +13,8 @@ public class AudioManager : Singleton<AudioManager>
     private void Start()
     {
         sfx_music_main = EazySoundManager.PlayMusic(backgroundMusic,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
-        Debug.Log(sfx_music_main);   
+        //Debug.Log(sfx_music_main);   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

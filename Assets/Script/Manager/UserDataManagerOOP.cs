@@ -23,3 +23,18 @@ public class UserDataOOP
         this.credit = credit;
     }
 }
+[Serializable]
+public class UserLogin{
+    public string email;
+    public string password;
+    public UserLogin(){}
+    public UserLogin(string email,string password){
+        this.email = email;
+        this.password = password;
+    }
+}
+[Serializable]
+public class AccessToken{
+    public string accessToken;
+    public string refreshToken;
+}

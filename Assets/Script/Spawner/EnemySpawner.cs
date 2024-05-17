@@ -13,7 +13,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
     [SerializeField] private Transform enemyHoder;
     [SerializeField] private float respawnDistance = 20f;
     [SerializeField] private List<EnemyCell> listEnemyCell;
-    [SerializeField] private Transform playerPosition;
+    [SerializeField] public Transform playerPosition;
     [SerializeField] private float spawnRadius = 15f;
     [SerializeField] private CampaignLevel campaignLevel;
     // int array [weight][counter]
@@ -136,13 +136,13 @@ public class EnemySpawner : Singleton<EnemySpawner>
                 yield return new WaitForSeconds(spawnTime);
                 if (enemiesSpawned < GameManager.Instance.maximumEnemies - 1)
                 {
-                    if ((float)enemiesCounter[i][1] / counterDict[currentWave].Count <= (float)enemiesCounter[i][0] / totalWeight)
+                    if ((float)enemiesCounter[i][1] / (float)counterDict[currentWave].Count <= (float)enemiesCounter[i][0] / (float)totalWeight)
                     {
                         enemyCell = LeanPool.Spawn(campaignLevel.waves[currentWave].listSpawn[i].enemyCells, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
                         counterDict[currentWave][enemyCell] = i;
                         enemyCell.wave = currentWave;
                         enemiesCounter[i][1]++;
-                        Debug.Log(enemiesCounter[i][0] + " : " + enemiesCounter[i][1]);
+                        //Debug.Log(enemiesCounter[i][0] + " : " + enemiesCounter[i][1]);
 
                     }
                     // foreach(KeyValuePair<EnemyCell,int> pair in counterDict){
