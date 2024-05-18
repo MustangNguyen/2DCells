@@ -18,7 +18,7 @@ public class StatusEffect : MonoBehaviour
         // StartCoroutine(IEStatusFade());
         //StatusFade();
         LeanTween.delayedCall(1f,()=>{
-            LeanPool.Despawn(gameObject);
+                LeanPool.Despawn(gameObject);
         });
     }
     public void StatusFade()

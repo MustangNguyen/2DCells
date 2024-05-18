@@ -6,8 +6,10 @@ using System;
 using Random = UnityEngine.Random;
 public class Bullet : MonoBehaviour
 {
+
     [SerializeField] protected float bulletSpeed = 20f;
     [SerializeField] protected int damage = 20;
+    [SerializeField] public CellGun cellGun;
     [SerializeField] protected Elements elements;
     [SerializeField] protected float timeExist = 2f;
     [SerializeField] protected bool isProjectile = true;
@@ -68,11 +70,20 @@ public class Bullet : MonoBehaviour
         bulletDirection = quaternion * bulletDirection;
         bulletDirection.Normalize();
         transform.rotation = quaternion * gunPosition.rotation;
+        bulletCollider2D.enabled = true;
         rigidbody2d.AddForce(bulletDirection * bulletSpeed,ForceMode2D.Impulse);
         LeanTween.delayedCall(timeExist, () =>
         {
             LeanPool.Despawn(gameObject);
         });
+    }
+    protected virtual void OnCollisionEnter2D(Collision2D collision2D) {
+        if(collision2D.gameObject.tag=="EnemyCell"){
+            EnemyCell enemyCell = collision2D.gameObject.GetComponent<EnemyCell>();
+            (float,int) critical = GameCalculator.CriticalManager(cellGun);
+            enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
+            bulletCollider2D.enabled = false;
+        }
     }
 }
 [Serializable]

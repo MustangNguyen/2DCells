@@ -4,7 +4,7 @@ public static class GameStatic
 {
     public static bool IS_ANIMATING = false;
     #region game property
-    public readonly static int ARMOR_COEFFICIENT = 500;
+    public readonly static int ARMOR_COEFFICIENT = 300;
     public readonly static float GUN_MAX_SPREAD_ANGLE = 60;
     #endregion
 
@@ -38,23 +38,6 @@ public static class GameStatic
     public readonly static string POST_SIGNUP_REQUEST = "/identity/register";
     #endregion
 
-    public static float ShieldRechargeCalculator(int maxShield)
-    {
-        Debug.Log("Shield recharge rate: " + 5 * Mathf.Sqrt((float)maxShield));
-        return 5 * Mathf.Sqrt((float)maxShield);
-    }
-    public static float ShieldRechargeDelayCalculator(int currentShield)
-    {
-        if(currentShield>0){
-            // Debug.Log("Shield recharge delay in: " +0.1f * Mathf.Sqrt((float)currentShield));
-            return 0.1f * Mathf.Sqrt((float)currentShield);
-        }
-        else{
-            // Debug.Log("Shield depleted, recharge in: "+1 + 0.1f * Mathf.Sqrt((float)currentShield));
-            return 1 + 0.1f * Mathf.Sqrt((float)currentShield);
-        }
-    }
-    public static float DamageReduceByArmorCalculator(int armor){
-        return (float)armor / (float)(armor + ARMOR_COEFFICIENT);
-    }
+
+    
 }

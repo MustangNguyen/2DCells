@@ -23,6 +23,7 @@ public class Mutation : CellsBase
     }
     protected virtual void Update(){
         StateMachineMonitor();
+        AbilityTrigger();
     }
     protected virtual void FixedUpdate() {
         isMoving = true;
@@ -42,7 +43,26 @@ public class Mutation : CellsBase
         AddProperties();
         ShowProterties();
         stateMachine.ChangeState(new PlayerStateIdle(this));
-        shieldRechargeRate = GameStatic.ShieldRechargeCalculator(baseCellArmor.shieldPoint);
+        shieldRechargeRate = GameCalculator.ShieldRechargeCalculator(baseCellArmor.shieldPoint);
+    }
+    protected void AbilityTrigger(){
+        if(InputManager.Instance.Ability1Button)
+            Ability1();
+        if(InputManager.Instance.Ability2Button)
+            Ability2();
+        if(InputManager.Instance.Ability3Button)
+            Ability3();
+    }
+    protected virtual void Ability1(){
+        Debug.Log("Ability 1 triggered!");
+    }
+    protected virtual void Ability2(){
+        Debug.Log("Ability 2 triggered!");
+
+    }
+    protected virtual void Ability3(){
+        Debug.Log("Ability 3 triggered!");
+
     }
     public void PlayerRotation(){
         Vector2 lookDir = InputManager.Instance.GetArrowButton();
@@ -101,7 +121,7 @@ public class Mutation : CellsBase
                 currentArmor.shieldPoint -=50;
                 if(currentArmor.shieldPoint<0)
                     currentArmor.shieldPoint = 0;
-                delayTime = GameStatic.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
+                delayTime = GameCalculator.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
                 GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
             }
             else{

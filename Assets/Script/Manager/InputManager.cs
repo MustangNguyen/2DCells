@@ -14,6 +14,12 @@ public class InputManager : Singleton<InputManager>
     public bool isMouseClick2 = false;
     public Action onFire;
     public Action onFire2;
+    public bool Ability1Button = false;
+    public bool Ability2Button = false;
+    public bool Ability3Button = false;
+    // public Action Ability1;
+    // public Action Ability2;
+    // public Action Ability3;
     public bool isOnPauseState = false;
     private void Update() {
         if(!isOnPauseState){
@@ -21,6 +27,7 @@ public class InputManager : Singleton<InputManager>
             GetArrowButton();
             GetMouseClick();
             GetMouseHold();
+            GetAbilityButtonDown();
         }
     }
     public Vector3 GetMousePosition(){
@@ -52,5 +59,10 @@ public class InputManager : Singleton<InputManager>
         bool isMouseHold2 = Input.GetMouseButton(1);
         if(isMouseHold2)
             onFire2?.Invoke();
+    }
+    public void GetAbilityButtonDown(){
+        Ability1Button = Input.GetKeyDown(KeyCode.E);
+        Ability2Button = Input.GetKeyDown(KeyCode.R);
+        Ability3Button = Input.GetKeyDown(KeyCode.Q);
     }
 }

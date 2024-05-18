@@ -30,14 +30,16 @@ public class LoginManager : Singleton<LoginManager>
         Init();
     }
     private void Init(){
-        userEmail.text = "qwerty@gmail.com";
-        userPassword.text = "Abc@123";
+        #if UNITY_EDITOR
+            userEmail.text = "qwerty@gmail.com";
+            userPassword.text = "Abc@123";
+        #endif
         RectTransform rect = (RectTransform)(userPassword.transform);
         sizeOftextField = new Vector2(rect.sizeDelta.x,rect.sizeDelta.y);
         sizeOfNotification = notification.fontSize;
         submitText = submitBtn.GetComponentInChildren<TextMeshProUGUI>();
         
-        LeanTween.value(gameObject, 1, 0, 5f).setOnStart(() =>
+        LeanTween.value(gameObject, 1, 0, 3.5f).setOnStart(() =>
         {
             startFog.gameObject.SetActive(true);
         }).setOnUpdate((float value) =>
@@ -146,7 +148,7 @@ public class LoginManager : Singleton<LoginManager>
             notification.text = "";
             isOnTransform = true;
             confirmPassword.sizeDelta = Vector2.zero;
-            EffectManager.Instance.TransformStringByRandom(submitText,"Sign Up",time);
+            UserUIManager.Instance.TransformStringByRandom(submitText,"Sign Up",time);
         }).setOnUpdate((float value) =>
         {
             confirmPassword.sizeDelta = tempSize*value;
@@ -164,7 +166,7 @@ public class LoginManager : Singleton<LoginManager>
         Vector2 tempSize = sizeOftextField;
         LeanTween.value(gameObject, 1, 0, time).setOnStart(() =>
         {
-            EffectManager.Instance.TransformStringByRandom(submitText,"Sign In",time);
+            UserUIManager.Instance.TransformStringByRandom(submitText,"Sign In",time);
             userPassword.text = "";
             isOnTransform = true;
         }).setOnUpdate((float value) =>

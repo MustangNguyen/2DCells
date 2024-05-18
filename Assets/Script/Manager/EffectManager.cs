@@ -11,14 +11,14 @@ public class EffectManager : Singleton<EffectManager>
     public Color heal = Color.green;
     public StatusEffect statusEffect;
     public GameObject effectHolder;
-    public void ShowDamageInfict(int damage, int criticalLevel, Transform transform)
+    public void ShowDamageInfict(int damage, int criticalTier, Transform transform)
     {
         Color orange = new Color(1f, 0.5f, 0f, 1f);
         Vector2 temp = new Vector2(transform.position.x, transform.position.y);
         temp = new Vector2(transform.position.x + Random.Range(-0.5f, 0.51f), transform.position.y);
         StatusEffect statusEffect = LeanPool.Spawn(this.statusEffect, temp, Quaternion.identity,effectHolder.transform);
         statusEffect.statusText.text = damage.ToString();
-        switch (criticalLevel)
+        switch (criticalTier)
         {
             case 0:
                 statusEffect.statusText.color = CRITICAL_TIER_0_COLOR;

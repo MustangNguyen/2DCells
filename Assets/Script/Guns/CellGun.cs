@@ -40,7 +40,7 @@ public class CellGun : MonoBehaviour
     protected virtual IEnumerator OnFire()
     {
         Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder.transform);
-
+        bullet.cellGun = this;
         if(isFirstGun)
             bullet.gameObject.tag = "Bullet1";
         else

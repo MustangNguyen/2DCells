@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static GameStatic;
 
@@ -21,5 +22,27 @@ public class UserUIManager : Singleton<UserUIManager>
     }
     public Color GetCurrentUIColor(){
         return currentUIColor;
+    }   
+    public void TransformStringByRandom(TextMeshProUGUI inputString, string outputString, float time){
+        StartCoroutine(IETransformStringByRandom(inputString,outputString,time));
+    }
+    public IEnumerator IETransformStringByRandom(TextMeshProUGUI inputString, string outputString, float time)
+    {
+        char[] charArray = inputString.text.ToCharArray();
+        while (time > 0)
+        {
+            yield return new WaitForFixedUpdate();
+            for (int i = 0; i < charArray.Length; i++)
+            {
+                if ((int)charArray[i] == 32) continue;
+                else if((int)charArray[i]<91)
+                    charArray[i] = (char)Random.Range(65, 91);
+                else
+                    charArray[i]= (char)Random.Range(97,123);
+            }
+            time -= Time.fixedDeltaTime;
+            inputString.text = string.Concat(charArray);
+        }
+        inputString.text = outputString;
     }
 }

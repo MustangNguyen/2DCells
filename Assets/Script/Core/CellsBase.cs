@@ -41,7 +41,7 @@ public class CellsBase : MonoBehaviour
         if(baseCellArmor.armorType == ArmorType.Bio){
             armor = baseCellArmor.armorPoint + maxHealth;
         }
-        return armor;
+        return baseCellArmor.armorPoint;
     }
 }
 [Serializable]
