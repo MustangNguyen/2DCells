@@ -24,7 +24,7 @@ public partial class NetworkManager {
             }
         }
     }
-    public IEnumerator CreateWebPostRequest(APIRequest apiRequest,Action<string> onComplete = null,Action onFail = null,Action onUnauthorized = null,bool isRequireAuthorize = true)
+    public IEnumerator CreateWebPostRequest(APIRequest apiRequest,Action<string> onComplete = null,Action<string> onFail = null,bool isRequireAuthorize = true,Action onUnauthorized = null)
     {
         
         using (UnityWebRequest request = UnityWebRequest.PostWwwForm(apiRequest.url, apiRequest.body))
@@ -44,8 +44,9 @@ public partial class NetworkManager {
                     onUnauthorized?.Invoke();
                 }
                 else{
-                    Debug.Log(request.error);
-                    onFail?.Invoke();
+                    string data = request.downloadHandler.text;
+                    Debug.Log(data);
+                    onFail?.Invoke(data);
                 }
             }
             else

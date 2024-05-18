@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Lean.Pool;
-using UnityEditor.Media;
-using System.ComponentModel.Design;
 
 public class GameManager : Singleton<GameManager>
 {

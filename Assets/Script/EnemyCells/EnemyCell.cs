@@ -30,12 +30,12 @@ public class EnemyCell : CellsBase
     protected override void Start()
     {
         base.Start();
-        AddProperties();
         destroyAnimation.SetActive(false);
     }
     protected override void OnEnable()
     {
         base.OnEnable();
+        AddProperties();
         UpdateManager.Instance.AddCellToPool(this);
         index = UpdateManager.Instance.poolIndex;
         Reset();
@@ -126,12 +126,13 @@ public class EnemyCell : CellsBase
         if(DataManager.Instance.Data.listEnemies.Exists(x=> x.enemyId == this.enemyId))
         {
             EnemyCellOOP enemyCellOOP = DataManager.Instance.Data.listEnemies.Find(x => x.enemyId == this.enemyId);
-            this.maxHealth = enemyCellOOP.hp;
-            this.healPoint = this.maxHealth;
-            this.moveSpeed = enemyCellOOP.moveSpeed;
-            this.baseCellArmor.armorPoint = enemyCellOOP.cellProtection.armorPoint;
-            this.faction = enemyCellOOP.faction;
-            this.bodyDamage = enemyCellOOP.bodyDamage;
+            maxHealth = enemyCellOOP.hp;
+            healPoint = maxHealth;
+            moveSpeed = enemyCellOOP.moveSpeed;
+            baseCellArmor = new CellProtection(enemyCellOOP.cellProtection);
+            currentArmor = new CellProtection(baseCellArmor);
+            faction = enemyCellOOP.faction;
+            bodyDamage = enemyCellOOP.bodyDamage;
         }
     }
     public override void OnDead()

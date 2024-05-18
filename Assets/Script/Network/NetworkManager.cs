@@ -52,7 +52,18 @@ public partial class NetworkManager : Singleton<NetworkManager>
     #endregion
 
     #region Post
-    public void PostRequestLogin(UserLogin userLogin,Action onComplete = null,Action onFail = null,Action onUnauthorized = null){
+    public void PostRequestSignUp(UserLogin userLogin,Action onComplete, Action<string> onFail){
+        APIRequest aPIRequest = new();
+        apiRequest.url = HOST + POST_SIGNUP_REQUEST;
+        string jsonData = JsonConvert.SerializeObject(userLogin);
+        apiRequest.body = jsonData;
+        StartCoroutine(CreateWebPostRequest(apiRequest,(string data)=>{
+            onComplete?.Invoke();
+        },(data)=>{
+            onFail?.Invoke(data);
+        },false));
+    }
+    public void PostRequestLogin(UserLogin userLogin,Action onComplete,Action onFail,Action onUnauthorized){
         APIRequest aPIRequest = new();
         apiRequest.url = HOST + POST_LOGIN_REQUEST;
         string jsonData = JsonConvert.SerializeObject(userLogin);
@@ -62,11 +73,11 @@ public partial class NetworkManager : Singleton<NetworkManager>
             accessToken.accessToken = json["accessToken"].str;
             accessToken.refreshToken = json["refreshToken"].str;
             onComplete?.Invoke();
-        },()=>{
+        },(data)=>{
             onFail?.Invoke();
-        },()=>{
+        },false,onUnauthorized:()=>{
             onUnauthorized?.Invoke();
-        },isRequireAuthorize:false));
+        }));
     }
     public void PostNewUserToServer(UserDataOOP newUser)
     {

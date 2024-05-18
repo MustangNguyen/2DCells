@@ -5,8 +5,10 @@ using UnityEngine;
 public class Spawner : Singleton<Spawner>
 {
     [SerializeField] private float respawnDistance = 20f;
+    [SerializeField] private GameObject effectHolder;
     protected Transform spawnPos;
     protected virtual void Start(){
+        EffectManager.Instance.effectHolder = effectHolder;
     }
     protected virtual void SpawnEnemies(){
 

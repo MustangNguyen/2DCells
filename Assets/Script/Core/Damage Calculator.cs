@@ -16,7 +16,7 @@ public class DamageCalculator : Singleton<DamageCalculator>
                 damageTaken = damageIncome;
                 break;
             case ArmorType.Alloy:
-                damageTaken = (int)((float)damageIncome * (1 - DamageReduceByArmorCalculator(currentCellProtection.armorPoint)));
+                damageTaken = (int)((float)damageIncome * (float)(1 - DamageReduceByArmorCalculator(currentCellProtection.armorPoint)));
                 break;
             case ArmorType.Bio:
                 armorReduce = damageIncome >= baseCellArmor / 20 ? damageIncome: baseCellArmor/20;
@@ -26,7 +26,6 @@ public class DamageCalculator : Singleton<DamageCalculator>
                 damageTaken = int.MaxValue;
                 break;
         }
-        //Debug.Log("armor reduce:"+armorReduce);
         return (damageTaken, armorReduce);
     }
     public (int, int) DamageManager(bool isCellGun1)

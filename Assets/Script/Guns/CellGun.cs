@@ -7,7 +7,7 @@ using Lean.Pool;
 public class CellGun : MonoBehaviour
 {
     [SerializeField] public Bullet bulletPrefab;
-    [SerializeField] protected Transform bulletHolder;
+    [SerializeField] protected GameObject bulletHolder;
     [SerializeField] protected bool isFirstGun = true;    
     [SerializeField] protected float fireRate = 1f;
     [Range(0f,100f)]
@@ -23,6 +23,8 @@ public class CellGun : MonoBehaviour
         else{
             InputManager.Instance.onFire2 += SetFire;
         }
+        GameObject gameObject = GameObject.Find("Bullet Holder");
+        bulletHolder = gameObject;
     }
     protected void Update()
     {
@@ -37,7 +39,7 @@ public class CellGun : MonoBehaviour
     }
     protected virtual IEnumerator OnFire()
     {
-        Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder);
+        Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder.transform);
 
         if(isFirstGun)
             bullet.gameObject.tag = "Bullet1";

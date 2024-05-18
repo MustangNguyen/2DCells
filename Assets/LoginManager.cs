@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Lean.Common;
 using System;
+using UnityEngine.Purchasing.MiniJSON;
 
 public class LoginManager : Singleton<LoginManager>
 {
@@ -13,10 +14,13 @@ public class LoginManager : Singleton<LoginManager>
     public Transform loginPanel;
     public TextMeshProUGUI notification;
     public RectTransform confirmPassword;
+    public TMP_InputField confirmUserPassword;
     public Button submitBtn;
     public Button startBtn;
     public Transform signUpPanel;
     public Button backButton;
+    public Image startFog;
+    private TextMeshProUGUI submitText;
     private Vector2 sizeOftextField;
     private float sizeOfNotification;
     private bool isOnTransform = false;
@@ -31,13 +35,25 @@ public class LoginManager : Singleton<LoginManager>
         RectTransform rect = (RectTransform)(userPassword.transform);
         sizeOftextField = new Vector2(rect.sizeDelta.x,rect.sizeDelta.y);
         sizeOfNotification = notification.fontSize;
+        submitText = submitBtn.GetComponentInChildren<TextMeshProUGUI>();
+        
+        LeanTween.value(gameObject, 1, 0, 5f).setOnStart(() =>
+        {
+            startFog.gameObject.SetActive(true);
+        }).setOnUpdate((float value) =>
+        {
+            startFog.color = new Color(0f,0f,0f,value);
+        }).setOnComplete(() =>
+        {
+            startFog.gameObject.SetActive(false);
+        });
     }
     public void OnSubmitBtnClick()
     {
+        TextMeshProUGUI logInText = submitBtn.GetComponentInChildren<TextMeshProUGUI>();
         if(isOnTransform) return;
         if(isSignIn){
             submitBtn.interactable = false;
-            TextMeshProUGUI logInText = submitBtn.GetComponentInChildren<TextMeshProUGUI>();
             logInText.color = new Color(1, 1, 1, 0.5f);
             notification.text = "";
             NetworkManager.Instance.PostRequestLogin(new UserLogin(userEmail.text, userPassword.text), () =>
@@ -60,7 +76,39 @@ public class LoginManager : Singleton<LoginManager>
         }
         else
         {
+            submitBtn.interactable = false;
+            logInText.color = new Color(1, 1, 1, 0.5f);
+            notification.text = "";
+            if(userPassword.text!=confirmUserPassword.text){
+                submitBtn.interactable = true;
+                logInText.color = new Color(1, 1, 1, 1);
+                notification.text = "Confirmation password does not match";
+            }
+            else{
+                NetworkManager.Instance.PostRequestSignUp(new UserLogin(userEmail.text, userPassword.text),()=>{
+                    submitBtn.interactable = true;
+                    logInText.color = new Color(1, 1, 1, 1);
+                    OnBackClick();
+                },(data)=>{
+                    JSONObject json = new JSONObject(data);
+                    var listErrors = json["errors"].list;
+                    if(listErrors[0].ToString() == $"[\"Email '{userEmail.text}' is invalid.\"]")
+                        notification.text = "Invalid email";
+                    else if(listErrors[0].ToString() ==  "[\"Passwords must be at least 6 characters.\"]")
+                        notification.text = "Passwords must be at least 6 characters.";
+                    else if(listErrors[0].ToString() == "[\"Passwords must have at least one digit ('0'-'9').\"]"||
+                        listErrors[0].ToString() == "[\"Passwords must have at least one lowercase ('a'-'z').\"]"||
+                        listErrors[0].ToString() == "[\"Passwords must have at least one uppercase ('A'-'Z').\"]"||
+                        listErrors[0].ToString() == "[\"Passwords must have at least one non alphanumeric character.\"]")
+                        notification.text = "Password require at least an uppercase, number and special character";
+                    else{
+                        notification.text = "Email is already taken";
+                    }
+                    submitBtn.interactable = true;
+                    logInText.color = new Color(1, 1, 1, 1);
 
+                });
+            }
         }
     }
     public void NotificationOutAnim()
@@ -87,15 +135,18 @@ public class LoginManager : Singleton<LoginManager>
         });
     }
     public void OnRegisterClick(){
+        float time = 0.4f;
         Vector2 tempSize = sizeOftextField;
+        
         if(notification.gameObject.activeSelf){
             
         }
-        LeanTween.value(gameObject, 0, 1, 0.4f).setOnStart(() =>
+        LeanTween.value(gameObject, 0, 1, time).setOnStart(() =>
         {
             notification.text = "";
             isOnTransform = true;
             confirmPassword.sizeDelta = Vector2.zero;
+            EffectManager.Instance.TransformStringByRandom(submitText,"Sign Up",time);
         }).setOnUpdate((float value) =>
         {
             confirmPassword.sizeDelta = tempSize*value;
@@ -109,9 +160,12 @@ public class LoginManager : Singleton<LoginManager>
         backButton.gameObject.SetActive(true);
     }
     public void OnBackClick(){
+        float time = 0.4f;
         Vector2 tempSize = sizeOftextField;
-        LeanTween.value(gameObject, 1, 0, 0.4f).setOnStart(() =>
+        LeanTween.value(gameObject, 1, 0, time).setOnStart(() =>
         {
+            EffectManager.Instance.TransformStringByRandom(submitText,"Sign In",time);
+            userPassword.text = "";
             isOnTransform = true;
         }).setOnUpdate((float value) =>
         {
@@ -119,6 +173,7 @@ public class LoginManager : Singleton<LoginManager>
         }).setEaseInQuad().setOnComplete(() => {
             isOnTransform = false;
             isSignIn = true;
+            confirmUserPassword.text = "";
         });
         signUpPanel.gameObject.SetActive(true);
         backButton.gameObject.SetActive(false);
