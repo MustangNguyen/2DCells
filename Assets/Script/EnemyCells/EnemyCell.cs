@@ -65,9 +65,16 @@ public class EnemyCell : CellsBase
     }
     public void movement()
     {
-        Vector3 moveDirection = (GameManager.Instance.playerPosition.transform.position - transform.position).normalized;
+        Vector2 moveDirection = (GameManager.Instance.playerPosition.transform.position - transform.position).normalized;
         //rigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
-        rigidbody2d.velocity = moveDirection * moveSpeed;
+        // rigidbody2d.velocity = moveDirection * moveSpeed;
+        float currentForce = moveSpeed - rigidbody2d.velocity.magnitude;
+        if(rigidbody2d.velocity.magnitude>0){
+            friction = rigidbody2d.velocity*-1;
+            rigidbody2d.AddForce(friction*10f);
+        }
+        if(moveSpeed < rigidbody2d.velocity.magnitude) return;
+            rigidbody2d.AddForce(moveDirection * currentForce *20);
     }
     public void TakeDamage(int damageIncome, int criticalTier)
     {

@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class Mutation : CellsBase
 {
-    [SerializeField] protected Rigidbody2D playerRigidbody2d;
+    [SerializeField] public Rigidbody2D playerRigidbody2d;
     [SerializeField] protected float pushBackForce = 1f;
     [SerializeField] protected string mutationId;
     [SerializeField] protected string mutationName;
@@ -87,8 +87,15 @@ public class Mutation : CellsBase
     }
     protected void PlayerMovement(){
         Vector2 moveDirection = InputManager.Instance.GetArrowButton();
-        //playerRigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
-        playerRigidbody2d.velocity = moveDirection * moveSpeed ;
+        float currentForce = moveSpeed - playerRigidbody2d.velocity.magnitude;
+        if(playerRigidbody2d.velocity.magnitude>0){
+            friction = playerRigidbody2d.velocity*-1;
+            playerRigidbody2d.AddForce(friction*10f);
+        }
+        if(moveSpeed < playerRigidbody2d.velocity.magnitude) return;
+            playerRigidbody2d.AddForce(moveDirection * currentForce *20);
+
+
     }
     
     protected void ShieldRecharge(){
