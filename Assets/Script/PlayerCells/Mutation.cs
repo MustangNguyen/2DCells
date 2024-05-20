@@ -7,12 +7,16 @@ using UnityEditor;
 public class Mutation : CellsBase
 {
     [SerializeField] public Rigidbody2D playerRigidbody2d;
-    [SerializeField] protected float pushBackForce = 1f;
     [SerializeField] protected string mutationId;
     [SerializeField] protected string mutationName;
     [SerializeField] protected StateMachine stateMachine;
-    protected bool isMoving = true;
+    [SerializeField] protected LayerMask layerAffectByShieldPulse;
+    private float impactField = 10f;
+    private float impactForce = 100f;
+    protected float pushBackForce = 20f;
     protected float shipAngle = 0f;
+    protected bool isMoving = true;
+    protected bool isShieldPulseCharged = true;
     protected bool isDelaying = false;
     protected float delayTime = 0;
     public float rotationInterpolation = 0.4f;
@@ -39,7 +43,6 @@ public class Mutation : CellsBase
         base.Start();
         stateMachine = GetComponent<StateMachine>();
         playerRigidbody2d = GetComponent<Rigidbody2D>();
-        pushBackForce = 1000;
         AddProperties();
         ShowProterties();
         stateMachine.ChangeState(new PlayerStateIdle(this));
@@ -108,6 +111,8 @@ public class Mutation : CellsBase
                 currentArmor.shieldPoint = baseCellArmor.shieldPoint;
             GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint / baseCellArmor.shieldPoint, currentArmor.shieldPoint.ToString());
         }
+        if(currentArmor.shieldPoint >= baseCellArmor.shieldPoint)
+            isShieldPulseCharged = true;
     }
     protected void StateMachineMonitor(){
         if(playerRigidbody2d.velocity==Vector2.zero){
@@ -126,8 +131,10 @@ public class Mutation : CellsBase
             if(currentArmor.shieldPoint>0){
 
                 currentArmor.shieldPoint -=50;
-                if(currentArmor.shieldPoint<0)
+                if(currentArmor.shieldPoint<0){
+                    OnShieldDelepted();
                     currentArmor.shieldPoint = 0;
+                }
                 delayTime = GameCalculator.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
                 GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
             }
@@ -140,8 +147,19 @@ public class Mutation : CellsBase
 
             Vector2 collisionDirection = other.contacts[0].normal.normalized;
             //Debug.Log(collisionDirection * pushBackForce);
-            playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Force);
+            playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Impulse);
         }
+    }
+    protected void OnShieldDelepted(){
+        if(isShieldPulseCharged){
+            Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position,impactField,layerAffectByShieldPulse);
+            foreach(Collider2D obj in objects){
+                Vector2 direction = (obj.transform.position - transform.position).normalized;
+                var victim = obj.GetComponent<Rigidbody2D>();
+                victim.AddForce(direction*impactForce,ForceMode2D.Impulse);
+            }
+        }
+        isShieldPulseCharged = false;
     }
     protected void ShieldDelay()
     {

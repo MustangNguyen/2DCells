@@ -26,6 +26,7 @@ public class GameManager : Singleton<GameManager>
         //
         virtualCamera.Follow = mutation.transform;
         playerPosition = mutation.transform;
+        AudioManager.Instance.StartNormalBattleHematos();
     }
     public void OnPauseClick(){
         if(!isPause){

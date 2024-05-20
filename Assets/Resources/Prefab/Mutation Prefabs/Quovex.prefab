@@ -258,11 +258,14 @@ MonoBehaviour:
   moveSpeed: 1
   lv: 1
   faction: 0
+  friction: {x: 0, y: 0}
   playerRigidbody2d: {fileID: 0}
-  pushBackForce: 1
   mutationId: 
   mutationName: 
   stateMachine: {fileID: 0}
+  layerAffectByShieldPulse:
+    serializedVersion: 2
+    m_Bits: 1024
   rotationInterpolation: 0.4
   mutationAbilities: []
 --- !u!1001 &3288341822837215547

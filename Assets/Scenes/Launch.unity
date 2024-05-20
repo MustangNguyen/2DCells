@@ -3318,7 +3318,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPersistence: 1
   backgroundMusic: {fileID: 8300000, guid: 923cf2d84ba552b4d84b731c7b5c470e, type: 3}
-  sfx_music_main: 0
+  normalBattleHematos: {fileID: 8300000, guid: 93672b9b91b4fb949906648dfd1a4fa8, type: 3}
+  bgMusicMain: 0
+  bgNormalBattleHematos: 0
   playerVolumeSetting: {fileID: 11400000, guid: ae77a201c4699764fb25410050907058, type: 2}
 --- !u!1 &1657454144
 GameObject:

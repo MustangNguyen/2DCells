@@ -155,7 +155,7 @@ public class EnemyCell : CellsBase
         animator.SetTrigger("Destroy");
         model.color = new Color(0, 0, 0, 0);
 
-        LeanTween.delayedCall(0.5f, () => { 
+        LeanTween.delayedCall(1f, () => { 
             EnemySpawner.Instance.OnEnemyDestroy(this);
             LeanPool.Despawn(gameObject); });
     }

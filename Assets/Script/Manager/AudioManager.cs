@@ -8,12 +8,17 @@ public class AudioManager : Singleton<AudioManager>
 {
     [Header("----------AudioClip--------------")]
     [SerializeField] public AudioClip backgroundMusic;
-    public int sfx_music_main;
-    [SerializeField]public GameSetting playerVolumeSetting;
+    [SerializeField] public AudioClip normalBattleHematos;
+    public int bgMusicMain;
+    public int bgNormalBattleHematos;
+    [SerializeField] public GameSetting playerVolumeSetting;
     private void Start()
     {
-        sfx_music_main = EazySoundManager.PlayMusic(backgroundMusic,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
-        //Debug.Log(sfx_music_main);   
+        bgMusicMain = EazySoundManager.PlayMusic(backgroundMusic,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
+        //Debug.Log(bgMusicMain);   
+    }
+    public void StartNormalBattleHematos(){
+        EazySoundManager.PlayMusic(normalBattleHematos,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
     }
 
 
