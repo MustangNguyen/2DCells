@@ -75,7 +75,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
                 for (int i = 0; i < campaignLevel.waves[currentWave].listSpawn.Count; i++)
                 {
                     enemiesCounter[i] = new int[2];
-                    enemiesCounter[i][1] = campaignLevel.waves[currentWave].listSpawn[i].weight;
+                    enemiesCounter[i][0] = campaignLevel.waves[currentWave].listSpawn[i].weight;
                     totalWeight += enemiesCounter[i][1];
                     // counterDict[campaignLevel.waves[currentWave].listSpawn[i].enemyCells] = i;
                 }
@@ -142,7 +142,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
                         counterDict[currentWave][enemyCell] = i;
                         enemyCell.wave = currentWave;
                         enemiesCounter[i][1]++;
-                        //Debug.Log(enemiesCounter[i][0] + " : " + enemiesCounter[i][1]);
 
                     }
                     // foreach(KeyValuePair<EnemyCell,int> pair in counterDict){
