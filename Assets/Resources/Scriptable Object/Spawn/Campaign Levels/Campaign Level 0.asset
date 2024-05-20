@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Campaign Level 0
   m_EditorClassIdentifier: 
   waves:
-  - {fileID: 11400000, guid: 5fb3cb0e52be104419844de58cacdca2, type: 2}
   - {fileID: 11400000, guid: 8a37da3f4bc21a0408d83d3a1f9802cf, type: 2}
+  - {fileID: 11400000, guid: 5fb3cb0e52be104419844de58cacdca2, type: 2}

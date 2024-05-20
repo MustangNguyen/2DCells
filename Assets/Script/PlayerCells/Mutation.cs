@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEditor;
+using Unity.VisualScripting;
 
 public class Mutation : CellsBase
 {
@@ -10,6 +11,7 @@ public class Mutation : CellsBase
     [SerializeField] protected string mutationId;
     [SerializeField] protected string mutationName;
     [SerializeField] protected StateMachine stateMachine;
+    [SerializeField] protected List<CellAbility> mutationAbilities;
     [SerializeField] protected LayerMask layerAffectByShieldPulse;
     private float impactField = 10f;
     private float impactForce = 100f;
@@ -20,7 +22,6 @@ public class Mutation : CellsBase
     protected bool isDelaying = false;
     protected float delayTime = 0;
     public float rotationInterpolation = 0.4f;
-    public List<Ability> mutationAbilities;
     protected override void Awake()
     {
         base.Awake();
@@ -47,14 +48,16 @@ public class Mutation : CellsBase
         ShowProterties();
         stateMachine.ChangeState(new PlayerStateIdle(this));
         shieldRechargeRate = GameCalculator.ShieldRechargeCalculator(baseCellArmor.shieldPoint);
+        
+        
     }
     protected void AbilityTrigger(){
         if(InputManager.Instance.Ability1Button)
-            Ability1();
+            mutationAbilities[0].AbilityCast();
         if(InputManager.Instance.Ability2Button)
-            Ability2();
+            mutationAbilities[1].AbilityCast();
         if(InputManager.Instance.Ability3Button)
-            Ability3();
+            mutationAbilities[2].AbilityCast();
     }
     protected virtual void Ability1(){
         Debug.Log("Ability 1 triggered!");
@@ -190,6 +193,14 @@ public class Mutation : CellsBase
             currentArmor.shieldPoint = baseCellArmor.shieldPoint;
             healPoint = maxHealth;
             currentEnery = maxEnery;
+            foreach (var ability in mutationOOP.mutationAbilities)
+            {
+                string customComponentName = ability.abilityId;
+                Type customComponentType = Type.GetType(customComponentName);
+                CellAbility cellAbility = (CellAbility)gameObject.AddComponent(customComponentType);
+                cellAbility.mutation = this;
+                mutationAbilities.Add(cellAbility);
+            }
         }
     }
     protected void ShowProterties(){
@@ -210,11 +221,11 @@ public class MutationOOP
     public CellProtection baseCellProtection;
     public float moveSpeed = 1f;
     public int lv = 1;
-    public List<Ability> mutationAbilities;
+    public List<AbilityOOP> mutationAbilities;
     public Faction faction;
     public MutationOOP()
     {
         baseCellProtection = new CellProtection();
-        mutationAbilities = new List<Ability>();
+        mutationAbilities = new List<AbilityOOP>();
     }
 }

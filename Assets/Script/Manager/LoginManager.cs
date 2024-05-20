@@ -180,6 +180,13 @@ public class LoginManager : Singleton<LoginManager>
         signUpPanel.gameObject.SetActive(true);
         backButton.gameObject.SetActive(false);
     }
+    public void OnStartClick(){
+        #if UNITY_EDITOR
+            SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
+        #else
+            SceneLoadManager.Instance.LoadScene(SceneName.MainMenu);
+        #endif
+    }
     // private IEnumerator IEInputFieldAnimation(float from,float to,float time,Action onStart =null, Action onFinish = null){
     //     while (time>0){
     //         yield return new WaitForFixedUpdate();

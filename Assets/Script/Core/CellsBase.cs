@@ -8,13 +8,13 @@ using UnityEngine.UI;
 public class CellsBase : MonoBehaviour
 {
     [Header("Base Stat")]
-    [SerializeField] protected int healPoint = 200;
+    [SerializeField] public int healPoint = 200;
     [SerializeField] protected int maxHealth = 200;
     [SerializeField] protected int maxEnery = 200;
-    [SerializeField] protected int currentEnery = 200;
+    [SerializeField] public int currentEnery = 200;
     [SerializeField] protected CellProtection baseCellArmor;
     [SerializeField] protected CellProtection currentArmor;
-    [SerializeField] protected float moveSpeed = 1f;
+    [SerializeField] public float moveSpeed = 1f;
     [SerializeField] protected int lv = 1;
     [SerializeField] protected Faction faction;
     [SerializeField] protected Vector2 friction;

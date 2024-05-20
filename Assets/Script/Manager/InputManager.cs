@@ -113,7 +113,6 @@ public class InputManager : Singleton<InputManager>
             while(Time.time < firstLeftClickTime+timeBetweenClick){
                 if(clickMouseLeft == 2){
                     onDoubleClickLeft?.Invoke();
-                    Debug.Log("double click left");
                     break;
                 }
                 yield return null;

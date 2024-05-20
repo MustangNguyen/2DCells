@@ -2282,8 +2282,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1298222374}
-        m_TargetAssemblyTypeName: LaunchManager, Assembly-CSharp
+      - m_Target: {fileID: 197356785}
+        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: OnStartClick
         m_Mode: 1
         m_Arguments:
@@ -2490,50 +2490,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272327477}
   m_CullTransparentMesh: 1
---- !u!1 &1298222373
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1298222375}
-  - component: {fileID: 1298222374}
-  m_Layer: 0
-  m_Name: === Launch Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1298222374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298222373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e62e23759ea168e48a25ca6d8401c5cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1298222375
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298222373}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 461.87103, y: 531.1939, z: 0.92577493}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1384896128
 GameObject:
   m_ObjectHideFlags: 0
@@ -4378,6 +4334,5 @@ SceneRoots:
   - {fileID: 27875597}
   - {fileID: 685441098}
   - {fileID: 128334965}
-  - {fileID: 1298222375}
   - {fileID: 338012784}
   - {fileID: 1559130110}

@@ -9,12 +9,13 @@ public class DataManager : Singleton<DataManager>
     public DataManagerOOP Data = new();
     public List<EnemyCell> listEnemyCell;
     public List<Mutation> listMutation;
+    public List<CellAbility> listAbility;
 
     private void Start()
     {
+        NetworkManager.Instance.GetAbilityDataFromServer();
         NetworkManager.Instance.GetMutationDataFromServer();
         NetworkManager.Instance.GetEnemyDataFromServer();
-        NetworkManager.Instance.GetAbilityDataFromServer();
         NetworkManager.Instance.GetBulletDataFromServer();
         listEnemyCell = Resources.LoadAll<EnemyCell>("Prefab/Enemy Prefabs").ToList();
         listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
@@ -42,9 +43,10 @@ public class DataManager : Singleton<DataManager>
             Enum.TryParse(item["factionId"].str,out faction);
             mutation.faction = faction;
             foreach(var ability in item["mutationAbilities"].list){
-                Ability tempAbility = new Ability();
-                tempAbility.abilityID = ability["abilityId"].str;
+                AbilityOOP tempAbility = new AbilityOOP();
+                tempAbility.abilityId = ability["abilityId"].str;
                 tempAbility.abilityName = ability["abilityName"].str;
+                tempAbility.mutationId = ability["mutationId"].str;
                 mutation.mutationAbilities.Add(tempAbility);
             }
             Data.listMutations.Add(mutation);
@@ -86,6 +88,7 @@ public class DataManager : Singleton<DataManager>
             AbilityOOP abilityOOP = new AbilityOOP();
             abilityOOP.abilityId = item["abilityId"].str;
             abilityOOP.abilityName = item["abilityName"].str;
+            abilityOOP.mutationId = item["mutationId"].str;
             Data.listAbilities.Add(abilityOOP);
         }
     }
