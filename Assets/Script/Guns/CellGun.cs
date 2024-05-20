@@ -14,14 +14,18 @@ public class CellGun : MonoBehaviour
     [SerializeField] protected float accuracy = 70f;
     [SerializeField] public float criticalRate = 30f;
     [SerializeField] public float criticalMultiple = 2;
+    [SerializeField] protected bool isAutoFire = false;
+    [SerializeField] protected bool isAutoFire2 = false;
     protected bool isGunReady = true;
 
     protected void Start(){
         if (isFirstGun){
             InputManager.Instance.onFire += SetFire;
+            InputManager.Instance.onDoubleClickLeft += SetAutoFire;
         }
         else{
             InputManager.Instance.onFire2 += SetFire;
+            InputManager.Instance.onDoubleClickRight += SetAutoFire;
         }
         GameObject gameObject = GameObject.Find("Bullet Holder");
         bulletHolder = gameObject;
@@ -29,6 +33,16 @@ public class CellGun : MonoBehaviour
     protected void Update()
     {
         GunRotation();
+        AutoFire();
+    }
+    protected virtual void SetAutoFire(){
+        isAutoFire = !isAutoFire;
+    }
+    protected virtual void AutoFire(){
+        if(isAutoFire){
+            //Debug.Log("on auto fire");
+            SetFire();
+        }
     }
     protected virtual void SetFire(){
         if(isGunReady){

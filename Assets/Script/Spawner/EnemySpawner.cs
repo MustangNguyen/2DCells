@@ -76,7 +76,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
                 {
                     enemiesCounter[i] = new int[2];
                     enemiesCounter[i][0] = campaignLevel.waves[currentWave].listSpawn[i].weight;
-                    totalWeight += enemiesCounter[i][1];
+                    totalWeight += enemiesCounter[i][0];
                     // counterDict[campaignLevel.waves[currentWave].listSpawn[i].enemyCells] = i;
                 }
 

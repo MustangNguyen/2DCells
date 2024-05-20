@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 
 using UnityEngine;
+using System.Collections;
 
 public class InputManager : Singleton<InputManager>
 {
@@ -17,16 +17,28 @@ public class InputManager : Singleton<InputManager>
     public bool Ability1Button = false;
     public bool Ability2Button = false;
     public bool Ability3Button = false;
+    public bool isOnPauseState = false;
+    public float timeBetweenClick = 0.5f;
+    private int clickMouseRight = 0;
+    private bool isRightTimeCheckAllowed = true;
+    private float firstRightClickTime = 0;
+    private int clickMouseLeft = 0;
+    private bool isLeftTimeCheckAllowed = true;
+    private float firstLeftClickTime = 0;
+    public Action onDoubleClickLeft;
+    public Action onDoubleClickRight;
     // public Action Ability1;
     // public Action Ability2;
     // public Action Ability3;
-    public bool isOnPauseState = false;
+
     private void Update() {
         if(!isOnPauseState){
             GetMousePosition();
             GetArrowButton();
             GetMouseClick();
             GetMouseHold();
+            GetDoubleClickRight();
+            GetDoubleClickLeft();
             GetAbilityButtonDown();
         }
     }
@@ -64,5 +76,50 @@ public class InputManager : Singleton<InputManager>
         Ability1Button = Input.GetKeyDown(KeyCode.E);
         Ability2Button = Input.GetKeyDown(KeyCode.R);
         Ability3Button = Input.GetKeyDown(KeyCode.Q);
+    }
+
+
+    public void GetDoubleClickRight(){
+        if(Input.GetButtonUp("Fire2"))
+            clickMouseRight++;
+        if(clickMouseRight == 1 && isLeftTimeCheckAllowed){
+            firstRightClickTime = Time.time;
+            StartCoroutine(DetectDoubleRightMouseClick());
+        }
+
+        IEnumerator DetectDoubleRightMouseClick(){
+            isLeftTimeCheckAllowed = false;
+            while(Time.time < firstRightClickTime+timeBetweenClick){
+                if(clickMouseRight == 2){
+                    onDoubleClickRight?.Invoke();
+                    break;
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            clickMouseRight = 0;
+            isLeftTimeCheckAllowed = true;
+        }
+    }
+     public void GetDoubleClickLeft(){
+        if(Input.GetButtonUp("Fire1"))
+            clickMouseLeft++;
+        if(clickMouseLeft == 1 && isRightTimeCheckAllowed){
+            firstLeftClickTime = Time.time;
+            StartCoroutine(DetectDoubleLeftMouseClick());
+        }
+
+        IEnumerator DetectDoubleLeftMouseClick(){
+            isRightTimeCheckAllowed = false;
+            while(Time.time < firstLeftClickTime+timeBetweenClick){
+                if(clickMouseLeft == 2){
+                    onDoubleClickLeft?.Invoke();
+                    Debug.Log("double click left");
+                    break;
+                }
+                yield return null;
+            }
+            clickMouseLeft = 0;
+            isRightTimeCheckAllowed = true;
+        }
     }
 }
