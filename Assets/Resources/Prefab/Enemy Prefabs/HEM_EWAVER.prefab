@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 87143013507893159}
   - component: {fileID: 810420624178567813}
   m_Layer: 10
-  m_Name: NEU_EWAVER
+  m_Name: HEM_EWAVER
   m_TagString: EnemyCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -740,8 +740,10 @@ MonoBehaviour:
   moveSpeed: 1
   lv: 1
   faction: 1
+  friction: {x: 0, y: 0}
   rigidbody2d: {fileID: 843731323462224902}
   collider2d: {fileID: 2539127559160538056}
+  bodyDamage: 0
   enemyId: NEU_EWAVER
   healthBar: {fileID: 7843194746716017019}
   healthText: {fileID: 4058430460571947321}
@@ -751,6 +753,7 @@ MonoBehaviour:
   stateMachine: {fileID: 810420624178567813}
   animator: {fileID: 1056000479836554749}
   destroyAnimation: {fileID: 8147937529635761698}
+  wave: 0
 --- !u!114 &810420624178567813
 MonoBehaviour:
   m_ObjectHideFlags: 0
