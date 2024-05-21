@@ -82,6 +82,7 @@ public class Bullet : MonoBehaviour
             EnemyCell enemyCell = collision2D.gameObject.GetComponent<EnemyCell>();
             (float,int) critical = GameCalculator.CriticalManager(cellGun);
             enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
+            enemyCell.SetStatusMachine(elements.primaryElement,damage,1);
             bulletCollider2D.enabled = false;
         }
     }

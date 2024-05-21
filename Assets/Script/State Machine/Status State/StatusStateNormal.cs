@@ -9,10 +9,15 @@ public class StatusStateNormal : StatusState
     {   
 
     }
+    public override void Enter()
+    {
+        base.Enter();
+        //resetState();
+    }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+        // Debug.Log("this is normal state");
     }
     public override void PhysicsUpdate()
     {

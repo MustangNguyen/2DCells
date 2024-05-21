@@ -5,7 +5,7 @@ using static GameStatic;
 
 public class StatusStateBurn : StatusState
 {
-    public StatusStateBurn(CellsBase cellsBase,int initDamage, int stackAddIn) : base(cellsBase)
+    public StatusStateBurn(CellsBase cellsBase,PrimaryElement element,int initDamage, int stackAddIn) : base(cellsBase)
     {   
         if(stack>0){
             stack+=stackAddIn;
@@ -15,6 +15,11 @@ public class StatusStateBurn : StatusState
             stack+=stackAddIn;
         }
     }
+    public override void Enter()
+    {
+        base.Enter();
+        primaryElement = PrimaryElement.Fire;
+    }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -23,12 +28,21 @@ public class StatusStateBurn : StatusState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        
+        if(enemyCell!=null)
+            DamageBurnPerTickToEnemy();
+        else{
+
+        }
+    }
+    public override void Exit()
+    {
+        base.Exit();
     }
     private void DamageBurnPerTickToEnemy(){
         timeBetweenTick -= Time.fixedDeltaTime;
         if(timeBetweenTick<=0){
             timeBetweenTick += TIME_BETWEEN_STATUS_TICK;
+            enemyCell.TakeDamage(damagePerTick,0,"Burn "+stack.ToString());
             
         }
     }

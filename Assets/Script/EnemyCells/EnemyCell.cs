@@ -21,7 +21,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected SpriteRenderer model;
     [SerializeField] protected int index;
     [SerializeField] protected Equipment equipment;
-    [SerializeField] protected StateMachine stateMachine;
+    [SerializeField] public StateMachine stateMachine;
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject destroyAnimation;
     [Space(10)]
@@ -36,6 +36,7 @@ public class EnemyCell : CellsBase
     {
         base.OnEnable();
         AddProperties();
+        SetStatusMachine(PrimaryElement.None);
         UpdateManager.Instance.AddCellToPool(this);
         index = UpdateManager.Instance.poolIndex;
         Reset();
@@ -76,15 +77,26 @@ public class EnemyCell : CellsBase
         if(moveSpeed < rigidbody2d.velocity.magnitude) return;
             rigidbody2d.AddForce(moveDirection * currentForce *20*rigidbody2d.mass);
     }
-    public void TakeDamage(int damageIncome, int criticalTier)
+    public void TakeDamage(int damageIncome, int criticalTier,string status = null)
     {
         (int, int) damageTaken;
-        damageTaken = GameCalculator.DamageTake(currentArmor, BioArmorCalculating(), damageIncome, GameManager.Instance.cellGun1.bulletPrefab.Elements);
+        damageTaken = GameCalculator.DamageTake(currentArmor, BioArmorCalculating(), damageIncome);
         currentArmor.armorPoint -= damageTaken.Item2;
         healPoint -= damageTaken.Item1;
-        EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform);
+        EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform,status);
     }
-
+    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0,int stack = 0){
+        switch(element){
+            case PrimaryElement.Fire:
+                stateMachine.ChangeStatusState(new StatusStateBurn(this,PrimaryElement.Fire,damageIncome,stack));
+                break;
+            case PrimaryElement.Ice:
+                break;
+            default:
+                stateMachine.ChangeStatusState(new StatusStateNormal(this));
+                break;
+        }
+    }
     protected void StateMachineMonitor(){
         if(rigidbody2d.velocity==Vector2.zero){
             stateMachine.ChangeState(new EnemyStateIdle(this));

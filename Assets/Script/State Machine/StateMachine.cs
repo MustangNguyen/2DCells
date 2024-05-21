@@ -15,12 +15,16 @@ public class StateMachine : MonoBehaviour
         currentStatusState?.PhysicsUpdate();
     }
     public void ChangeStatusState(StatusState newStatusState){
+        int initDamage = -1;
         if(currentStatusState!=null){
+            initDamage = currentStatusState.damagePerTick;
+            newStatusState.stack+=currentStatusState.stack;
             currentStatusState.Exit();
         }
         currentStatusState = newStatusState;
         currentStatusState.Initialize(this);
         currentStatusState.Enter();
+        currentStatusState.damagePerTick = initDamage > currentStatusState.damagePerTick ? initDamage : currentStatusState.damagePerTick;
         currentStateStatusName = currentStatusState.ToString();
     }
     public void ChangeState(PlayerState newState)

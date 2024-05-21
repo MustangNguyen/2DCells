@@ -10,15 +10,34 @@ public class StatusState : State
     protected int maxStack = UNLIMIT_STATUS_STACK;
     public float statusTimeLeft = 0;
     protected float timeBetweenTick = TIME_BETWEEN_STATUS_TICK;
+    protected PrimaryElement primaryElement = PrimaryElement.None;
     protected EnemyCell enemyCell;
     protected Mutation mutation;
     public StatusState(CellsBase cellsBase)
     {
-        if(cellsBase.GetType() == enemyCell.GetType()){
+        if(cellsBase is EnemyCell){
             enemyCell = (EnemyCell)cellsBase;
         }
         else{
             mutation = (Mutation)cellsBase;
+        }
+    }
+    public override void Enter()
+    {
+        base.Enter();
+        if(this is not StatusStateNormal){
+            statusTimeLeft = STATUS_DURATION;
+        }
+    }
+    public override void PhysicsUpdate(){
+        base.PhysicsUpdate();
+        // if(enemyCell!=null)
+        //     Debug.Log("status is on enemy");
+        // else
+        //     Debug.Log("status is on mutation");
+        statusTimeLeft-=Time.fixedDeltaTime;
+        if(statusTimeLeft<=0){
+            enemyCell?.SetStatusMachine(PrimaryElement.None);
         }
     }
 }

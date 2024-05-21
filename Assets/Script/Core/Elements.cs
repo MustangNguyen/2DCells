@@ -14,7 +14,7 @@ public enum PrimaryElement{
     None,
     Physic,
     Fire,
-    Water,
+    Ice,
     Electric,
     Toxin,
     Earth

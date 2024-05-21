@@ -18,6 +18,10 @@ public class CellsBase : MonoBehaviour
     [SerializeField] protected int lv = 1;
     [SerializeField] protected Faction faction;
     [SerializeField] protected Vector2 friction;
+    [Space(10)]
+    [Header("Status")]
+    [SerializeField] protected int currentElementStack = 0;
+    [SerializeField] protected PrimaryElement currentPrimaryElement = 0;
     protected float shieldRechargeDelay = 1;
     protected float shieldRechargeRate = 100;
 

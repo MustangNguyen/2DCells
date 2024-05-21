@@ -128,8 +128,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 20
   damage: 20
+  cellGun: {fileID: 0}
   elements:
-    primaryElement: 1
+    primaryElement: 2
     secondaryElement: 0
   timeExist: 2
   isProjectile: 1

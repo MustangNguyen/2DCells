@@ -5,7 +5,7 @@ using static GameStatic;
 
 public class GameCalculator
 {
-    public static (int, int) DamageTake(CellProtection currentCellProtection, int baseCellArmor, int damageIncome, Elements elements)
+    public static (int, int) DamageTake(CellProtection currentCellProtection, int baseCellArmor, int damageIncome, Elements elements = null)
     {
         //Debug.Log("base armor:"+baseCellArmor);
         int armorReduce = 0;
