@@ -16,3 +16,7 @@ MonoBehaviour:
   listSpawn:
   - weight: 1
     enemyCells: {fileID: -3129199665608748248, guid: aed24096dbedc9f489c5eea13a00ceac, type: 3}
+  - weight: 5
+    enemyCells: {fileID: -224524233728151985, guid: fcbd04ea3bff16548a349aa51e9cddf6, type: 3}
+  - weight: 5
+    enemyCells: {fileID: -224524233728151985, guid: fcbd04ea3bff16548a349aa51e9cddf6, type: 3}

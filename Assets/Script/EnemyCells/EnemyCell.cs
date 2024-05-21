@@ -71,10 +71,10 @@ public class EnemyCell : CellsBase
         float currentForce = moveSpeed - rigidbody2d.velocity.magnitude;
         if(rigidbody2d.velocity.magnitude>0){
             friction = rigidbody2d.velocity*-1;
-            rigidbody2d.AddForce(friction*10f);
+            rigidbody2d.AddForce(friction*10f*rigidbody2d.mass);
         }
         if(moveSpeed < rigidbody2d.velocity.magnitude) return;
-            rigidbody2d.AddForce(moveDirection * currentForce *20);
+            rigidbody2d.AddForce(moveDirection * currentForce *20*rigidbody2d.mass);
     }
     public void TakeDamage(int damageIncome, int criticalTier)
     {
@@ -84,33 +84,7 @@ public class EnemyCell : CellsBase
         healPoint -= damageTaken.Item1;
         EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform);
     }
-    // private void OnCollisionEnter2D(Collision2D other)
-    // {
-    //     string damageSource = other.gameObject.tag;
-    //     (int, int) damageTaken;
-    //     (int, int) finalDamage;
-    //     switch (damageSource)
-    //     {
-    //         case "Bullet1":
-    //             finalDamage = DamageCalculator.Instance.CriticalManager(true);
-    //             break;
-    //         case "Bullet2":
-    //             finalDamage = DamageCalculator.Instance.CriticalManager(false);
-    //             damageTaken = DamageCalculator.Instance.DamageTake(currentArmor, BioArmorCalculating() , finalDamage.Item1, GameManager.Instance.cellGun2.bulletPrefab.Elements);
-    //             healPoint -= damageTaken.Item1;
-    //             currentArmor.armorPoint -= damageTaken.Item2;
-    //             EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, finalDamage.Item2, transform);
-    //             break;
-    //         default:
-    //             healPoint -= 0;
-    //             break;
-    //     }
-    //     if (currentArmor.armorPoint <= baseCellArmor.armorPoint)
-    //     {
-    //         currentArmor.armorPoint = baseCellArmor.armorPoint;
-    //     }
-    //     //Debug.Log("fix armor: "+baseCellArmor.armorPoint);
-    // }
+
     protected void StateMachineMonitor(){
         if(rigidbody2d.velocity==Vector2.zero){
             stateMachine.ChangeState(new EnemyStateIdle(this));

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4807726613818817180}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 1128631669800372578}
   - component: {fileID: 4883716126977040860}
   - component: {fileID: 477276368412432380}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -147,7 +147,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7802653806028143313}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2105081732554631857}
   - component: {fileID: 3867343259216143365}
   - component: {fileID: 7893947966335553659}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Destroy Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,11 +291,11 @@ GameObject:
   - component: {fileID: 1665094397700565928}
   - component: {fileID: 4243540913297065839}
   - component: {fileID: 9037762243537240782}
-  - component: {fileID: 4658982330126906171}
   - component: {fileID: 3160253765104366153}
   - component: {fileID: 4411161091843619794}
-  m_Layer: 10
-  m_Name: HEM_REDCYCLINDER
+  - component: {fileID: -224524233728151985}
+  m_Layer: 9
+  m_Name: HEM_EREDCY
   m_TagString: EnemyCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 200
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -397,49 +397,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4658982330126906171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4569782290257700300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74f2e02e3253d21469f7a7cac6c67c53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healPoint: 200
-  maxHealth: 200
-  maxEnery: 200
-  currentEnery: 200
-  baseCellArmor:
-    armorType: 0
-    shieldType: 0
-    armorPoint: 0
-    shieldPoint: 0
-  currentArmor:
-    armorType: 0
-    shieldType: 0
-    armorPoint: 0
-    shieldPoint: 0
-  moveSpeed: 1
-  lv: 1
-  faction: 0
-  friction: {x: 0, y: 0}
-  rigidbody2d: {fileID: 9037762243537240782}
-  collider2d: {fileID: 4411161091843619794}
-  bodyDamage: 0
-  enemyId: HEM_REDCYCLINDER
-  healthBar: {fileID: 972956822803694789}
-  healthText: {fileID: 1897817903137830348}
-  model: {fileID: 0}
-  index: 0
-  equipment: 0
-  stateMachine: {fileID: 3160253765104366153}
-  animator: {fileID: 7893947966335553659}
-  destroyAnimation: {fileID: 3902353808990010922}
-  wave: 0
 --- !u!114 &3160253765104366153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,6 +445,49 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.35555556
+--- !u!114 &-224524233728151985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4569782290257700300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94530fb69a14fd4d8eb7b1b324bd9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healPoint: 200
+  maxHealth: 200
+  maxEnery: 200
+  currentEnery: 200
+  baseCellArmor:
+    armorType: 0
+    shieldType: 0
+    armorPoint: 0
+    shieldPoint: 0
+  currentArmor:
+    armorType: 0
+    shieldType: 0
+    armorPoint: 0
+    shieldPoint: 0
+  moveSpeed: 1
+  lv: 1
+  faction: 0
+  friction: {x: 0, y: 0}
+  rigidbody2d: {fileID: 9037762243537240782}
+  collider2d: {fileID: 4411161091843619794}
+  bodyDamage: 0
+  enemyId: HEM_EREDCY
+  healthBar: {fileID: 972956822803694789}
+  healthText: {fileID: 1897817903137830348}
+  model: {fileID: 4243540913297065839}
+  index: 0
+  equipment: 0
+  stateMachine: {fileID: 3160253765104366153}
+  animator: {fileID: 7893947966335553659}
+  destroyAnimation: {fileID: 3902353808990010922}
+  wave: 0
 --- !u!1 &5885871812457918914
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 6279370602301514819}
   - component: {fileID: 3798293835288752299}
   - component: {fileID: 384775091208226429}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 2046529730445994332}
   - component: {fileID: 9041071205943538658}
   - component: {fileID: 1897817903137830348}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 4644186832078218044}
   - component: {fileID: 4866057267443784285}
   - component: {fileID: 8729093891006541054}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -783,7 +783,7 @@ GameObject:
   - component: {fileID: 9183475480515186531}
   - component: {fileID: 1090290201246413582}
   - component: {fileID: 4498184755227014794}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -857,7 +857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3629641066756471674}
   - component: {fileID: 972956822803694789}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Health Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +946,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4624630375618909597}
-  m_Layer: 10
+  m_Layer: 9
   m_Name: Status bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}

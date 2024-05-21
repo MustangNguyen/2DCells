@@ -15,7 +15,6 @@ public class CellGun : MonoBehaviour
     [SerializeField] public float criticalRate = 30f;
     [SerializeField] public float criticalMultiple = 2;
     [SerializeField] protected bool isAutoFire = false;
-    [SerializeField] protected bool isAutoFire2 = false;
     protected bool isGunReady = true;
 
     protected void Start(){

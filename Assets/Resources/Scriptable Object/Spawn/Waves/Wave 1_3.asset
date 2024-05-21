@@ -17,4 +17,4 @@ MonoBehaviour:
   - weight: 2
     enemyCells: {fileID: 87143013507893159, guid: adf87a40760cb0547babb1b99da8c3ff, type: 3}
   - weight: 1
-    enemyCells: {fileID: 4658982330126906171, guid: fcbd04ea3bff16548a349aa51e9cddf6, type: 3}
+    enemyCells: {fileID: -224524233728151985, guid: fcbd04ea3bff16548a349aa51e9cddf6, type: 3}

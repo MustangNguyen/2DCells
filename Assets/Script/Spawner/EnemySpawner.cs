@@ -36,8 +36,8 @@ public class EnemySpawner : Singleton<EnemySpawner>
     private void FixedUpdate()
     {
         enemiesSpawned = UpdateManager.Instance.enemiesCount;
-        UpdateWave();
-
+        // UpdateWave();
+        waveDurationLeft -= Time.fixedDeltaTime;
 
     }
 
@@ -88,7 +88,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
             }
             isOnChangeWave = false;
         }
-        waveDurationLeft -= Time.fixedDeltaTime;
+        
     }
     private void SpawnEnemies()
     {
@@ -122,6 +122,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
         EnemyCell enemyCell;
         while (true)
         {
+            UpdateWave();
             if (isOnChangeWave) yield return new WaitForFixedUpdate();
             //Debug.Log("spawning");
             if (counterDict[currentWave].Count == 0)

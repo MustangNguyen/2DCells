@@ -13,6 +13,9 @@ TagManager:
   - Bullet1
   - Bullet2
   - WallObstacle
+  - Canvas Popup 4
+  - Canvas Popup 3
+  - EnemyCellWraith
   layers:
   - Default
   - TransparentFX
@@ -23,7 +26,7 @@ TagManager:
   - MapBorder
   - 
   - 
-  - 
+  - EnemyWraith
   - Enemy
   - 
   - 
