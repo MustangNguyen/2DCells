@@ -40,4 +40,9 @@ public class StatusState : State
             enemyCell?.SetStatusMachine(PrimaryElement.None);
         }
     }
+    protected virtual void resetState(){
+        damagePerTick = 0;
+        stack = 0;
+        primaryElement = PrimaryElement.None;
+    }
 }
