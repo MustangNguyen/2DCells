@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
     public CinemachineVirtualCamera virtualCamera;
     public Transform playerPosition;
     public int maximumEnemies = 50;
+    public Mutation mutation;
     public CellGun cellGun1;
     public CellGun cellGun2;
     public MutationHealthBar healthBar;
@@ -21,9 +22,8 @@ public class GameManager : Singleton<GameManager>
     }
     private void Init(){
         // spawn player's mutation here
-        Mutation mutation = LeanPool.Spawn(DataManager.Instance.listMutation[0]);
+        mutation = LeanPool.Spawn(DataManager.Instance.listMutation[0]);
         EnemySpawner.Instance.playerPosition = mutation.transform;
-        //
         virtualCamera.Follow = mutation.transform;
         playerPosition = mutation.transform;
         AudioManager.Instance.StartNormalBattleHematos();

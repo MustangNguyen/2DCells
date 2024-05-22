@@ -443,8 +443,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b8b2244f18231441b22667619368d85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsPersistence: 0
-  spawnTime: 5
+  IsPersistence: 1
+  spawnTime: 0.2
   enemyHoder: {fileID: 1706902183}
   respawnDistance: 5
   listEnemyCell: []
@@ -2363,6 +2363,7 @@ MonoBehaviour:
   virtualCamera: {fileID: 1517631858}
   playerPosition: {fileID: 8620685787941985618}
   maximumEnemies: 200
+  mutation: {fileID: 0}
   cellGun1: {fileID: 0}
   cellGun2: {fileID: 0}
   healthBar: {fileID: 1340581832}
