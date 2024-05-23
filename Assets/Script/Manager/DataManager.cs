@@ -7,7 +7,6 @@ using System.Linq;
 public class DataManager : Singleton<DataManager>
 {
     public DataManagerOOP Data = new();
-    public List<EnemyCell> listEnemyCell;
     public List<Mutation> listMutation;
     public List<CellAbility> listAbility;
 
@@ -17,10 +16,19 @@ public class DataManager : Singleton<DataManager>
         NetworkManager.Instance.GetMutationDataFromServer();
         NetworkManager.Instance.GetEnemyDataFromServer();
         NetworkManager.Instance.GetBulletDataFromServer();
-        listEnemyCell = Resources.LoadAll<EnemyCell>("Prefab/Enemy Prefabs").ToList();
+        NetworkManager.Instance.GetIngameLevelConfigsFromServer();
         listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
     }
-
+    public void GetIngameLevelConfigs(string data){
+        JSONObject json = new JSONObject(data);
+        var listData = json.list;
+        foreach(var item in listData){
+            IngameLevelConfigsOOP lv = new IngameLevelConfigsOOP();
+            lv.inGameLv = (int)item["inGameLv"].n;
+            lv.xpRequire = (int)item["xpRequire"].n;
+            Data.listIngameLevelConfig.Add(lv);
+        }
+    }
     public void GetMutationData(string data){
         JSONObject json = new JSONObject(data);
         var listData = json.list;
@@ -78,6 +86,7 @@ public class DataManager : Singleton<DataManager>
             Enum.TryParse(item["equipment"].str, out equipment); 
             enemyCell.equipment = equipment;
             enemyCell.bodyDamage = (int)item["bodyDamage"].n;
+            enemyCell.XpObs=(int)item["xpObs"].n;
             Data.listEnemies.Add(enemyCell);
         }   
     }

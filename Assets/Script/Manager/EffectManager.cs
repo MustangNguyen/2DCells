@@ -65,4 +65,7 @@ public class EffectManager : Singleton<EffectManager>
         }
         inputString.text = outputString;
     }
+    public void SpawnObs(){
+        
+    }
 }

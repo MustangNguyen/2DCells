@@ -8,6 +8,11 @@ public class EnemyStateDestroy : EnemyState
     {
 
     }
+    public override void Enter()
+    {
+        base.Enter();
+        enemyCell.OnDead();
+    }
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -15,6 +20,8 @@ public class EnemyStateDestroy : EnemyState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        enemyCell.OnDead();
+    }
+    public void SpawnObs(){
+        
     }
 }

@@ -41,14 +41,16 @@ public class EnemyCell : CellsBase
         index = UpdateManager.Instance.poolIndex;
         Reset();
     }
-    private void Reset() {
+    private void Reset()
+    {
         healPoint = maxHealth;
         currentArmor.armorType = baseCellArmor.armorType;
         currentArmor.armorPoint = BioArmorCalculating();
         model.color = new Color(1, 1, 1, 1);
         collider2d.enabled = true;
     }
-    public void CellUpdate(){
+    public void CellUpdate()
+    {
         // healthText.text = healPoint.ToString();
         stateMachine.StateMachineUpdate();
         Spawner.Instance.Reposition(transform);
@@ -61,34 +63,37 @@ public class EnemyCell : CellsBase
         stateMachine.StateMachineFixedUpdate();
         if (healPoint <= 0)
         {
-            
+
         }
     }
     public void movement()
     {
         Vector2 moveDirection = (GameManager.Instance.playerPosition.transform.position - transform.position).normalized;
-        //rigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
+        // rigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
         // rigidbody2d.velocity = moveDirection * moveSpeed;
         float currentForce = moveSpeed - rigidbody2d.velocity.magnitude;
-        if(rigidbody2d.velocity.magnitude>0){
-            friction = rigidbody2d.velocity*-1;
-            rigidbody2d.AddForce(friction*10f*rigidbody2d.mass);
+        if (rigidbody2d.velocity.magnitude > 0)
+        {
+            friction = rigidbody2d.velocity * -1;
+            rigidbody2d.AddForce(friction * 10f * rigidbody2d.mass);
         }
-        if(moveSpeed < rigidbody2d.velocity.magnitude) return;
-            rigidbody2d.AddForce(moveDirection * currentForce *20*rigidbody2d.mass);
+        if (moveSpeed < rigidbody2d.velocity.magnitude) return;
+        rigidbody2d.AddForce(moveDirection * currentForce * 20 * rigidbody2d.mass);
     }
-    public void TakeDamage(int damageIncome, int criticalTier,string status = null)
+    public void TakeDamage(int damageIncome, int criticalTier, string status = null)
     {
         (int, int) damageTaken;
         damageTaken = GameCalculator.DamageTake(currentArmor, BioArmorCalculating(), damageIncome);
         currentArmor.armorPoint -= damageTaken.Item2;
         healPoint -= damageTaken.Item1;
-        EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform,status);
+        EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform, status);
     }
-    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0,int stack = 0){
-        switch(element){
+    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0)
+    {
+        switch (element)
+        {
             case PrimaryElement.Fire:
-                stateMachine.ChangeStatusState(new StatusStateBurn(this,PrimaryElement.Fire,damageIncome,stack));
+                stateMachine.ChangeStatusState(new StatusStateBurn(this, PrimaryElement.Fire, damageIncome, stack));
                 break;
             case PrimaryElement.Ice:
                 break;
@@ -97,29 +102,32 @@ public class EnemyCell : CellsBase
                 break;
         }
     }
-    protected void StateMachineMonitor(){
-        if(rigidbody2d.velocity==Vector2.zero){
+    protected void StateMachineMonitor()
+    {
+        if (rigidbody2d.velocity == Vector2.zero)
+        {
             stateMachine.ChangeState(new EnemyStateIdle(this));
         }
-        else if(rigidbody2d.velocity!=Vector2.zero){
+        else if (rigidbody2d.velocity != Vector2.zero)
+        {
             stateMachine.ChangeState(new EnemyStateMove(this));
         }
         if (healPoint <= 0)
         {
             stateMachine.ChangeState(new EnemyStateDestroy(this));
         }
-        
+
     }
     // protected void Init(){
     //     foreach(var enemy in DataManager.Instance.Data.listEnemies){
     //         if(enemyId == enemy.enemyId){
-                
+
     //         }
     //     }
     // }
     protected void AddProperties()
     {
-        if(DataManager.Instance.Data.listEnemies.Exists(x=> x.enemyId == this.enemyId))
+        if (DataManager.Instance.Data.listEnemies.Exists(x => x.enemyId == this.enemyId))
         {
             EnemyCellOOP enemyCellOOP = DataManager.Instance.Data.listEnemies.Find(x => x.enemyId == this.enemyId);
             maxHealth = enemyCellOOP.hp;
@@ -140,14 +148,17 @@ public class EnemyCell : CellsBase
         destroyAnimation.SetActive(true);
         animator.SetTrigger("Destroy");
         model.color = new Color(0, 0, 0, 0);
-
-        LeanTween.delayedCall(1f, () => { 
+        
+        LeanTween.delayedCall(1f, () =>
+        {
             EnemySpawner.Instance.OnEnemyDestroy(this);
-            LeanPool.Despawn(gameObject); });
+            LeanPool.Despawn(gameObject);
+        });
     }
 }
 [Serializable]
-public class EnemyCellOOP{
+public class EnemyCellOOP
+{
     public string enemyId;
     public string enemyName;
     public int hp;
@@ -157,13 +168,16 @@ public class EnemyCellOOP{
     public string abilityId;
     public Faction faction;
     public Equipment equipment;
-    public EnemyCellOOP(){
-        cellProtection =new CellProtection();
+    public int XpObs;
+    public EnemyCellOOP()
+    {
+        cellProtection = new CellProtection();
     }
     public int bodyDamage;
 }
 [Serializable]
-public enum Equipment{
+public enum Equipment
+{
     None,
     Melee,
     Range

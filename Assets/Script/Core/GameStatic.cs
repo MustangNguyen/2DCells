@@ -36,6 +36,7 @@ public static class GameStatic
     public readonly static string GET_ENEMY_API = "/api/EnemyCells";
     public readonly static string GET_ABILITY_API = "/api/MutationAbilities";
     public readonly static string GET_BULLET_API = "/api/Bullets";
+    public readonly static string GET_INGAME_LEVEL_CONFIGS = "/api/IngameLevelConfigs";
 
     //POST
     public readonly static string POST_LOGIN_REQUEST = "/identity/login";

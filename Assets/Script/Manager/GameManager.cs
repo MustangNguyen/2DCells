@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using Lean.Pool;
+using UnityEngine.UI;
+using System;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -12,7 +14,14 @@ public class GameManager : Singleton<GameManager>
     public Mutation mutation;
     public CellGun cellGun1;
     public CellGun cellGun2;
+    [Space(10)]
+    [Header("Game UI")]
     public MutationHealthBar healthBar;
+    public Slider xpBar;
+    public int xpRequire;
+    public int currentXp;
+    [Space(10)]
+    [Header("Game State")]
     public StateMachine gameStateMachine;
     public bool isPause = false;
     private void Start()
@@ -37,4 +46,10 @@ public class GameManager : Singleton<GameManager>
             gameStateMachine.ChangeState(new GameStatePlay());
         }
     }
+    
+}
+[Serializable]
+public class IngameLevelConfigsOOP{
+    public int inGameLv;
+    public int xpRequire;
 }

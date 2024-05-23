@@ -22,6 +22,11 @@ public partial class NetworkManager : Singleton<NetworkManager>
         // PostNewUserToServer(user);
     }
     #region Get
+    public void GetIngameLevelConfigsFromServer(){
+        StartCoroutine(CreateWebGetRequest(HOST + GET_INGAME_LEVEL_CONFIGS,(string data)=>{
+            DataManager.Instance.GetIngameLevelConfigs(data);
+        }));
+    }
     public void GetMutationDataFromServer()
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_MUTATION_API, (string data) =>
