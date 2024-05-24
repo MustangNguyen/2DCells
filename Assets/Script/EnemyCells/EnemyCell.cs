@@ -13,6 +13,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [SerializeField] protected Collider2D collider2d;
     [SerializeField] protected int bodyDamage = 0;
+    [SerializeField] protected int XpObs;
     [Space(10)]
     [Header("UI")]
     [SerializeField] protected string enemyId;
@@ -68,7 +69,7 @@ public class EnemyCell : CellsBase
     }
     public void movement()
     {
-        Vector2 moveDirection = (GameManager.Instance.playerPosition.transform.position - transform.position).normalized;
+        Vector2 moveDirection = (GameManager.Instance.mutation.transform.position - transform.position).normalized;
         // rigidbody2d.MovePosition((Vector2)transform.position + ((Vector2)moveDirection * moveSpeed * Time.deltaTime));
         // rigidbody2d.velocity = moveDirection * moveSpeed;
         float currentForce = moveSpeed - rigidbody2d.velocity.magnitude;
@@ -137,6 +138,7 @@ public class EnemyCell : CellsBase
             currentArmor = new CellProtection(baseCellArmor);
             faction = enemyCellOOP.faction;
             bodyDamage = enemyCellOOP.bodyDamage;
+            XpObs = enemyCellOOP.XpObs;
         }
     }
     public override void OnDead()
@@ -148,7 +150,7 @@ public class EnemyCell : CellsBase
         destroyAnimation.SetActive(true);
         animator.SetTrigger("Destroy");
         model.color = new Color(0, 0, 0, 0);
-        
+        EffectManager.Instance.SpawnObs(gameObject,XpObs);
         LeanTween.delayedCall(1f, () =>
         {
             EnemySpawner.Instance.OnEnemyDestroy(this);

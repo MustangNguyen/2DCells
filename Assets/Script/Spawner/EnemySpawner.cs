@@ -95,7 +95,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
         //StartCoroutine(IESpawnSchedule());
         StartCoroutine(IESpawnByLevelScript());
     }
-    protected Vector3 SetTargetCyclePos(float spawnRadius, Vector3 playerPos)
+    public Vector3 SetTargetCyclePos(float spawnRadius, Vector3 playerPos)
     {
         float randomAngle = UnityEngine.Random.value;
         float angleInDegrees = randomAngle * 360;

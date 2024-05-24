@@ -4,6 +4,7 @@ using static GameStatic;
 using UnityEngine;
 using Lean.Pool;
 using TMPro;
+using System.Linq;
 
 public class EffectManager : Singleton<EffectManager>
 {
@@ -11,14 +12,21 @@ public class EffectManager : Singleton<EffectManager>
     public Color heal = Color.green;
     public StatusEffect statusEffect;
     public GameObject effectHolder;
-    public void ShowDamageInfict(int damage, int criticalTier, Transform transform,string status = null)
+    public List<XPObs> listXpObs = new();
+    public List<int> listXpPerObs = new(){1000,500,200,100,50,20,10,1};
+    private void Start()
+    {
+        //listXpObs = Resources.LoadAll<XPObs>("Prefab/Obs").ToList();
+    }
+    public void ShowDamageInfict(int damage, int criticalTier, Transform transform, string status = null)
     {
         Vector2 temp;
         temp = new Vector2(transform.position.x + Random.Range(-0.5f, 0.51f), transform.position.y);
-        StatusEffect statusEffect = LeanPool.Spawn(this.statusEffect, temp, Quaternion.identity,effectHolder.transform);
-        if(status !=null)
+        StatusEffect statusEffect = LeanPool.Spawn(this.statusEffect, temp, Quaternion.identity, effectHolder.transform);
+        if (status != null)
             statusEffect.statusText.text = damage.ToString() + " " + status;
-        else{
+        else
+        {
             statusEffect.statusText.text = damage.ToString();
         }
         switch (criticalTier)
@@ -43,8 +51,9 @@ public class EffectManager : Singleton<EffectManager>
                 break;
         }
     }
-    public void TransformStringByRandom(TextMeshProUGUI inputString, string outputString, float time){
-        StartCoroutine(IETransformStringByRandom(inputString,outputString,time));
+    public void TransformStringByRandom(TextMeshProUGUI inputString, string outputString, float time)
+    {
+        StartCoroutine(IETransformStringByRandom(inputString, outputString, time));
     }
     public IEnumerator IETransformStringByRandom(TextMeshProUGUI inputString, string outputString, float time)
     {
@@ -55,17 +64,26 @@ public class EffectManager : Singleton<EffectManager>
             for (int i = 0; i < charArray.Length; i++)
             {
                 if ((int)charArray[i] == 32) continue;
-                else if((int)charArray[i]<91)
+                else if ((int)charArray[i] < 91)
                     charArray[i] = (char)Random.Range(65, 91);
                 else
-                    charArray[i]= (char)Random.Range(97,123);
+                    charArray[i] = (char)Random.Range(97, 123);
             }
             time -= Time.fixedDeltaTime;
             inputString.text = string.Concat(charArray);
         }
         inputString.text = outputString;
     }
-    public void SpawnObs(){
-        
+    public void SpawnObs(GameObject objectSpawn, int amount)
+    {
+        int divide;
+        for(int i = 0;i<listXpPerObs.Count;i++){
+            divide = amount / listXpPerObs[i];
+            if (divide > 0){
+                for (int j = 0; j < divide; j++)
+                    LeanPool.Spawn(listXpObs[i], EnemySpawner.Instance.SetTargetCyclePos(0.1f, objectSpawn.transform.position), Quaternion.identity, effectHolder.transform);
+                amount -= divide * listXpPerObs[i];
+            }
+        }
     }
 }

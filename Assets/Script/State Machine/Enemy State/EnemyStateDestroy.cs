@@ -21,7 +21,5 @@ public class EnemyStateDestroy : EnemyState
     {
         base.PhysicsUpdate();
     }
-    public void SpawnObs(){
-        
-    }
+
 }

@@ -16,6 +16,7 @@ TagManager:
   - Canvas Popup 4
   - Canvas Popup 3
   - EnemyCellWraith
+  - XPObs
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - Water
   - UI
   - MapBorder
-  - 
+  - Obs
   - 
   - EnemyWraith
   - Enemy
