@@ -1570,7 +1570,7 @@ MonoBehaviour:
     listEnemies: []
     listAbilities: []
     listBullet: []
-  listEnemyCell: []
+    listIngameLevelConfig: []
   listMutation: []
   listAbility: []
 --- !u!1 &762424731
