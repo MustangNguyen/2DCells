@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected string bulletId;
     [SerializeField] protected string bulletTypeId;
     [SerializeField] protected string bulletName;
+    [SerializeField] protected bool isPenetration = false;
 
     public int Damage
     {
@@ -84,6 +85,16 @@ public class Bullet : MonoBehaviour
             enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
             enemyCell.SetStatusMachine(elements.primaryElement,damage,1);
             bulletCollider2D.enabled = false;
+        }
+    }
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "EnemyCell")
+        {
+            EnemyCell enemyCell = collision.gameObject.GetComponent<EnemyCell>();
+            (float, int) critical = GameCalculator.CriticalManager(cellGun);
+            enemyCell.TakeDamage((int)(critical.Item1 * damage), critical.Item2);
+            enemyCell.SetStatusMachine(elements.primaryElement, damage, 1);
         }
     }
 }
