@@ -20,15 +20,16 @@ public class XPObs : MonoBehaviour
 
     private void Start()
     {
+
     }
     private void OnEnable() {
+        gameObject.layer = LayerMask.NameToLayer("Obs");
         Collider2D []objects = Physics2D.OverlapCircleAll(transform.position,radius,layerMask);
         for(int i = 0;i<objects.Length;i++){
             Vector2 direction = (objects[i].transform.position-transform.position).normalized;
             var pulse = objects[i].GetComponent<Rigidbody2D>();
             pulse.AddForce(direction*force,ForceMode2D.Impulse);
         }
-        StartMovement();
     }
     public void StartMovement()
     {

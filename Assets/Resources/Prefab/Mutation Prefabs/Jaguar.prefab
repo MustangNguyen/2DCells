@@ -104,7 +104,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1157303043
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: a568e58ef6f1a4badb639e8f7c8793f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -229,6 +229,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStateName: 
+  currentStateStatusName: 
 --- !u!114 &-8853869850727471151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,6 +260,8 @@ MonoBehaviour:
   lv: 1
   faction: 0
   friction: {x: 0, y: 0}
+  currentElementStack: 0
+  currentPrimaryElement: 0
   playerRigidbody2d: {fileID: 8608562803421528327}
   mutationId: 
   mutationName: 
@@ -267,6 +270,9 @@ MonoBehaviour:
   layerAffectByShieldPulse:
     serializedVersion: 2
     m_Bits: 1024
+  layerObs:
+    serializedVersion: 2
+    m_Bits: 128
   rotationInterpolation: 0.4
 --- !u!1001 &180877886645671503
 PrefabInstance:
@@ -366,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
       propertyPath: m_SortingLayerID
@@ -484,7 +490,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
       propertyPath: m_SortingLayerID

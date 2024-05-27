@@ -11,8 +11,8 @@ public class GunSimple : CellGun
     }
     protected override IEnumerator OnFire()
     {
-        base.OnFire();
-        yield return null;
+        yield return base.OnFire();
+        //base.OnFire();
     }
     public override void GunRotation(){
         base.GunRotation();

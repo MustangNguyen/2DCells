@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class Mutation : CellsBase
 {
@@ -13,6 +14,8 @@ public class Mutation : CellsBase
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected List<CellAbility> mutationAbilities;
     [SerializeField] protected LayerMask layerAffectByShieldPulse;
+    [SerializeField] protected LayerMask layerObs;
+    protected float obsCollectRange = 5f;
     private float impactField = 10f;
     private float impactForce = 100f;
     protected float pushBackForce = 20f;
@@ -29,6 +32,7 @@ public class Mutation : CellsBase
     protected virtual void Update(){
         StateMachineMonitor();
         AbilityTrigger();
+        ObsDectector();
     }
     protected virtual void FixedUpdate() {
         isMoving = true;
@@ -69,6 +73,14 @@ public class Mutation : CellsBase
     protected virtual void Ability3(){
         Debug.Log("Ability 3 triggered!");
 
+    }
+    public void ObsDectector(){
+        Collider2D []arrayObsDetected = Physics2D.OverlapCircleAll(transform.position,obsCollectRange,layerObs);
+        if(arrayObsDetected.Length>0)
+            for(int i = 0;i<arrayObsDetected.Length;i++){
+                arrayObsDetected[i].GetComponent<XPObs>().StartMovement();
+                arrayObsDetected[i].gameObject.layer = LayerMask.NameToLayer("ObsNeutral");
+            }
     }
     public void PlayerRotation(){
         Vector2 lookDir = InputManager.Instance.GetArrowButton();

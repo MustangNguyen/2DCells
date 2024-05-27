@@ -52,13 +52,13 @@ public class CellGun : MonoBehaviour
     }
     protected virtual IEnumerator OnFire()
     {
-        Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, bulletHolder.transform);
+        Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, GameManager.Instance.bulletHolder);
         bullet.cellGun = this;
         if(isFirstGun)
             bullet.gameObject.tag = "Bullet1";
         else
             bullet.gameObject.tag = "Bullet2";
-        bullet.SetBullet(transform, accuracy);
+        bullet.SetBullet(transform, InputManager.Instance.mouseWorldPosition, accuracy);
         yield return new WaitForSeconds(1 / fireRate);
         isGunReady = true;
     }

@@ -31,6 +31,8 @@ public class GameCalculator
     public static (float, int) CriticalManager(CellGun cellGun)
     {
         int criticalCoeffident = Random.Range(0, 101);
+        if(cellGun == null)
+            return (1,0);
         // value return is critical multipler and critical tier
         if (cellGun.criticalRate < 100)
         {
