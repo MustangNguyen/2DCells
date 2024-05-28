@@ -21,7 +21,7 @@ public class XPObs : MonoBehaviour
     }
     private void OnEnable()
     {
-
+        
     }
     public void StartMovement()
     {
@@ -32,9 +32,9 @@ public class XPObs : MonoBehaviour
     {
         Vector2 temp = transform.localScale;
         Color color = model.color;
+        isPulling = false;
         LeanTween.value(gameObject, 0, 1, fadeTime).setOnStart(() =>
         {
-            isPulling = false;
             GameManager.Instance.OnObsCollect(xPContain);
         }).setOnUpdate((float value) =>
         {
@@ -43,9 +43,10 @@ public class XPObs : MonoBehaviour
         }).setOnComplete(() =>
         {
             moveSpeed = 0;
-            LeanPool.Despawn(this);
             transform.localScale = temp;
             model.color = color;
+            gameObject.layer = LayerMask.NameToLayer("Obs");
+            LeanPool.Despawn(gameObject);
         });
     }
     public IEnumerator IEOnObsMove()

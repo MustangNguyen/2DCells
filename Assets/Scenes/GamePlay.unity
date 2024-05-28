@@ -385,13 +385,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBall
       objectReference: {fileID: 0}
-    - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
-      propertyPath: m_LocalPosition.x
+    - target: {fileID: 309796950434619821, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.361
+      objectReference: {fileID: 0}
+    - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 37.729
       objectReference: {fileID: 0}
     - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
       propertyPath: m_LocalPosition.z

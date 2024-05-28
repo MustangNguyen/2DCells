@@ -5,6 +5,7 @@ using UnityEngine;
 using Lean.Pool;
 using TMPro;
 using System.Linq;
+using Unity.Collections;
 
 public class EffectManager : Singleton<EffectManager>
 {
@@ -81,8 +82,10 @@ public class EffectManager : Singleton<EffectManager>
         for(int i = 0;i<listXpPerObs.Count;i++){
             divide = amount / listXpPerObs[i];
             if (divide > 0){
-                for (int j = 0; j < divide; j++)
+                for (int j = 0; j < divide; j++){
                     LeanPool.Spawn(listXpObs[i], EnemySpawner.Instance.SetTargetCyclePos(0.1f, objectSpawn.transform.position), Quaternion.identity, effectHolder.transform);
+
+                }
                 amount -= divide * listXpPerObs[i];
             }
         }

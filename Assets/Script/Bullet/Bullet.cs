@@ -15,6 +15,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected bool isProjectile = true;
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [SerializeField] protected BoxCollider2D bulletCollider2D;
+    [SerializeField] protected TrailRenderer bulletTrail;
+    [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] protected string bulletId;
     [SerializeField] protected string bulletTypeId;
     [SerializeField] protected string bulletName;
@@ -77,13 +79,16 @@ public class Bullet : MonoBehaviour
         bulletDirection.Normalize();
         transform.rotation = quaternion * gunPosition.rotation;
         bulletCollider2D.enabled = true;
+        if(bulletTrail!=null)
+            bulletTrail.Clear();
+        sprite.color = Color.white;
         rigidbody2d.AddForce(bulletDirection * bulletSpeed,ForceMode2D.Impulse);
         LeanTween.delayedCall(timeExist, () =>
         {
             LeanPool.Despawn(gameObject);
         });
     }
-    protected virtual void explode()
+    protected virtual void Explode()
     {
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, impactField, layerToHit);
         for (int i = 0; i < objects.Length; i++)
@@ -108,7 +113,7 @@ public class Bullet : MonoBehaviour
                 bulletCollider2D.enabled = false;
             }
             else{
-                explode();
+                Explode();
             }
         }
     }

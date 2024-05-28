@@ -110,6 +110,7 @@ MonoBehaviour:
   isProjectile: 1
   rigidbody2d: {fileID: -6593891085908867312}
   bulletCollider2D: {fileID: 8593638103208446277}
+  sprite: {fileID: 3826545368362221535}
   bulletId: BPRO_ICESH
   bulletTypeId: 
   bulletName: 
