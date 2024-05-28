@@ -131,7 +131,7 @@ MonoBehaviour:
   isProjectile: 1
   rigidbody2d: {fileID: 6337976132388497709}
   bulletCollider2D: {fileID: 8297262433646558806}
-  bulletId: 
+  bulletId: BPRO_SHURI
   bulletTypeId: 
   bulletName: 
   isPenetration: 0
