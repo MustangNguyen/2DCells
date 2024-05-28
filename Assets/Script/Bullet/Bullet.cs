@@ -18,6 +18,11 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected string bulletId;
     [SerializeField] protected string bulletTypeId;
     [SerializeField] protected string bulletName;
+    [SerializeField] protected bool isExplosive = false;
+    [SerializeField] protected float impactField = 2f;
+    [SerializeField] protected float impactForce = 15f;
+    [SerializeField] protected float countdown = 10;
+    [SerializeField] protected LayerMask layerToHit;
     [SerializeField] protected bool isPenetration = false;
 
     public int Damage
@@ -62,11 +67,11 @@ public class Bullet : MonoBehaviour
         }
     }
     
-    public virtual void SetBullet(Transform gunPosition, float accuracy)
+    public virtual void SetBullet(Transform gunPosition,Vector3 targetPosition, float accuracy)
     {
         float spreadAngle = GUN_MAX_SPREAD_ANGLE - GUN_MAX_SPREAD_ANGLE / 100 * accuracy;
         float randomAngle = Random.Range(-spreadAngle, spreadAngle + 1);
-        Vector2 bulletDirection = InputManager.Instance.mouseWorldPosition - gunPosition.position;
+        Vector2 bulletDirection = targetPosition - gunPosition.position;
         Quaternion quaternion = Quaternion.Euler(0f,0f,randomAngle);
         bulletDirection = quaternion * bulletDirection;
         bulletDirection.Normalize();
@@ -78,13 +83,33 @@ public class Bullet : MonoBehaviour
             LeanPool.Despawn(gameObject);
         });
     }
-    protected virtual void OnCollisionEnter2D(Collision2D collision2D) {
-        if(collision2D.gameObject.tag=="EnemyCell"){
-            EnemyCell enemyCell = collision2D.gameObject.GetComponent<EnemyCell>();
+    protected virtual void explode()
+    {
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, impactField, layerToHit);
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Vector2 direction = (objects[i].transform.position - transform.position).normalized;
+            var victim = objects[i].GetComponent<Rigidbody2D>();
+            victim.AddForce(direction * impactForce, ForceMode2D.Impulse);
+            EnemyCell enemyCell = objects[i].gameObject.GetComponent<EnemyCell>();
             (float,int) critical = GameCalculator.CriticalManager(cellGun);
             enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
             enemyCell.SetStatusMachine(elements.primaryElement,damage,1);
             bulletCollider2D.enabled = false;
+        }
+    }
+    protected virtual void OnCollisionEnter2D(Collision2D collision2D) {
+        if(collision2D.gameObject.tag=="EnemyCell"){
+            if(!isExplosive){
+                EnemyCell enemyCell = collision2D.gameObject.GetComponent<EnemyCell>();
+                (float,int) critical = GameCalculator.CriticalManager(cellGun);
+                enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
+                enemyCell.SetStatusMachine(elements.primaryElement,damage,1);
+                bulletCollider2D.enabled = false;
+            }
+            else{
+                explode();
+            }
         }
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)

@@ -113,6 +113,13 @@ MonoBehaviour:
   bulletId: BPRO_ICESH
   bulletTypeId: 
   bulletName: 
+  isExplosive: 0
+  impactField: 2
+  impactForce: 15
+  countdown: 10
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 0
   isPenetration: 0
 --- !u!50 &-6593891085908867312
 Rigidbody2D:

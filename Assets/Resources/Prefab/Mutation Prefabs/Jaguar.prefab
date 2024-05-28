@@ -271,7 +271,10 @@ MonoBehaviour:
   mutationAbilities: []
   layerAffectByShieldPulse:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1536
+  layerObs:
+    serializedVersion: 2
+    m_Bits: 128
   rotationInterpolation: 0.4
 --- !u!1001 &26252224389399893
 PrefabInstance:

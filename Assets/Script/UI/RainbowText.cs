@@ -27,7 +27,7 @@ public class RainbowText : MonoBehaviour
             Color targetColor = new Color(r, b, g, 1f);
             text.color = targetColor;
             time += Time.fixedDeltaTime * cycleSpeed;
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
         }
     }
  

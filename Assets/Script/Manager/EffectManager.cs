@@ -16,7 +16,8 @@ public class EffectManager : Singleton<EffectManager>
     public List<int> listXpPerObs = new(){1000,500,200,100,50,20,10,1};
     private void Start()
     {
-        //listXpObs = Resources.LoadAll<XPObs>("Prefab/Obs").ToList();
+        // listXpObs = new();
+        // listXpObs = Resources.LoadAll<XPObs>("Prefab/Obs").ToList();
     }
     public void ShowDamageInfict(int damage, int criticalTier, Transform transform, string status = null)
     {

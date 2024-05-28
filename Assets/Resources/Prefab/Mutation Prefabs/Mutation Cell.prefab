@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 8608562803421528327}
   - component: {fileID: 8084353728301255565}
   - component: {fileID: 8543297691273630339}
-  - component: {fileID: -7456378390394922620}
+  - component: {fileID: -4238244107374048821}
   m_Layer: 13
   m_Name: Mutation Cell
   m_TagString: Player
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateName: 
   currentStateStatusName: 
---- !u!114 &-7456378390394922620
+--- !u!114 &-4238244107374048821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7559470799616134614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b48943d440e345429e55f2233fec077, type: 3}
+  m_Script: {fileID: 11500000, guid: 6feb9f4d2cc76514688f0bfc58d27269, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healPoint: 200
@@ -263,12 +263,15 @@ MonoBehaviour:
   friction: {x: 0, y: 0}
   currentElementStack: 0
   currentPrimaryElement: 0
-  playerRigidbody2d: {fileID: 0}
-  mutationId: HEM_JAGUAR
-  mutationName: 
+  playerRigidbody2d: {fileID: 8608562803421528327}
+  mutationId: TEST
+  mutationName: TEST
   stateMachine: {fileID: 0}
   mutationAbilities: []
   layerAffectByShieldPulse:
+    serializedVersion: 2
+    m_Bits: 0
+  layerObs:
     serializedVersion: 2
     m_Bits: 0
   rotationInterpolation: 0.4
@@ -325,8 +328,24 @@ PrefabInstance:
       value: Gun2
       objectReference: {fileID: 0}
     - target: {fileID: 4133762846089900181, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4133762846089900181, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
+      propertyPath: m_TagString
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
+      propertyPath: m_SortingLayer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -420697141
+      objectReference: {fileID: 0}
+    - target: {fileID: 6886512329764851758, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

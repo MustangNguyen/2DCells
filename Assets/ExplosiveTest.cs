@@ -18,12 +18,14 @@ public class ExplosiveTest : MonoBehaviour
             explode();
         }
     }
-    private void explode(){
-        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position,impactField,layerToHit);
-        foreach(Collider2D obj in objects){
-            Vector2 direction = (obj.transform.position - transform.position).normalized;
-            var victim = obj.GetComponent<Rigidbody2D>();
-            victim.AddForce(direction*impactForce,ForceMode2D.Impulse);
+    private void explode()
+    {
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, impactField, layerToHit);
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Vector2 direction = (objects[i].transform.position - transform.position).normalized;
+            var victim = objects[i].GetComponent<Rigidbody2D>();
+            victim.AddForce(direction * impactForce, ForceMode2D.Impulse);
         }
     }
 }

@@ -8,9 +8,9 @@ public class BulletSimple : Bullet
     {
         base.Awake();
     }
-    public override void SetBullet(Transform gunPosition, float accuracy)
+    public override void SetBullet(Transform gunPosition,Vector3 targetPosition, float accuracy)
     {
-        base.SetBullet(gunPosition, accuracy);
+        base.SetBullet(gunPosition,targetPosition, accuracy);
         
         
     }

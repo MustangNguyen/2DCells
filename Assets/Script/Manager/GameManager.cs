@@ -6,14 +6,22 @@ using Lean.Pool;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Unity.VisualScripting;
+using System.Linq;
 
 public class GameManager : Singleton<GameManager>
 {
     public CinemachineVirtualCamera virtualCamera;
     public int maximumEnemies = 50;
     public Mutation mutation;
+    public Transform powerUpHolder;
+    public int maxCardToChoose = 3;
+    public List<PowerUpData> listPowerUpDatas = new();
+    public bool isChoosingPowerUp = false;
     public CellGun cellGun1;
     public CellGun cellGun2;
+    public Transform bulletHolder;
+    public Action<string> returnPowerIdUpChosen;
     [Space(10)]
     [Header("Game UI")]
     public MutationHealthBar healthBar;
@@ -39,7 +47,9 @@ public class GameManager : Singleton<GameManager>
         virtualCamera.Follow = mutation.transform;
         AudioManager.Instance.StartNormalBattleHematos();
         xpRequire = DataManager.Instance.Data.listIngameLevelConfig[currentLv].xpRequire;
-        
+        powerUpHolder.SetParent(mutation.transform);
+
+        listPowerUpDatas = Resources.LoadAll<PowerUpData>("Scriptable Object/PowerUps").ToList();
     }
     public void OnPauseClick()
     {
@@ -68,6 +78,7 @@ public class GameManager : Singleton<GameManager>
                 XpObs -= xpRequire - currentXp;
                 currentXp += xpRequire - currentXp;
                 currentLv++;
+                OnLevelUp();
                 currentLvText.text = currentLv.ToString();
                 xpRequire = DataManager.Instance.Data.listIngameLevelConfig[currentLv].xpRequire;
                 currentXp = 0;
@@ -75,10 +86,41 @@ public class GameManager : Singleton<GameManager>
         }
         xpBar.value = (float)currentXp/xpRequire;
     }
+    public void OnLevelUp(){
+        if (!isPause)
+        {
+            gameStateMachine.ChangeState(new GameStatePause());
+            isChoosingPowerUp = true;
+            StartCoroutine(IEWaitForChoosingPowerUp());
+            PopupChoosePowerUp.Show();
+            
+        }
+    }
+    public IEnumerator IEWaitForChoosingPowerUp(){
+        returnPowerIdUpChosen += AddPowerUpToMutation;
+        yield return new WaitUntil(()=>!isChoosingPowerUp);
+        returnPowerIdUpChosen -= AddPowerUpToMutation;
+        gameStateMachine.ChangeState(new GameStatePlay());
+    }
+    public void AddPowerUpToMutation(string powerUpId){
+        Debug.Log("power up choose: " + powerUpId);
+        isChoosingPowerUp = false;
+        PowerUp powerUp = listPowerUpDatas.Find(x=>x.id == powerUpId).powerUp;
+        LeanPool.Spawn(powerUp,powerUpHolder);
+    }
 }
 [Serializable]
 public class IngameLevelConfigsOOP
 {
     public int inGameLv;
     public int xpRequire;
+}
+[Serializable]
+public enum PowerUpRarity{
+    Common,
+    Uncommon,
+    Rare,
+    Epic,
+    Legendary,
+    Corrupted,
 }
