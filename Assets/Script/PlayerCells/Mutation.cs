@@ -14,7 +14,7 @@ public class Mutation : CellsBase
     [SerializeField] protected StateMachine stateMachine;
     [SerializeField] protected List<CellAbility> mutationAbilities;
     [SerializeField] protected LayerMask layerAffectByShieldPulse;
-    [SerializeField] protected LayerMask layerObs;
+    [SerializeField] protected int layerObs;
     protected float obsCollectRange = 5f;
     private float impactField = 10f;
     private float impactForce = 100f;
@@ -52,7 +52,7 @@ public class Mutation : CellsBase
         ShowProterties();
         stateMachine.ChangeState(new PlayerStateIdle(this));
         shieldRechargeRate = GameCalculator.ShieldRechargeCalculator(baseCellArmor.shieldPoint);
-        
+        layerObs = LayerMask.GetMask("Obs");
         
     }
     protected void AbilityTrigger(){

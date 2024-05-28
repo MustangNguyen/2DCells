@@ -271,7 +271,7 @@ MonoBehaviour:
   mutationAbilities: []
   layerAffectByShieldPulse:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1536
   layerObs:
     serializedVersion: 2
     m_Bits: 128
@@ -330,31 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8010684252168335412, guid: 8e81838ef6e4a1c4397e5dd43faf39d8, type: 3}
       propertyPath: m_Name
-<<<<<<< HEAD
-      value: Gun2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4133762846089900181, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 4133762846089900181, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
-      propertyPath: m_TagString
-      value: Gun
-      objectReference: {fileID: 0}
-    - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
-      propertyPath: m_SortingLayer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5282778521074430007, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -420697141
-      objectReference: {fileID: 0}
-    - target: {fileID: 6886512329764851758, guid: 717aa144d55e1c44d967602f32fa38e4, type: 3}
-      propertyPath: m_Layer
-      value: 15
-=======
       value: ShurikenGun
->>>>>>> origin/sonta
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

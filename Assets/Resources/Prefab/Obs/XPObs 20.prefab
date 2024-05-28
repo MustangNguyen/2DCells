@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1603087235404921455}
   - component: {fileID: 5835166352732536051}
   - component: {fileID: 9108792166347164188}
-  - component: {fileID: 8959973510140126479}
   m_Layer: 7
   m_Name: XPObs 20
   m_TagString: XPObs
@@ -134,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda989bb5c190d74d972d7cfea510149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 8959973510140126479}
+  rb: {fileID: 0}
   model: {fileID: 1603087235404921455}
   xPContain: 20
   moveSpeed: 0
@@ -146,30 +145,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   isPulling: 0
---- !u!50 &8959973510140126479
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5079582671952775665}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

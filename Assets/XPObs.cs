@@ -7,29 +7,21 @@ using Lean.Pool;
 public class XPObs : MonoBehaviour
 {
     [SerializeField] Collision2D collision;
-    [SerializeField] Rigidbody2D rb;
+    // [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer model;
     [SerializeField] int xPContain = 0;
     [SerializeField] float moveSpeed = 0f;
     [SerializeField] float acceleration = 0.01f;
     [SerializeField] float fadeTime = 0.3f;
-    [SerializeField] float radius = 1f;
-    [SerializeField] float force = 1f;
-    [SerializeField] LayerMask layerMask;
     public bool isPulling = false;
 
     private void Start()
     {
 
     }
-    private void OnEnable() {
-        gameObject.layer = LayerMask.NameToLayer("Obs");
-        Collider2D []objects = Physics2D.OverlapCircleAll(transform.position,radius,layerMask);
-        for(int i = 0;i<objects.Length;i++){
-            Vector2 direction = (objects[i].transform.position-transform.position).normalized;
-            var pulse = objects[i].GetComponent<Rigidbody2D>();
-            pulse.AddForce(direction*force,ForceMode2D.Impulse);
-        }
+    private void OnEnable()
+    {
+
     }
     public void StartMovement()
     {
@@ -43,6 +35,7 @@ public class XPObs : MonoBehaviour
         LeanTween.value(gameObject, 0, 1, fadeTime).setOnStart(() =>
         {
             isPulling = false;
+            GameManager.Instance.OnObsCollect(xPContain);
         }).setOnUpdate((float value) =>
         {
             transform.localScale = temp * (value + 2);
@@ -59,18 +52,43 @@ public class XPObs : MonoBehaviour
     {
         while (isPulling)
         {
-            yield return new WaitForFixedUpdate();
-            Vector2 moveDirection = (GameManager.Instance.mutation.transform.position - transform.position).normalized;
-            rb.velocity = moveDirection * (moveSpeed += acceleration);
+            yield return new WaitForEndOfFrame();
+            if (Time.timeScale > 0)
+            {
+                Vector2 moveDirection = GameManager.Instance.mutation.transform.position - transform.position;
+                if (moveDirection.magnitude < 1)
+                {
+                    OnConsumption();
+                    
+                }
+                moveDirection.Normalize();
+                // rb.velocity = moveDirection * (moveSpeed += acceleration);
+
+                moveSpeed += acceleration * Time.deltaTime;
+                float moveDistance = moveSpeed;
+                transform.Translate(moveDirection * moveDistance, Space.World);
+            }
+
         }
-        rb.velocity = Vector3.zero;
+        // while (isPulling)
+        // {
+        //     yield return new WaitForFixedUpdate();
+        //     Vector2 moveDirection = GameManager.Instance.mutation.transform.position - transform.position;
+        //     if(moveDirection.magnitude<1){
+        //         OnConsumption();
+        //         GameManager.Instance.OnObsCollect(xPContain);
+        //     }
+        //     moveDirection.Normalize();
+        //     rb.velocity = moveDirection * (moveSpeed += acceleration);
+        // }
+        // rb.velocity = Vector3.zero;
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            OnConsumption();
-            GameManager.Instance.OnObsCollect(xPContain);
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.tag == "Player")
+    //     {
+    //         OnConsumption();
+    //         GameManager.Instance.OnObsCollect(xPContain);
+    //     }
+    // }
 }
