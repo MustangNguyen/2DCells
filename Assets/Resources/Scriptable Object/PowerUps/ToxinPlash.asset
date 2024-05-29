@@ -17,4 +17,6 @@ MonoBehaviour:
   powerUpName: Toxin Plash
   description: Throw a plash of poison that infict 50% DPS per second to enemies
     inside the area.
+  maxLv: 99
+  glyph: {fileID: 0}
   powerUp: {fileID: -4917763956000642435, guid: 8664e5e1da846044ca52d86f8fe067a3, type: 3}

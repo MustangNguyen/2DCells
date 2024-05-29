@@ -10,7 +10,6 @@ public class FireBall : Bullet
         base.OnCollisionEnter2D(other);
         gameObject.SetActive(false);
         EffectManager.Instance.ShowFireBlashVFX(transform);
-        LeanTween.delayedCall(1.5f, () => { LeanPool.Despawn(this); });
     }
 
 }

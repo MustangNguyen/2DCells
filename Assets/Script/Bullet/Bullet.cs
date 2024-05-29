@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
 {
 
     [SerializeField] protected float bulletSpeed = 20f;
-    [SerializeField] protected int damage = 20;
+    [SerializeField] public int damage = 20;
     [SerializeField] public CellGun cellGun;
     [SerializeField] protected Elements elements;
     [SerializeField] protected float timeExist = 2f;
@@ -27,17 +27,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected LayerMask layerToHit;
     [SerializeField] protected bool isPenetration = false;
 
-    public int Damage
-    {
-        get
-        {
-            return damage;
-        }
-        set
-        {
-            damage = value;
-        }
-    }
     public float Speed
     {
         get

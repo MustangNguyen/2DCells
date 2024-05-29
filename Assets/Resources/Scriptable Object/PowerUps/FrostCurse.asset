@@ -17,4 +17,6 @@ MonoBehaviour:
   powerUpName: Frost Curse
   description: Form a circle of ice around you, cause 40% DPS per second and slow
     enemies.
+  maxLv: 99
+  glyph: {fileID: 0}
   powerUp: {fileID: 3701561491477928292, guid: 734bf0c944178c94da05ecaa1f742351, type: 3}

@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
-  damage: 100
+  damage: 30
   cellGun: {fileID: 0}
   elements:
     primaryElement: 2

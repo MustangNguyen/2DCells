@@ -17,6 +17,8 @@ public class GameManager : Singleton<GameManager>
     public Transform powerUpHolder;
     public int maxCardToChoose = 3;
     public List<PowerUpData> listPowerUpDatas = new();
+    public List<PowerUpData> listPlayerPowerUpDatas = new();
+    public List<PowerUp> listPlayerPowerUps = new();
     public bool isChoosingPowerUp = false;
     public CellGun cellGun1;
     public CellGun cellGun2;
@@ -105,8 +107,18 @@ public class GameManager : Singleton<GameManager>
     public void AddPowerUpToMutation(string powerUpId){
         Debug.Log("power up choose: " + powerUpId);
         isChoosingPowerUp = false;
-        PowerUp powerUp = listPowerUpDatas.Find(x=>x.id == powerUpId).powerUp;
-        LeanPool.Spawn(powerUp,powerUpHolder);
+        bool isExistPowerUp = listPowerUpDatas.Exists(x => x.id == powerUpId);
+        if (isExistPowerUp){
+            PowerUp powerUp = listPowerUpDatas.Find(x=>x.id == powerUpId).powerUp;
+            PowerUp temp = LeanPool.Spawn(powerUp,powerUpHolder);
+            listPlayerPowerUpDatas.Add(listPowerUpDatas.Find(x => x.id == powerUpId));
+            listPlayerPowerUps.Add(temp);
+            listPowerUpDatas.Remove(listPowerUpDatas.Find(x => x.id == powerUpId));
+        }
+        else{
+            PowerUp powerUp = listPlayerPowerUps.Find(x=>x.id == powerUpId);
+            powerUp.OnLevelUp(powerUp.lv+1);
+        }
     }
 }
 [Serializable]

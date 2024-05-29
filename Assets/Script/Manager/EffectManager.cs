@@ -25,7 +25,8 @@ public class EffectManager : Singleton<EffectManager>
     public void ShowFireBlashVFX(Transform transform){
          Vector2 temp;
         temp = new Vector2(transform.position.x, transform.position.y);
-        LeanPool.Spawn(FireBlashVFX, temp, Quaternion.identity,effectHolder.transform);
+        GameObject fireballVFX = LeanPool.Spawn(FireBlashVFX, temp, Quaternion.identity,effectHolder.transform);
+        LeanTween.delayedCall(1.5f, () => { LeanPool.Despawn(fireballVFX); });
     }
     public void ShowDamageInfict(int damage, int criticalTier, Transform transform, string status = null)
     {

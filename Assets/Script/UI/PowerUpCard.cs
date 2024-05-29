@@ -14,9 +14,9 @@ public class PowerUpCard : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cardDescription;
     [SerializeField] private PopupChoosePowerUp popupChoosePowerUp;
 
-    public void InitCard(PowerUpData powerUpData,PopupChoosePowerUp popupChoosePowerUp){
+    public void InitCard(PowerUpData powerUpData,PopupChoosePowerUp popupChoosePowerUp,int lv = 0){
         cardTitle.text = powerUpData.powerUpName;
-        cardDescription.text = powerUpData.description;
+        cardDescription.text = powerUpData.UpdateDescription(lv);
         this.powerUpData = powerUpData;
         this.popupChoosePowerUp = popupChoosePowerUp;
     }
