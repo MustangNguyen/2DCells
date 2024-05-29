@@ -38,6 +38,17 @@ public class Bullet : MonoBehaviour
             damage = value;
         }
     }
+    public float Speed
+    {
+        get
+        {
+            return bulletSpeed;
+        }
+        set
+        {
+            bulletSpeed = value;
+        }
+    }
     public Elements Elements {get => elements;}
     protected virtual void Awake(){
         rigidbody2d = GetComponent<Rigidbody2D>();
