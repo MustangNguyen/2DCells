@@ -15,10 +15,17 @@ public class EffectManager : Singleton<EffectManager>
     public GameObject effectHolder;
     public List<XPObs> listXpObs = new();
     public List<int> listXpPerObs = new(){1000,500,200,100,50,20,10,1};
+    public GameObject FireBlashVFX;
     private void Start()
     {
         // listXpObs = new();
         // listXpObs = Resources.LoadAll<XPObs>("Prefab/Obs").ToList();
+        FireBlashVFX = Resources.Load<GameObject>("Prefab/UI/VFX/Fire_blash_VFX");
+    }
+    public void ShowFireBlashVFX(Transform transform){
+         Vector2 temp;
+        temp = new Vector2(transform.position.x, transform.position.y);
+        LeanPool.Spawn(FireBlashVFX, temp, Quaternion.identity,effectHolder.transform);
     }
     public void ShowDamageInfict(int damage, int criticalTier, Transform transform, string status = null)
     {

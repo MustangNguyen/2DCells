@@ -633,7 +633,6 @@ MonoBehaviour:
   IsPersistence: 1
   spawnTime: 0.2
   enemyHoder: {fileID: 1706902183}
-  respawnDistance: 5
   listEnemyCell: []
   playerPosition: {fileID: 272775831}
   spawnRadius: 15
@@ -2647,6 +2646,7 @@ MonoBehaviour:
   - {fileID: 7516105162821540437, guid: f40348649c9d05c4da442a6617f9df1d, type: 3}
   - {fileID: 4059355242547193048, guid: 1526c871593c66f4aa60c038db4f43b3, type: 3}
   listXpPerObs: e8030000f4010000c80000006400000032000000140000000a00000001000000
+  FireBlashVFX: {fileID: 0}
 --- !u!1 &1309225140
 GameObject:
   m_ObjectHideFlags: 0
