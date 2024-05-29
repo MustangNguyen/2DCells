@@ -1608,7 +1608,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 962763974}
         m_TargetAssemblyTypeName: MainMenuManager, Assembly-CSharp
-        m_MethodName: OnCampaignBtnClick
+        m_MethodName: OnCollectionBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

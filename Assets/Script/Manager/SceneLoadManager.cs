@@ -13,4 +13,5 @@ public enum SceneName{
     MainMenu,
     Launch,
     GamePlay,
+    Collection,
 }

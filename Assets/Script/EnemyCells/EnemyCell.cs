@@ -17,6 +17,7 @@ public class EnemyCell : CellsBase
     [Space(10)]
     [Header("UI")]
     [SerializeField] protected string enemyId;
+    [SerializeField] public string enemyName;
     [SerializeField] protected Slider healthBar;
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected SpriteRenderer model;
@@ -132,6 +133,7 @@ public class EnemyCell : CellsBase
         {
             EnemyCellOOP enemyCellOOP = DataManager.Instance.Data.listEnemies.Find(x => x.enemyId == this.enemyId);
             maxHealth = enemyCellOOP.hp;
+            enemyName = enemyCellOOP.enemyName;
             healPoint = maxHealth;
             moveSpeed = enemyCellOOP.moveSpeed;
             baseCellArmor = new CellProtection(enemyCellOOP.cellProtection);

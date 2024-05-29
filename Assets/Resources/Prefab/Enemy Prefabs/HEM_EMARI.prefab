@@ -322,7 +322,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -813242097
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4e5815775bee94691858ce9272b15983, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -364,9 +364,15 @@ MonoBehaviour:
   moveSpeed: 1
   lv: 1
   faction: 0
+  friction: {x: 0, y: 0}
+  currentElementStack: 0
+  currentPrimaryElement: 0
   rigidbody2d: {fileID: 7972279139686672109}
   collider2d: {fileID: 7927935831264846181}
+  bodyDamage: 0
+  XpObs: 0
   enemyId: HEM_EMARI
+  enemyName: Marine
   healthBar: {fileID: 3204548329667127057}
   healthText: {fileID: 5519259120346946660}
   model: {fileID: 509484139380529113}
@@ -375,6 +381,7 @@ MonoBehaviour:
   stateMachine: {fileID: 2404866790970904685}
   animator: {fileID: 8771560774932421375}
   destroyAnimation: {fileID: 436348718608249120}
+  wave: 0
 --- !u!114 &2404866790970904685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStateName: 
+  currentStateStatusName: 
 --- !u!50 &7972279139686672109
 Rigidbody2D:
   serializedVersion: 4

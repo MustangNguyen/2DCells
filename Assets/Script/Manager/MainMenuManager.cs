@@ -10,4 +10,8 @@ public class MainMenuManager : MonoBehaviour
     public void OpenSettingPopup(){
         PopupSetting.Show();
     }
+    public void OnCollectionBtnClick()
+    {
+        SceneLoadManager.Instance.LoadScene(SceneName.Collection);
+    }
 }

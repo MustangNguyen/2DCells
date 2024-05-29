@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 87143013507893159}
   - component: {fileID: 810420624178567813}
   m_Layer: 10
-  m_Name: HEM_EWAVER
+  m_Name: HEM_EWEAVER
   m_TagString: EnemyCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,9 +626,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -813242097
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7f2a531230264559935f25fd7550eea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 631891c75b73b4557ba92d9b93b7edca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -741,9 +741,12 @@ MonoBehaviour:
   lv: 1
   faction: 1
   friction: {x: 0, y: 0}
+  currentElementStack: 0
+  currentPrimaryElement: 0
   rigidbody2d: {fileID: 843731323462224902}
   collider2d: {fileID: 2539127559160538056}
   bodyDamage: 0
+  XpObs: 0
   enemyId: NEU_EWAVER
   healthBar: {fileID: 7843194746716017019}
   healthText: {fileID: 4058430460571947321}
@@ -767,6 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentStateName: 
+  currentStateStatusName: 
 --- !u!1 &7220362211064874909
 GameObject:
   m_ObjectHideFlags: 0
