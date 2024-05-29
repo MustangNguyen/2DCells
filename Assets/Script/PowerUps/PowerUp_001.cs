@@ -33,13 +33,16 @@ public class PowerUp_001 : PowerUp
             for (int i = 0; i < multishot; i++)
             {
                 var nearestEnemy = enemyArray[i];
-                Bullet spawnedBullet = LeanPool.Spawn(bullet, transform.position, Quaternion.identity, GameManager.Instance.bulletHolder);
-                spawnedBullet.damage = modifiedDamage;
-                Vector3 distance = nearestEnemy.transform.position - transform.position;
-                distance.Normalize();
-                float rotateZ = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
-                transform.rotation = Quaternion.Euler(0f, 0f, rotateZ + 90);
-                spawnedBullet.SetBullet(transform, nearestEnemy.transform.position, 100f);
+                LeanTween.delayedCall(1f/multishot * i,()=>{
+                    Bullet spawnedBullet = LeanPool.Spawn(bullet, transform.position, Quaternion.identity, GameManager.Instance.bulletHolder);
+                    spawnedBullet.damage = modifiedDamage;
+                    Vector3 distance = nearestEnemy.transform.position - transform.position;
+                    distance.Normalize();
+                    float rotateZ = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
+                    transform.rotation = Quaternion.Euler(0f, 0f, rotateZ + 90);
+                    spawnedBullet.SetBullet(transform, nearestEnemy.transform.position, 100f);
+                });
+                
             }
         }
 

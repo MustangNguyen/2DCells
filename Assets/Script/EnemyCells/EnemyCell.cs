@@ -89,7 +89,7 @@ public class EnemyCell : CellsBase
         healPoint -= damageTaken.Item1;
         EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform, status);
     }
-    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0)
+    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0,bool isOverrideMaxStack = false)
     {
         switch (element)
         {
@@ -97,6 +97,7 @@ public class EnemyCell : CellsBase
                 stateMachine.ChangeStatusState(new StatusStateBurn(this, PrimaryElement.Fire, damageIncome, stack));
                 break;
             case PrimaryElement.Ice:
+                stateMachine.ChangeStatusState(new StatusStateFreeze(this,PrimaryElement.Ice,stack,isOverrideMaxStack));
                 break;
             default:
                 stateMachine.ChangeStatusState(new StatusStateNormal(this));
@@ -134,6 +135,7 @@ public class EnemyCell : CellsBase
             maxHealth = enemyCellOOP.hp;
             healPoint = maxHealth;
             moveSpeed = enemyCellOOP.moveSpeed;
+            defaultMoveSpeed = enemyCellOOP.moveSpeed;
             baseCellArmor = new CellProtection(enemyCellOOP.cellProtection);
             currentArmor = new CellProtection(baseCellArmor);
             faction = enemyCellOOP.faction;

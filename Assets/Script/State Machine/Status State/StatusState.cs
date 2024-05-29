@@ -7,7 +7,7 @@ public class StatusState : State
 {
     public int damagePerTick = 0;
     public int stack = 0;
-    protected int maxStack = UNLIMIT_STATUS_STACK;
+    public int maxStack = UNLIMITED_STATUS_STACK;
     public float statusTimeLeft = 0;
     protected float timeBetweenTick = TIME_BETWEEN_STATUS_TICK;
     protected PrimaryElement primaryElement = PrimaryElement.None;
@@ -44,5 +44,6 @@ public class StatusState : State
         damagePerTick = 0;
         stack = 0;
         primaryElement = PrimaryElement.None;
+
     }
 }

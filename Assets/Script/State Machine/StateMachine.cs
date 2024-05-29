@@ -19,6 +19,8 @@ public class StateMachine : MonoBehaviour
         if(currentStatusState!=null){
             initDamage = currentStatusState.damagePerTick;
             newStatusState.stack+=currentStatusState.stack;
+            if(newStatusState.stack>newStatusState.maxStack)
+                newStatusState.stack = newStatusState.maxStack;
             currentStatusState.Exit();
         }
         currentStatusState = newStatusState;

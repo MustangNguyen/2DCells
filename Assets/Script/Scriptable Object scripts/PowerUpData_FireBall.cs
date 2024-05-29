@@ -9,7 +9,7 @@ public class PowerUpData_FireBall : PowerUpData
 
     public override string UpdateDescription(int lv){
         base.UpdateDescription(lv);
-        description = $"Launch a fire<color=#00ff00> {fireBallUpgrades[lv].ballsAmount} </color>ball(s) to enemies, cause <color=#00ff00>{fireBallUpgrades[lv].damage}%</color> DPS explosive damage.";
+        description = $"Launch a fire<color=#00ff00> {fireBallUpgrades[lv].ballsAmount} </color>ball(s) per second to enemies, cause <color=#00ff00>{fireBallUpgrades[lv].damage}%</color> DPS explosive damage.";
         return description;
     }
 }
