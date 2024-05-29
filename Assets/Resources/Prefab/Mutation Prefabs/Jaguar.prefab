@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 7559470799616134614}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.7, y: -1.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -215,9 +215,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.03542144}
+  m_Offset: {x: 0.0029494166, y: 0.03542143}
   serializedVersion: 2
-  m_Radius: 0.2557785
+  m_Radius: 0.18400925
 --- !u!114 &8543297691273630339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,9 +272,7 @@ MonoBehaviour:
   layerAffectByShieldPulse:
     serializedVersion: 2
     m_Bits: 1536
-  layerObs:
-    serializedVersion: 2
-    m_Bits: 128
+  layerObs: 0
   rotationInterpolation: 0.4
 --- !u!1001 &26252224389399893
 PrefabInstance:
@@ -286,11 +284,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2215023766566395251, guid: 8e81838ef6e4a1c4397e5dd43faf39d8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07968321
+      value: -0.105
       objectReference: {fileID: 0}
     - target: {fileID: 2215023766566395251, guid: 8e81838ef6e4a1c4397e5dd43faf39d8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.010865206
+      value: -0.014
       objectReference: {fileID: 0}
     - target: {fileID: 2215023766566395251, guid: 8e81838ef6e4a1c4397e5dd43faf39d8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -325,8 +323,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7356109444998833447, guid: 8e81838ef6e4a1c4397e5dd43faf39d8, type: 3}
-      propertyPath: isFirstGun
-      value: 0
+      propertyPath: accuracy
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8010684252168335412, guid: 8e81838ef6e4a1c4397e5dd43faf39d8, type: 3}
       propertyPath: m_Name
@@ -416,17 +414,53 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8808215422540524036}
     m_Modifications:
+    - target: {fileID: 514367348268336424, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 514367348268336424, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 514367348268336424, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.419
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400462520418806132, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a568e58ef6f1a4badb639e8f7c8793f6, type: 3}
+    - target: {fileID: 1400462520418806132, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_Color.b
+      value: 0.10810248
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400462520418806132, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_Color.g
+      value: 0.10810248
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400462520418806132, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_Color.r
+      value: 0.90943396
+      objectReference: {fileID: 0}
     - target: {fileID: 7161094241297279446, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_Name
       value: IceGun
       objectReference: {fileID: 0}
     - target: {fileID: 9016624705188137926, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016624705188137926, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 9016624705188137926, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0753
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 9016624705188137926, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.010865206
+      value: -0.009
       objectReference: {fileID: 0}
     - target: {fileID: 9016624705188137926, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_LocalPosition.z

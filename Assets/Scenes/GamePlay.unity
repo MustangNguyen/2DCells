@@ -385,6 +385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireBall
       objectReference: {fileID: 0}
+    - target: {fileID: 309796950434619821, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4990,7 +4994,7 @@ Transform:
   m_GameObject: {fileID: 2084856809}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0613567, y: -0.22764952, z: 0.007503478}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5878,7 +5882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7559470799616134614, guid: 64d1c245237df024f89cdea8ab303d64, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2825378006773199517, guid: 64d1c245237df024f89cdea8ab303d64, type: 3}

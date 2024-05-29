@@ -55,6 +55,9 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 1536
+  explosiveRadius: 0
+  pushForce: 0
+  bullet: {fileID: 0}
 --- !u!58 &8692451585800548458
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -62,7 +65,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 28361709710810443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
