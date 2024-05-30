@@ -50,7 +50,7 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.StartNormalBattleHematos();
         xpRequire = DataManager.Instance.Data.listIngameLevelConfig[currentLv].xpRequire;
         powerUpHolder.SetParent(mutation.transform);
-
+        powerUpHolder.localPosition = Vector3.zero;
         listPowerUpDatas = Resources.LoadAll<PowerUpData>("Scriptable Object/PowerUps").ToList();
     }
     public void OnPauseClick()

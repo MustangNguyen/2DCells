@@ -9,9 +9,9 @@ public abstract class PowerUp : MonoBehaviour
     public Mutation mutation;
     [SerializeField] protected float timeCharge = 1f;
     [SerializeField] protected float countdown = 0f;
-    [SerializeField] protected int damage;
+    [SerializeField] protected int damage = 0;
     [SerializeField] protected int modifiedDamage;
-    [SerializeField] protected int multishot ;
+    [SerializeField] protected int multishot;
     [SerializeField] public int lv = 0;
     [SerializeField] protected float scanRadius = 10f;
     [SerializeField] protected int[] layerMaskInt;
@@ -22,6 +22,14 @@ public abstract class PowerUp : MonoBehaviour
         lv = 0;
         modifiedDamage = damage;
         multishot = 1;
+    }
+    protected virtual void FixedUpdate()
+    {
+        FixedTimeCountdown();
+        if (countdown <= 0)
+        {
+            OnFire();
+        }
     }
     protected virtual void FixedTimeCountdown()
     {

@@ -11,6 +11,6 @@ public class PowerUp_004 : PowerUp
 
     protected override void OnFire()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

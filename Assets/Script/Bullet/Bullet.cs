@@ -45,6 +45,7 @@ public class Bullet : MonoBehaviour
             rigidbody2d = gameObject.AddComponent<Rigidbody2D>();
         }
         rigidbody2d.gravityScale = 0;
+        AddProperties();
     }
     public void BulletMovement()
     {
@@ -52,7 +53,6 @@ public class Bullet : MonoBehaviour
     }
     private void Start() {
 
-        AddProperties();
     }
     public void AddProperties()
     {
