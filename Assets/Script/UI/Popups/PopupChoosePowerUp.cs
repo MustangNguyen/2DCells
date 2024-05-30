@@ -24,18 +24,43 @@ public class PopupChoosePowerUp : Popups
         for (int i = 0; i < GameManager.Instance.maxCardToChoose; i++)
         {
             bool isChosen = false;
+            int lv = 0;
             while (!isChosen)
             {
-                int random = UnityEngine.Random.Range(0, GameManager.Instance.listPowerUpDatas.Count);
-                PowerUpData powerUpData =GameManager.Instance.listPowerUpDatas[random];
-                if(!listPowerUpToShow.Exists(x=>x.id == powerUpData.id)){
-                    listPowerUpToShow.Add(powerUpData);
-                    isChosen = true;
+                int isPowerUpOwn = UnityEngine.Random.Range(0,2);
+
+                if (isPowerUpOwn == 0)
+                {
+                    if (GameManager.Instance.listPowerUpDatas.Count > 0)
+                    {
+                        int random = UnityEngine.Random.Range(0, GameManager.Instance.listPowerUpDatas.Count);
+                        PowerUpData powerUpData = GameManager.Instance.listPowerUpDatas[random];
+                        if (!listPowerUpToShow.Exists(x => x.id == powerUpData.id))
+                        {
+                            listPowerUpToShow.Add(powerUpData);
+                            isChosen = true;
+                        }
+                    }
+                }
+                else if(isPowerUpOwn == 1){
+                    if(GameManager.Instance.listPlayerPowerUpDatas.Count>0){
+                        int random = UnityEngine.Random.Range(0, GameManager.Instance.listPlayerPowerUpDatas.Count);
+                        PowerUpData powerUpData = GameManager.Instance.listPlayerPowerUpDatas[random];
+                        if (!listPowerUpToShow.Exists(x => x.id == powerUpData.id))
+                        {
+                            lv = GameManager.Instance.listPlayerPowerUps.Find(x => x.id == powerUpData.id).lv + 1;
+                            if(lv <= powerUpData.maxLv){
+                                listPowerUpToShow.Add(powerUpData);
+                                isChosen = true;
+                            }
+                        }
+                    }
+                    
                 }
             }
             //PowerUpCard cardSpawned = LeanPool.Spawn(powerUpCardPrefab,cardHolder);
             PowerUpCard cardSpawned = Instantiate(powerUpCardPrefab,cardHolder);
-            cardSpawned.InitCard(listPowerUpToShow[i],this);
+            cardSpawned.InitCard(listPowerUpToShow[i],this,lv);
         }
     }
 

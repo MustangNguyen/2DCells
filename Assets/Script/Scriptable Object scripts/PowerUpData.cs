@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,12 @@ public class PowerUpData : ScriptableObject
     public string id;
     public string powerUpName;
     public string description;
+    public int maxLv = 5;
     public Image glyph;
     public PowerUp powerUp;
-
-
+    public virtual string UpdateDescription(int lv){
+        return description;
+    }
 
 }
+

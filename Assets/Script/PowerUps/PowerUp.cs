@@ -10,12 +10,18 @@ public abstract class PowerUp : MonoBehaviour
     [SerializeField] protected float timeCharge = 1f;
     [SerializeField] protected float countdown = 0f;
     [SerializeField] protected int damage;
+    [SerializeField] protected int modifiedDamage;
+    [SerializeField] protected int multishot ;
+    [SerializeField] public int lv = 0;
     [SerializeField] protected float scanRadius = 10f;
     [SerializeField] protected int[] layerMaskInt;
     [SerializeField] protected LayerMask layerMask;
     protected virtual void Start()
     {
         mutation = GetComponentInParent<Mutation>();
+        lv = 0;
+        modifiedDamage = damage;
+        multishot = 1;
     }
     protected virtual void FixedTimeCountdown()
     {
@@ -26,6 +32,7 @@ public abstract class PowerUp : MonoBehaviour
         countdown -= Time.fixedDeltaTime;
     }
     protected abstract void OnFire();
+    public abstract void OnLevelUp(int lv);
 }
 
 [Serializable]

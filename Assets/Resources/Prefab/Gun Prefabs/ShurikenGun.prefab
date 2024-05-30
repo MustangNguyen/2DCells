@@ -134,8 +134,8 @@ MonoBehaviour:
   isFirstGun: 0
   fireRate: 5
   accuracy: 100
-  criticalRate: 30
-  criticalMultiple: 2
+  criticalRate: 150
+  criticalMultiple: 5
   isAutoFire: 0
   pelletCount: 5
   spreadAngle: 45

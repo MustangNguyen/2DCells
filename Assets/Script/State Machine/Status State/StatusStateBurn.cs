@@ -5,7 +5,7 @@ using static GameStatic;
 
 public class StatusStateBurn : StatusState
 {
-    public StatusStateBurn(CellsBase cellsBase,PrimaryElement element,int initDamage, int stackAddIn) : base(cellsBase)
+    public StatusStateBurn(CellsBase cellsBase,PrimaryElement triggerElement,int initDamage, int stackAddIn) : base(cellsBase)
     {   
         if(stack>0){
             stack+=stackAddIn;

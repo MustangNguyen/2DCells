@@ -8,13 +8,15 @@ public class Bullet : MonoBehaviour
 {
 
     [SerializeField] protected float bulletSpeed = 20f;
-    [SerializeField] protected int damage = 20;
+    [SerializeField] public int damage = 20;
     [SerializeField] public CellGun cellGun;
     [SerializeField] protected Elements elements;
     [SerializeField] protected float timeExist = 2f;
     [SerializeField] protected bool isProjectile = true;
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [SerializeField] protected BoxCollider2D bulletCollider2D;
+    [SerializeField] protected TrailRenderer bulletTrail;
+    [SerializeField] protected SpriteRenderer sprite;
     [SerializeField] protected string bulletId;
     [SerializeField] protected string bulletTypeId;
     [SerializeField] protected string bulletName;
@@ -25,17 +27,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] protected LayerMask layerToHit;
     [SerializeField] protected bool isPenetration = false;
 
-    public int Damage
-    {
-        get
-        {
-            return damage;
-        }
-        set
-        {
-            damage = value;
-        }
-    }
     public float Speed
     {
         get
@@ -88,13 +79,16 @@ public class Bullet : MonoBehaviour
         bulletDirection.Normalize();
         transform.rotation = quaternion * gunPosition.rotation;
         bulletCollider2D.enabled = true;
+        if(bulletTrail!=null)
+            bulletTrail.Clear();
+        sprite.color = Color.white;
         rigidbody2d.AddForce(bulletDirection * bulletSpeed,ForceMode2D.Impulse);
         LeanTween.delayedCall(timeExist, () =>
         {
             LeanPool.Despawn(gameObject);
         });
     }
-    protected virtual void explode()
+    protected virtual void Explode()
     {
         Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, impactField, layerToHit);
         for (int i = 0; i < objects.Length; i++)
@@ -105,7 +99,7 @@ public class Bullet : MonoBehaviour
             EnemyCell enemyCell = objects[i].gameObject.GetComponent<EnemyCell>();
             (float,int) critical = GameCalculator.CriticalManager(cellGun);
             enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
-            enemyCell.SetStatusMachine(elements.primaryElement,damage,1);
+            enemyCell.SetStatusMachine(elements.primaryElement,(int)(critical.Item1 * damage),1);
             bulletCollider2D.enabled = false;
         }
     }
@@ -115,11 +109,11 @@ public class Bullet : MonoBehaviour
                 EnemyCell enemyCell = collision2D.gameObject.GetComponent<EnemyCell>();
                 (float,int) critical = GameCalculator.CriticalManager(cellGun);
                 enemyCell.TakeDamage((int)(critical.Item1*damage),critical.Item2);
-                enemyCell.SetStatusMachine(elements.primaryElement,damage,1);
+                enemyCell.SetStatusMachine(elements.primaryElement,(int)(critical.Item1 * damage),1);
                 bulletCollider2D.enabled = false;
             }
             else{
-                explode();
+                Explode();
             }
         }
     }
@@ -130,7 +124,7 @@ public class Bullet : MonoBehaviour
             EnemyCell enemyCell = collision.gameObject.GetComponent<EnemyCell>();
             (float, int) critical = GameCalculator.CriticalManager(cellGun);
             enemyCell.TakeDamage((int)(critical.Item1 * damage), critical.Item2);
-            enemyCell.SetStatusMachine(elements.primaryElement, damage, 1);
+            enemyCell.SetStatusMachine(elements.primaryElement, (int)(critical.Item1 * damage), 1);
         }
     }
 }

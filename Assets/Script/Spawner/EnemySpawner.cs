@@ -11,7 +11,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
 {
     [SerializeField] private float spawnTime = 1f;
     [SerializeField] private Transform enemyHoder;
-    [SerializeField] private float respawnDistance = 20f;
+    // [SerializeField] private float respawnDistance = 20f;
     [SerializeField] private List<EnemyCell> listEnemyCell;
     [SerializeField] public Transform playerPosition;
     [SerializeField] private float spawnRadius = 15f;

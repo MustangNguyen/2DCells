@@ -29,11 +29,12 @@ Transform:
   m_GameObject: {fileID: 309796950434619821}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.075, y: -0.161, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.0209057, y: 3.0209057, z: 3.0209057}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5430123463041383358}
+  - {fileID: 431300207456157151}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1275779362687362555
@@ -173,15 +174,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
-  damage: 100
+  damage: 30
   cellGun: {fileID: 0}
   elements:
-    primaryElement: 1
+    primaryElement: 2
     secondaryElement: 0
   timeExist: 2
   isProjectile: 1
   rigidbody2d: {fileID: 1275779362687362555}
   bulletCollider2D: {fileID: 3759474731114508207}
+  bulletTrail: {fileID: 6702924999901460723}
+  sprite: {fileID: 4301685307907571168}
   bulletId: 
   bulletTypeId: 
   bulletName: 
@@ -219,7 +222,7 @@ Transform:
   m_GameObject: {fileID: 8402716373171149662}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.082, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -267,7 +270,7 @@ TrailRenderer:
   m_SortingLayerID: -723912789
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Time: 0.1
+  m_Time: 0.2
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -277,7 +280,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.40119362
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -298,8 +301,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.58190876, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0.7600515, b: 0, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -338,3 +341,69 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!1001 &2315552163937728545
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 2780789226879735258}
+    m_Modifications:
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379142000985337725, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_Name
+      value: Fire blash VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379142000985337725, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+--- !u!4 &431300207456157151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2728679087804302846, guid: 1ddf172924407ba4ea1c1e80bee0f843, type: 3}
+  m_PrefabInstance: {fileID: 2315552163937728545}
+  m_PrefabAsset: {fileID: 0}

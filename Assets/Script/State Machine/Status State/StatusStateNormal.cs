@@ -13,6 +13,7 @@ public class StatusStateNormal : StatusState
     {
         base.Enter();
         resetState();
+        enemyCell.moveSpeed = enemyCell.defaultMoveSpeed;
     }
     public override void LogicUpdate()
     {

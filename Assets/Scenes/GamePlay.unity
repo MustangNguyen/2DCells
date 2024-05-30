@@ -391,11 +391,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 11.361
       objectReference: {fileID: 0}
     - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 37.729
       objectReference: {fileID: 0}
     - target: {fileID: 2780789226879735258, guid: ee32f059f8fa6e1448a13240dc51e9e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -633,7 +633,6 @@ MonoBehaviour:
   IsPersistence: 1
   spawnTime: 0.2
   enemyHoder: {fileID: 1706902183}
-  respawnDistance: 5
   listEnemyCell: []
   playerPosition: {fileID: 272775831}
   spawnRadius: 15
@@ -2647,6 +2646,7 @@ MonoBehaviour:
   - {fileID: 7516105162821540437, guid: f40348649c9d05c4da442a6617f9df1d, type: 3}
   - {fileID: 4059355242547193048, guid: 1526c871593c66f4aa60c038db4f43b3, type: 3}
   listXpPerObs: e8030000f4010000c80000006400000032000000140000000a00000001000000
+  FireBlashVFX: {fileID: 0}
 --- !u!1 &1309225140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,6 +2700,8 @@ MonoBehaviour:
   powerUpHolder: {fileID: 2084856810}
   maxCardToChoose: 3
   listPowerUpDatas: []
+  listPlayerPowerUpDatas: []
+  listPlayerPowerUps: []
   isChoosingPowerUp: 0
   cellGun1: {fileID: 0}
   cellGun2: {fileID: 0}
@@ -5490,6 +5492,7 @@ MonoBehaviour:
     shieldType: 0
     armorPoint: 0
     shieldPoint: 0
+  defaultMoveSpeed: 1
   moveSpeed: 1
   lv: 1
   faction: 1
@@ -5500,6 +5503,7 @@ MonoBehaviour:
   collider2d: {fileID: 9213524312159292620}
   bodyDamage: 0
   XpObs: 0
+  isRestrict: 0
   enemyId: HEM_REDCYCLINDER
   healthBar: {fileID: 6808280751500136010}
   healthText: {fileID: 788427167975886344}

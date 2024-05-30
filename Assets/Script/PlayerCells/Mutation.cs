@@ -201,6 +201,7 @@ public class Mutation : CellsBase
             baseCellArmor = mutationOOP.baseCellProtection;
             currentArmor = new CellProtection(baseCellArmor);
             moveSpeed = mutationOOP.moveSpeed;
+            defaultMoveSpeed = mutationOOP.moveSpeed;
             lv = mutationOOP.lv;
             currentArmor.shieldPoint = baseCellArmor.shieldPoint;
             healPoint = maxHealth;

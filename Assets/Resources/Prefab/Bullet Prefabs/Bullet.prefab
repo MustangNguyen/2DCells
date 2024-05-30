@@ -136,9 +136,18 @@ MonoBehaviour:
   isProjectile: 1
   rigidbody2d: {fileID: 1275779362687362555}
   bulletCollider2D: {fileID: 3759474731114508207}
+  sprite: {fileID: 4301685307907571168}
   bulletId: 
   bulletTypeId: 
   bulletName: 
+  isExplosive: 0
+  impactField: 2
+  impactForce: 15
+  countdown: 10
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 0
+  isPenetration: 0
 --- !u!61 &3759474731114508207
 BoxCollider2D:
   m_ObjectHideFlags: 0

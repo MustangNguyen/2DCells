@@ -5,6 +5,7 @@ using UnityEngine;
 using Lean.Pool;
 using TMPro;
 using System.Linq;
+using Unity.Collections;
 
 public class EffectManager : Singleton<EffectManager>
 {
@@ -14,10 +15,18 @@ public class EffectManager : Singleton<EffectManager>
     public GameObject effectHolder;
     public List<XPObs> listXpObs = new();
     public List<int> listXpPerObs = new(){1000,500,200,100,50,20,10,1};
+    public GameObject FireBlashVFX;
     private void Start()
     {
         // listXpObs = new();
         // listXpObs = Resources.LoadAll<XPObs>("Prefab/Obs").ToList();
+        FireBlashVFX = Resources.Load<GameObject>("Prefab/UI/VFX/Fire_blash_VFX");
+    }
+    public void ShowFireBlashVFX(Transform transform){
+         Vector2 temp;
+        temp = new Vector2(transform.position.x, transform.position.y);
+        GameObject fireballVFX = LeanPool.Spawn(FireBlashVFX, temp, Quaternion.identity,effectHolder.transform);
+        LeanTween.delayedCall(1.5f, () => { LeanPool.Despawn(fireballVFX); });
     }
     public void ShowDamageInfict(int damage, int criticalTier, Transform transform, string status = null)
     {
@@ -81,8 +90,10 @@ public class EffectManager : Singleton<EffectManager>
         for(int i = 0;i<listXpPerObs.Count;i++){
             divide = amount / listXpPerObs[i];
             if (divide > 0){
-                for (int j = 0; j < divide; j++)
+                for (int j = 0; j < divide; j++){
                     LeanPool.Spawn(listXpObs[i], EnemySpawner.Instance.SetTargetCyclePos(0.1f, objectSpawn.transform.position), Quaternion.identity, effectHolder.transform);
+
+                }
                 amount -= divide * listXpPerObs[i];
             }
         }

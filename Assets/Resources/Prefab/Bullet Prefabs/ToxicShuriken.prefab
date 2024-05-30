@@ -125,12 +125,14 @@ MonoBehaviour:
   damage: 10
   cellGun: {fileID: 0}
   elements:
-    primaryElement: 1
+    primaryElement: 2
     secondaryElement: 0
   timeExist: 0.5
   isProjectile: 1
   rigidbody2d: {fileID: 6337976132388497709}
   bulletCollider2D: {fileID: 8297262433646558806}
+  bulletTrail: {fileID: 0}
+  sprite: {fileID: 5057006849145797334}
   bulletId: BPRO_SHURI
   bulletTypeId: 
   bulletName: 

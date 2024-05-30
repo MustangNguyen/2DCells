@@ -14,6 +14,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected Collider2D collider2d;
     [SerializeField] protected int bodyDamage = 0;
     [SerializeField] protected int XpObs;
+    [SerializeField] public bool isRestrict = false;
     [Space(10)]
     [Header("UI")]
     [SerializeField] protected string enemyId;
@@ -65,7 +66,7 @@ public class EnemyCell : CellsBase
         stateMachine.StateMachineFixedUpdate();
         if (healPoint <= 0)
         {
-
+            stateMachine.ChangeState(new EnemyStateDestroy(this));
         }
     }
     public void movement()
@@ -90,7 +91,7 @@ public class EnemyCell : CellsBase
         healPoint -= damageTaken.Item1;
         EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform, status);
     }
-    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0)
+    public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0,bool isOverrideMaxStack = false)
     {
         switch (element)
         {
@@ -98,6 +99,13 @@ public class EnemyCell : CellsBase
                 stateMachine.ChangeStatusState(new StatusStateBurn(this, PrimaryElement.Fire, damageIncome, stack));
                 break;
             case PrimaryElement.Ice:
+                stateMachine.ChangeStatusState(new StatusStateFreeze(this,PrimaryElement.Ice,stack,isOverrideMaxStack));
+                break;
+            case PrimaryElement.Toxin:
+                stateMachine.ChangeStatusState(new StatusStatePoisoned(this,PrimaryElement.Toxin, damageIncome,stack));
+                break;
+            case PrimaryElement.Electric:
+                stateMachine.ChangeStatusState(new StatusStateShock(this,PrimaryElement.Electric, damageIncome,stack,isOverrideMaxStack));
                 break;
             default:
                 stateMachine.ChangeStatusState(new StatusStateNormal(this));
@@ -106,6 +114,7 @@ public class EnemyCell : CellsBase
     }
     protected void StateMachineMonitor()
     {
+        if(isRestrict) return;
         if (rigidbody2d.velocity == Vector2.zero)
         {
             stateMachine.ChangeState(new EnemyStateIdle(this));
@@ -113,10 +122,6 @@ public class EnemyCell : CellsBase
         else if (rigidbody2d.velocity != Vector2.zero)
         {
             stateMachine.ChangeState(new EnemyStateMove(this));
-        }
-        if (healPoint <= 0)
-        {
-            stateMachine.ChangeState(new EnemyStateDestroy(this));
         }
 
     }
@@ -127,7 +132,7 @@ public class EnemyCell : CellsBase
     //         }
     //     }
     // }
-    protected void AddProperties()
+    protected void  AddProperties()
     {
         if (DataManager.Instance.Data.listEnemies.Exists(x => x.enemyId == this.enemyId))
         {
@@ -136,6 +141,7 @@ public class EnemyCell : CellsBase
             enemyName = enemyCellOOP.enemyName;
             healPoint = maxHealth;
             moveSpeed = enemyCellOOP.moveSpeed;
+            defaultMoveSpeed = enemyCellOOP.moveSpeed;
             baseCellArmor = new CellProtection(enemyCellOOP.cellProtection);
             currentArmor = new CellProtection(baseCellArmor);
             faction = enemyCellOOP.faction;
@@ -146,6 +152,7 @@ public class EnemyCell : CellsBase
     public override void OnDead()
     {
         base.OnDead();
+        moveSpeed = 0;
         UpdateManager.Instance.RemoveCellFromPool(index);
         rigidbody2d.velocity = Vector3.zero;
         collider2d.enabled = false;

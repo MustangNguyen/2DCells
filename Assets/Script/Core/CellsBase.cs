@@ -14,6 +14,7 @@ public class CellsBase : MonoBehaviour
     [SerializeField] public int currentEnery = 200;
     [SerializeField] protected CellProtection baseCellArmor;
     [SerializeField] protected CellProtection currentArmor;
+    [SerializeField] public float defaultMoveSpeed = 1f;
     [SerializeField] public float moveSpeed = 1f;
     [SerializeField] protected int lv = 1;
     [SerializeField] protected Faction faction;
