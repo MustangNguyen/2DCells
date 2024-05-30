@@ -9,7 +9,7 @@ public static class GameStatic
     public readonly static float STATUS_DURATION = 10f;
     public readonly static float TIME_BETWEEN_STATUS_TICK = 1f;
     public readonly static int MAX_STATUS_STACK = 10;
-    public readonly static int UNLIMITED_STATUS_STACK = 9999;
+    public readonly static int UNLIMITED_STATUS_STACK = int.MaxValue;
     #endregion
 
     #region color

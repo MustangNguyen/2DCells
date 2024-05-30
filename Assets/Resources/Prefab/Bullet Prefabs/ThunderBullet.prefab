@@ -131,6 +131,8 @@ MonoBehaviour:
   isProjectile: 1
   rigidbody2d: {fileID: 200915367383095995}
   bulletCollider2D: {fileID: 7006881797389642029}
+  bulletTrail: {fileID: 0}
+  sprite: {fileID: 7828009341107142431}
   bulletId: BPRO_THUDE
   bulletTypeId: 
   bulletName: 

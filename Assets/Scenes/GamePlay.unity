@@ -2700,6 +2700,8 @@ MonoBehaviour:
   powerUpHolder: {fileID: 2084856810}
   maxCardToChoose: 3
   listPowerUpDatas: []
+  listPlayerPowerUpDatas: []
+  listPlayerPowerUps: []
   isChoosingPowerUp: 0
   cellGun1: {fileID: 0}
   cellGun2: {fileID: 0}
@@ -5490,6 +5492,7 @@ MonoBehaviour:
     shieldType: 0
     armorPoint: 0
     shieldPoint: 0
+  defaultMoveSpeed: 1
   moveSpeed: 1
   lv: 1
   faction: 1
@@ -5500,6 +5503,7 @@ MonoBehaviour:
   collider2d: {fileID: 9213524312159292620}
   bodyDamage: 0
   XpObs: 0
+  isRestrict: 0
   enemyId: HEM_REDCYCLINDER
   healthBar: {fileID: 6808280751500136010}
   healthText: {fileID: 788427167975886344}

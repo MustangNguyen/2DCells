@@ -38,6 +38,9 @@ public class StatusState : State
         statusTimeLeft-=Time.fixedDeltaTime;
         if(statusTimeLeft<=0){
             enemyCell?.SetStatusMachine(PrimaryElement.None);
+        if(stack<=0)
+            enemyCell?.SetStatusMachine(PrimaryElement.None);
+            
         }
     }
     protected virtual void resetState(){
