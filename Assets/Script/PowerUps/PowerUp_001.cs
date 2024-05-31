@@ -12,12 +12,7 @@ public class PowerUp_001 : PowerUp
         base.Start();
         bullet = Resources.Load<Bullet>("Prefab/Bullet Prefabs/FireBall");
     }
-    private void FixedUpdate() {
-        FixedTimeCountdown();
-        if(countdown <=0){
-            OnFire();
-        }
-    }
+
     protected override void OnFire()
     {
         Collider2D []enemyArray = Physics2D.OverlapCircleAll(mutation.transform.position,scanRadius,layerMask);
