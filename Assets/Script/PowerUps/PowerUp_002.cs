@@ -17,16 +17,15 @@ public class PowerUp_002 : PowerUp
     {
         this.lv = lv;
         PowerUpData_FrostCurse powerUpData = (PowerUpData_FrostCurse)GameManager.Instance.listPlayerPowerUpDatas.Find(x => x.id == id);
-        modifiedDamage = (int)((float)damage / powerUpData.FrostCurseUpgrades[0].damage * powerUpData.FrostCurseUpgrades[this.lv].damage);
-        float currentRadius = powerUpData.FrostCurseUpgrades[this.lv].radius*10;
+        modifiedDamage = (int)((float)damage / powerUpData.frostCurseUpgrades[0].damage * powerUpData.frostCurseUpgrades[this.lv].damage);
+        float currentRadius = powerUpData.frostCurseUpgrades[this.lv].radius*10;
         gameObject.transform.localScale = new Vector3(currentRadius, currentRadius, currentRadius);
         scanRadius = gameObject.transform.localScale.x / 11;
-        timeCharge = powerUpData.FrostCurseUpgrades[this.lv].delay;
+        timeCharge = powerUpData.frostCurseUpgrades[this.lv].delay;
     }
 
     protected override void OnFire()
     {
-        Debug.Log("scan radius:" + scanRadius);
         Collider2D[] enemyArray = Physics2D.OverlapCircleAll(mutation.transform.position, scanRadius, layerMask);
         for (int i = 0; i < enemyArray.Length; i++)
         {
@@ -36,7 +35,7 @@ public class PowerUp_002 : PowerUp
         }
         StartCoroutine(IEBursAnimation());
         IEnumerator IEBursAnimation(){
-            float duration = 0.3f;
+            float duration = 0.2f;
             float currentduration = duration;
             burstSprite.color = new Color(162f/255,1,1,20f/255);
             while(currentduration>0){
@@ -49,6 +48,7 @@ public class PowerUp_002 : PowerUp
         IEnumerator IEBurstFade(){
             float duration = 0.6f;
             float currentduration = duration;
+            yield return new WaitForSeconds(0.2f);
             while(currentduration>0){
                 burstSprite.color = new Color(162f/255,1,1,20f/255 * (currentduration/duration));
                 currentduration -= Time.fixedDeltaTime;
@@ -56,5 +56,4 @@ public class PowerUp_002 : PowerUp
             }
         }
     }
-    
 }

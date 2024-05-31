@@ -39,6 +39,7 @@ public class PopupChoosePowerUp : Popups
                         {
                             listPowerUpToShow.Add(powerUpData);
                             isChosen = true;
+                            lv = 0;
                         }
                     }
                 }
@@ -54,11 +55,12 @@ public class PopupChoosePowerUp : Popups
                                 isChosen = true;
                             }
                         }
-                    }   
+                    }
                 }
             }
             //PowerUpCard cardSpawned = LeanPool.Spawn(powerUpCardPrefab,cardHolder);
             PowerUpCard cardSpawned = Instantiate(powerUpCardPrefab,cardHolder);
+            Debug.Log(listPowerUpToShow[i].name +": "+ lv);
             cardSpawned.InitCard(listPowerUpToShow[i],this,lv);
         }
     }

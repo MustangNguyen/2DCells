@@ -20,22 +20,22 @@ MonoBehaviour:
   maxLv: 5
   glyph: {fileID: 0}
   powerUp: {fileID: 3701561491477928292, guid: 734bf0c944178c94da05ecaa1f742351, type: 3}
-  FrostCurseUpgrades:
-  - damage: 10
+  frostCurseUpgrades:
+  - damage: 12
     radius: 4
     delay: 2
-  - damage: 12
-    radius: 4.5
-    delay: 1.8
-  - damage: 12
-    radius: 4.5
-    delay: 1.8
   - damage: 15
+    radius: 4.5
+    delay: 1.8
+  - damage: 18
+    radius: 4.5
+    delay: 1.8
+  - damage: 21
     radius: 5
-    delay: 1.8
-  - damage: 15
+    delay: 1.6
+  - damage: 24
     radius: 5.5
-    delay: 1.5
-  - damage: 20
+    delay: 1.4
+  - damage: 30
     radius: 6
     delay: 1.2
