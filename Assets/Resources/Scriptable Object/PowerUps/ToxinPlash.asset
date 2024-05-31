@@ -15,7 +15,8 @@ MonoBehaviour:
   rarity: 0
   id: PowerUp_004
   powerUpName: ToxinPlash
-  description: Create 1 plash dealing 40% damge for enemies in the plash
+  description: Create <color=#00ff00>3</color> plash(s) dealing <color=#00ff00>80</color>
+    damge for enemies in <color=#00ff00>50</color>
   maxLv: 6
   glyph: {fileID: 0}
   powerUp: {fileID: -4917763956000642435, guid: 8664e5e1da846044ca52d86f8fe067a3, type: 3}
@@ -28,13 +29,13 @@ MonoBehaviour:
     plashAmount: 1
   - raidus: 25
     damage: 55
-    plashAmount: 2
+    plashAmount: 1
   - raidus: 30
     damage: 60
-    plashAmount: 2
+    plashAmount: 1
   - raidus: 35
     damage: 65
-    plashAmount: 3
+    plashAmount: 1
   - raidus: 50
     damage: 80
-    plashAmount: 3
+    plashAmount: 1

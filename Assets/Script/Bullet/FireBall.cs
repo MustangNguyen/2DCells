@@ -11,5 +11,4 @@ public class FireBall : Bullet
         gameObject.SetActive(false);
         EffectManager.Instance.ShowFireBlashVFX(transform);
     }
-
 }

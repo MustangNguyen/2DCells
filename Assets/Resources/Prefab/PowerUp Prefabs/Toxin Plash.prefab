@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: PowerUp_004
   mutation: {fileID: 0}
-  timeCharge: 1
+  timeCharge: 5
   countdown: 0
   damage: 0
   modifiedDamage: 0
@@ -58,3 +58,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   splashRadius: 0
+  bullet: {fileID: 0}
+  plash: {fileID: 0}

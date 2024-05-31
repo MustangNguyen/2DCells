@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 
 public class PowerUp_004 : PowerUp
 {
     [SerializeField] private int splashRadius;
     [SerializeField] private Bullet bullet;
-
+    [SerializeField] private Bullet plash;
 
     protected override void Start()
     {
@@ -54,8 +56,7 @@ public class PowerUp_004 : PowerUp
                     transform.rotation = Quaternion.Euler(0f, 0f, rotateZ + 90);
                     spawnedBullet.SetBullet(transform, nearestEnemy.transform.position, 100f);
                 });
-
             }
-        }
+        } 
     }
 }
