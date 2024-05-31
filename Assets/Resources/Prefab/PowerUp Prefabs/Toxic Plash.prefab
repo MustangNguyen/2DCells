@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2364954304473912258}
   - component: {fileID: -4917763956000642435}
   m_Layer: 13
-  m_Name: Toxin Plash
+  m_Name: Toxic Plash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

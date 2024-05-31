@@ -9,14 +9,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2318321c90539d48b51e57f571550a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 96bf871dfe2cd274cb4fdcaec0f09574, type: 3}
   m_Name: Elechain
   m_EditorClassIdentifier: 
   rarity: 0
   id: PowerUp_003
   powerUpName: Elechain
-  description: Shock enemies with 70% DPS per hit, having 40% chance to jump to next 
-    target.
-  maxLv: 99
+  description: Fire a chain of electricity to nearest enemy, cause <color=#00ff00>75%</color>
+    damage. Every enemy inflicted have <color=#00ff00>60%</color> chance to jump
+    to other.
+  maxLv: 5
   glyph: {fileID: 0}
   powerUp: {fileID: 6657273830525040682, guid: 51e04f397e0da754ebfa72a10a18fdae, type: 3}
+  elechainlUpgrades:
+  - damage: 75
+    jumpRate: 70
+  - damage: 90
+    jumpRate: 75
+  - damage: 90
+    jumpRate: 80
+  - damage: 115
+    jumpRate: 85
+  - damage: 130
+    jumpRate: 90
+  - damage: 145
+    jumpRate: 95
