@@ -54,8 +54,7 @@ public class PopupChoosePowerUp : Popups
                                 isChosen = true;
                             }
                         }
-                    }
-                    
+                    }   
                 }
             }
             //PowerUpCard cardSpawned = LeanPool.Spawn(powerUpCardPrefab,cardHolder);

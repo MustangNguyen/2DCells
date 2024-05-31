@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a0531e3d8071e4fb1b298b078ccae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3645355255543851771, guid: 2be7f36450d0a814a92f2738325d1446, type: 3}
+  bulletPrefab: {fileID: 3343703895410781277, guid: 2be7f36450d0a814a92f2738325d1446, type: 3}
   bulletHolder: {fileID: 0}
   isFirstGun: 0
   fireRate: 5

@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 8260656456892968025}
   - component: {fileID: 5057006849145797334}
   - component: {fileID: 5313034625940118301}
-  - component: {fileID: 3645355255543851771}
   - component: {fileID: 6337976132388497709}
   - component: {fileID: 8297262433646558806}
+  - component: {fileID: 3343703895410781277}
   m_Layer: 14
   m_Name: ToxicShuriken
   m_TagString: Bullet
@@ -109,41 +109,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3645355255543851771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5668509509518688597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 003954c53e2c7614c8c7749b0d5ce806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpeed: 5
-  damage: 10
-  cellGun: {fileID: 0}
-  elements:
-    primaryElement: 2
-    secondaryElement: 0
-  timeExist: 0.5
-  isProjectile: 1
-  rigidbody2d: {fileID: 6337976132388497709}
-  bulletCollider2D: {fileID: 8297262433646558806}
-  bulletTrail: {fileID: 0}
-  sprite: {fileID: 5057006849145797334}
-  bulletId: BPRO_SHURI
-  bulletTypeId: 
-  bulletName: 
-  isExplosive: 0
-  impactField: 2
-  impactForce: 15
-  countdown: 10
-  layerToHit:
-    serializedVersion: 2
-    m_Bits: 0
-  isPenetration: 0
 --- !u!50 &6337976132388497709
 Rigidbody2D:
   serializedVersion: 4
@@ -216,3 +181,38 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.150877, y: 0.14784384}
   m_EdgeRadius: 0
+--- !u!114 &3343703895410781277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5668509509518688597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeef3295de0c64f46bcda48e585696fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 20
+  damage: 20
+  cellGun: {fileID: 0}
+  elements:
+    primaryElement: 1
+    secondaryElement: 0
+  timeExist: 2
+  isProjectile: 1
+  rigidbody2d: {fileID: 6337976132388497709}
+  bulletCollider2D: {fileID: 8297262433646558806}
+  bulletTrail: {fileID: 0}
+  sprite: {fileID: 5057006849145797334}
+  bulletId: BPRO_SHURI
+  bulletTypeId: 
+  bulletName: 
+  isExplosive: 0
+  impactField: 2
+  impactForce: 15
+  countdown: 10
+  layerToHit:
+    serializedVersion: 2
+    m_Bits: 0
+  isPenetration: 0

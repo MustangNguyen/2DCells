@@ -273,7 +273,7 @@ MonoBehaviour:
   layerAffectByShieldPulse:
     serializedVersion: 2
     m_Bits: 1536
-  layerObs: 0
+  layerObs: 7
   rotationInterpolation: 0.4
 --- !u!1001 &26252224389399893
 PrefabInstance:
@@ -357,6 +357,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8808215422540524036}
     m_Modifications:
+    - target: {fileID: 241040002609670026, guid: 2e15cd1c5855db147b2633d0be98c57e, type: 3}
+      propertyPath: fireRate
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2105930041168278932, guid: 2e15cd1c5855db147b2633d0be98c57e, type: 3}
       propertyPath: m_Name
       value: ThunderGun
