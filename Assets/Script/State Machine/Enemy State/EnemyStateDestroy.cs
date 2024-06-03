@@ -11,6 +11,8 @@ public class EnemyStateDestroy : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemyCell.healPoint = 0;
+        enemyCell.healthBar.value = 0;
         enemyCell.OnDead();
     }
     public override void LogicUpdate()

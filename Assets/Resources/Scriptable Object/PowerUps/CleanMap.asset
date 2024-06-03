@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: CleanMap
   m_EditorClassIdentifier: 
   rarity: 0
-  id: 
-  powerUpName: 
+  id: PowerUp_006
+  powerUpName: Apocalypse
   description: 
   maxLv: 99
   glyph: {fileID: 0}
-  powerUp: {fileID: 0}
+  powerUp: {fileID: 2454268633040185091, guid: adf0275d4584c7a4a8c44efc4870b697, type: 3}
   magneticUpgrades:
   - radius: 0
   - radius: 0

@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: PowerUp_005
   mutation: {fileID: 0}
+  powerUpType: 0
   timeCharge: 0
   countdown: 0
   damage: 0

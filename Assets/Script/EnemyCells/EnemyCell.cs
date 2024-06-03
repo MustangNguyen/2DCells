@@ -19,7 +19,7 @@ public class EnemyCell : CellsBase
     [Header("UI")]
     [SerializeField] protected string enemyId;
     [SerializeField] public string enemyName;
-    [SerializeField] protected Slider healthBar;
+    [SerializeField] public Slider healthBar;
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected SpriteRenderer model;
     [SerializeField] protected int index;
