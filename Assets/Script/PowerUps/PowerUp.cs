@@ -7,6 +7,7 @@ public abstract class PowerUp : MonoBehaviour
 {
     public string id;
     public Mutation mutation;
+    [SerializeField] protected PowerUpType powerUpType = PowerUpType.Weapon;
     [SerializeField] protected float timeCharge = 1f;
     [SerializeField] protected float countdown = 0f;
     [SerializeField] protected int damage = 0;
@@ -49,4 +50,5 @@ public enum PowerUpType
     StartUp,
     Equipment,
     Weapon,
+    Instant,
 }

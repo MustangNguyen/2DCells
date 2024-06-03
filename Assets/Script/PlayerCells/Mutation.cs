@@ -15,7 +15,8 @@ public class Mutation : CellsBase
     [SerializeField] protected List<CellAbility> mutationAbilities;
     [SerializeField] protected LayerMask layerAffectByShieldPulse;
     [SerializeField] protected int layerObs;
-    protected float obsCollectRange = 5f;
+    public float obsCollectRange {get;protected set;} = 5f;
+    public float obsCollectRangeAddIn = 0f;
     private float impactField = 10f;
     private float impactForce = 100f;
     protected float pushBackForce = 20f;
@@ -75,6 +76,7 @@ public class Mutation : CellsBase
 
     }
     public void ObsDectector(){
+        float obsCollectRange = this.obsCollectRange + obsCollectRangeAddIn;
         Collider2D []arrayObsDetected = Physics2D.OverlapCircleAll(transform.position,obsCollectRange,layerObs);
         if(arrayObsDetected.Length>0)
             for(int i = 0;i<arrayObsDetected.Length;i++){
