@@ -22,15 +22,15 @@ MonoBehaviour:
   glyph: {fileID: 0}
   powerUp: {fileID: 6657273830525040682, guid: 51e04f397e0da754ebfa72a10a18fdae, type: 3}
   elechainlUpgrades:
-  - damage: 75
+  - damage: 10
     jumpRate: 70
-  - damage: 90
+  - damage: 15
     jumpRate: 75
-  - damage: 90
+  - damage: 20
     jumpRate: 80
-  - damage: 115
+  - damage: 25
     jumpRate: 85
-  - damage: 130
+  - damage: 30
     jumpRate: 90
-  - damage: 145
-    jumpRate: 95
+  - damage: 35
+    jumpRate: 100

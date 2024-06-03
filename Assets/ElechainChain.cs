@@ -12,7 +12,7 @@ public class ElechainChain : MonoBehaviour
     public float scanRadius = 4f;
     public float jumpRate = 100;
     public int damage = 0;
-    private List<Transform> listEnemiesMarked;
+    [SerializeField] private List<Transform> listEnemiesMarked;
     private void OnEnable()
     {
         listEnemiesMarked = new();
@@ -66,7 +66,7 @@ public class ElechainChain : MonoBehaviour
                 bool canJump = true;
                 foreach (var enemy in listEnemiesMarked)
                 {
-                    if (enemyArray[i].transform == enemy)
+                    if (enemyArray[i].gameObject == enemy.gameObject)
                     {
                         canJump = false;
                         break;
@@ -77,6 +77,10 @@ public class ElechainChain : MonoBehaviour
                 {
                     nearestEnemy = enemyArray[i];
                 }
+            }
+            if(nearestEnemy == enemyArray[0]){
+                LeanPool.Despawn(this);
+                return;
             }
             LeanTween.delayedCall(0.1f, () => { Jump(jumpFromTarget, nearestEnemy.transform); });
         }

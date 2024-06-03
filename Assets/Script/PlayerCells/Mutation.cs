@@ -139,28 +139,31 @@ public class Mutation : CellsBase
             stateMachine.ChangeState(new PlayerStateMove(this));
         }
     }
+    
 
     /* +++ ON CONSTRUCTION +++ */
     protected void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "EnemyCell")
         {
+            EnemyCell enemyCell = other.gameObject.GetComponent<EnemyCell>();
             if(currentArmor.shieldPoint>0){
 
-                currentArmor.shieldPoint -=50;
+                currentArmor.shieldPoint -= enemyCell.bodyDamage;
                 if(currentArmor.shieldPoint<0){
                     OnShieldDelepted();
                     currentArmor.shieldPoint = 0;
                 }
                 delayTime = GameCalculator.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
                 GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
+                EffectManager.Instance.ShowDamageInfict(enemyCell.bodyDamage,4,transform);
             }
             else{
-
-                healPoint -= 10;
+                int damageTake = GameCalculator.DamageTake(currentArmor,currentArmor.armorPoint,enemyCell.bodyDamage).Item1;
+                healPoint -= damageTake;
+                EffectManager.Instance.ShowDamageInfict(damageTake,4,transform);
                 GameManager.Instance.healthBar.AdjustHealth((float)healPoint/maxHealth,healPoint.ToString());
             }
-            EffectManager.Instance.ShowDamageInfict(10,4,transform);
 
             Vector2 collisionDirection = other.contacts[0].normal.normalized;
             //Debug.Log(collisionDirection * pushBackForce);

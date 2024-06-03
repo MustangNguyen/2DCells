@@ -12,7 +12,7 @@ public class EnemyCell : CellsBase
     [Header("Enemy Properties")]
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [SerializeField] protected Collider2D collider2d;
-    [SerializeField] protected int bodyDamage = 0;
+    [SerializeField] public int bodyDamage{get; protected set;} = 0;
     [SerializeField] protected int XpObs;
     [SerializeField] public bool isRestrict = false;
     [Space(10)]
