@@ -7,22 +7,10 @@ using Unity.VisualScripting;
 
 public class PowerUp_004 : PowerUp
 {
-    [SerializeField] private int splashRadius;
-    [SerializeField] private Bullet bullet;
-    [SerializeField] private Bullet plash;
-
+    [SerializeField] private ToxinBullet bullet;
     protected override void Start()
     {
         base.Start();
-        bullet = Resources.Load<Bullet>("Prefab/Bullet Prefabs/ToxinBullet");
-    }
-    public override void OnLevelUp(int lv)
-    {
-        this.lv = lv;
-        PowerUpData_ToxinPlash powerUPdata = (PowerUpData_ToxinPlash)GameManager.Instance.listPlayerPowerUpDatas.Find(x => x.id == id);
-        multishot = powerUPdata.toxinPlashUpgrades[this.lv].plashAmount;
-        modifiedDamage = (int)((float)damage / powerUPdata.toxinPlashUpgrades[0].damage * powerUPdata.toxinPlashUpgrades[this.lv].damage);
-        scanRadius = powerUPdata.toxinPlashUpgrades[this.lv].raidus;
     }
     private void FixedUpdate()
     {
@@ -48,15 +36,26 @@ public class PowerUp_004 : PowerUp
             {
                 var nearestEnemy = enemyArray[i];
                 LeanTween.delayedCall(1f / multishot * i, () => {
-                    Bullet spawnedBullet = LeanPool.Spawn(bullet, transform.position, Quaternion.identity, GameManager.Instance.bulletHolder);
+                    ToxinBullet spawnedBullet = LeanPool.Spawn(bullet, transform.position, Quaternion.identity, GameManager.Instance.bulletHolder);
                     //spawnedBullet.damage = modifiedDamage;
                     Vector3 distance = nearestEnemy.transform.position - transform.position;
                     distance.Normalize();
                     float rotateZ = Mathf.Atan2(distance.y, distance.x) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.Euler(0f, 0f, rotateZ + 90);
+                    spawnedBullet.GetToxinStats(modifiedDamage, scanRadius);
                     spawnedBullet.SetBullet(transform, nearestEnemy.transform.position, 100f);
+                   // Debug.Log(modifiedDamage);
+                    //Debug.Log(scanRadius);
                 });
             }
         } 
+    }
+    public override void OnLevelUp(int lv)
+    {
+        this.lv = lv;
+        PowerUpData_ToxinPlash powerUPdata = (PowerUpData_ToxinPlash)GameManager.Instance.listPlayerPowerUpDatas.Find(x => x.id == id);
+        multishot = powerUPdata.toxinPlashUpgrades[this.lv].plashAmount;
+        modifiedDamage = powerUPdata.toxinPlashUpgrades[this.lv].damage;
+        scanRadius = powerUPdata.toxinPlashUpgrades[this.lv].raidus;
     }
 }

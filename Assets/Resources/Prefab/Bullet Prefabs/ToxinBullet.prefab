@@ -194,4 +194,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   isPenetration: 0
+  toxinDamage: 40
+  radius: 25
   toxinSplash: {fileID: -2417086027375590747, guid: 832d04829e301474aae3bb64f7f445d7, type: 3}

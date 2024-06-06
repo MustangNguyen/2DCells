@@ -18,7 +18,7 @@ public class PowerUpData_ToxinPlash : PowerUpData
 [Serializable]
 public class ToxinPlashUpgrades
 {
-    public int raidus;
+    public float raidus;
     public int damage;
     public int plashAmount;
 }

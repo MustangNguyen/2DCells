@@ -2,38 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using JetBrains.Annotations;
 public class ToxinSplash : MonoBehaviour
 {
     [SerializeField] public int damage;
-    [SerializeField] public int duration;
-    [SerializeField] public int radius;
+    [SerializeField] private float damageInterval = 0.5f;
+    [SerializeField] private float timer = 0f;
+    [SerializeField] private float despawnTimer = 0f;
     EnemyCell cell;
+
+ 
+    private void Start()
+    {
+        StartCoroutine(Destroy());
+    }
+ 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "EnemyCell")
         {
             cell = collision.gameObject.GetComponent<EnemyCell>();
-            StartCoroutine(DoT());
-            cell.SetStatusMachine(PrimaryElement.Toxin, damage, 1);
-            StartCoroutine(Destroy());
         }
     }
-  
-    public void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        StopCoroutine(DoT());
-    }
-    IEnumerator DoT()
-    {
-        while (cell.healPoint != 0)
+        if (collision.gameObject.tag == "EnemyCell")
         {
-            cell.TakeDamage(30, 0);
-            yield return new WaitForSeconds(1.5f);
-        }  
+            timer += Time.deltaTime;
+            cell = collision.gameObject.GetComponent<EnemyCell>();
+            if (timer >= damageInterval)
+            {
+                cell.TakeDamage(damage, 0);
+                timer = 0f;
+            }
+        }
     }
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(5f);
-        LeanPool.Despawn(this);
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 }
