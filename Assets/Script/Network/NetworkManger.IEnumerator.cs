@@ -11,7 +11,7 @@ public partial class NetworkManager {
 
     public IEnumerator CreateWebGetRequest(string requestAPI,Action<string> onComplete = null, Action onFail = null){
         using(UnityWebRequest webRequest = UnityWebRequest.Get(requestAPI)){
-            webRequest.SetRequestHeader("Authorization","Bearer " + accessToken);
+            webRequest.SetRequestHeader("Authorization","Bearer " + accessToken.accessToken);
             yield return webRequest.SendWebRequest();
             if(webRequest.result != UnityWebRequest.Result.Success){
                 Debug.Log("Error while fetch from API: " + requestAPI + " " + webRequest.error);
@@ -34,7 +34,7 @@ public partial class NetworkManager {
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
             request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
             if(isRequireAuthorize)
-                request.SetRequestHeader("Authorization","Bearer " + accessToken);
+                request.SetRequestHeader("Authorization","Bearer " + accessToken.accessToken);
             yield return request.SendWebRequest();
             long responseCode = request.responseCode;
             if (request.result != UnityWebRequest.Result.Success)

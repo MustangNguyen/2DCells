@@ -274,6 +274,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1536
   layerObs: 0
+  obsCollectRangeAddIn: 0
   rotationInterpolation: 0.4
 --- !u!1001 &26252224389399893
 PrefabInstance:
@@ -363,7 +364,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2105930041168278932, guid: 2e15cd1c5855db147b2633d0be98c57e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6844706610124633295, guid: 2e15cd1c5855db147b2633d0be98c57e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -457,7 +458,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7161094241297279446, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9016624705188137926, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_LocalScale.x

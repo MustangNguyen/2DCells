@@ -54,6 +54,12 @@ public partial class NetworkManager : Singleton<NetworkManager>
             DataManager.Instance.GetBulletData(data);
         }));
     }
+    public void GetUserInformationFromServer(string email){
+        StartCoroutine(CreateWebGetRequest(HOST + GET_USER_INFORMATION + email, (string data) =>
+        {
+            DataManager.Instance.GetUserInformationData(data);
+        }));
+    }
     #endregion
 
     #region Post

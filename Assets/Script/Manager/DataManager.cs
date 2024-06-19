@@ -19,6 +19,15 @@ public class DataManager : Singleton<DataManager>
         NetworkManager.Instance.GetIngameLevelConfigsFromServer();
         listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
     }
+    public void GetUserInformationData(string data){
+        JSONObject json = new JSONObject(data);
+        var listData = json.list;
+        foreach(var item in listData){
+            Data.userInformation.userID = item["id"].str;
+            Data.userInformation.userName = item["userName"].str;
+            Data.userInformation.email = item["email"].str;
+        }
+    }
     public void GetIngameLevelConfigs(string data){
         JSONObject json = new JSONObject(data);
         var listData = json.list;
