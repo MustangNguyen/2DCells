@@ -120,7 +120,7 @@ public class DataManager : Singleton<DataManager>
             bulletOOP.bulletId = item["bulletId"].str;
             bulletOOP.bulletName = item["bulletName"].str;
             bulletOOP.bulletTypeId = item["bulletTypeId"].str;
-            bulletOOP.timeExist = (int)item["timeExist"].n;
+            bulletOOP.timeExist = (float)item["timeExist"].n;
             bulletOOP.damage = (int)item["damage"].n;
             bulletOOP.bulletSpeed = (int)item["bulletSpeed"].n;
             Elements element = new();

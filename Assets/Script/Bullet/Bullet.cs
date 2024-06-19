@@ -53,6 +53,7 @@ public class Bullet : MonoBehaviour
     }
     private void Start() {
 
+       
     }
     public void AddProperties()
     {
@@ -135,7 +136,7 @@ public class BulletOOP
     public string bulletName;
     public string bulletTypeId;
     public int damage;
-    public int timeExist;
+    public float timeExist;
     public int bulletSpeed;
     public Elements element = new();
 }

@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,11 +46,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: PowerUp_004
   mutation: {fileID: 0}
-  timeCharge: 1
+  timeCharge: 3
   countdown: 0
-  damage: 0
-  scanRadius: 10
+  damage: 40
+  modifiedDamage: 0
+  multishot: 0
+  lv: 0
+  scanRadius: 25
   layerMaskInt: 
   layerMask:
     serializedVersion: 2
     m_Bits: 1536
+  bullet: {fileID: 4792117142706176819, guid: e833040c0f2639249b29ab88261cb329, type: 3}

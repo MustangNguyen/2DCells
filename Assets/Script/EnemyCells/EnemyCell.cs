@@ -30,6 +30,7 @@ public class EnemyCell : CellsBase
     [Space(10)]
     [Header("Wave")]
     [SerializeField] public int wave;
+    [SerializeField] public bool dotStatus = false;
     protected override void Start()
     {
         base.Start();
