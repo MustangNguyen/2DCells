@@ -8,7 +8,7 @@ public class ToxinSplash : MonoBehaviour
     [SerializeField] public int damage;
     [SerializeField] private float damageInterval = 0.5f;
     [SerializeField] private float timer = 0f;
-    [SerializeField] private float despawnTimer = 0f;
+    // [SerializeField] private float despawnTimer = 0f;
     EnemyCell cell;
 
  

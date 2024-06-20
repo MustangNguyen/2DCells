@@ -5,7 +5,7 @@ public class StateMachine : MonoBehaviour
     [SerializeField] private string currentStateName;
     [SerializeField] private string currentStateStatusName;
     private State currentState;
-    private StatusState currentStatusState;
+    public StatusState currentStatusState {get;private set;}
     public void StateMachineUpdate() {
         currentState?.LogicUpdate();
         currentStatusState?.LogicUpdate();
@@ -16,6 +16,8 @@ public class StateMachine : MonoBehaviour
     }
     public void ChangeStatusState(StatusState newStatusState){
         int initDamage = -1;
+        if (newStatusState.CurrentStatusLevel() == 2)
+            return;
         if(currentStatusState!=null){
             initDamage = currentStatusState.damagePerTick;
             newStatusState.stack+=currentStatusState.stack;

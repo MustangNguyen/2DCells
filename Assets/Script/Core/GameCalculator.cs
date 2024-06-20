@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static GameStatic;
 
-public class GameCalculator
+public partial class GameCalculator
 {
     public static (int, int) DamageTake(CellProtection currentCellProtection, int baseCellArmor, int damageIncome, Elements elements = null)
     {

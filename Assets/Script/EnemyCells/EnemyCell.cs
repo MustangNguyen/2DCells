@@ -6,6 +6,7 @@ using Lean.Pool;
 using TMPro;
 using Unity.VisualScripting;
 using System;
+using static GameCalculator;
 
 public class EnemyCell : CellsBase
 {
@@ -97,16 +98,16 @@ public class EnemyCell : CellsBase
         switch (element)
         {
             case PrimaryElement.Fire:
-                stateMachine.ChangeStatusState(new StatusStateBurn(this, PrimaryElement.Fire, damageIncome, stack));
+                stateMachine.ChangeStatusState(ElementReact(stateMachine.currentStatusState,new StatusStateBurn(this, PrimaryElement.Fire, damageIncome, stack)));
                 break;
             case PrimaryElement.Ice:
-                stateMachine.ChangeStatusState(new StatusStateFreeze(this,PrimaryElement.Ice,stack,isOverrideMaxStack));
+                stateMachine.ChangeStatusState(ElementReact(stateMachine.currentStatusState,new StatusStateFreeze(this,PrimaryElement.Ice,stack,isOverrideMaxStack)));
                 break;
             case PrimaryElement.Toxin:
-                stateMachine.ChangeStatusState(new StatusStatePoisoned(this,PrimaryElement.Toxin, damageIncome,stack));
+                stateMachine.ChangeStatusState(ElementReact(stateMachine.currentStatusState,new StatusStatePoisoned(this,PrimaryElement.Toxin, damageIncome,stack)));
                 break;
             case PrimaryElement.Electric:
-                stateMachine.ChangeStatusState(new StatusStateShock(this,PrimaryElement.Electric, damageIncome,stack,isOverrideMaxStack));
+                stateMachine.ChangeStatusState(ElementReact(stateMachine.currentStatusState,new StatusStateShock(this,PrimaryElement.Electric, damageIncome,stack,isOverrideMaxStack)));
                 break;
             default:
                 stateMachine.ChangeStatusState(new StatusStateNormal(this));

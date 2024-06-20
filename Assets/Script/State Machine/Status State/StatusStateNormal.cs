@@ -12,7 +12,7 @@ public class StatusStateNormal : StatusState
     public override void Enter()
     {
         base.Enter();
-        resetState();
+        ResetState();
         enemyCell.moveSpeed = enemyCell.defaultMoveSpeed;
     }
     public override void LogicUpdate()

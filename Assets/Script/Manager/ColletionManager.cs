@@ -14,7 +14,7 @@ public class ColletionManager : Singleton<ColletionManager>
     [SerializeField] private List<CharcaterItem> charcaterItems =  new();
     [SerializeField] private List<EnemyCellOOP> enemyCellOops = new();
 
-    [SerializeField] private TextMeshProUGUI name;
+    [SerializeField] private TextMeshProUGUI cellName;
     [SerializeField] private TextMeshProUGUI faction;
     [SerializeField] private TextMeshProUGUI hp;
     [SerializeField] private TextMeshProUGUI damage;
@@ -39,7 +39,7 @@ public class ColletionManager : Singleton<ColletionManager>
     {
         Debug.Log(id);
         var enemy = enemyCellOops.Find(x=>x.enemyId == id);
-        name.text = $"Name: {enemy.enemyName}";
+        cellName.text = $"Name: {enemy.enemyName}";
         faction.text = $"Faction: {enemy.faction}";
         hp.text = $"HP: {enemy.hp}";
         damage.text = $"Damage: {enemy.bodyDamage}";

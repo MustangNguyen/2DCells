@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PowerUp_003 : PowerUp
 {
-    [SerializeField] private float jumpRate = 60;
+    // [SerializeField] private float jumpRate = 60;
     [SerializeField] private ElechainChain elechainChain;
     public override void OnLevelUp(int lv)
     {

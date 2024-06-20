@@ -7,7 +7,6 @@ using UnityEngine;
 public class Elements
 {
     public PrimaryElement primaryElement = PrimaryElement.Physic;
-
     public SecondaryElement secondaryElement = SecondaryElement.None;
 }
 public enum PrimaryElement{
@@ -21,7 +20,7 @@ public enum PrimaryElement{
 }
 public enum SecondaryElement{
     None,
-    Ice,
+    Blast,
 }
 
 public enum Status{

@@ -4699,6 +4699,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3129199665608748248, guid: aed24096dbedc9f489c5eea13a00ceac, type: 3}
+      propertyPath: healPoint
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: -3129199665608748248, guid: aed24096dbedc9f489c5eea13a00ceac, type: 3}
+      propertyPath: maxHealth
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 1263794284896037523, guid: aed24096dbedc9f489c5eea13a00ceac, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -5550,7 +5558,6 @@ MonoBehaviour:
   currentPrimaryElement: 0
   rigidbody2d: {fileID: 4113746338169639735}
   collider2d: {fileID: 9213524312159292620}
-  bodyDamage: 0
   XpObs: 0
   isRestrict: 0
   enemyId: HEM_REDCYCLINDER
@@ -5564,6 +5571,7 @@ MonoBehaviour:
   animator: {fileID: 4324816304175356620}
   destroyAnimation: {fileID: 4877457047852888339}
   wave: 0
+  dotStatus: 0
 --- !u!212 &3964060582159839873
 SpriteRenderer:
   m_ObjectHideFlags: 0
