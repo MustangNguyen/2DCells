@@ -5,20 +5,26 @@ using static GameStatic;
 
 public class StatusStateBlast : StatusState
 {
-    public StatusStateBlast(CellsBase cellsBase, PrimaryElement triggerElement, int initDamage, int stackAddIn) : base(cellsBase)
+    private float impactField = 3;
+    private float impactForce = 30;
+    [SerializeField] private LayerMask layerToHit;
+    public StatusStateBlast(CellsBase cellsBase, int initDamage, int stackAddIn) : base(cellsBase)
     {   
         if(stack>0){
             stack+=stackAddIn;
         }
         else{
-            damagePerTick = initDamage/10;
+            damagePerTick = initDamage;
             stack+=stackAddIn;
         }
+        primaryElement = PrimaryElement.None;
+        secondaryElement = SecondaryElement.Blast;
     }
     public override void Enter()
     {
         base.Enter();
-        primaryElement = PrimaryElement.Fire;
+        Debug.Log("blast status is triggered");
+        Explode();
     }
     public override void LogicUpdate()
     {
@@ -28,22 +34,28 @@ public class StatusStateBlast : StatusState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if(enemyCell!=null)
-            DamageBurnPerTickToEnemy();
-        else{
+        // if(enemyCell!=null)
+        //     DamageBurnPerTickToEnemy();
+        // else{
 
-        }
+        // }
     }
     public override void Exit()
     {
         base.Exit();
     }
-    private void DamageBurnPerTickToEnemy(){
-        timeBetweenTick -= Time.fixedDeltaTime;
-        if(timeBetweenTick<=0){
-            timeBetweenTick += TIME_BETWEEN_STATUS_TICK;
-            enemyCell.TakeDamage(damagePerTick,0,"Burn "+stack.ToString());
-            
+    private void Explode()
+    {
+        layerToHit = LayerMask.GetMask("Enemy","EnemyWraith");
+        
+        Collider2D[] objects = Physics2D.OverlapCircleAll(enemyCell.transform.position, impactField, layerToHit);
+        for (int i = 0; i < objects.Length; i++)
+        {
+            Vector2 direction = (objects[i].transform.position - this.enemyCell.transform.position).normalized;
+            var victim = objects[i].GetComponent<Rigidbody2D>();
+            victim.AddForce(direction * impactForce, ForceMode2D.Impulse);
+            EnemyCell enemyCell = objects[i].gameObject.GetComponent<EnemyCell>();
+            enemyCell.TakeDamage((int)(damagePerTick*stack),5);
         }
     }
 }

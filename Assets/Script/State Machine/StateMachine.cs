@@ -16,8 +16,8 @@ public class StateMachine : MonoBehaviour
     }
     public void ChangeStatusState(StatusState newStatusState){
         int initDamage = -1;
-        if (newStatusState.CurrentStatusLevel() == 2)
-            return;
+        // if (newStatusState.CurrentStatusLevel() == 2)
+        //     return;
         if(currentStatusState!=null){
             initDamage = currentStatusState.damagePerTick;
             newStatusState.stack+=currentStatusState.stack;

@@ -14,11 +14,11 @@ public class StatusStatePoisoned : StatusState
             damagePerTick = initDamage/10;
             stack+=stackAddIn;
         }
+        primaryElement = PrimaryElement.Toxin;
     }
     public override void Enter()
     {
         base.Enter();
-        primaryElement = PrimaryElement.Toxin;
     }
     public override void LogicUpdate()
     {

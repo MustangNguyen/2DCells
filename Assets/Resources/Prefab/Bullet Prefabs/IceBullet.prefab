@@ -101,10 +101,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 20
-  damage: 20
+  damage: 1
   cellGun: {fileID: 0}
   elements:
-    primaryElement: 1
+    primaryElement: 2
     secondaryElement: 0
   timeExist: 2
   isProjectile: 1
@@ -112,7 +112,7 @@ MonoBehaviour:
   bulletCollider2D: {fileID: 8593638103208446277}
   bulletTrail: {fileID: 0}
   sprite: {fileID: 3826545368362221535}
-  bulletId: 
+  bulletId: BPRO_ICESH
   bulletTypeId: 
   bulletName: 
   isExplosive: 0

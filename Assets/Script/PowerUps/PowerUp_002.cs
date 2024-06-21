@@ -31,7 +31,7 @@ public class PowerUp_002 : PowerUp
         {
             EnemyCell enemyCell = enemyArray[i].GetComponent<EnemyCell>();
             enemyCell.TakeDamage(damage, 0);
-            enemyCell.SetStatusMachine(PrimaryElement.Ice,damage,1);
+            enemyCell.SetStatusMachine(PrimaryElement.Ice,damage,3);
         }
         StartCoroutine(IEBursAnimation());
         IEnumerator IEBursAnimation(){

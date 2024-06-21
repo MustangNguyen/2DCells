@@ -12,11 +12,11 @@ public class StatusStateFreeze : StatusState
         else    
             maxStack = MAX_STATUS_STACK;
             stack+=stackAddIn;
+        primaryElement = PrimaryElement.Ice;
     }
     public override void Enter()
     {
         base.Enter();
-        primaryElement = PrimaryElement.Ice;
         if(enemyCell!=null)
             SlowPerTickToEnemy();
         else{

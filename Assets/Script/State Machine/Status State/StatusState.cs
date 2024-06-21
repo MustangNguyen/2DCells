@@ -12,8 +12,11 @@ public class StatusState : State
     protected float timeBetweenTick = TIME_BETWEEN_STATUS_TICK;
     public PrimaryElement primaryElement { get; protected set; } = PrimaryElement.None;
     public SecondaryElement secondaryElement { get; protected set; } = SecondaryElement.None;
-    protected EnemyCell enemyCell;
-    protected Mutation mutation;
+    public EnemyCell enemyCell{get;protected set;}
+    public Mutation mutation{get;protected set;}
+    public StatusState(){
+        
+    }
     public StatusState(CellsBase cellsBase)
     {
         if (cellsBase is EnemyCell)

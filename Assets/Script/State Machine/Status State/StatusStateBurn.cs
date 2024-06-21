@@ -14,11 +14,11 @@ public class StatusStateBurn : StatusState
             damagePerTick = initDamage/10;
             stack+=stackAddIn;
         }
+        primaryElement = PrimaryElement.Fire;
     }
     public override void Enter()
     {
         base.Enter();
-        primaryElement = PrimaryElement.Fire;
     }
     public override void LogicUpdate()
     {

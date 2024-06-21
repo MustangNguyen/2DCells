@@ -18,11 +18,11 @@ public class StatusStateShock : StatusState
             damagePerTick = initDamage/10;
             stack+=stackAddIn;
         }
+        primaryElement = PrimaryElement.Electric;
     }
     public override void Enter()
     {
         base.Enter();
-        primaryElement = PrimaryElement.Electric;
         EnemyShock();
     }
     public override void LogicUpdate()
