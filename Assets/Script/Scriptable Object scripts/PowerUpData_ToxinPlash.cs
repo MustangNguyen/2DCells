@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 [CreateAssetMenu(fileName ="Power Up data Toxin Plash", menuName = "Scriptable Objects/Power Up Data/Toxin Plash")]
