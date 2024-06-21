@@ -56,17 +56,22 @@ public class StatusState : State
         // else
         //     Debug.Log("status is on mutation");
         statusTimeLeft -= Time.fixedDeltaTime;
-        if (statusTimeLeft <= 0)
+        if (statusTimeLeft <= 0){
+            ResetState();
             enemyCell?.SetStatusMachine(PrimaryElement.None);
-        if (stack <= 0)
+        }
+        if (stack <= 0){
+            ResetState();
             enemyCell?.SetStatusMachine(PrimaryElement.None);
+        }
     }
     protected virtual void ResetState()
     {
         damagePerTick = 0;
         stack = 0;
         primaryElement = PrimaryElement.None;
-
+        secondaryElement = SecondaryElement.None;
+        CurrentStatusLevel();
     }
     public int CurrentStatusLevel()
     {

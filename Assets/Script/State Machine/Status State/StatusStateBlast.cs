@@ -25,6 +25,7 @@ public class StatusStateBlast : StatusState
         base.Enter();
         Debug.Log("blast status is triggered");
         Explode();
+        statusTimeLeft = 0;
     }
     public override void LogicUpdate()
     {
@@ -55,7 +56,7 @@ public class StatusStateBlast : StatusState
             var victim = objects[i].GetComponent<Rigidbody2D>();
             victim.AddForce(direction * impactForce, ForceMode2D.Impulse);
             EnemyCell enemyCell = objects[i].gameObject.GetComponent<EnemyCell>();
-            enemyCell.TakeDamage((int)(damagePerTick*stack),5);
+            enemyCell.TakeDamage(damagePerTick*stack,5,"Blast!!!");
         }
     }
 }

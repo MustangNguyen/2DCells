@@ -7,6 +7,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System;
 using static GameCalculator;
+using System.Data;
 
 public class EnemyCell : CellsBase
 {
@@ -95,6 +96,7 @@ public class EnemyCell : CellsBase
     }
     public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0,bool isOverrideMaxStack = false)
     {
+        if(stateMachine.currentStatusState!= null && stateMachine.currentStatusState.CurrentStatusLevel()== 2) return;
         switch (element)
         {
             case PrimaryElement.Fire:
@@ -110,6 +112,8 @@ public class EnemyCell : CellsBase
                 stateMachine.ChangeStatusState(ElementReact(stateMachine.currentStatusState,new StatusStateShock(this,PrimaryElement.Electric, damageIncome,stack,isOverrideMaxStack)));
                 break;
             default:
+                // if(stateMachine.currentStatusState!= null && stateMachine.currentStatusState.secondaryElement!= SecondaryElement.None)
+                //     break;
                 stateMachine.ChangeStatusState(new StatusStateNormal(this));
                 break;
         }

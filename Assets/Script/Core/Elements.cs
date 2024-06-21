@@ -21,6 +21,7 @@ public enum PrimaryElement{
 public enum SecondaryElement{
     None,
     Blast,
+    HellFire,
 }
 
 public enum Status{

@@ -17,7 +17,7 @@ public partial class GameCalculator : MonoBehaviour
                     break;
                     case PrimaryElement.Toxin:
                         Debug.Log("Fire + Toxin");
-                        resultStatus = new StatusStateBlast(currentStatus.enemyCell,currentStatus.damagePerTick,currentStatus.stack);
+                        resultStatus = new StatusStateHellBurn(currentStatus.enemyCell,currentStatus.damagePerTick,currentStatus.stack);
                     break;
                 }
             break;
