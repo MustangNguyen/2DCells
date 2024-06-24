@@ -76,7 +76,7 @@ public partial class GameCalculator
     }
         public static float ShieldRechargeCalculator(int maxShield)
     {
-        Debug.Log("Shield recharge rate: " + 5 * Mathf.Sqrt((float)maxShield));
+        // Debug.Log("Shield recharge rate: " + 5 * Mathf.Sqrt((float)maxShield));
         return 5 * Mathf.Sqrt((float)maxShield);
     }
     public static float ShieldRechargeDelayCalculator(int currentShield)

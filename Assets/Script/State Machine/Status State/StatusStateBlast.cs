@@ -23,7 +23,6 @@ public class StatusStateBlast : StatusState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("blast status is triggered");
         Explode();
         statusTimeLeft = 0;
     }

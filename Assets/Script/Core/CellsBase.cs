@@ -13,7 +13,7 @@ public class CellsBase : MonoBehaviour
     [SerializeField] protected int maxEnery = 200;
     [SerializeField] public int currentEnery = 200;
     [SerializeField] protected CellProtection baseCellArmor;
-    [SerializeField] protected CellProtection currentArmor;
+    [SerializeField] public CellProtection currentArmor;
     [SerializeField] public float defaultMoveSpeed = 1f;
     [SerializeField] public float moveSpeed = 1f;
     [SerializeField] protected int lv = 1;
@@ -32,6 +32,7 @@ public class CellsBase : MonoBehaviour
         healPoint = maxHealth;
         currentArmor.armorType = baseCellArmor.armorType;
         currentArmor.armorPoint = BioArmorCalculating();
+        
     }
     protected virtual void Awake(){
         

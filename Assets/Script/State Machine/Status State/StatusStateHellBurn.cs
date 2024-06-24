@@ -19,7 +19,6 @@ public class StatusStateHellBurn : StatusState
     }
     public override void Enter()
     {
-        Debug.Log("Hell Fire Enter");
         base.Enter();
     }
     public override void LogicUpdate()

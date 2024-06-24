@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Lean.Pool;
 using TMPro;
-using Unity.VisualScripting;
 using System;
 using static GameCalculator;
-using System.Data;
 
 public class EnemyCell : CellsBase
 {
@@ -17,6 +15,11 @@ public class EnemyCell : CellsBase
     [SerializeField] public int bodyDamage{get; protected set;} = 0;
     [SerializeField] protected int XpObs;
     [SerializeField] public bool isRestrict = false;
+    [SerializeField] protected int index;
+    [SerializeField] protected Equipment equipment;
+    [SerializeField] public StateMachine stateMachine;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected GameObject destroyAnimation;
     [Space(10)]
     [Header("UI")]
     [SerializeField] protected string enemyId;
@@ -24,11 +27,6 @@ public class EnemyCell : CellsBase
     [SerializeField] public Slider healthBar;
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected SpriteRenderer model;
-    [SerializeField] protected int index;
-    [SerializeField] protected Equipment equipment;
-    [SerializeField] public StateMachine stateMachine;
-    [SerializeField] protected Animator animator;
-    [SerializeField] protected GameObject destroyAnimation;
     [Space(10)]
     [Header("Wave")]
     [SerializeField] public int wave;
@@ -89,10 +87,20 @@ public class EnemyCell : CellsBase
     public void TakeDamage(int damageIncome, int criticalTier, string status = null)
     {
         (int, int) damageTaken;
-        damageTaken = GameCalculator.DamageTake(currentArmor, BioArmorCalculating(), damageIncome);
+        damageTaken = DamageTake(currentArmor, BioArmorCalculating(), damageIncome);
         currentArmor.armorPoint -= damageTaken.Item2;
         healPoint -= damageTaken.Item1;
         EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform, status);
+    }
+    public void ArmorStrip(int Amount){
+        if(currentArmor.armorType == ArmorType.None)
+            return;
+        else if(currentArmor.armorType == ArmorType.Alloy){
+            currentArmor.armorPoint -= Amount;
+        }
+        else if(currentArmor.armorType == ArmorType.Bio){
+            currentArmor.armorPoint -= Amount;
+        }
     }
     public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0,bool isOverrideMaxStack = false)
     {
