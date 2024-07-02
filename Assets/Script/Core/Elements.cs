@@ -22,6 +22,8 @@ public enum SecondaryElement{
     None,
     Blast,
     HellFire,
+    Shattered,
+    Viral,
 }
 
 public enum Status{

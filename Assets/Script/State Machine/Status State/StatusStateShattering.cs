@@ -15,7 +15,7 @@ public class StatusStateShattering : StatusState
             stack+=stackAddIn;
         }
         primaryElement = PrimaryElement.None;
-        secondaryElement = SecondaryElement.Blast;
+        secondaryElement = SecondaryElement.Shattered;
     }
     public override void Enter()
     {

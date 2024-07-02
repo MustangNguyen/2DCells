@@ -18,13 +18,12 @@ public class StatusStateWeak : StatusState
             stack+=stackAddIn;
         }
         primaryElement = PrimaryElement.None;
-        secondaryElement = SecondaryElement.Blast;
+        secondaryElement = SecondaryElement.Viral;
     }
     public override void Enter()
     {
         base.Enter();
-        Weaken();
-        statusTimeLeft = 0;
+        // Weaken();
     }
     public override void LogicUpdate()
     {
@@ -39,9 +38,8 @@ public class StatusStateWeak : StatusState
     {
         base.Exit();
     }
-    private void Weaken()
-    {
-        // enemyCell.ArmorStrip((int)((float)(enemyCell.currentArmor.armorPoint*stack)*0.09f));
-        // Debug.Log("Armor Shattered!");
-    }
+    // private void Weaken()
+    // {
+
+    // }
 }

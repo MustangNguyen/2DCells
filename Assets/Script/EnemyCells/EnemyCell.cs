@@ -87,6 +87,8 @@ public class EnemyCell : CellsBase
     public void TakeDamage(int damageIncome, int criticalTier, string status = null)
     {
         (int, int) damageTaken;
+        if(stateMachine.currentStatusState.secondaryElement == SecondaryElement.Viral)
+            damageIncome+=(int)(0.3f*(float)damageIncome*stateMachine.currentStatusState.stack);
         damageTaken = DamageTake(currentArmor, BioArmorCalculating(), damageIncome);
         currentArmor.armorPoint -= damageTaken.Item2;
         healPoint -= damageTaken.Item1;
@@ -104,6 +106,8 @@ public class EnemyCell : CellsBase
     }
     public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0,bool isOverrideMaxStack = false)
     {
+        if(element == PrimaryElement.None)
+            stateMachine.ChangeStatusState(new StatusStateNormal(this));
         if(stateMachine.currentStatusState!= null && stateMachine.currentStatusState.CurrentStatusLevel()== 2) return;
         switch (element)
         {
