@@ -24,6 +24,8 @@ public enum SecondaryElement{
     HellFire,
     Shattered,
     Viral,
+    Corrosive,
+    SuperConductive,
 }
 
 public enum Status{

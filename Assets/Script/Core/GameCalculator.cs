@@ -9,22 +9,27 @@ public partial class GameCalculator
     {
         //Debug.Log("base armor:"+baseCellArmor);
         int armorReduce = 0;
-        int damageTaken;
-        switch (currentCellProtection.armorType)
-        {
-            case ArmorType.None:
-                damageTaken = damageIncome;
-                break;
-            case ArmorType.Alloy:
-                damageTaken = (int)((float)damageIncome * (float)(1 - DamageReduceByArmorCalculator(currentCellProtection.armorPoint)));
-                break;
-            case ArmorType.Bio:
-                armorReduce = damageIncome >= baseCellArmor / 20 ? damageIncome: baseCellArmor/20;
-                damageTaken = damageIncome - currentCellProtection.armorPoint >= damageIncome / 20 ? damageIncome - currentCellProtection.armorPoint : damageIncome / 20;
-                break;
-            default:
-                damageTaken = int.MaxValue;
-                break;
+        int damageTaken = 0;
+        if(currentCellProtection.shieldPoint>0){
+            damageTaken = damageIncome;
+        }
+        else{
+            switch (currentCellProtection.armorType)
+            {
+                case ArmorType.None:
+                    damageTaken = damageIncome;
+                    break;
+                case ArmorType.Alloy:
+                    damageTaken = (int)((float)damageIncome * (float)(1 - DamageReduceByArmorCalculator(currentCellProtection.armorPoint)));
+                    break;
+                case ArmorType.Bio:
+                    armorReduce = damageIncome >= baseCellArmor / 20 ? damageIncome: baseCellArmor/20;
+                    damageTaken = damageIncome - currentCellProtection.armorPoint >= damageIncome / 20 ? damageIncome - currentCellProtection.armorPoint : damageIncome / 20;
+                    break;
+                default:
+                    damageTaken = int.MaxValue;
+                    break;
+            }
         }
         return (damageTaken, armorReduce);
     }
@@ -92,5 +97,20 @@ public partial class GameCalculator
     }
     public static float DamageReduceByArmorCalculator(int armor){
         return (float)armor / (armor + ARMOR_COEFFICIENT);
+    }
+    public static int CalculateFactorial(int n)
+    {
+        if (n < 0)
+        {
+            return -1;
+        }
+
+        int factorial = 1;
+        for (int i = 1; i <= n; i++)
+        {
+            factorial *= i;
+        }
+
+        return factorial;
     }
 }

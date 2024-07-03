@@ -56,6 +56,12 @@ public class EffectManager : Singleton<EffectManager>
             case 4:
                 statusEffect.statusText.color = CRITICAL_TIER_4_COLOR;
                 break;
+            case 5:
+                statusEffect.statusText.color = CRITICAL_TIER_5_COLOR;
+                break;
+            case 6:
+                statusEffect.statusText.color = SHIELD_DAMAGE_COLOR;
+                break;
             default:
                 statusEffect.statusText.color = CRITICAL_TIER_5_COLOR;
                 break;

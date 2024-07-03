@@ -19,6 +19,7 @@ public static class GameStatic
     public readonly static Color CRITICAL_TIER_3_COLOR = Color.red;
     public readonly static Color CRITICAL_TIER_4_COLOR = Color.red;
     public readonly static Color CRITICAL_TIER_5_COLOR = Color.red;
+    public readonly static Color SHIELD_DAMAGE_COLOR = new Color(0f, 200f / 255f, 1f, 1f);
     public readonly static Color USER_UI_COLOR_BLUE = Color.blue;
     public readonly static Color USER_UI_COLOR_CYAN = Color.cyan;
     public readonly static Color USER_UI_COLOR_PURPLE = new Color(0.627451f, 0.1254902f, 0.9411765f, 1f);

@@ -35,6 +35,13 @@ public partial class GameCalculator : MonoBehaviour
                     case PrimaryElement.Electric:
                         resultStatus = incomeStatus;
                     break;
+                    case PrimaryElement.Toxin:
+                        resultStatus = new StatusStateCorrosive(currentStatus.enemyCell,currentStatus.stack);
+                    break;
+                    case PrimaryElement.Ice:
+                        Debug.Log("Super conductive require condition matched");
+                        resultStatus = new StatusStateSuperConductive(currentStatus.enemyCell,currentStatus.damagePerTick,currentStatus.stack);
+                    break;
                 }
             break;
             case PrimaryElement.Toxin:
@@ -47,6 +54,9 @@ public partial class GameCalculator : MonoBehaviour
                     break;
                     case PrimaryElement.Ice:
                         resultStatus = new StatusStateWeak(currentStatus.enemyCell,currentStatus.stack);
+                    break;
+                    case PrimaryElement.Electric:
+                        resultStatus = new StatusStateCorrosive(currentStatus.enemyCell,currentStatus.stack);
                     break;
                 }
             break;

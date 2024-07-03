@@ -25,6 +25,7 @@ public class EnemyCell : CellsBase
     [SerializeField] protected string enemyId;
     [SerializeField] public string enemyName;
     [SerializeField] public Slider healthBar;
+    [SerializeField] public Slider shieldBar;
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected SpriteRenderer model;
     [Space(10)]
@@ -62,6 +63,7 @@ public class EnemyCell : CellsBase
     public void CellFixedUpdate()
     {
         healthBar.value = (float)healPoint / (float)maxHealth;
+        shieldBar.value = (float)currentArmor.shieldPoint/(float)baseCellArmor.shieldPoint;
         movement();
         StateMachineMonitor();
         stateMachine.StateMachineFixedUpdate();
@@ -84,14 +86,21 @@ public class EnemyCell : CellsBase
         if (moveSpeed < rigidbody2d.velocity.magnitude) return;
         rigidbody2d.AddForce(moveDirection * currentForce * 20 * rigidbody2d.mass);
     }
-    public void TakeDamage(int damageIncome, int criticalTier, string status = null)
+    public void TakeDamage(int damageIncome, int criticalTier, string status = null, bool isToShieldOnly = false)
     {
         (int, int) damageTaken;
         if(stateMachine.currentStatusState.secondaryElement == SecondaryElement.Viral)
             damageIncome+=(int)(0.3f*(float)damageIncome*stateMachine.currentStatusState.stack);
         damageTaken = DamageTake(currentArmor, BioArmorCalculating(), damageIncome);
         currentArmor.armorPoint -= damageTaken.Item2;
-        healPoint -= damageTaken.Item1;
+        if(currentArmor.shieldPoint>0){
+            currentArmor.shieldPoint-=damageTaken.Item1;
+            criticalTier = 6;
+        }else{
+            if(!isToShieldOnly){
+                healPoint -= damageTaken.Item1;
+            }
+        }
         EffectManager.Instance.ShowDamageInfict(damageTaken.Item1, criticalTier, transform, status);
     }
     public void ArmorStrip(int Amount){
@@ -185,6 +194,7 @@ public class EnemyCell : CellsBase
         });
     }
 }
+
 [Serializable]
 public class EnemyCellOOP
 {
