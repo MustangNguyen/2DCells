@@ -29,6 +29,9 @@ public class EnemyCell : CellsBase
     [SerializeField] protected TextMeshProUGUI healthText;
     [SerializeField] protected SpriteRenderer model;
     [Space(10)]
+    [Header("Attack")]
+    [SerializeField] protected EnemyMeleeController meleeController;
+    [Space(10)]
     [Header("Wave")]
     [SerializeField] public int wave;
     [SerializeField] public bool dotStatus = false;
@@ -63,10 +66,14 @@ public class EnemyCell : CellsBase
     public void CellFixedUpdate()
     {
         healthBar.value = (float)healPoint / (float)maxHealth;
-        shieldBar.value = (float)currentArmor.shieldPoint/(float)baseCellArmor.shieldPoint;
+        if(baseCellArmor.shieldPoint!=0)
+            shieldBar.value = (float)currentArmor.shieldPoint/(float)baseCellArmor.shieldPoint;
+        else
+            shieldBar.value = 0;
         movement();
         StateMachineMonitor();
         stateMachine.StateMachineFixedUpdate();
+        meleeController?.SlashCheck();
         if (healPoint <= 0)
         {
             stateMachine.ChangeState(new EnemyStateDestroy(this));

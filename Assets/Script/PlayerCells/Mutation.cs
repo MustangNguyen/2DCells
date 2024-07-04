@@ -147,28 +147,49 @@ public class Mutation : CellsBase
         if (other.gameObject.tag == "EnemyCell")
         {
             EnemyCell enemyCell = other.gameObject.GetComponent<EnemyCell>();
-            if(currentArmor.shieldPoint>0){
+            TakeDamage(enemyCell.bodyDamage);
+            // if(currentArmor.shieldPoint>0){
 
-                currentArmor.shieldPoint -= enemyCell.bodyDamage;
+            //     currentArmor.shieldPoint -= enemyCell.bodyDamage;
+            //     if(currentArmor.shieldPoint<0){
+            //         OnShieldDelepted();
+            //         currentArmor.shieldPoint = 0;
+            //     }
+            //     delayTime = GameCalculator.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
+            //     GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
+            //     EffectManager.Instance.ShowDamageInfict(enemyCell.bodyDamage,4,transform);
+            // }
+            // else{
+            //     int damageTake = GameCalculator.DamageTake(currentArmor,currentArmor.armorPoint,enemyCell.bodyDamage).Item1;
+            //     healPoint -= damageTake;
+            //     EffectManager.Instance.ShowDamageInfict(damageTake,4,transform);
+            //     GameManager.Instance.healthBar.AdjustHealth((float)healPoint/maxHealth,healPoint.ToString());
+            // }
+
+            Vector2 collisionDirection = other.contacts[0].normal.normalized;
+            //Debug.Log(collisionDirection * pushBackForce);
+            playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Impulse);
+        }
+    }
+    public void TakeDamage(int damageIncome){
+        if(currentArmor.shieldPoint>0){
+
+                currentArmor.shieldPoint -= damageIncome;
                 if(currentArmor.shieldPoint<0){
                     OnShieldDelepted();
                     currentArmor.shieldPoint = 0;
                 }
                 delayTime = GameCalculator.ShieldRechargeDelayCalculator(baseCellArmor.shieldPoint - currentArmor.shieldPoint);
                 GameManager.Instance.healthBar.AdjustShield((float)currentArmor.shieldPoint/baseCellArmor.shieldPoint,currentArmor.shieldPoint.ToString());
-                EffectManager.Instance.ShowDamageInfict(enemyCell.bodyDamage,4,transform);
+                EffectManager.Instance.ShowDamageInfict(damageIncome,4,transform);
             }
             else{
-                int damageTake = GameCalculator.DamageTake(currentArmor,currentArmor.armorPoint,enemyCell.bodyDamage).Item1;
+                int damageTake = GameCalculator.DamageTake(currentArmor,currentArmor.armorPoint,damageIncome).Item1;
                 healPoint -= damageTake;
                 EffectManager.Instance.ShowDamageInfict(damageTake,4,transform);
                 GameManager.Instance.healthBar.AdjustHealth((float)healPoint/maxHealth,healPoint.ToString());
             }
 
-            Vector2 collisionDirection = other.contacts[0].normal.normalized;
-            //Debug.Log(collisionDirection * pushBackForce);
-            playerRigidbody2d.AddForce(collisionDirection * pushBackForce, ForceMode2D.Impulse);
-        }
     }
     protected void OnShieldDelepted(){
         if(isShieldPulseCharged){

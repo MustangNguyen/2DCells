@@ -105,7 +105,7 @@ public class GameManager : Singleton<GameManager>
         gameStateMachine.ChangeState(new GameStatePlay());
     }
     public void AddPowerUpToMutation(string powerUpId){
-        Debug.Log("power up choose: " + powerUpId);
+        // Debug.Log("power up choose: " + powerUpId);
         isChoosingPowerUp = false;
         bool isExistPowerUp = listPowerUpDatas.Exists(x => x.id == powerUpId);
         if (isExistPowerUp){

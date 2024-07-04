@@ -60,7 +60,7 @@ public class PopupChoosePowerUp : Popups
             }
             //PowerUpCard cardSpawned = LeanPool.Spawn(powerUpCardPrefab,cardHolder);
             PowerUpCard cardSpawned = Instantiate(powerUpCardPrefab,cardHolder);
-            Debug.Log(listPowerUpToShow[i].name +": "+ lv);
+            // Debug.Log(listPowerUpToShow[i].name +": "+ lv);
             cardSpawned.InitCard(listPowerUpToShow[i],this,lv);
         }
     }

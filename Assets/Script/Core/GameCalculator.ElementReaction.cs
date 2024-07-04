@@ -39,7 +39,7 @@ public partial class GameCalculator : MonoBehaviour
                         resultStatus = new StatusStateCorrosive(currentStatus.enemyCell,currentStatus.stack);
                     break;
                     case PrimaryElement.Ice:
-                        Debug.Log("Super conductive require condition matched");
+                        // Debug.Log("Super conductive require condition matched");
                         resultStatus = new StatusStateSuperConductive(currentStatus.enemyCell,currentStatus.damagePerTick,currentStatus.stack);
                     break;
                 }

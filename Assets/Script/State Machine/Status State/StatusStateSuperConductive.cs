@@ -23,7 +23,7 @@ public class StatusStateSuperConductive : StatusState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("super conductive triggered");
+        // Debug.Log("super conductive triggered");
         SuperConductive();
         statusTimeLeft = 0;
     }
