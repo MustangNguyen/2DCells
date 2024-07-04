@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPersistence: 0
-  spawnTime: 10
+  spawnTime: 60
   enemyHoder: {fileID: 1706902183}
   listEnemyCell: []
   playerPosition: {fileID: 272775831}

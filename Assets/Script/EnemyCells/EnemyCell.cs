@@ -35,10 +35,12 @@ public class EnemyCell : CellsBase
     [Header("Wave")]
     [SerializeField] public int wave;
     [SerializeField] public bool dotStatus = false;
+    #region Initial & Update
     protected override void Start()
     {
         base.Start();
         destroyAnimation.SetActive(false);
+        meleeController.gameObject.SetActive(equipment == Equipment.Melee ? true : false);
     }
     protected override void OnEnable()
     {
@@ -47,6 +49,7 @@ public class EnemyCell : CellsBase
         SetStatusMachine(PrimaryElement.None);
         UpdateManager.Instance.AddCellToPool(this);
         index = UpdateManager.Instance.poolIndex;
+        
         Reset();
     }
     private void Reset()
@@ -79,6 +82,26 @@ public class EnemyCell : CellsBase
             stateMachine.ChangeState(new EnemyStateDestroy(this));
         }
     }
+    protected void  AddProperties()
+    {
+        if (DataManager.Instance.Data.listEnemies.Exists(x => x.enemyId == this.enemyId))
+        {
+            EnemyCellOOP enemyCellOOP = DataManager.Instance.Data.listEnemies.Find(x => x.enemyId == this.enemyId);
+            maxHealth = enemyCellOOP.hp;
+            enemyName = enemyCellOOP.enemyName;
+            healPoint = maxHealth;
+            moveSpeed = enemyCellOOP.moveSpeed;
+            defaultMoveSpeed = enemyCellOOP.moveSpeed;
+            baseCellArmor = new CellProtection(enemyCellOOP.cellProtection);
+            currentArmor = new CellProtection(baseCellArmor);
+            faction = enemyCellOOP.faction;
+            equipment = enemyCellOOP.equipment;
+            bodyDamage = enemyCellOOP.bodyDamage;
+            XpObs = enemyCellOOP.XpObs;
+        }
+    }
+    #endregion
+    #region Function
     public void movement()
     {
         Vector2 moveDirection = (GameManager.Instance.mutation.transform.position - transform.position).normalized;
@@ -120,6 +143,25 @@ public class EnemyCell : CellsBase
             currentArmor.armorPoint -= Amount;
         }
     }
+    public override void OnDead()
+    {
+        base.OnDead();
+        moveSpeed = 0;
+        UpdateManager.Instance.RemoveCellFromPool(index);
+        rigidbody2d.velocity = Vector3.zero;
+        collider2d.enabled = false;
+        destroyAnimation.SetActive(true);
+        animator.SetTrigger("Destroy");
+        model.color = new Color(0, 0, 0, 0);
+        EffectManager.Instance.SpawnObs(gameObject,XpObs);
+        LeanTween.delayedCall(1f, () =>
+        {
+            EnemySpawner.Instance.OnEnemyDestroy(this);
+            LeanPool.Despawn(gameObject);
+        });
+    }
+    #endregion
+    #region State Machine
     public void SetStatusMachine(PrimaryElement element, int damageIncome = 0, int stack = 0,bool isOverrideMaxStack = false)
     {
         if(element == PrimaryElement.None)
@@ -159,6 +201,7 @@ public class EnemyCell : CellsBase
         }
 
     }
+    #endregion
     // protected void Init(){
     //     foreach(var enemy in DataManager.Instance.Data.listEnemies){
     //         if(enemyId == enemy.enemyId){
@@ -166,40 +209,19 @@ public class EnemyCell : CellsBase
     //         }
     //     }
     // }
-    protected void  AddProperties()
-    {
-        if (DataManager.Instance.Data.listEnemies.Exists(x => x.enemyId == this.enemyId))
-        {
-            EnemyCellOOP enemyCellOOP = DataManager.Instance.Data.listEnemies.Find(x => x.enemyId == this.enemyId);
-            maxHealth = enemyCellOOP.hp;
-            enemyName = enemyCellOOP.enemyName;
-            healPoint = maxHealth;
-            moveSpeed = enemyCellOOP.moveSpeed;
-            defaultMoveSpeed = enemyCellOOP.moveSpeed;
-            baseCellArmor = new CellProtection(enemyCellOOP.cellProtection);
-            currentArmor = new CellProtection(baseCellArmor);
-            faction = enemyCellOOP.faction;
-            bodyDamage = enemyCellOOP.bodyDamage;
-            XpObs = enemyCellOOP.XpObs;
-        }
+    
+    
+    #region Component gadget
+    [ContextMenu("AutoFillFields")]
+    public void AutoFillFields(){
+        rigidbody2d = GetComponent<Rigidbody2D>();
+        collider2d = GetComponent<Collider2D>();
+        stateMachine = GetComponent<StateMachine>();
+        model = GetComponent<SpriteRenderer>();
+        meleeController = GetComponentInChildren<EnemyMeleeController>();
+        animator = GetComponentInChildren<Animator>();
     }
-    public override void OnDead()
-    {
-        base.OnDead();
-        moveSpeed = 0;
-        UpdateManager.Instance.RemoveCellFromPool(index);
-        rigidbody2d.velocity = Vector3.zero;
-        collider2d.enabled = false;
-        destroyAnimation.SetActive(true);
-        animator.SetTrigger("Destroy");
-        model.color = new Color(0, 0, 0, 0);
-        EffectManager.Instance.SpawnObs(gameObject,XpObs);
-        LeanTween.delayedCall(1f, () =>
-        {
-            EnemySpawner.Instance.OnEnemyDestroy(this);
-            LeanPool.Despawn(gameObject);
-        });
-    }
+    #endregion
 }
 
 [Serializable]

@@ -374,7 +374,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35555556
+  m_Radius: 0.2318908
 --- !u!114 &-224524233728151985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +434,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9129821641811507468}
     m_Modifications:
+    - target: {fileID: 1857110751942870333, guid: 7a02448dc7ec6914f8b417e96ce77638, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857110751942870333, guid: 7a02448dc7ec6914f8b417e96ce77638, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1857110751942870333, guid: 7a02448dc7ec6914f8b417e96ce77638, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2075835943679302826, guid: 7a02448dc7ec6914f8b417e96ce77638, type: 3}
       propertyPath: m_Name
       value: Status bar
@@ -615,6 +627,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 652824927691344557, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 652824927691344557, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2822226032446953040, guid: 3c14166d8641e964084335e7cc097353, type: 3}

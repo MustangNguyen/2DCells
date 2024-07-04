@@ -14,4 +14,7 @@ public class MainMenuManager : MonoBehaviour
     {
         SceneLoadManager.Instance.LoadScene(SceneName.Collection);
     }
+    public void OnQuitBtnClick(){
+        Application.Quit();
+    }
 }

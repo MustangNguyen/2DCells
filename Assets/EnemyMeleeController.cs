@@ -12,8 +12,12 @@ public class EnemyMeleeController : MonoBehaviour
     [SerializeField] private float slashEdge = 120;
     [SerializeField] private float slashDuration = 0.5f;
     [SerializeField] private float cooldownDuration = 1f;
+    [SerializeField] private float detectedRange = 2f;
     private bool isCooldown = false;
     
+    private void Awake() {
+        enemyCell = GetComponentInParent<EnemyCell>();
+    }
     private void Start() {
         sword.gameObject.SetActive(false);
     }
@@ -24,7 +28,7 @@ public class EnemyMeleeController : MonoBehaviour
         direction.Normalize();
         float edge = Mathf.Atan2(direction.y,direction.x)*Mathf.Rad2Deg;
         slashAxis.rotation=Quaternion.Euler(slashAxis.position.x,slashAxis.position.y,edge - 90);
-        if(magnitude<2){
+        if(magnitude<detectedRange){
             SlashSlash();
             isCooldown = true;
         }
