@@ -6057,6 +6057,8 @@ MonoBehaviour:
   criticalRate: 30
   criticalMultiple: 2
   isAutoFire: 0
+  gunId: 
+  gunName: 
 --- !u!114 &5315905493469598266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6077,6 +6079,8 @@ MonoBehaviour:
   criticalRate: 30
   criticalMultiple: 2
   isAutoFire: 0
+  gunId: 
+  gunName: 
 --- !u!1001 &5698208696931262137
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,5 +13,10 @@ public class MainMenuManager : MonoBehaviour
     public void OnCollectionBtnClick()
     {
         SceneLoadManager.Instance.LoadScene(SceneName.Collection);
+
+    }
+    public void OnEquipmentBtnClick()
+    {
+        SceneLoadManager.Instance.LoadScene(SceneName.Equipment);
     }
 }

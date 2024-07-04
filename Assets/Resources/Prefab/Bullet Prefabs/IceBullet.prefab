@@ -112,7 +112,7 @@ MonoBehaviour:
   bulletCollider2D: {fileID: 8593638103208446277}
   bulletTrail: {fileID: 0}
   sprite: {fileID: 3826545368362221535}
-  bulletId: 
+  bulletId: BPRO_ICESH
   bulletTypeId: 
   bulletName: 
   isExplosive: 0

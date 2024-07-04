@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -420697141
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 272bb09ec375eb94e9304ed5547d75c8, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 9016624705188137926}
   - component: {fileID: -8562231970903223584}
   m_Layer: 15
-  m_Name: IceGun
+  m_Name: ICEGUN
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,3 +137,5 @@ MonoBehaviour:
   criticalRate: 30
   criticalMultiple: 2
   isAutoFire: 0
+  gunId: GHEM_002
+  gunName: 

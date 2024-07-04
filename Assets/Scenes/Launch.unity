@@ -1599,11 +1599,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPersistence: 1
   Data:
+    userInformation:
+      userID: 
+      userName: 
+      email: 
+    userGunInformation: []
+    userEquipedGunInfors: []
     listMutations: []
     listEnemies: []
     listAbilities: []
     listBullet: []
     listIngameLevelConfig: []
+    listGun: []
   listMutation: []
   listAbility: []
 --- !u!1 &762424731

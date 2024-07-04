@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public class UserDataManagerOOP : MonoBehaviour
@@ -33,6 +34,27 @@ public class UserLogin{
         this.password = password;
     }
 }
+/*
+[Serializable]
+public class UserGun
+{
+    public string ownershipId;
+    public string userId;
+    public string gunId;
+    public int gunLv;
+    public int gunXp;
+    public UserGun() { }
+
+    public UserGun(string ownerShipId, string userId, string gunId, int gunLv, int gunXp)
+    {
+        this.ownershipId = ownerShipId;
+        this.userId = userId;
+        this.gunId = gunId;
+        this.gunLv = gunLv;
+        this.gunXp = gunXp;
+    }
+}*/
+
 [Serializable]
 public class AccessToken{
     public string accessToken;

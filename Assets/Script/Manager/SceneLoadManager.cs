@@ -14,4 +14,5 @@ public enum SceneName{
     Launch,
     GamePlay,
     Collection,
+    Equipment,
 }
