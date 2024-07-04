@@ -17,38 +17,68 @@ public class DataManager : Singleton<DataManager>
         NetworkManager.Instance.GetEnemyDataFromServer();
         NetworkManager.Instance.GetBulletDataFromServer();
         NetworkManager.Instance.GetIngameLevelConfigsFromServer();
+        NetworkManager.Instance.GetGunFromServer();
         listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
     }
-    public void GetUserInformationData(string data){
+    public void GetUserInformationData(string data) {
         JSONObject json = new JSONObject(data);
         var listData = json.list;
-        foreach(var item in listData){
+        foreach (var item in listData) {
             Data.userInformation.userID = item["id"].str;
             Data.userInformation.userName = item["userName"].str;
             Data.userInformation.email = item["email"].str;
         }
     }
-    public void GetIngameLevelConfigs(string data){
+    public void GetUserGunInformationData(string data)
+    {
         JSONObject json = new JSONObject(data);
         var listData = json.list;
-        foreach(var item in listData){
+        foreach (var item in listData) {
+            UserGunInformation userGunInformation = new UserGunInformation();
+            userGunInformation.ownerShipId = item["ownershipId"].str;
+            userGunInformation.userId = item["userId"].str;
+            userGunInformation.gunId = item["gunId"].str;
+            userGunInformation.gunLv = (int)item["gunLv"].n;
+            userGunInformation.gunXp = (int)item["gunXp"].n;
+            Data.userGunInformation.Add(userGunInformation);
+        }
+    }
+    public void GetUserEquipedGunInfor(string data)
+    {
+        JSONObject json = new JSONObject(data);
+        var listData = json.list;
+        foreach (var item in listData)
+        {
+            UserEquipedGunInfor userEquipedGunInfor = new UserEquipedGunInfor();
+            userEquipedGunInfor.userEquipmentId = item["userEquipmentId"].str;
+            userEquipedGunInfor.userId = item["userId"].str;
+            userEquipedGunInfor.mutationOwnershipId = item["mutationOwnershipId"].str;
+            userEquipedGunInfor.gunOwnershipId1 = item["gunOwnershipId1"].str;
+            userEquipedGunInfor.gunOwnershipId2 = item["gunOwnershipId2"].str;
+            Data.userEquipedGunInfors.Add(userEquipedGunInfor);
+        }
+    }
+    public void GetIngameLevelConfigs(string data) {
+        JSONObject json = new JSONObject(data);
+        var listData = json.list;
+        foreach (var item in listData) {
             IngameLevelConfigsOOP lv = new IngameLevelConfigsOOP();
             lv.inGameLv = (int)item["inGameLv"].n;
             lv.xpRequire = (int)item["xpRequire"].n;
             Data.listIngameLevelConfig.Add(lv);
         }
     }
-    public void GetMutationData(string data){
+    public void GetMutationData(string data) {
         JSONObject json = new JSONObject(data);
         var listData = json.list;
-        foreach(var item in listData){
+        foreach (var item in listData) {
             MutationOOP mutation = new MutationOOP();
             mutation.maxHealth = (int)item["hp"].n;
             mutation.maxEnery = (int)item["mp"].n;
             ArmorType armorType;
-            Enum.TryParse(item["cellProtection"].str,out armorType);
+            Enum.TryParse(item["cellProtection"].str, out armorType);
             ShieldType shieldType;
-            Enum.TryParse(item["shieldType"].str,out shieldType);
+            Enum.TryParse(item["shieldType"].str, out shieldType);
             mutation.baseCellProtection.armorType = armorType;
             mutation.baseCellProtection.armorPoint = (int)item["armor"].n;
             mutation.baseCellProtection.shieldType = shieldType;
@@ -57,9 +87,9 @@ public class DataManager : Singleton<DataManager>
             mutation.mutationID = item["mutationId"].str;
             mutation.mutationName = item["mutationName"].str;
             Faction faction;
-            Enum.TryParse(item["factionId"].str,out faction);
+            Enum.TryParse(item["factionId"].str, out faction);
             mutation.faction = faction;
-            foreach(var ability in item["mutationAbilities"].list){
+            foreach (var ability in item["mutationAbilities"].list) {
                 AbilityOOP tempAbility = new AbilityOOP();
                 tempAbility.abilityId = ability["abilityId"].str;
                 tempAbility.abilityName = ability["abilityName"].str;
@@ -69,40 +99,40 @@ public class DataManager : Singleton<DataManager>
             Data.listMutations.Add(mutation);
         }
     }
-    public void GetEnemydata(string data){
+    public void GetEnemydata(string data) {
         JSONObject json = new JSONObject(data);
         var listData = json.list;
-        foreach(var item in listData){
+        foreach (var item in listData) {
             EnemyCellOOP enemyCell = new();
             enemyCell.enemyId = item["enemyId"].str;
             enemyCell.enemyName = item["enemyName"].str;
             enemyCell.hp = (int)item["hp"].n;
             enemyCell.mp = (int)item["mp"].n;
             ArmorType armorType;
-            Enum.TryParse(item["cellProtection"].str,out armorType);
+            Enum.TryParse(item["cellProtection"].str, out armorType);
             ShieldType shieldType;
-            Enum.TryParse(item["shieldType"].str,out shieldType);
+            Enum.TryParse(item["shieldType"].str, out shieldType);
             enemyCell.cellProtection.armorType = armorType;
             enemyCell.cellProtection.armorPoint = (int)item["armor"].n;
             enemyCell.cellProtection.shieldType = shieldType;
             enemyCell.cellProtection.shieldPoint = (int)item["shield"].n;
             Faction faction;
-            Enum.TryParse(item["factionId"].str,out faction);
+            Enum.TryParse(item["factionId"].str, out faction);
             enemyCell.faction = faction;
             enemyCell.abilityId = item["abilityId"].str;
             enemyCell.moveSpeed = (float)item["moveSpeed"].n;
             Equipment equipment;
-            Enum.TryParse(item["equipment"].str, out equipment); 
+            Enum.TryParse(item["equipment"].str, out equipment);
             enemyCell.equipment = equipment;
             enemyCell.bodyDamage = (int)item["bodyDamage"].n;
-            enemyCell.XpObs=(int)item["xpObs"].n;
+            enemyCell.XpObs = (int)item["xpObs"].n;
             Data.listEnemies.Add(enemyCell);
-        }   
+        }
     }
-    public void GetAbilityData(string data){
+    public void GetAbilityData(string data) {
         JSONObject json = new JSONObject(data);
         var listjson = json.list;
-        foreach(var item in listjson){
+        foreach (var item in listjson) {
             AbilityOOP abilityOOP = new AbilityOOP();
             abilityOOP.abilityId = item["abilityId"].str;
             abilityOOP.abilityName = item["abilityName"].str;
@@ -113,8 +143,8 @@ public class DataManager : Singleton<DataManager>
     public void GetBulletData(string data)
     {
         JSONObject json = new JSONObject(data);
-        var listjson  = json.list;
-        foreach(var item in listjson)
+        var listjson = json.list;
+        foreach (var item in listjson)
         {
             BulletOOP bulletOOP = new BulletOOP();
             bulletOOP.bulletId = item["bulletId"].str;
@@ -133,6 +163,23 @@ public class DataManager : Singleton<DataManager>
             bulletOOP.element.primaryElement = element.primaryElement;
             bulletOOP.element.secondaryElement = element.secondaryElement;
             Data.listBullet.Add(bulletOOP);
+        }
+    }
+    public void GetGunData(string data)
+    {
+        JSONObject json = new JSONObject(data);
+        var listjson = json.list;
+        foreach(var item in listjson) 
+        {
+            CellGunOOP cellGunOOP = new CellGunOOP();
+            cellGunOOP.gunId = item["gunId"].str;
+            cellGunOOP.gunName = item["gunName"].str;
+            cellGunOOP.bulletId = item["bulletId"].str;
+            cellGunOOP.fireRate = (float)item["fireRate"].n;
+            cellGunOOP.accuracy = (float)item["accuracy"].n;
+            cellGunOOP.criticalRate = (float)item["criticalRate"].n;
+            cellGunOOP.criticalMultiple = (float)item["criticalMultiple"].n;
+            Data.listGun.Add(cellGunOOP);
         }
     }
 }

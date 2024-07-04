@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Lean.Common;
 using System;
 using UnityEngine.Purchasing.MiniJSON;
+using System.Linq;
 
 public class LoginManager : Singleton<LoginManager>
 {
@@ -62,7 +63,7 @@ public class LoginManager : Singleton<LoginManager>
             {
                 loginPanel.gameObject.SetActive(false);
                 startBtn.gameObject.SetActive(true);
-                
+                NetworkManager.Instance.GetUserInformationFromServer(userEmail.text);
             }, () =>
             {
                 submitBtn.interactable = true;
@@ -185,8 +186,9 @@ public class LoginManager : Singleton<LoginManager>
         /* #if UNITY_EDITOR
              SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
          #else */
-        NetworkManager.Instance.GetUserInformationFromServer(userEmail.text);
         SceneLoadManager.Instance.LoadScene(SceneName.MainMenu);
+        NetworkManager.Instance.GetUserGunFromServer(DataManager.Instance.Data.userInformation.userID);
+        NetworkManager.Instance.GetUserEquipedGunFromServer(DataManager.Instance.Data.userInformation.userID);
         //  #endif
     }
     // private IEnumerator IEInputFieldAnimation(float from,float to,float time,Action onStart =null, Action onFinish = null){

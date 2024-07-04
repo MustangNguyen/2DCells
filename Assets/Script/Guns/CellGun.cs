@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Lean.Pool;
+using System;
 
 
 public class CellGun : MonoBehaviour
@@ -15,6 +16,9 @@ public class CellGun : MonoBehaviour
     [SerializeField] public float criticalRate = 30f;
     [SerializeField] public float criticalMultiple = 2;
     [SerializeField] protected bool isAutoFire = false;
+    [SerializeField] protected string gunId;
+    [SerializeField] protected string gunName;
+
     protected bool isGunReady = true;
 
     protected void Start(){
@@ -28,6 +32,7 @@ public class CellGun : MonoBehaviour
         }
         GameObject gameObject = GameObject.Find("Bullet Holder");
         bulletHolder = gameObject;
+        AddProperties();
     }
     protected void Update()
     {
@@ -68,4 +73,28 @@ public class CellGun : MonoBehaviour
         float rotateZ = Mathf.Atan2(distance.y,distance.x)*Mathf.Rad2Deg;
         transform.rotation=Quaternion.Euler(0f,0f,rotateZ-90);
     }
+    public void AddProperties()
+    {
+        if(DataManager.Instance.Data.listGun.Exists(x=>x.gunId == this.gunId))
+        {
+            CellGunOOP cellGunOOP = DataManager.Instance.Data.listGun.Find(x=> x.gunId == this.gunId);
+            this.gunId = cellGunOOP.gunId;
+            this.criticalMultiple = cellGunOOP.criticalMultiple;
+            this.fireRate = cellGunOOP.fireRate;
+            this.criticalRate = cellGunOOP.criticalRate;
+            this.accuracy = cellGunOOP.accuracy;
+            this.gunName = cellGunOOP.gunName;
+        }
+    }
+}
+[Serializable]
+public class CellGunOOP
+{
+    public string gunId;
+    public string gunName;
+    public string bulletId;
+    public float fireRate;
+    public float accuracy;
+    public float criticalRate;
+    public float criticalMultiple;
 }

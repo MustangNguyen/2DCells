@@ -35,6 +35,9 @@ public static class GameStatic
     public readonly static string GET_BULLET_API = "/api/Bullets";
     public readonly static string GET_INGAME_LEVEL_CONFIGS = "/api/IngameLevelConfigs";
     public readonly static string GET_USER_INFORMATION = "/api/Users/";
+    public readonly static string GET_USER_GUN = "/api/UserGun/getUserGunList/";
+    public readonly static string GET_GUN_API = "/api/Guns";
+    public readonly static string GET_USER_EQUIPED_GUN = "/api/UserEquipment/GetUserEquipmentById/{id}?userid=";
 
     //POST
     public readonly static string POST_LOGIN_REQUEST = "/identity/login";

@@ -60,6 +60,27 @@ public partial class NetworkManager : Singleton<NetworkManager>
             DataManager.Instance.GetUserInformationData(data);
         }));
     }
+    public void GetUserGunFromServer(string userId)
+    {
+        StartCoroutine(CreateWebGetRequest(HOST + GET_USER_GUN + userId, (string data) => 
+        {
+            DataManager.Instance.GetUserGunInformationData(data);
+        }));
+    }
+    public void GetGunFromServer()
+    {
+        StartCoroutine(CreateWebGetRequest(HOST + GET_GUN_API, (string data) =>
+        {
+            DataManager.Instance.GetGunData(data);   
+        }));
+    }
+    public void GetUserEquipedGunFromServer(string userId)
+    {
+        StartCoroutine(CreateWebGetRequest(HOST + GET_USER_EQUIPED_GUN + userId , (string data) =>
+        {
+            DataManager.Instance.GetUserEquipedGunInfor(data);
+        }));
+    }
     #endregion
 
     #region Post

@@ -13,6 +13,7 @@ public class ColletionManager : Singleton<ColletionManager>
     [SerializeField] private Transform itemHolder;
     [SerializeField] private List<CharcaterItem> charcaterItems =  new();
     [SerializeField] private List<EnemyCellOOP> enemyCellOops = new();
+    
 
     [SerializeField] private TextMeshProUGUI cellName;
     [SerializeField] private TextMeshProUGUI faction;
@@ -37,7 +38,6 @@ public class ColletionManager : Singleton<ColletionManager>
     }
     public void OnClickShowInfor(string id)
     {
-        Debug.Log(id);
         var enemy = enemyCellOops.Find(x=>x.enemyId == id);
         cellName.text = $"Name: {enemy.enemyName}";
         faction.text = $"Faction: {enemy.faction}";
@@ -50,9 +50,8 @@ public class ColletionManager : Singleton<ColletionManager>
         shieldPoint.text = $"Shield Point: {enemy.cellProtection.shieldPoint}";
 
     }
-    // Update is called once per frame
-    void Update()
+    public void OnClickBackToMenu()
     {
-        
+        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu);
     }
 }
