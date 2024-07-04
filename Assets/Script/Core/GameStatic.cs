@@ -25,10 +25,6 @@ public static class GameStatic
     public readonly static Color USER_UI_COLOR_PURPLE = new Color(0.627451f, 0.1254902f, 0.9411765f, 1f);
     #endregion
 
-    #region GAMESCENCE
-    public readonly static string MENU_SCENCE_NAME = "MainMenu";
-    #endregion
-
     #region API
     //HOST
     public readonly static string HOST = "https://twodcellcore20240513164925.azurewebsites.net";

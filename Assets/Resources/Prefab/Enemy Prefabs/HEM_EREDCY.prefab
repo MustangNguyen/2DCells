@@ -683,7 +683,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Size.y
-      value: 0.15
+      value: 0.1955286
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.02527098
       objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_IsTrigger

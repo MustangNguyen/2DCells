@@ -639,7 +639,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 652824927691344557, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2822226032446953040, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Layer
@@ -731,15 +731,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Size.x
-      value: 0.5
+      value: 2.1265717
       objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Size.y
-      value: 0.19688888
+      value: 0.19097027
+      objectReference: {fileID: 0}
+    - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.90709686
       objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Offset.y
-      value: -0.023444436
+      value: -0.02640374
       objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_IsTrigger

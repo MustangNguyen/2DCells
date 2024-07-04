@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private void Start() {
+        AudioManager.Instance.StartMainMenuBackGround();
+    }
     public void OnCampaignBtnClick(){
         SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
     }
