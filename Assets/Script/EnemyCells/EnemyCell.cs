@@ -6,12 +6,14 @@ using Lean.Pool;
 using TMPro;
 using System;
 using static GameCalculator;
+using Unity.VisualScripting;
 
 public class EnemyCell : CellsBase
 {
     [Header("Enemy Properties")]
     [SerializeField] protected Rigidbody2D rigidbody2d;
     [SerializeField] protected Collider2D collider2d;
+    [SerializeField] public bool isBoss = false;
     [SerializeField] public int bodyDamage{get; protected set;} = 0;
     [SerializeField] protected int XpObs;
     [SerializeField] public bool isRestrict = false;
@@ -31,6 +33,7 @@ public class EnemyCell : CellsBase
     [Space(10)]
     [Header("Attack")]
     [SerializeField] protected EnemyMeleeController meleeController;
+    [SerializeField] public MeleeRangeRenderer meleeRangeRenderer;
     [Space(10)]
     [Header("Wave")]
     [SerializeField] public int wave;
@@ -41,6 +44,7 @@ public class EnemyCell : CellsBase
         base.Start();
         destroyAnimation.SetActive(false);
         meleeController.gameObject.SetActive(equipment == Equipment.Melee ? true : false);
+        meleeRangeRenderer.radius = meleeController.detectedRange;
     }
     protected override void OnEnable()
     {
@@ -65,6 +69,8 @@ public class EnemyCell : CellsBase
         // healthText.text = healPoint.ToString();
         stateMachine.StateMachineUpdate();
         Spawner.Instance.Reposition(transform);
+        meleeRangeRenderer?.DrawArc();
+        meleeController?.SlashCheck();
     }
     public void CellFixedUpdate()
     {
@@ -76,7 +82,9 @@ public class EnemyCell : CellsBase
         movement();
         StateMachineMonitor();
         stateMachine.StateMachineFixedUpdate();
-        meleeController?.SlashCheck();
+        currentElementStack =  stateMachine.currentStatusState.stack;
+        currentPrimaryElement = stateMachine.currentStatusState.primaryElement;
+        currentSecondaryElement = stateMachine.currentStatusState.secondaryElement;
         if (healPoint <= 0)
         {
             stateMachine.ChangeState(new EnemyStateDestroy(this));
@@ -157,7 +165,7 @@ public class EnemyCell : CellsBase
         LeanTween.delayedCall(1f, () =>
         {
             EnemySpawner.Instance.OnEnemyDestroy(this);
-            LeanPool.Despawn(gameObject);
+            LeanPool.Despawn(this);
         });
     }
     #endregion

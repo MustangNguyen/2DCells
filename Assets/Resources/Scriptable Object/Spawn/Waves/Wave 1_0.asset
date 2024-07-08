@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waveDuration: 90
   listSpawn:
+  - weight: 10
+    enemyCells: {fileID: -224524233728151985, guid: fcbd04ea3bff16548a349aa51e9cddf6, type: 3}
   - weight: 1
     enemyCells: {fileID: 3817388997303399524, guid: 5fa1656ffccc4264386062b4da39aa6c, type: 3}

@@ -23,6 +23,7 @@ public class CellsBase : MonoBehaviour
     [Header("Status")]
     [SerializeField] protected int currentElementStack = 0;
     [SerializeField] protected PrimaryElement currentPrimaryElement = 0;
+    [SerializeField] protected SecondaryElement currentSecondaryElement = 0;
     protected float shieldRechargeDelay = 1;
     protected float shieldRechargeRate = 100;
 

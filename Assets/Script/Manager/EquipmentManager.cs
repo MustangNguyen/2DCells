@@ -22,6 +22,7 @@ public class EquipmentManager : Singleton<EquipmentManager>
     
     private void Start()
     {
+        AudioManager.Instance.StartMainMenuBackGround();
         userGunInformations = DataManager.Instance.Data.userGunInformation;
         for (int i = 0; i < userGunInformations.Count; i++)
         {

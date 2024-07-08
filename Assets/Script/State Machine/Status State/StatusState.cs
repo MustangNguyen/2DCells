@@ -12,16 +12,18 @@ public class StatusState : State
     protected float timeBetweenTick = TIME_BETWEEN_STATUS_TICK;
     public PrimaryElement primaryElement { get; protected set; } = PrimaryElement.None;
     public SecondaryElement secondaryElement { get; protected set; } = SecondaryElement.None;
-    public EnemyCell enemyCell{get;protected set;}
-    public Mutation mutation{get;protected set;}
-    public StatusState(){
-        
+    public EnemyCell enemyCell { get; protected set; }
+    public Mutation mutation { get; protected set; }
+    public StatusState()
+    {
+
     }
     public StatusState(CellsBase cellsBase)
     {
         if (cellsBase is EnemyCell)
         {
             enemyCell = (EnemyCell)cellsBase;
+
         }
         else
         {
@@ -47,6 +49,15 @@ public class StatusState : State
         {
             statusTimeLeft = STATUS_DURATION;
         }
+        if (enemyCell.isBoss)
+        {
+            maxStack = MAX_STATUS_STACK / 2;
+            stack = stack > maxStack ? maxStack : stack;
+        }
+        else
+        {
+            maxStack = MAX_STATUS_STACK;
+        }
     }
     public override void PhysicsUpdate()
     {
@@ -56,11 +67,13 @@ public class StatusState : State
         // else
         //     Debug.Log("status is on mutation");
         statusTimeLeft -= Time.fixedDeltaTime;
-        if (statusTimeLeft <= 0){
+        if (statusTimeLeft <= 0)
+        {
             ResetState();
             enemyCell?.SetStatusMachine(PrimaryElement.None);
         }
-        if (stack <= 0){
+        if (stack <= 0)
+        {
             ResetState();
             enemyCell?.SetStatusMachine(PrimaryElement.None);
         }

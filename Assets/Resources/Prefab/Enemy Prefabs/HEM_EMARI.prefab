@@ -124,8 +124,10 @@ MonoBehaviour:
   friction: {x: 0, y: 0}
   currentElementStack: 0
   currentPrimaryElement: 0
+  currentSecondaryElement: 0
   rigidbody2d: {fileID: 7972279139686672109}
   collider2d: {fileID: 7927935831264846181}
+  isBoss: 0
   XpObs: 0
   isRestrict: 0
   index: 0
@@ -139,7 +141,8 @@ MonoBehaviour:
   shieldBar: {fileID: 8859337803141188390}
   healthText: {fileID: 5519259120346946660}
   model: {fileID: 509484139380529113}
-  meleeController: {fileID: 0}
+  meleeController: {fileID: 508693302553576877}
+  meleeRangeRenderer: {fileID: 5667154057458237914}
   wave: 0
   dotStatus: 0
 --- !u!114 &2404866790970904685
@@ -385,11 +388,33 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+--- !u!114 &508693302553576877 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 294408351022007214, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+  m_PrefabInstance: {fileID: 223718768327575043}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957b3e7561b0c03419411765319c23ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3799066089156770900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4008820984037194327, guid: 3c14166d8641e964084335e7cc097353, type: 3}
   m_PrefabInstance: {fileID: 223718768327575043}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5667154057458237914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5602207036519909337, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+  m_PrefabInstance: {fileID: 223718768327575043}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b9f641587e13e4f9ccb4c8736019d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4946401200589301649
 PrefabInstance:
   m_ObjectHideFlags: 0

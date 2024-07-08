@@ -11,7 +11,7 @@ public class EnemyMeleeSlash : MonoBehaviour
         collider2d = GetComponent<Collider2D>();
     }
     private void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("your are slashed!");
+        // Debug.Log("your are slashed!");
         if(other.CompareTag("Player")){
             Rigidbody2D playerRigidBody = other.GetComponent<Rigidbody2D>();
             other.GetComponent<Mutation>().TakeDamage(enemyMeleeController.EnemyCell.bodyDamage * 2);

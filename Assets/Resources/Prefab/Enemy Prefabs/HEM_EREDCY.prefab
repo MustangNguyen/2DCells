@@ -408,8 +408,10 @@ MonoBehaviour:
   friction: {x: 0, y: 0}
   currentElementStack: 0
   currentPrimaryElement: 0
+  currentSecondaryElement: 0
   rigidbody2d: {fileID: 9037762243537240782}
   collider2d: {fileID: 4411161091843619794}
+  isBoss: 0
   XpObs: 0
   isRestrict: 0
   index: 0
@@ -424,6 +426,7 @@ MonoBehaviour:
   healthText: {fileID: 792341848160159537}
   model: {fileID: 4243540913297065839}
   meleeController: {fileID: 7839276780766463105}
+  meleeRangeRenderer: {fileID: 2693240509272965366}
   wave: 0
   dotStatus: 0
 --- !u!1001 &640014775203459396
@@ -618,6 +621,10 @@ PrefabInstance:
       value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 294408351022007214, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: detectedRange
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 294408351022007214, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: slashDuration
       value: 0.25
       objectReference: {fileID: 0}
@@ -636,6 +643,22 @@ PrefabInstance:
     - target: {fileID: 2822226032446953040, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277719735579669144, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_SortingLayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277719735579669144, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277719735579669144, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -813242097
+      objectReference: {fileID: 0}
+    - target: {fileID: 3277719735579669144, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 4008820984037194327, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_LocalPosition.x
@@ -677,6 +700,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5602207036519909337, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: angle
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602207036519909337, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: radius
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5602207036519909337, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+      propertyPath: chargeSegments
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6280554415185971501, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: m_Size.x
       value: 0.5
@@ -706,6 +741,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+--- !u!114 &2693240509272965366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5602207036519909337, guid: 3c14166d8641e964084335e7cc097353, type: 3}
+  m_PrefabInstance: {fileID: 7556836109961840431}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19b9f641587e13e4f9ccb4c8736019d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6880786739811974520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4008820984037194327, guid: 3c14166d8641e964084335e7cc097353, type: 3}

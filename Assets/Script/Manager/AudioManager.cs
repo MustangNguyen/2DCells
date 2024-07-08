@@ -44,7 +44,7 @@ public class AudioManager : Singleton<AudioManager>
         while(duration>0){
             yield return new WaitForSecondsRealtime(0.01f);
             EazySoundManager.GlobalMusicVolume -= playerVolumeSetting.gameVolume/(turnOnOffDuration/0.01f);
-
+            duration-= 0.01f;
         }
         EazySoundManager.GlobalMusicVolume = 0;
         EazySoundManager.StopAllMusic();
@@ -53,10 +53,11 @@ public class AudioManager : Singleton<AudioManager>
         float duration = turnOnOffDuration;
         // yield return new WaitForSeconds(turnOnOffDuration*2);
         EazySoundManager.PlayMusic(audioClip,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
+        EazySoundManager.GlobalMusicVolume = 0;
         while(duration>0){
             yield return new WaitForSeconds(0.01f);
             EazySoundManager.GlobalMusicVolume += playerVolumeSetting.gameVolume/(turnOnOffDuration/0.01f);
-
+            duration -= 0.01f;
         }
         EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume;
     }

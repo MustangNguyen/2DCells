@@ -27,6 +27,7 @@ public class ColletionManager : Singleton<ColletionManager>
 
     public void Start()
     {
+        AudioManager.Instance.StartMainMenuBackGround();
         enemyCellOops = DataManager.Instance.Data.listEnemies;
         for(int i = 0; i < enemyCellOops.Count; i++)
         {

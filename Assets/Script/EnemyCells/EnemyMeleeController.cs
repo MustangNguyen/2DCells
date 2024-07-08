@@ -11,9 +11,11 @@ public class EnemyMeleeController : MonoBehaviour
     [SerializeField] private Transform sword;
     [SerializeField] private float slashEdge = 120;
     [SerializeField] private float slashDuration = 0.5f;
+    [SerializeField] private float chargeDuration = 1f;
     [SerializeField] private float cooldownDuration = 1f;
-    [SerializeField] private float detectedRange = 2f;
+    [SerializeField] public float detectedRange = 2f;
     private bool isCooldown = false;
+    private bool isCharging = false;
     
     private void Awake() {
         enemyCell = GetComponentInParent<EnemyCell>();
@@ -29,19 +31,33 @@ public class EnemyMeleeController : MonoBehaviour
         float edge = Mathf.Atan2(direction.y,direction.x)*Mathf.Rad2Deg;
         slashAxis.rotation=Quaternion.Euler(slashAxis.position.x,slashAxis.position.y,edge - 90);
         if(magnitude<detectedRange){
-            SlashSlash();
-            isCooldown = true;
+            if(!isCharging)
+                StartCoroutine(IEChargeToAttack());
         }
     }
     public void SlashSlash(){
+        isCooldown = true;
         sword.gameObject.SetActive(true);
         slashAxis.rotation = Quaternion.Euler(slashAxis.position.x, slashAxis.position.y, slashAxis.eulerAngles.z + slashEdge/2);
         StartCoroutine(IEMoveSword());
         StartCoroutine(IEWaitForCooldown());
     }
+    public IEnumerator IEChargeToAttack(){
+        isCharging = true;
+        float chargeDuration = this.chargeDuration;
+        enemyCell.meleeRangeRenderer.projectileChargeLine.gameObject.SetActive(true);
+        while(chargeDuration>0){
+            float t = Mathf.Clamp01((this.chargeDuration  - chargeDuration)/ this.chargeDuration);
+            enemyCell.meleeRangeRenderer.DrawChargeArc(t);
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+            chargeDuration -= Time.fixedDeltaTime;
+        }
+        enemyCell.meleeRangeRenderer.projectileChargeLine.gameObject.SetActive(false);
+        SlashSlash();
+    }
     public IEnumerator IEMoveSword(){
         float duration = slashDuration;
-        while(duration>0){
+        while(duration>=0){
             slashAxis.rotation = Quaternion.Euler(slashAxis.position.x, slashAxis.position.y, slashAxis.eulerAngles.z - slashEdge / (slashDuration/Time.fixedDeltaTime));
             yield return new WaitForFixedUpdate();
             duration -= Time.fixedDeltaTime;
@@ -56,5 +72,6 @@ public class EnemyMeleeController : MonoBehaviour
             cooldownDuration-= Time.fixedDeltaTime;;
         }
         isCooldown = false;
+        isCharging = false;
     }
 }
