@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 4243540913297065839}
   - component: {fileID: 9037762243537240782}
   - component: {fileID: 3160253765104366153}
-  - component: {fileID: 3817388997303399524}
+  - component: {fileID: 8725309217468484491}
   - component: {fileID: 4411161091843619794}
   m_Layer: 9
   m_Name: HEM_EWARPI
@@ -340,7 +340,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStateName: 
   currentStateStatusName: 
---- !u!114 &3817388997303399524
+--- !u!114 &8725309217468484491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4569782290257700300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea0c2efeed20ee4eb48d81f4551d967, type: 3}
+  m_Script: {fileID: 11500000, guid: da489cfbfe64c1145b131f30df6c437e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healPoint: 200
@@ -376,7 +376,7 @@ MonoBehaviour:
   currentSecondaryElement: 0
   rigidbody2d: {fileID: 9037762243537240782}
   collider2d: {fileID: 4411161091843619794}
-  isBoss: 0
+  isBoss: 1
   XpObs: 0
   isRestrict: 0
   index: 0
@@ -612,10 +612,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1665094397700565928}
     m_Modifications:
-    - target: {fileID: 294408351022007214, guid: 3c14166d8641e964084335e7cc097353, type: 3}
-      propertyPath: enemyCell
-      value: 
-      objectReference: {fileID: 3817388997303399524}
     - target: {fileID: 294408351022007214, guid: 3c14166d8641e964084335e7cc097353, type: 3}
       propertyPath: slashEdge
       value: 300

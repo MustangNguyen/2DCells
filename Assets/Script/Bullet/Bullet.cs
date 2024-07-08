@@ -86,7 +86,12 @@ public class Bullet : MonoBehaviour
         rigidbody2d.AddForce(bulletDirection * bulletSpeed,ForceMode2D.Impulse);
         LeanTween.delayedCall(timeExist, () =>
         {
-            LeanPool.Despawn(gameObject);
+            try{
+                LeanPool.Despawn(gameObject);
+            }
+            catch(Exception e){
+                Debug.LogWarning(e);
+            }
         });
     }
     protected virtual void Explode()

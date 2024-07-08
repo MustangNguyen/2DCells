@@ -16,6 +16,7 @@ public class AudioManager : Singleton<AudioManager>
     public int bgMusicMain;
     public int bgNormalBattleHematos;
     [SerializeField] public GameSetting playerVolumeSetting;
+    private bool isStoppingAudio = false;
     private void Start()
     {
         StartLogInBackground();
@@ -41,6 +42,7 @@ public class AudioManager : Singleton<AudioManager>
     }
     public IEnumerator IEStopMusic(){
         float duration = turnOnOffDuration;
+        isStoppingAudio = true;
         while(duration>0){
             yield return new WaitForSecondsRealtime(0.01f);
             EazySoundManager.GlobalMusicVolume -= playerVolumeSetting.gameVolume/(turnOnOffDuration/0.01f);
@@ -48,10 +50,16 @@ public class AudioManager : Singleton<AudioManager>
         }
         EazySoundManager.GlobalMusicVolume = 0;
         EazySoundManager.StopAllMusic();
+        isStoppingAudio = false;
     }
     public IEnumerator IEStartMusic(AudioClip audioClip){
         float duration = turnOnOffDuration;
+        while(isStoppingAudio){
+            yield return null;
+        }
         // yield return new WaitForSeconds(turnOnOffDuration*2);
+        
+        EazySoundManager.StopAllMusic();
         EazySoundManager.PlayMusic(audioClip,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
         EazySoundManager.GlobalMusicVolume = 0;
         while(duration>0){

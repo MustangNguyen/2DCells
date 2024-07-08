@@ -50,10 +50,8 @@ public class EnemyCell : CellsBase
     {
         base.OnEnable();
         AddProperties();
-        SetStatusMachine(PrimaryElement.None);
         UpdateManager.Instance.AddCellToPool(this);
         index = UpdateManager.Instance.poolIndex;
-        
         Reset();
     }
     private void Reset()
@@ -63,14 +61,18 @@ public class EnemyCell : CellsBase
         currentArmor.armorPoint = BioArmorCalculating();
         model.color = new Color(1, 1, 1, 1);
         collider2d.enabled = true;
+        SetStatusMachine(PrimaryElement.None);
+        meleeController.gameObject.SetActive(equipment == Equipment.Melee ? true : false);
     }
     public void CellUpdate()
     {
         // healthText.text = healPoint.ToString();
         stateMachine.StateMachineUpdate();
         Spawner.Instance.Reposition(transform);
-        meleeRangeRenderer?.DrawArc();
-        meleeController?.SlashCheck();
+        if(equipment == Equipment.Melee){
+            meleeRangeRenderer?.DrawArc();
+            meleeController?.SlashCheck();
+        }
     }
     public void CellFixedUpdate()
     {
@@ -162,10 +164,16 @@ public class EnemyCell : CellsBase
         animator.SetTrigger("Destroy");
         model.color = new Color(0, 0, 0, 0);
         EffectManager.Instance.SpawnObs(gameObject,XpObs);
+        stateMachine.ChangeStatusState(new StatusStateNormal(this));
         LeanTween.delayedCall(1f, () =>
         {
-            EnemySpawner.Instance.OnEnemyDestroy(this);
-            LeanPool.Despawn(this);
+            try{
+                EnemySpawner.Instance.OnEnemyDestroy(this);
+                LeanPool.Despawn(this);
+            }
+            catch(Exception e){
+                Debug.LogWarning(e);
+            }
         });
     }
     #endregion

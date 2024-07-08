@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Lean.Pool;
+using System;
 
 public class StatusEffect : MonoBehaviour
 {
@@ -18,7 +19,12 @@ public class StatusEffect : MonoBehaviour
         // StartCoroutine(IEStatusFade());
         //StatusFade();
         LeanTween.delayedCall(1f,()=>{
+            try{
                 LeanPool.Despawn(gameObject);
+            }
+            catch(Exception e){
+                Debug.LogWarning(e);
+            }
         });
     }
     public void StatusFade()

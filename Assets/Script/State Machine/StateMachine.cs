@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class StateMachine : MonoBehaviour
@@ -27,7 +29,18 @@ public class StateMachine : MonoBehaviour
         }
         currentStatusState = newStatusState;
         currentStatusState.Initialize(this);
-        currentStatusState.Enter();
+        try{
+            currentStatusState.Enter();
+        }
+        catch(Exception e){
+            StartCoroutine(IEWaitForEnemyLoad());
+            IEnumerator IEWaitForEnemyLoad(){
+                while(currentStatusState.enemyCell==null)
+                    yield return null;
+                currentStatusState.Enter();
+                Debug.LogWarning(e);
+            }
+        }
         currentStatusState.damagePerTick = initDamage > currentStatusState.damagePerTick ? initDamage : currentStatusState.damagePerTick;
         currentStateStatusName = currentStatusState.ToString();
     }
