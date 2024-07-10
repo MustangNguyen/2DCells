@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-public class UserDataManagerOOP : MonoBehaviour
-{
 
-}
 
 [Serializable]
 public class UserDataOOP

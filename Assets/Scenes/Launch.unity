@@ -1624,18 +1624,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPersistence: 1
+  UserData:
+    userId: 
+    userName: 
+    password: 
+    credit: 0
   Data:
     userInformation:
       userID: 
       userName: 
       email: 
+    userGunInformation: []
+    usersetEquipmentInfor: []
+    UserMutationInfor: []
     listMutations: []
     listEnemies: []
     listAbilities: []
     listBullet: []
     listIngameLevelConfig: []
+    listGun: []
   listMutation: []
   listAbility: []
+  listGun: []
 --- !u!1 &762424731
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ public partial class NetworkManager {
         
         using (UnityWebRequest request = UnityWebRequest.PostWwwForm(apiRequest.url, apiRequest.body))
         {
+            Debug.Log(apiRequest.body);
             request.SetRequestHeader("Content-Type", "application/json");
             byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(apiRequest.body);
             request.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
@@ -36,6 +37,7 @@ public partial class NetworkManager {
             if(isRequireAuthorize)
                 request.SetRequestHeader("Authorization","Bearer " + accessToken.accessToken);
             yield return request.SendWebRequest();
+            Debug.Log(request.responseCode);
             long responseCode = request.responseCode;
             if (request.result != UnityWebRequest.Result.Success)
             {

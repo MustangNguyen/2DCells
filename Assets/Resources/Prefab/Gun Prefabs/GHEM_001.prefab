@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2818758899710808709}
   - component: {fileID: 2717738933388043474}
-  - component: {fileID: 2882699953920130967}
   m_Layer: 15
-  m_Name: Gun1
+  m_Name: GHEM_001
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,12 +40,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4133762846089900181}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18170731477c55d4b94303b2ef006c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: -3547513021954940327, guid: fe35b861a5791d147bbca25b06c4e618, type: 3}
+  bulletPrefab: {fileID: 2277018407206519518, guid: c2cfbbfa119254c45bb26665bb59e2a2, type: 3}
   bulletHolder: {fileID: 0}
   isFirstGun: 1
   fireRate: 20
@@ -54,26 +53,8 @@ MonoBehaviour:
   criticalRate: 50
   criticalMultiple: 1.2
   isAutoFire: 0
---- !u!114 &2882699953920130967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4133762846089900181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5104389a01addea40b6299d30a016edd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: -3547513021954940327, guid: fe35b861a5791d147bbca25b06c4e618, type: 3}
-  bulletHolder: {fileID: 0}
-  isFirstGun: 1
-  fireRate: 1
-  accuracy: 70
-  criticalRate: 75
-  criticalMultiple: 1.2
-  isAutoFire: 0
+  gunId: GHEM_001
+  gunName: 
 --- !u!1 &6886512329764851758
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +82,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0018, y: 0.4779, z: 0}
-  m_LocalScale: {x: 0.18812682, y: 6.932552, z: 1}
+  m_LocalScale: {x: 0.581688, y: 5.18444, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2818758899710808709}
@@ -147,7 +128,7 @@ SpriteRenderer:
   m_SortingLayerID: -420697141
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: ae16c2eab9b160842bf4ce44c7dc2381, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0

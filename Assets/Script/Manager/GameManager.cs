@@ -20,8 +20,6 @@ public class GameManager : Singleton<GameManager>
     public List<PowerUpData> listPlayerPowerUpDatas = new();
     public List<PowerUp> listPlayerPowerUps = new();
     public bool isChoosingPowerUp = false;
-    public CellGun cellGun1;
-    public CellGun cellGun2;
     public Transform bulletHolder;
     public Action<string> returnPowerIdUpChosen;
     [Space(10)]
