@@ -8,18 +8,10 @@ using UnityEngine;
 [Serializable]
 public class UserDataOOP
 {
-    public string userId;
-    public string userName;
-    public string password;
-    public int credit;
-    public UserDataOOP(){}
-    public UserDataOOP(string userId, string userName, string password, int credit)
-    {
-        this.userId = userId;
-        this.userName = userName;
-        this.password = password;
-        this.credit = credit;
-    }
+    public UserInformation userInformation = new();
+    public List<UserGunInformation> userGunInformation = new();
+    public List<UserSetEquipmentInfor> usersetEquipmentInfor = new();
+    public List<UserMutaitonInfor> UserMutationInfor = new();
 }
 [Serializable]
 public class UserLogin{
@@ -31,26 +23,42 @@ public class UserLogin{
         this.password = password;
     }
 }
-/*
 [Serializable]
-public class UserGun
+public class UserInformation
 {
-    public string ownershipId;
+    public string userID;
+    public string userName;
+    public string email;
+}
+
+[Serializable]
+public class UserGunInformation
+{
+    public string ownerShipId;
     public string userId;
     public string gunId;
     public int gunLv;
     public int gunXp;
-    public UserGun() { }
+}
+[Serializable]
+public class UserSetEquipmentInfor
+{
+    public string userEquipmentId;
+    public string userId;
+    public string mutationOwnershipId;
+    public string gunOwnershipId1;
+    public string gunOwnershipId2;
+}
+[Serializable]
+public class UserMutaitonInfor
+{
+    public string ownerShipId;
+    public string userId;
+    public string mutationId;
+    public int mutationLv;
+    public int mutationXp;
+}
 
-    public UserGun(string ownerShipId, string userId, string gunId, int gunLv, int gunXp)
-    {
-        this.ownershipId = ownerShipId;
-        this.userId = userId;
-        this.gunId = gunId;
-        this.gunLv = gunLv;
-        this.gunXp = gunXp;
-    }
-}*/
 
 [Serializable]
 public class AccessToken{

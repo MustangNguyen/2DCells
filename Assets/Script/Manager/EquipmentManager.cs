@@ -23,7 +23,7 @@ public class EquipmentManager : Singleton<EquipmentManager>
     private void Start()
     {
         AudioManager.Instance.StartMainMenuBackGround();
-        userGunInformations = DataManager.Instance.Data.userGunInformation;
+        userGunInformations = DataManager.Instance.UserData.userGunInformation;
         for (int i = 0; i < userGunInformations.Count; i++)
         {
             var gunSprite = Instantiate(gunItem,itemHolder);

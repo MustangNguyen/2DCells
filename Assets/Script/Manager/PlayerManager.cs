@@ -15,9 +15,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] public UserGunInformation equipmentSlot2 = new();
     void Start()
     {
-        userSetEquipmentInfor = DataManager.Instance.Data.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
-        equipmentSlot1 = DataManager.Instance.Data.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
-        equipmentSlot2 = DataManager.Instance.Data.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
+        userSetEquipmentInfor = DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
+        equipmentSlot1 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
+        equipmentSlot2 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
         cellgun1 = DataManager.Instance.listGun.Find(x =>x.gunId == equipmentSlot1.gunId);
         cellgun2 = DataManager.Instance.listGun.Find(x=>x.gunId == equipmentSlot2.gunId);
         cellgun2.isFirstGun = false;

@@ -20,24 +20,13 @@ public class LayoutManager : Singleton<LayoutManager>
     private void Start()
     {
         Init(); 
-        /*
-        userSetEquipmentInfor = DataManager.Instance.Data.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
-        equipmentSlot1 = DataManager.Instance.Data.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
-        equipmentSlot2 = DataManager.Instance.Data.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
-        var mutation = DataManager.Instance.Data.UserMutationInfor.Find(x=>x.ownerShipId == userSetEquipmentInfor.mutationOwnershipId);
-        gunItem1.InitIcon(equipmentSlot1);
-        gunItem2.InitIcon(equipmentSlot2);
-        mutationItem.InitCharIcon(mutation);
-        gunEquipId1 = equipmentSlot1.ownerShipId;
-        gunEquipId2 = equipmentSlot2.ownerShipId;
-        */
     }
     public void Init()
     {
-        userSetEquipmentInfor = DataManager.Instance.Data.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
-        equipmentSlot1 = DataManager.Instance.Data.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
-        equipmentSlot2 = DataManager.Instance.Data.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
-        var mutation = DataManager.Instance.Data.UserMutationInfor.Find(x => x.ownerShipId == userSetEquipmentInfor.mutationOwnershipId);
+        userSetEquipmentInfor = DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
+        equipmentSlot1 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
+        equipmentSlot2 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
+        var mutation = DataManager.Instance.UserData.UserMutationInfor.Find(x => x.ownerShipId == userSetEquipmentInfor.mutationOwnershipId);
         gunItem1.InitIcon(equipmentSlot1);
         gunItem2.InitIcon(equipmentSlot2);
         mutationItem.InitCharIcon(mutation);
@@ -58,7 +47,7 @@ public class LayoutManager : Singleton<LayoutManager>
                 (string data) =>
                 {
                     JSONObject jsonData = new JSONObject(data);
-                    DataManager.Instance.Data.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet).gunOwnershipId1 = EquipmentManager.Instance.gunOwnedId;
+                    DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet).gunOwnershipId1 = EquipmentManager.Instance.gunOwnedId;
                     Init();
                 }));
     }
@@ -74,7 +63,7 @@ public class LayoutManager : Singleton<LayoutManager>
                 (string data) =>
                 {
                     JSONObject jsonData = new JSONObject(data);
-                    DataManager.Instance.Data.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet).gunOwnershipId2 = EquipmentManager.Instance.gunOwnedId;
+                    DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet).gunOwnershipId2 = EquipmentManager.Instance.gunOwnedId;
                     Init();
                 }));
     }

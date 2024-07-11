@@ -27,9 +27,9 @@ public class DataManager : Singleton<DataManager>
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
-            Data.userInformation.userID = item["id"].str;
-            Data.userInformation.userName = item["userName"].str;
-            Data.userInformation.email = item["email"].str;
+            UserData.userInformation.userID = item["id"].str;
+            UserData.userInformation.userName = item["userName"].str;
+            UserData.userInformation.email = item["email"].str;
         }
     }
     public void GetUserGunInformationData(string data)
@@ -43,7 +43,7 @@ public class DataManager : Singleton<DataManager>
             userGunInformation.gunId = item["gunId"].str;
             userGunInformation.gunLv = (int)item["gunLv"].n;
             userGunInformation.gunXp = (int)item["gunXp"].n;
-            Data.userGunInformation.Add(userGunInformation);
+            UserData.userGunInformation.Add(userGunInformation);
         }
     }
     public void GetUserEquipedGunInfor(string data)
@@ -58,7 +58,7 @@ public class DataManager : Singleton<DataManager>
             userSetEquipment.mutationOwnershipId = item["mutationOwnershipId"].str;
             userSetEquipment.gunOwnershipId1 = item["gunOwnershipId1"].str;
             userSetEquipment.gunOwnershipId2 = item["gunOwnershipId2"].str;
-            Data.usersetEquipmentInfor.Add(userSetEquipment);
+            UserData.usersetEquipmentInfor.Add(userSetEquipment);
         }
     }
     public void GetUserMutationInfor(string data)
@@ -73,7 +73,7 @@ public class DataManager : Singleton<DataManager>
             userMutaitionInfor.mutationId = item["mutationId"].str;
             userMutaitionInfor.mutationLv = (int)item["mutationLv"].n;
             userMutaitionInfor.mutationXp = (int)item["mutationXp"].n;
-            Data.UserMutationInfor.Add(userMutaitionInfor);
+            UserData.UserMutationInfor.Add(userMutaitionInfor);
         }
     }
     public void GetIngameLevelConfigs(string data) {

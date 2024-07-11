@@ -133,7 +133,7 @@ public partial class NetworkManager : Singleton<NetworkManager>
     {
         APIRequest apiRequest = new();
         apiRequest.url = HOST + "/api/UserEquipment/UpdateUserEquipment";
-        var currentSet = DataManager.Instance.Data.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipSetId);
+        var currentSet = DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipSetId);
         var data = new
         {
             userEquipmentId = currentSet.userEquipmentId,
