@@ -110,7 +110,7 @@ public class Bullet : MonoBehaviour
         }
     }
     protected virtual void OnCollisionEnter2D(Collision2D collision2D) {
-        if(collision2D.gameObject.tag=="EnemyCell"){
+        if(collision2D.gameObject.tag=="EnemyCell" && gameObject.tag != "EnemyBullet"){
             if(!isExplosive){
                 EnemyCell enemyCell = collision2D.gameObject.GetComponent<EnemyCell>();
                 (float,int) critical = GameCalculator.CriticalManager(cellGun);
@@ -121,6 +121,9 @@ public class Bullet : MonoBehaviour
             else{
                 Explode();
             }
+        }
+        else if(collision2D.gameObject.CompareTag("Player") && gameObject.tag == "EnemyBullet"){
+            collision2D.gameObject.GetComponent<Mutation>().TakeDamage(damage);
         }
     }
     protected virtual void OnTriggerEnter2D(Collider2D collision)

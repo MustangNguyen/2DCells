@@ -42,8 +42,8 @@ public class StatusStateSuperConductive : StatusState
     }
     private void SuperConductive()
     {
-        enemyCell.TakeDamage(damagePerTick * GameCalculator.CalculateFactorial(stack), 4, "Super conductive");
-        // enemyCell.TakeDamage(damagePerTick * stack, 4, "Super conductive");
+        // enemyCell.TakeDamage(damagePerTick * GameCalculator.CalculateFactorial(stack), 4, "Super conductive");
+        enemyCell.TakeDamage(damagePerTick * stack * 5, 4, "Super conductive");
         // Debug.Log("Armor SuperConductive!");
     }
 

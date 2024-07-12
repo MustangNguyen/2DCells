@@ -44,6 +44,7 @@ public class GameManager : Singleton<GameManager>
     private void Init()
     {
         // spawn player's mutation here
+        Debug.Log(DataManager.Instance.listMutation.Count);
         mutation = LeanPool.Spawn(DataManager.Instance.listMutation[0]);
         EnemySpawner.Instance.playerPosition = mutation.transform;
         virtualCamera.Follow = mutation.transform;

@@ -26,6 +26,7 @@ public class Mutation : CellsBase
     protected bool isDelaying = false;
     protected float delayTime = 0;
     public float rotationInterpolation = 0.4f;
+    #region Initial & Update
     protected override void Awake()
     {
         base.Awake();
@@ -56,6 +57,8 @@ public class Mutation : CellsBase
         layerObs = LayerMask.GetMask("Obs");
         
     }
+    #endregion
+    #region Function
     protected void AbilityTrigger(){
         if(InputManager.Instance.Ability1Button)
             mutationAbilities[0].AbilityCast();
@@ -248,6 +251,7 @@ public class Mutation : CellsBase
         GameManager.Instance.healthBar.energyText.text = maxEnery.ToString();
     }
 }
+#endregion
 
 [Serializable]
 public class MutationOOP

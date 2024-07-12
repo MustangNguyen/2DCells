@@ -265,8 +265,9 @@ MonoBehaviour:
   friction: {x: 0, y: 0}
   currentElementStack: 0
   currentPrimaryElement: 0
+  currentSecondaryElement: 0
   playerRigidbody2d: {fileID: 8608562803421528327}
-  mutationId: 
+  mutationId: HEM_JAGUAR
   mutationName: 
   stateMachine: {fileID: 8543297691273630339}
   mutationAbilities: []
@@ -463,6 +464,10 @@ PrefabInstance:
     - target: {fileID: 1400462520418806132, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_Color.r
       value: 0.90943396
+      objectReference: {fileID: 0}
+    - target: {fileID: 1400462520418806132, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7161094241297279446, guid: a19a0db88e5703d4ab4cbc95f3794fcc, type: 3}
       propertyPath: m_Name
