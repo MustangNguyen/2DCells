@@ -10,9 +10,11 @@ public class PopupSetting : Popups
 {
     public static PopupSetting Instance;
     [SerializeField] private Slider volumeSlider;
+    [SerializeField] private Slider sfxSlider;
     [SerializeField] private List<Button> button;
     [SerializeField] private CustomButton yesButton;
     [SerializeField] private CustomButton noButton;
+   
     private float _musicVolume;
     private float _soundVolume;
 
@@ -23,6 +25,7 @@ public class PopupSetting : Popups
         {
             _musicVolume = value;
             EazySoundManager.GlobalMusicVolume = value;
+            EazySoundManager.GlobalSoundsVolume = value;
         }
     }
 
@@ -33,7 +36,7 @@ public class PopupSetting : Popups
         {
             _soundVolume = value;
             EazySoundManager.GlobalSoundsVolume = value;
-            EazySoundManager.GlobalUISoundsVolume = value;
+            EazySoundManager.GlobalSoundsVolume = value;
         }
     }
 
@@ -43,8 +46,8 @@ public class PopupSetting : Popups
 
         volumeSlider.value = EazySoundManager.GlobalMusicVolume;
         volumeSlider.onValueChanged.AddListener(OnChangeSliderMusic);
-        Debug.Log(EazySoundManager.GlobalMusicVolume);
-        Debug.Log(MusicVolume);
+        sfxSlider.value = EazySoundManager.GlobalSoundsVolume;
+        sfxSlider.onValueChanged.AddListener(OnChangeSfxVoloume);
     }
 
     public void OnYesButtonClicked()
@@ -63,6 +66,11 @@ public class PopupSetting : Popups
         EazySoundManager.GlobalMusicVolume = value;
         AudioManager.Instance.playerVolumeSetting.gameVolume = EazySoundManager.GlobalMusicVolume;
         // Debug.Log(EazySoundManager.GlobalMusicVolume);
+    }
+    public void OnChangeSfxVoloume(float value)
+    {
+        EazySoundManager.GlobalSoundsVolume = value;
+        AudioManager.Instance.playerVolumeSetting.sfxVolume = EazySoundManager.GlobalSoundsVolume;
     }
     public void OnUIColorChange(int id)
     {

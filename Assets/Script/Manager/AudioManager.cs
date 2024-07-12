@@ -73,6 +73,6 @@ public class AudioManager : Singleton<AudioManager>
         EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume;
     }
     public void PlayGunFire(){
-        EazySoundManager.PlaySound(gunFire);
+        EazySoundManager.PlaySound(gunFire,EazySoundManager.GlobalSoundsVolume = playerVolumeSetting.sfxVolume);
     }
 }
