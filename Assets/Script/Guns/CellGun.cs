@@ -9,14 +9,14 @@ public class CellGun : MonoBehaviour
 {
     [SerializeField] public Bullet bulletPrefab;
     [SerializeField] protected GameObject bulletHolder;
-    [SerializeField] protected bool isFirstGun = true;    
+    [SerializeField] public bool isFirstGun = true;    
     [SerializeField] protected float fireRate = 1f;
     [Range(0f,100f)]
     [SerializeField] protected float accuracy = 70f;
     [SerializeField] public float criticalRate = 30f;
     [SerializeField] public float criticalMultiple = 2;
     [SerializeField] protected bool isAutoFire = false;
-    [SerializeField] protected string gunId;
+    [SerializeField] public string gunId;
     [SerializeField] protected string gunName;
 
     protected bool isGunReady = true;

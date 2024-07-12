@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 409418921855191405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0018, y: 0.4779, z: 0}
-  m_LocalScale: {x: 0.18812682, y: 6.932552, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9016624705188137926}
@@ -73,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: -420697141
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 272bb09ec375eb94e9304ed5547d75c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56392eb755e925842b693e16435a7f59, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.16, y: 0.16}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 9016624705188137926}
   - component: {fileID: -8562231970903223584}
   m_Layer: 15
-  m_Name: ICEGUN
+  m_Name: GHEM_002
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

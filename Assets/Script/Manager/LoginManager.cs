@@ -187,8 +187,9 @@ public class LoginManager : Singleton<LoginManager>
              SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
          #else */
         SceneLoadManager.Instance.LoadScene(SceneName.MainMenu);
-        NetworkManager.Instance.GetUserGunFromServer(DataManager.Instance.Data.userInformation.userID);
-        NetworkManager.Instance.GetUserEquipedGunFromServer(DataManager.Instance.Data.userInformation.userID);
+        NetworkManager.Instance.GetUserGunFromServer(DataManager.Instance.UserData.userInformation.userID);
+        NetworkManager.Instance.GetUserEquipedGunFromServer(DataManager.Instance.UserData.userInformation.userID);
+        NetworkManager.Instance.GetUserMutattionFromServer(DataManager.Instance.UserData.userInformation.userID);
         //  #endif
     }
     // private IEnumerator IEInputFieldAnimation(float from,float to,float time,Action onStart =null, Action onFinish = null){

@@ -10,6 +10,9 @@ public class CharcaterItem : MonoBehaviour
     [SerializeField] private SpriteAtlas enemy;
     [SerializeField] Button chooseButton;
     [SerializeField] private string enemyId;
+
+    [SerializeField] private SpriteAtlas mutation;
+    [SerializeField] private string mutationId;
     public void InitIcon(EnemyCellOOP _data)
     {
         Sprite sprite = enemy.GetSprite(_data.enemyId);
@@ -17,6 +20,12 @@ public class CharcaterItem : MonoBehaviour
         icon.sprite = sprite;
        
     }    
+    public void InitCharIcon(UserMutaitonInfor _data)
+    {
+        Sprite sprite = mutation.GetSprite(_data.mutationId);   
+        icon.sprite = sprite;
+        mutationId = _data.mutationId;
+    }
     public void OnClick()
     {
         ColletionManager.Instance.OnClickShowInfor(enemyId);

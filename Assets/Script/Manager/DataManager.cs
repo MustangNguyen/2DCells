@@ -6,9 +6,11 @@ using System.Linq;
 
 public class DataManager : Singleton<DataManager>
 {
+    public UserDataOOP UserData = new();
     public DataManagerOOP Data = new();
     public List<Mutation> listMutation;
     public List<CellAbility> listAbility;
+    public List<CellGun> listGun;
 
     private void Start()
     {
@@ -19,14 +21,15 @@ public class DataManager : Singleton<DataManager>
         NetworkManager.Instance.GetIngameLevelConfigsFromServer();
         NetworkManager.Instance.GetGunFromServer();
         listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
+        listGun = Resources.LoadAll<CellGun>("Prefab/Gun Prefabs").ToList();
     }
     public void GetUserInformationData(string data) {
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
-            Data.userInformation.userID = item["id"].str;
-            Data.userInformation.userName = item["userName"].str;
-            Data.userInformation.email = item["email"].str;
+            UserData.userInformation.userID = item["id"].str;
+            UserData.userInformation.userName = item["userName"].str;
+            UserData.userInformation.email = item["email"].str;
         }
     }
     public void GetUserGunInformationData(string data)
@@ -40,7 +43,7 @@ public class DataManager : Singleton<DataManager>
             userGunInformation.gunId = item["gunId"].str;
             userGunInformation.gunLv = (int)item["gunLv"].n;
             userGunInformation.gunXp = (int)item["gunXp"].n;
-            Data.userGunInformation.Add(userGunInformation);
+            UserData.userGunInformation.Add(userGunInformation);
         }
     }
     public void GetUserEquipedGunInfor(string data)
@@ -49,13 +52,28 @@ public class DataManager : Singleton<DataManager>
         var listData = json.list;
         foreach (var item in listData)
         {
-            UserEquipedGunInfor userEquipedGunInfor = new UserEquipedGunInfor();
-            userEquipedGunInfor.userEquipmentId = item["userEquipmentId"].str;
-            userEquipedGunInfor.userId = item["userId"].str;
-            userEquipedGunInfor.mutationOwnershipId = item["mutationOwnershipId"].str;
-            userEquipedGunInfor.gunOwnershipId1 = item["gunOwnershipId1"].str;
-            userEquipedGunInfor.gunOwnershipId2 = item["gunOwnershipId2"].str;
-            Data.userEquipedGunInfors.Add(userEquipedGunInfor);
+            UserSetEquipmentInfor userSetEquipment = new UserSetEquipmentInfor();
+            userSetEquipment.userEquipmentId = item["userEquipmentId"].str;
+            userSetEquipment.userId = item["userId"].str;
+            userSetEquipment.mutationOwnershipId = item["mutationOwnershipId"].str;
+            userSetEquipment.gunOwnershipId1 = item["gunOwnershipId1"].str;
+            userSetEquipment.gunOwnershipId2 = item["gunOwnershipId2"].str;
+            UserData.usersetEquipmentInfor.Add(userSetEquipment);
+        }
+    }
+    public void GetUserMutationInfor(string data)
+    {
+        JSONObject json = new JSONObject(data);
+        var listData = json.list;
+        foreach(var item in listData) 
+        {
+            UserMutaitonInfor userMutaitionInfor = new UserMutaitonInfor();
+            userMutaitionInfor.ownerShipId = item["ownershipId"].str;
+            userMutaitionInfor.userId = item["userId"].str;
+            userMutaitionInfor.mutationId = item["mutationId"].str;
+            userMutaitionInfor.mutationLv = (int)item["mutationLv"].n;
+            userMutaitionInfor.mutationXp = (int)item["mutationXp"].n;
+            UserData.UserMutationInfor.Add(userMutaitionInfor);
         }
     }
     public void GetIngameLevelConfigs(string data) {
