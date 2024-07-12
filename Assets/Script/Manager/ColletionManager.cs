@@ -24,6 +24,7 @@ public class ColletionManager : Singleton<ColletionManager>
     [SerializeField] private TextMeshProUGUI amorType;
     [SerializeField] private TextMeshProUGUI shield;
     [SerializeField] private TextMeshProUGUI shieldPoint;
+    [SerializeField] private TextMeshProUGUI equipment;
 
     public void Start()
     {
@@ -49,6 +50,7 @@ public class ColletionManager : Singleton<ColletionManager>
         amorType.text = $"Amor Type: {enemy.cellProtection.armorType}";
         shield.text = $"Shield: {enemy.cellProtection.shieldType}";
         shieldPoint.text = $"Shield Point: {enemy.cellProtection.shieldPoint}";
+        equipment.text = $"Equipment: {enemy.equipment}";
 
     }
     public void OnClickBackToMenu()
