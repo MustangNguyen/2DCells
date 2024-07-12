@@ -18,17 +18,11 @@ public class PlayerManager : MonoBehaviour
         userSetEquipmentInfor = DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
         equipmentSlot1 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
         equipmentSlot2 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
-        cellgun1 = DataManager.Instance.listGun.Find(x =>x.gunId == equipmentSlot1.gunId);
-        cellgun2 = DataManager.Instance.listGun.Find(x=>x.gunId == equipmentSlot2.gunId);
-        Instantiate(cellgun1,slot1.transform);
-        Instantiate(cellgun2, slot2.transform);
+        cellgun1 = Instantiate(DataManager.Instance.listGun.Find(x => x.gunId == equipmentSlot1.gunId), slot1.transform);
+        cellgun2 = Instantiate(DataManager.Instance.listGun.Find(x => x.gunId == equipmentSlot2.gunId), slot2.transform);
         cellgun2.isFirstGun = false;
         cellgun1.isFirstGun = true;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
