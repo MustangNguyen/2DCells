@@ -12,8 +12,9 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private void Start() {
         sceneLoadAnimator.enabled = false;
     }
-    public void LoadScene(SceneName sceneName){
-        AudioManager.Instance.StopCurrentMusic();
+    public void LoadScene(SceneName sceneName,bool isStopMusic = false){
+        if(isStopMusic)
+            AudioManager.Instance.StopCurrentMusic();
         sceneLoadAnimator.enabled = true;
         lastScene = SceneManager.GetActiveScene().name;
         StartCoroutine(IEOnSceneLoad(sceneName));

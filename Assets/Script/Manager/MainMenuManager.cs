@@ -5,10 +5,14 @@ using UnityEngine;
 public class MainMenuManager : MonoBehaviour
 {
     private void Start() {
-        AudioManager.Instance.StartMainMenuBackGround();
+        if(SceneLoadManager.Instance.lastScene == SceneName.Equipment.ToString()||SceneLoadManager.Instance.lastScene == SceneName.Collection.ToString()){
+
+        }
+        else
+            AudioManager.Instance.StartMainMenuBackGround();
     }
     public void OnCampaignBtnClick(){
-        SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
+        SceneLoadManager.Instance.LoadScene(SceneName.GamePlay, true);
     }
     public void OpenSettingPopup(){
         PopupSetting.Show();

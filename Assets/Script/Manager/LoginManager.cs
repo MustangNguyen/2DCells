@@ -186,10 +186,10 @@ public class LoginManager : Singleton<LoginManager>
         /* #if UNITY_EDITOR
              SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
          #else */
-        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu);
         NetworkManager.Instance.GetUserGunFromServer(DataManager.Instance.UserData.userInformation.userID);
         NetworkManager.Instance.GetUserEquipedGunFromServer(DataManager.Instance.UserData.userInformation.userID);
         NetworkManager.Instance.GetUserMutattionFromServer(DataManager.Instance.UserData.userInformation.userID);
+        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,true);
         //  #endif
     }
     // private IEnumerator IEInputFieldAnimation(float from,float to,float time,Action onStart =null, Action onFinish = null){

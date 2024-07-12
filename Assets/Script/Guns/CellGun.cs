@@ -63,6 +63,7 @@ public class CellGun : MonoBehaviour
         Bullet bullet = LeanPool.Spawn(bulletPrefab, transform.position, transform.rotation, GameManager.Instance.bulletHolder);
         bullet.gameObject.SetActive(true);
         bullet.cellGun = this;
+        AudioManager.Instance.PlayGunFire();
         if(isFirstGun)
             bullet.gameObject.tag = "Bullet1";
         else
