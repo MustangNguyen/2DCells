@@ -20,7 +20,10 @@ public class CellGun : MonoBehaviour
     [SerializeField] protected string gunName;
 
     protected bool isGunReady = true;
-
+    protected void OnEnable()
+    {
+        isGunReady = true;
+    }
     protected void Start(){
         if (isFirstGun){
             InputManager.Instance.onFire += SetFire;

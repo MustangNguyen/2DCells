@@ -648,6 +648,10 @@ PrefabInstance:
       propertyPath: accuracy
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 3495703052215458905, guid: 0f62cf74cc8ef9843a39338902d272ed, type: 3}
+      propertyPath: fireRate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4967881687138192187, guid: 0f62cf74cc8ef9843a39338902d272ed, type: 3}
       propertyPath: m_Enabled
       value: 0
