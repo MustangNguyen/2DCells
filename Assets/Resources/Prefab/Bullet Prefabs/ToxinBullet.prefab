@@ -175,7 +175,7 @@ MonoBehaviour:
   damage: 0
   cellGun: {fileID: 0}
   elements:
-    primaryElement: 1
+    primaryElement: 5
     secondaryElement: 0
   timeExist: 2
   isProjectile: 1

@@ -136,8 +136,9 @@ MonoBehaviour:
   isProjectile: 1
   rigidbody2d: {fileID: 1275779362687362555}
   bulletCollider2D: {fileID: 3759474731114508207}
+  bulletTrail: {fileID: 0}
   sprite: {fileID: 4301685307907571168}
-  bulletId: 
+  bulletId: BPRO_00111
   bulletTypeId: 
   bulletName: 
   isExplosive: 0
