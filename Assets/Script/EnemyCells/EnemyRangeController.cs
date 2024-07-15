@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyRangeController : MonoBehaviour
 {
     [SerializeField] public float range = 5f;
-    [SerializeField] private CellGun cellGun;
-    
+    [SerializeField] private EnemyGun cellGun;
+    private void Start() {
+        cellGun.range = range*2;
+    }
 }

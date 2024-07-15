@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class EnemyGun : CellGun
 {
+    [HideInInspector] public float range;
     protected new void Start() {
         GameObject gameObject = GameObject.Find("Bullet Holder");
         bulletHolder = gameObject;
     }
     protected override void SetFire()
     {
-        base.SetFire();
+        float distance = (GameManager.Instance.mutation.transform.position - transform.position).magnitude;
+        if(distance<range)
+            base.SetFire();
     }
     protected override IEnumerator OnFire()
     {
