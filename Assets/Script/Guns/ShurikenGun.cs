@@ -19,6 +19,7 @@ public class ShurikenGun : CellGun
     {
         float angleIncrement = spreadAngle / (pelletCount - 1);
         float startAngle = -spreadAngle / 2f;
+        AudioManager.Instance.PlayGunFire();
         for (int i = 0; i < pelletCount; i++)
         {
             float currentAngle = startAngle + i * angleIncrement;

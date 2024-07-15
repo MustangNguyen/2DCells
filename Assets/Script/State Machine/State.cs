@@ -22,10 +22,4 @@ public abstract class State
   public virtual void PhysicsUpdate()
   {
   }
-  public virtual void TransitionChecks()
-  {
-  }
-  public virtual void AnimationTrigger()
-  {
-  }
 }

@@ -126,9 +126,9 @@ GameObject:
   - component: {fileID: 1419445860586458655}
   - component: {fileID: 8608562803421528327}
   - component: {fileID: 8084353728301255565}
-  - component: {fileID: 8543297691273630339}
   - component: {fileID: -8853869850727471151}
   - component: {fileID: 2646890998122623901}
+  - component: {fileID: 8126363997909258870}
   m_Layer: 13
   m_Name: Jaguar
   m_TagString: Player
@@ -216,20 +216,6 @@ CircleCollider2D:
   m_Offset: {x: 0.0029494166, y: 0.03542143}
   serializedVersion: 2
   m_Radius: 0.18400925
---- !u!114 &8543297691273630339
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7559470799616134614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentStateName: 
-  currentStateStatusName: 
 --- !u!114 &-8853869850727471151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +253,7 @@ MonoBehaviour:
   playerRigidbody2d: {fileID: 8608562803421528327}
   mutationId: 
   mutationName: 
-  stateMachine: {fileID: 8543297691273630339}
+  stateMachine: {fileID: 0}
   mutationAbilities: []
   layerAffectByShieldPulse:
     serializedVersion: 2
@@ -309,6 +295,22 @@ MonoBehaviour:
     gunId: 
     gunLv: 0
     gunXp: 0
+  mutaiton: {fileID: 0}
+  gameStateMachine: {fileID: 8126363997909258870}
+--- !u!114 &8126363997909258870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7559470799616134614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab124bd6bb61ad3409ab388b5624a24e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentStateName: 
+  currentStateStatusName: 
 --- !u!1 &9180433794249448901
 GameObject:
   m_ObjectHideFlags: 0

@@ -97,6 +97,15 @@ public class GameManager : Singleton<GameManager>
             
         }
     }
+    public void CheckIsDead()
+    {
+        if (mutation.healPoint <= 0)
+        {
+            gameStateMachine.ChangeState(new GameStateLose());
+            Destroy(mutation.gameObject);
+            PopupGameOver.Show();
+        }
+    }
     public IEnumerator IEWaitForChoosingPowerUp(){
         returnPowerIdUpChosen += AddPowerUpToMutation;
         yield return new WaitUntil(()=>!isChoosingPowerUp);

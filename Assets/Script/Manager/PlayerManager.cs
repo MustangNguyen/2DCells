@@ -13,8 +13,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private UserSetEquipmentInfor userSetEquipmentInfor = new();
     [SerializeField] public UserGunInformation equipmentSlot1 = new();
     [SerializeField] public UserGunInformation equipmentSlot2 = new();
+    [SerializeField] private MutationJaguar mutaiton;
+    public StateMachine gameStateMachine;
     void Start()
     {
+        
         userSetEquipmentInfor = DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
         equipmentSlot1 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
         equipmentSlot2 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
@@ -24,11 +27,12 @@ public class PlayerManager : MonoBehaviour
         CellGun checkIsfirtgun2 = Instantiate(cellgun2, slot2.transform);
         checkIsfirtgun1.isFirstGun = true;
         checkIsfirtgun2.isFirstGun = false;
+        mutaiton = GetComponent<MutationJaguar>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        GameManager.Instance.CheckIsDead();
     }
 }

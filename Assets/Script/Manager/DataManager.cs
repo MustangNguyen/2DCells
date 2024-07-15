@@ -9,7 +9,6 @@ public class DataManager : Singleton<DataManager>
     public UserDataOOP UserData = new();
     public DataManagerOOP Data = new();
     public List<Mutation> listMutation;
-    public List<CellAbility> listAbility;
     public List<CellGun> listGun;
 
     private void Start()

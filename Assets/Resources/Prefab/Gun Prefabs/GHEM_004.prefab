@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6844706610124633295}
   - component: {fileID: 241040002609670026}
   m_Layer: 15
-  m_Name: ThunderGun
+  m_Name: GHEM_004
   m_TagString: Gun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2105930041168278932}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07968321, y: 0.010865206, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.07982668, y: 0.011656724, z: 0.2810963}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -53,6 +53,8 @@ MonoBehaviour:
   criticalRate: 30
   criticalMultiple: 2
   isAutoFire: 0
+  gunId: GHME_004
+  gunName: 
 --- !u!1 &8306491047673745010
 GameObject:
   m_ObjectHideFlags: 0
@@ -79,8 +81,8 @@ Transform:
   m_GameObject: {fileID: 8306491047673745010}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0018, y: 0.4779, z: 0}
-  m_LocalScale: {x: 0.18812682, y: 6.932552, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.39256805, y: 3.3952348, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6844706610124633295}
@@ -126,7 +128,7 @@ SpriteRenderer:
   m_SortingLayerID: -420697141
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 7de5f1ec30b89a5498ed596f9670f7fd, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
