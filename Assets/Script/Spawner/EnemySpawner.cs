@@ -9,6 +9,7 @@ using System.Threading;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
+    [SerializeField] private float missionTime = 0f;
     [SerializeField] private float spawnTime = 1f;
     [SerializeField] private Transform enemyHoder;
     // [SerializeField] private float respawnDistance = 20f;
@@ -38,7 +39,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
         enemiesSpawned = UpdateManager.Instance.enemiesCount;
         // UpdateWave();
         waveDurationLeft -= Time.fixedDeltaTime;
-
+        missionTime += Time.fixedDeltaTime;
     }
 
     private void Initialize()
@@ -160,5 +161,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
             // Debug.Log(index);
             enemiesCounter[index][1]--;
         }
+    }
+    public void SiegeSpawn(){
+
+    }
+    public void BossSpawn(){
+        
     }
 }

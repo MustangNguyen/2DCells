@@ -561,6 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPersistence: 0
+  missionTime: 0
   spawnTime: 1
   enemyHoder: {fileID: 1706902183}
   listEnemyCell: []
@@ -611,7 +612,7 @@ GameObject:
   - component: {fileID: 493542837}
   - component: {fileID: 493542838}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Respawner by camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
