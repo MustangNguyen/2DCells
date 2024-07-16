@@ -115,7 +115,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _Time_speed: 0.2
+    - _Time_speed: 0.02
     - _WorkflowMode: 1
     - _ZWrite: 1
     - cloud_cover: 0.504
@@ -129,7 +129,7 @@ Material:
     - seed: 5.38
     - size: 5.228
     - stretch: 2.001
-    - time: 279.91626
+    - time: 1612.1807
     - time_speed: 1.1990646
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
@@ -138,7 +138,7 @@ Material:
     - _Color2: {r: 0.30980393, g: 0.6431373, b: 0.72156864, a: 1}
     - _Color3: {r: 0.17254902, g: 0.20784314, b: 0.3019608, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Light_origin: {r: 0.000000059604645, g: 0.500225, b: 0, a: 0}
+    - _Light_origin: {r: 0.0032983124, g: 0.55733603, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - base_color: {r: 0.8451899, g: 0.8679245, b: 0.47080812, a: 1}
     - col1: {r: 0.78431374, g: 0.83137256, b: 0.3647059, a: 1}
