@@ -91,7 +91,6 @@ public class PlanetControl : MonoBehaviour {
     public void OnSelectPlanet()
     {
         selected_planet = dd_planets.value;
-        IPlanet _planet = null;
         for (int i = 0; i < planets.Length; i++)
         {
             if (i == selected_planet) {

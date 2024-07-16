@@ -28,7 +28,6 @@ public class GradientTextureGenerate : MonoBehaviour {
         targetMaterial.SetTexture(key, CreateTexture());
         _colorKeys = new GradientColorKey[colorkey.Length];
         _colorKeys = colorkey;
-
     }
 
     public GradientColorKey[] GetColorKeys()

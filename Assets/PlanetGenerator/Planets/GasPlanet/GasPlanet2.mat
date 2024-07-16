@@ -128,14 +128,14 @@ Material:
     - seed: 5.939
     - size: 9
     - stretch: 2
-    - time: 41.731613
+    - time: 5.2363753
     - time_speed: 1.1990646
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_color: {r: 0.23137255, g: 0.1254902, b: 0.15294118, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Light_origin: {r: 0.35992905, g: 0.498424, b: 0, a: 0}
+    - _Light_origin: {r: 0.45932546, g: 0.6772487, b: 0, a: 0}
     - _Outline_color: {r: 0.23137255, g: 0.1254902, b: 0.15294118, a: 1}
     - _Shadow_base_color: {r: 0.12941177, g: 0.09411765, b: 0.105882354, a: 1}
     - _Shadow_outline_color: {r: 0.12941177, g: 0.09411765, b: 0.105882354, a: 1}

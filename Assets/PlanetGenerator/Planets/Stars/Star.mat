@@ -121,7 +121,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rotation: 6.28
-    - _Seed: 6.4
+    - _Seed: 3.12
     - _Size: 4.463
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -146,7 +146,7 @@ Material:
     - seed: 4.9
     - size: 4.463
     - stretch: 2.001
-    - time: 8.403428
+    - time: 21.054329
     - time_speed: 1.1990646
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
