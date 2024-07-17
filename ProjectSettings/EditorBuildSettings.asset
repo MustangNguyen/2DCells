@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/PlanetGenerator/SimplePixelUI/ExamleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Launch.unity
     guid: f9630dad631685d4585c8b82a6311d47
@@ -23,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Equipment.unity
     guid: 203b7218dfb2e004792a2114eb348bce
+  - enabled: 1
+    path: Assets/Scenes/Campaign.unity
+    guid: edbea5d552159d54d99cfce5c3518bc2
   m_configObjects: {}

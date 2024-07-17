@@ -12,7 +12,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     private void Start() {
         sceneLoadAnimator.enabled = false;
     }
-    public void LoadScene(SceneName sceneName,bool isStopMusic = false){
+    public void LoadScene(SceneName sceneName,bool isStopMusic = true){
         if(isStopMusic)
             AudioManager.Instance.StopCurrentMusic();
         sceneLoadAnimator.enabled = true;
@@ -30,6 +30,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
 public enum SceneName{
     MainMenu,
     Launch,
+    Campaign,
     GamePlay,
     Collection,
     Equipment,

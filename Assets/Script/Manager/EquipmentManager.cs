@@ -58,6 +58,6 @@ public class EquipmentManager : Singleton<EquipmentManager>
     }
     public void OnClickBackToMenu()
     {
-        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu);
+        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,false);
     }
 }

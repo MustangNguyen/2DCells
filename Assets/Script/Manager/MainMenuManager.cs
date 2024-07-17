@@ -12,19 +12,19 @@ public class MainMenuManager : MonoBehaviour
             AudioManager.Instance.StartMainMenuBackGround();
     }
     public void OnCampaignBtnClick(){
-        SceneLoadManager.Instance.LoadScene(SceneName.GamePlay, true);
+        SceneLoadManager.Instance.LoadScene(SceneName.Campaign, true);
     }
     public void OpenSettingPopup(){
         PopupSetting.Show();
     }
     public void OnCollectionBtnClick()
     {
-        SceneLoadManager.Instance.LoadScene(SceneName.Collection);
+        SceneLoadManager.Instance.LoadScene(SceneName.Collection, false);
 
     }
     public void OnEquipmentBtnClick()
     {
-        SceneLoadManager.Instance.LoadScene(SceneName.Equipment);
+        SceneLoadManager.Instance.LoadScene(SceneName.Equipment,false);
     }
     public void OnQuitBtnClick(){
         Application.Quit();

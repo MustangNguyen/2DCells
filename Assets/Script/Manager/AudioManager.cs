@@ -9,6 +9,7 @@ public class AudioManager : Singleton<AudioManager>
     [Header("--------------Sound Tracks--------------")]
     [SerializeField] private AudioClip backgroundMusic;
     [SerializeField] private AudioClip logInBackground;
+    [SerializeField] private AudioClip campaignBackground;
     [SerializeField] private AudioClip normalBattleHematos;
     [SerializeField] private float turnOnOffDuration = 0.5f;
     [Header("--------------Sound Effects--------------")]
@@ -35,6 +36,9 @@ public class AudioManager : Singleton<AudioManager>
     public void StartMainMenuBackGround(){
         // EazySoundManager.PlayMusic(backgroundMusic,EazySoundManager.GlobalMusicVolume = playerVolumeSetting.gameVolume , true, true);
         StartCoroutine(IEStartMusic(backgroundMusic));
+    }
+    public void StartCampaignBackGround(){
+        StartCoroutine(IEStartMusic(campaignBackground));
     }
     public void StartNormalBattleHematos(){
         StartCoroutine(IEStartMusic(normalBattleHematos));

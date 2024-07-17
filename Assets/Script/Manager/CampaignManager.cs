@@ -15,7 +15,7 @@ public class CampaignManager : MonoBehaviour {
     [SerializeField] private GameObject[] planets;
     
     private float time = 0f;
-    private float pixels = 100;
+    // private float pixels = 100;
     private int seed = 0;
     private bool override_time = false;
     private List<Color> colors = new List<Color>();
@@ -26,7 +26,7 @@ public class CampaignManager : MonoBehaviour {
     {
         OnChangeSeedRandom();
         GetColors();
-        // MakeColorButtons();
+        AudioManager.Instance.StartCampaignBackGround();
     }
 
     private int selected_planet = 0;
@@ -112,7 +112,6 @@ public class CampaignManager : MonoBehaviour {
             var pos = planets[0].transform.position - planets[selected_planet].transform.position;
             pos = pos.normalized*0.5f + new Vector3(0.5f,0.5f,0f);
             OnLightPositionChanged(pos);
-            Debug.Log(pos);
 
             time += Time.deltaTime;
             if (!override_time)
@@ -136,5 +135,7 @@ public class CampaignManager : MonoBehaviour {
 
         return false;
     }
-
+    public void BackToMainMenu(){
+        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,true);
+    }
 }
