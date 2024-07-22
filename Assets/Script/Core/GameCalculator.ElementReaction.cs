@@ -9,6 +9,9 @@ public partial class GameCalculator : MonoBehaviour
         switch(currentStatus.primaryElement){
             case PrimaryElement.Fire:
                 switch (incomeStatus.primaryElement){
+                    case PrimaryElement.Ice:
+                        resultStatus = new StatusStateBlast(currentStatus.enemyCell,currentStatus.damagePerTick,currentStatus.stack);
+                    break;
                     case PrimaryElement.Fire:
                         resultStatus = incomeStatus;
                     break;

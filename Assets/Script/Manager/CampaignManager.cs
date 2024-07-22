@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ public class CampaignManager : Singleton<CampaignManager> {
         foreach(var planet in planets){
             listSelectPlanets.Add(planet.gameObject?.GetComponent<SelectedPlanet>());
         }
+        InitStartChart();
     }
 
     private int selected_planet = 0;
@@ -176,6 +178,10 @@ public class CampaignManager : Singleton<CampaignManager> {
         mainCamera.orthographicSize = cameraSize;
     }
 
+    public void InitStartChart(){
+        
+    }
+
     public void OnChangePlanetButtonLeftClick(){
         if(planetIndex-1>0)
             OnPlanetSelect(--planetIndex);
@@ -198,4 +204,3 @@ public class PlanetOOP{
     public int planetOrder;
     public List<NodeOOP> planetNodes = new();
 }
-

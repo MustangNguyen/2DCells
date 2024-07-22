@@ -44,6 +44,14 @@ public class EnemySpawner : Singleton<EnemySpawner>
 
     private void Initialize()
     {
+        var campaignLevels = Resources.LoadAll<CampaignLevel>("Scriptable Object/Spawn/Campaign Levels");
+        foreach(var level in campaignLevels){
+            if (level.nodeId == SceneLoadManager.Instance.nodeSelected){
+                campaignLevel = level;
+                break;
+            }
+        }
+
         currentWave = 0;
         listEnemyCell = new();
         counterDict = new();

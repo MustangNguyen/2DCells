@@ -45,6 +45,7 @@ public static class GameStatic
     //POST
     public readonly static string POST_LOGIN_REQUEST = "/identity/login";
     public readonly static string POST_SIGNUP_REQUEST = "/identity/register";
+    public readonly static string POST_UPDATE_USER_PROCESS = "/api/NodeProcess/UpdateUserGameProcess";
     #endregion
 
 
