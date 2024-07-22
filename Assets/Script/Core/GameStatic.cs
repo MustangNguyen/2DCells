@@ -39,6 +39,8 @@ public static class GameStatic
     public readonly static string GET_GUN_API = "/api/Guns";
     public readonly static string GET_USER_EQUIPED_GUN = "/api/UserEquipment/GetUserEquipmentById/{id}?userid=";
     public readonly static string GET_USER_MUTATION = "/api/UserMutation/getUserMutationList/";
+    public readonly static string GET_PLANETS_API = "/api/Planets/";
+    public readonly static string GET_USER_NODE_PROCESS_API = "/api/Planets/";
 
     //POST
     public readonly static string POST_LOGIN_REQUEST = "/identity/login";

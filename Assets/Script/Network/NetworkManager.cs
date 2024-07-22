@@ -88,6 +88,12 @@ public partial class NetworkManager : Singleton<NetworkManager>
             DataManager.Instance.GetUserMutationInfor(data);
         }));
     }
+    public void GetPlanetsFromServer(){
+        StartCoroutine(CreateWebGetRequest(HOST + GET_PLANETS_API, (string data) =>
+        {
+            DataManager.Instance.GetPlanetsData(data);
+        }));
+    }
     #endregion
 
     #region Post

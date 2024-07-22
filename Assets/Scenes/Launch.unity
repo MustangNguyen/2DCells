@@ -199,8 +199,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 1
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1624,14 +1624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsPersistence: 1
-  UserData:
-    userInformation:
-      userID: 
-      userName: 
-      email: 
-    userGunInformation: []
-    usersetEquipmentInfor: []
-    UserMutationInfor: []
   Data:
     listMutations: []
     listEnemies: []
@@ -1639,6 +1631,16 @@ MonoBehaviour:
     listBullet: []
     listIngameLevelConfig: []
     listGun: []
+    listPlanets: []
+  UserData:
+    userInformation:
+      userID: 
+      userName: 
+      email: 
+    userGunInformation: []
+    usersetEquipmentInfor: []
+    userMutationInfor: []
+    userNodeProcesses: []
   listMutation: []
   listAbility: []
   listGun: []

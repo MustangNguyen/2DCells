@@ -11,7 +11,8 @@ public class UserDataOOP
     public UserInformation userInformation = new();
     public List<UserGunInformation> userGunInformation = new();
     public List<UserSetEquipmentInfor> usersetEquipmentInfor = new();
-    public List<UserMutaitonInfor> UserMutationInfor = new();
+    public List<UserMutaitonInfor> userMutationInfor = new();
+    public List<UserNodeProcess> userNodeProcesses = new();
 }
 [Serializable]
 public class UserLogin{
@@ -59,6 +60,12 @@ public class UserMutaitonInfor
     public int mutationXp;
 }
 
+[Serializable]
+public class UserNodeProcess{
+    public string nodeId;
+    public bool isNodeFinish;
+    public int nodeScore;
+}
 
 [Serializable]
 public class AccessToken{

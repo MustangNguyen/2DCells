@@ -104,7 +104,7 @@ Material:
     - _OCTAVES: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _Pixels: 100
+    - _Pixels: 256
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rotation: 6.28
@@ -128,14 +128,14 @@ Material:
     - seed: 5.939
     - size: 7.74
     - stretch: 2
-    - time: 9.449065
+    - time: 15.415543
     - time_speed: 1.1990646
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Base_color: {r: 0.8745098, g: 0.8784314, b: 0.9098039, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Light_origin: {r: 0.0032983124, g: 0.55733603, b: 0, a: 0}
+    - _Light_origin: {r: 0.00335899, g: 0.5578595, b: 0, a: 0}
     - _Outline_color: {r: 0.6392157, g: 0.654902, b: 0.7607843, a: 1}
     - _Shadow_Base_color: {r: 0.40784314, g: 0.43529412, b: 0.6, a: 1}
     - _Shadow_Outline_color: {r: 0.2509804, g: 0.28627452, b: 0.4509804, a: 1}

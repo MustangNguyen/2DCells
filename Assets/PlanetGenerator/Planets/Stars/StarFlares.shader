@@ -4,7 +4,7 @@ Shader "Unlit/StarFlares"
     {
         _MainTex ("Texture", 2D) = "white" {}
     	
-	    _Pixels("Pixels", range(10,300)) = 200.0
+	    _Pixels("Pixels", range(10,500)) = 200.0
     	_GradientTex("Texture", 2D) = "white" {}	    
 	    _Time_speed("Time Speed",range(-1.0, 1.0)) = 0.2
     	time("time",float) = 0.0

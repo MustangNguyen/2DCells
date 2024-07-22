@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Collections;
 using UnityEngine;
-using SFB;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using System.Runtime.InteropServices;
 #endif
@@ -49,13 +48,6 @@ public class MaterialSave : MonoBehaviour
         var bytes = tex.EncodeToPNG();
         Object.DestroyImmediate(tex);
         RenderTexture.ReleaseTemporary(renderTexture);
-
-#if UNITY_WEBGL && !UNITY_EDITOR
-        DownloadFile(gameObject.name, "OnFileDownload", filename + ".png",bytes, bytes.Length);
-#else
-        var path = StandaloneFileBrowser.SaveFilePanel("Save Png", "", filename, "png");
-        File.WriteAllBytes(path, bytes);
-#endif
         
         
         
@@ -101,12 +93,6 @@ public class MaterialSave : MonoBehaviour
         RenderTexture.ReleaseTemporary(renderTexture);
         yield return new WaitForEndOfFrame();
         
-#if UNITY_WEBGL && !UNITY_EDITOR
-        DownloadFile(gameObject.name, "OnFileDownload", filename+ ".png",bytes, bytes.Length);
-#else
-        var path = StandaloneFileBrowser.SaveFilePanel("Save Sprite Sheets", "", filename, "png");
-        File.WriteAllBytes(path, bytes);
-#endif
 
 
     }

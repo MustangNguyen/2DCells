@@ -1,19 +1,22 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
+using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Animations;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using Random = System.Random;
 
 
-public class CampaignManager : MonoBehaviour {
+public class CampaignManager : Singleton<CampaignManager> {
     
 
     [SerializeField] private GameObject[] planets;
-    
+    [SerializeField] private SelectedPlanet selectedPlanet;
+    [SerializeField] private int planetIndex = 1;
+    [SerializeField] private float moveCameraDuration = 1f;
+    [SerializeField] private float cameraSize = 3f;
+    private List<SelectedPlanet> listSelectPlanets;
     private float time = 0f;
     // private float pixels = 100;
     private int seed = 0;
@@ -26,11 +29,15 @@ public class CampaignManager : MonoBehaviour {
     {
         OnChangeSeedRandom();
         GetColors();
-        AudioManager.Instance.StartCampaignBackGround();
+        //AudioManager.Instance.StartCampaignBackGround();
+        listSelectPlanets = new();
+        foreach(var planet in planets){
+            listSelectPlanets.Add(planet.gameObject?.GetComponent<SelectedPlanet>());
+        }
     }
 
     private int selected_planet = 0;
-
+#region Shader
     public void OnClickChooseColor()
     {
         for(int i = 0;i<planets.Count();i++){
@@ -94,12 +101,13 @@ public class CampaignManager : MonoBehaviour {
     {
         UnityEngine.Random.InitState( System.DateTime.Now.Millisecond );
         seed = UnityEngine.Random.Range(0, int.MaxValue);
-
-
+        // temporary
+        seed = 1202034323;
     }
+    #endregion
     private void Update()
     {
-        if (isOnGui()) return;
+        // if (isOnGui()) return;
         selected_planet = 0;
         for (; selected_planet < planets.Count(); ++selected_planet)
         {
@@ -121,7 +129,7 @@ public class CampaignManager : MonoBehaviour {
         }
 
     }
-
+    // may be useful later
     private bool isOnGui()
     {
         var eventData = new PointerEventData(EventSystem.current);
@@ -135,7 +143,59 @@ public class CampaignManager : MonoBehaviour {
 
         return false;
     }
+    #region Campaign function
     public void BackToMainMenu(){
         SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,true);
     }
+    public void OnPlanetSelect(SelectedPlanet selectPlanet){
+        for(int i = 0; i< listSelectPlanets.Count();i++){
+            if(listSelectPlanets[i] == selectPlanet){
+                selectedPlanet = listSelectPlanets[i];
+                planetIndex = i;
+                StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[i].transform,cameraSize,moveCameraDuration));
+            }
+        }
+    }
+    public void OnPlanetSelect(int index){
+        selectedPlanet = listSelectPlanets[index];
+                planetIndex = index;
+                StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[index].transform,cameraSize,moveCameraDuration));
+    }
+    private IEnumerator IEMoveCameraToTarget(Transform target, float cameraSize,float duration = 2f){
+        Camera mainCamera = Camera.main;
+        Vector3 lastCameraPosition = mainCamera.transform.position;
+        float defaultCameraSize = mainCamera.orthographicSize;
+        float elapsedTime  = 0f;
+        while(elapsedTime < duration){
+            mainCamera.transform.position = Vector2.Lerp(lastCameraPosition,target.position,elapsedTime/duration);
+            mainCamera.orthographicSize = Mathf.Lerp(defaultCameraSize,cameraSize,elapsedTime/duration);
+            yield return new WaitForSeconds(Time.deltaTime);
+            elapsedTime+=Time.deltaTime;
+        }
+        mainCamera.transform.position = new Vector3(target.position.x,target.position.y,-10f);
+        mainCamera.orthographicSize = cameraSize;
+    }
+
+    public void OnChangePlanetButtonLeftClick(){
+        if(planetIndex-1>0)
+            OnPlanetSelect(--planetIndex);
+    }
+    public void OnChangePlanetButtonRightClick(){
+        if(planetIndex+1<listSelectPlanets.Count())
+            OnPlanetSelect(++planetIndex);
+    }
+    #endregion
 }
+
+public class CampaignChapter{
+    public List<CampaignLevel> listCampaignLevel;
+}
+
+[Serializable]
+public class PlanetOOP{
+    public string planetId;
+    public string planetName;
+    public int planetOrder;
+    public List<NodeOOP> planetNodes = new();
+}
+

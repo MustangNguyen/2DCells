@@ -26,7 +26,7 @@ public class LayoutManager : Singleton<LayoutManager>
         userSetEquipmentInfor = DataManager.Instance.UserData.usersetEquipmentInfor.Find(x => x.userEquipmentId == equipmentSet);
         equipmentSlot1 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
         equipmentSlot2 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
-        var mutation = DataManager.Instance.UserData.UserMutationInfor.Find(x => x.ownerShipId == userSetEquipmentInfor.mutationOwnershipId);
+        var mutation = DataManager.Instance.UserData.userMutationInfor.Find(x => x.ownerShipId == userSetEquipmentInfor.mutationOwnershipId);
         gunItem1.InitIcon(equipmentSlot1);
         gunItem2.InitIcon(equipmentSlot2);
         mutationItem.InitCharIcon(mutation);

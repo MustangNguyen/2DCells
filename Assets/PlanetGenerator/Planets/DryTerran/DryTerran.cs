@@ -7,7 +7,7 @@ public class DryTerran : MonoBehaviour, IPlanet {
     [SerializeField] private GameObject Land;
     [SerializeField] private GradientTextureGenerate _gradientLand;
     private Material m_Land;
-    private string gradient_vars = "_GradientTex";
+    // private string gradient_vars = "_GradientTex";
     private GradientColorKey[] colorKey = new GradientColorKey[5];
     private GradientAlphaKey[] alphaKey = new GradientAlphaKey[5];
     private string[] _colors1 = new[] {"#ff8933", "#e64539", "#ad2f45", "#52333f", "#3d2936"};

@@ -6,8 +6,8 @@ using System.Linq;
 
 public class DataManager : Singleton<DataManager>
 {
-    public UserDataOOP UserData = new();
     public DataManagerOOP Data = new();
+    public UserDataOOP UserData = new();
     public List<Mutation> listMutation;
     public List<CellAbility> listAbility;
     public List<CellGun> listGun;
@@ -20,6 +20,7 @@ public class DataManager : Singleton<DataManager>
         NetworkManager.Instance.GetBulletDataFromServer();
         NetworkManager.Instance.GetIngameLevelConfigsFromServer();
         NetworkManager.Instance.GetGunFromServer();
+        NetworkManager.Instance.GetPlanetsFromServer();
         listMutation = Resources.LoadAll<Mutation>("Prefab/Mutation Prefabs").ToList();
         listGun = Resources.LoadAll<CellGun>("Prefab/Gun Prefabs").ToList();
     }
@@ -30,6 +31,13 @@ public class DataManager : Singleton<DataManager>
             UserData.userInformation.userID = item["id"].str;
             UserData.userInformation.userName = item["userName"].str;
             UserData.userInformation.email = item["email"].str;
+            foreach(var nodeProcess in item["nodeProcesses"].list){
+                UserData.userNodeProcesses.Add(new UserNodeProcess{
+                    nodeId = nodeProcess["nodeId"].str,
+                    isNodeFinish = nodeProcess["isNodeFinish"].b,
+                    nodeScore = (int)nodeProcess["nodeScore"].n
+                });
+            }
         }
     }
     public void GetUserGunInformationData(string data)
@@ -73,7 +81,7 @@ public class DataManager : Singleton<DataManager>
             userMutaitionInfor.mutationId = item["mutationId"].str;
             userMutaitionInfor.mutationLv = (int)item["mutationLv"].n;
             userMutaitionInfor.mutationXp = (int)item["mutationXp"].n;
-            UserData.UserMutationInfor.Add(userMutaitionInfor);
+            UserData.userMutationInfor.Add(userMutaitionInfor);
         }
     }
     public void GetIngameLevelConfigs(string data) {
@@ -198,6 +206,35 @@ public class DataManager : Singleton<DataManager>
             cellGunOOP.criticalRate = (float)item["criticalRate"].n;
             cellGunOOP.criticalMultiple = (float)item["criticalMultiple"].n;
             Data.listGun.Add(cellGunOOP);
+        }
+    }
+    public void GetPlanetsData(string data){
+        JSONObject json = new JSONObject(data);
+        var listjson = json.list;
+        foreach(var item in listjson){
+            PlanetOOP planetOOP = new PlanetOOP();
+            planetOOP.planetId = item["planetId"].str;
+            planetOOP.planetName = item["planetName"].str;
+            planetOOP.planetOrder = (int)item["planetOrder"].n;
+            foreach (var node in item["planetNodes"].list){
+                NodeOOP nodeOOP = new NodeOOP();
+                nodeOOP.nodeId = node["nodeId"].str;
+                nodeOOP.planetId = node["planetId"].str;
+                planetOOP.planetNodes.Add(nodeOOP);
+            }
+            Data.listPlanets.Add(planetOOP);
+        }
+    }
+    public void GetUserNodeProcessData(string data){
+        JSONObject json = new JSONObject(data);
+        var listjson = json.list;
+        foreach(var item in listjson){
+            NodeProcessOOP nodeProcessOOP = new NodeProcessOOP();
+            nodeProcessOOP.userId = item["userId"].str;
+            nodeProcessOOP.nodeId = item["nodeId"].str;
+            nodeProcessOOP.isFinish = item["isNodeFinish"].b;
+            nodeProcessOOP.nodeScore = (int)item["nodeScore"].n;
+            
         }
     }
 }

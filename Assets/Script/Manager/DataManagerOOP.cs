@@ -12,6 +12,7 @@ public class DataManagerOOP
     public List<BulletOOP> listBullet = new();
     public List<IngameLevelConfigsOOP> listIngameLevelConfig = new();
     public List<CellGunOOP> listGun = new();
+    public List<PlanetOOP> listPlanets = new();
 }
 
 
