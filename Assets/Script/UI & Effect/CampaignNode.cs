@@ -11,10 +11,10 @@ public class CampaignNode : MonoBehaviour
     public Image nodeNotReach;
     public bool isCleared = false;
     private void Start() {
-    }
-    private void OnEnable() {
         SetClearNode(DataManager.Instance.UserData.userNodeProcesses.Exists(x => x.nodeId == nodeInformation.nodeId && x.isNodeFinish == true)
         ,DataManager.Instance.UserData.userNodeProcesses.Exists(x => x.nodeId == nodeInformation.nodeId && x.isNodeFinish == false));
+    }
+    private void OnEnable() {
     }
     public void SetClearNode(bool isClear = false,bool isReach = false){
         if (isClear){
@@ -36,7 +36,7 @@ public class CampaignNode : MonoBehaviour
         }
     }
     public void OnNodeClick(){
-        SceneLoadManager.Instance.nodeSelected = nodeInformation.nodeId;
+        SceneLoadManager.Instance.mapNodeInformation = nodeInformation;
         SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
     }
 }

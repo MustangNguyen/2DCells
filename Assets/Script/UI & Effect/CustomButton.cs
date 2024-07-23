@@ -10,10 +10,7 @@ public class CustomButton : MonoBehaviour
     private void Start() {
         backGround.color = UserUIManager.Instance.GetCurrentUIColor();
     }
-    private void FixedUpdate()
-    {
-        backGround.color = UserUIManager.Instance.GetCurrentUIColor();
-    }
+
     public void ChangeButtonColor()
     {
         backGround.color = UserUIManager.Instance.GetCurrentUIColor();

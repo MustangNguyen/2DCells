@@ -17,6 +17,11 @@ public class CampaignManager : Singleton<CampaignManager> {
     [SerializeField] private int planetIndex = 1;
     [SerializeField] private float moveCameraDuration = 1f;
     [SerializeField] private float cameraSize = 3f;
+    [Space(10)]
+    [Header("UI")]
+    [SerializeField] private RectTransform leftSwitchButton;
+    [SerializeField] private RectTransform rightSwitchButton;
+    [SerializeField] private bool isZoom = false;
     private List<SelectedPlanet> listSelectPlanets;
     private float time = 0f;
     // private float pixels = 100;
@@ -130,6 +135,10 @@ public class CampaignManager : Singleton<CampaignManager> {
             }
         }
 
+        bool isMouseClick2 = Input.GetButtonDown("Fire2");
+        if(isMouseClick2){
+            ZoomOutCamera();
+        }
     }
     // may be useful later
     private bool isOnGui()
@@ -155,13 +164,41 @@ public class CampaignManager : Singleton<CampaignManager> {
                 selectedPlanet = listSelectPlanets[i];
                 planetIndex = i;
                 StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[i].transform,cameraSize,moveCameraDuration));
+                if(!isZoom)
+                    StartCoroutine(IEMoveSwitchButton(moveCameraDuration));
             }
         }
     }
-    public void OnPlanetSelect(int index){
+    public void OnPlanetSelect(int index)
+    {
         selectedPlanet = listSelectPlanets[index];
-                planetIndex = index;
-                StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[index].transform,cameraSize,moveCameraDuration));
+        planetIndex = index;
+        StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[index].transform, cameraSize, moveCameraDuration));
+    }
+    private void ZoomOutCamera(){
+        if (isZoom)
+        {
+            StartCoroutine(IEMoveSwitchButton(moveCameraDuration));
+            var tempRect = new GameObject();
+            tempRect.transform.position = Vector3.zero;
+            StartCoroutine(IEMoveCameraToTarget(tempRect.transform, 25, moveCameraDuration));
+        }
+    }
+    private IEnumerator IEMoveSwitchButton(float duration = 2f){
+        Vector3 lastLeftSwitchButton =  leftSwitchButton.anchoredPosition;
+        Vector3 lastRightSwitchButton =  rightSwitchButton.anchoredPosition;
+        float elapsedTime  = 0f;
+        int direction = !isZoom ? 1 : -1;
+        isZoom = !isZoom;
+        while (elapsedTime < duration)
+        {
+            leftSwitchButton.anchoredPosition = Vector2.Lerp(lastLeftSwitchButton, new Vector2(lastLeftSwitchButton.x + 200f * direction, lastLeftSwitchButton.y), elapsedTime / duration);
+            rightSwitchButton.anchoredPosition = Vector2.Lerp(lastRightSwitchButton, new Vector2(lastRightSwitchButton.x - 200f * direction, lastRightSwitchButton.y), elapsedTime / duration);
+            yield return new WaitForSeconds(Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+        }
+        leftSwitchButton.anchoredPosition = new Vector2(lastLeftSwitchButton.x + 200f * direction, lastLeftSwitchButton.y);
+        rightSwitchButton.anchoredPosition = new Vector2(lastRightSwitchButton.x - 200f * direction, lastRightSwitchButton.y);
     }
     private IEnumerator IEMoveCameraToTarget(Transform target, float cameraSize,float duration = 2f){
         Camera mainCamera = Camera.main;
@@ -169,17 +206,18 @@ public class CampaignManager : Singleton<CampaignManager> {
         float defaultCameraSize = mainCamera.orthographicSize;
         float elapsedTime  = 0f;
         while(elapsedTime < duration){
-            mainCamera.transform.position = Vector2.Lerp(lastCameraPosition,target.position,elapsedTime/duration);
-            mainCamera.orthographicSize = Mathf.Lerp(defaultCameraSize,cameraSize,elapsedTime/duration);
+            mainCamera.transform.position = Vector2.Lerp(lastCameraPosition, target.position, elapsedTime / duration);
+            mainCamera.orthographicSize = Mathf.Lerp(defaultCameraSize, cameraSize, elapsedTime / duration);
             yield return new WaitForSeconds(Time.deltaTime);
-            elapsedTime+=Time.deltaTime;
+            elapsedTime += Time.deltaTime;
         }
         mainCamera.transform.position = new Vector3(target.position.x,target.position.y,-10f);
         mainCamera.orthographicSize = cameraSize;
     }
 
     public void InitStartChart(){
-        
+        leftSwitchButton.anchoredPosition = new Vector2(-1000,0);
+        rightSwitchButton.anchoredPosition = new Vector2(1000,0);
     }
 
     public void OnChangePlanetButtonLeftClick(){

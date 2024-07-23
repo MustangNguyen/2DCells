@@ -25,6 +25,7 @@ public class DataManager : Singleton<DataManager>
         listGun = Resources.LoadAll<CellGun>("Prefab/Gun Prefabs").ToList();
     }
     public void GetUserInformationData(string data) {
+        UserData.userNodeProcesses.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
@@ -42,6 +43,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void GetUserGunInformationData(string data)
     {
+        UserData.userGunInformation.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
@@ -56,6 +58,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void GetUserEquipedGunInfor(string data)
     {
+        UserData.usersetEquipmentInfor.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData)
@@ -71,6 +74,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void GetUserMutationInfor(string data)
     {
+        UserData.userMutationInfor.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach(var item in listData) 
@@ -85,6 +89,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
     public void GetIngameLevelConfigs(string data) {
+        Data.listIngameLevelConfig.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
@@ -95,6 +100,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
     public void GetMutationData(string data) {
+        Data.listMutations.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
@@ -126,6 +132,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
     public void GetEnemydata(string data) {
+        Data.listEnemies.Clear();
         JSONObject json = new JSONObject(data);
         var listData = json.list;
         foreach (var item in listData) {
@@ -156,6 +163,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
     public void GetAbilityData(string data) {
+        Data.listAbilities.Clear();
         JSONObject json = new JSONObject(data);
         var listjson = json.list;
         foreach (var item in listjson) {
@@ -168,6 +176,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void GetBulletData(string data)
     {
+        Data.listBullet.Clear();
         JSONObject json = new JSONObject(data);
         var listjson = json.list;
         foreach (var item in listjson)
@@ -193,6 +202,7 @@ public class DataManager : Singleton<DataManager>
     }
     public void GetGunData(string data)
     {
+        Data.listGun.Clear();
         JSONObject json = new JSONObject(data);
         var listjson = json.list;
         foreach(var item in listjson) 
@@ -209,6 +219,7 @@ public class DataManager : Singleton<DataManager>
         }
     }
     public void GetPlanetsData(string data){
+        Data.listPlanets.Clear();
         JSONObject json = new JSONObject(data);
         var listjson = json.list;
         foreach(var item in listjson){
@@ -223,18 +234,6 @@ public class DataManager : Singleton<DataManager>
                 planetOOP.planetNodes.Add(nodeOOP);
             }
             Data.listPlanets.Add(planetOOP);
-        }
-    }
-    public void GetUserNodeProcessData(string data){
-        JSONObject json = new JSONObject(data);
-        var listjson = json.list;
-        foreach(var item in listjson){
-            NodeProcessOOP nodeProcessOOP = new NodeProcessOOP();
-            nodeProcessOOP.userId = item["userId"].str;
-            nodeProcessOOP.nodeId = item["nodeId"].str;
-            nodeProcessOOP.isFinish = item["isNodeFinish"].b;
-            nodeProcessOOP.nodeScore = (int)item["nodeScore"].n;
-            
         }
     }
 }

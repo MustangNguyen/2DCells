@@ -13,7 +13,8 @@ public class SelectedPlanet : MonoBehaviour, IPointerClickHandler
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnPlanetSelect();
+        if (eventData.button == PointerEventData.InputButton.Left)
+            OnPlanetSelect();
     }
     public void OnPlanetSelect(){
         CampaignManager.Instance.OnPlanetSelect(this);

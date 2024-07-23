@@ -46,7 +46,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
     {
         var campaignLevels = Resources.LoadAll<CampaignLevel>("Scriptable Object/Spawn/Campaign Levels");
         foreach(var level in campaignLevels){
-            if (level.nodeId == SceneLoadManager.Instance.nodeSelected){
+            if (level.nodeId == SceneLoadManager.Instance.mapNodeInformation.nodeId){
                 campaignLevel = level;
                 break;
             }

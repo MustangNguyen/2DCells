@@ -3063,7 +3063,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPersistence: 0
   virtualCamera: {fileID: 1517631858}
-  nodeId: 
+  nodeInformation: {fileID: 0}
   maximumEnemies: 200
   mutation: {fileID: 0}
   powerUpHolder: {fileID: 2084856810}

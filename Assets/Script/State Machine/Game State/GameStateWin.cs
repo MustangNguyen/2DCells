@@ -1,9 +1,9 @@
 using UnityEngine;
 public class GameStateWin : GameState{
-    public string nodeId;
+    public MapNodeInformation nodeInformation;
     public int nodeScore;
-    public GameStateWin(string nodeId, int nodeScore){
-        this.nodeId = nodeId;
+    public GameStateWin(MapNodeInformation nodeInformation, int nodeScore){
+        this.nodeInformation = nodeInformation;
         this.nodeScore = nodeScore;
     }
     public override void Enter()
@@ -11,14 +11,40 @@ public class GameStateWin : GameState{
         base.Enter();
         NodeProcessOOP nodeProcessOOP = new NodeProcessOOP{
             userId = DataManager.Instance.UserData.userInformation.userID,
-            nodeId = this.nodeId,
-            isFinish = true,
+            nodeId = this.nodeInformation.nodeId,
+            isNodeFinish = true,
             nodeScore = this.nodeScore
         };
+
         NetworkManager.Instance.PostUpdateUserProcess(nodeProcessOOP,(data)=>{
             Debug.Log("node update");
-            NetworkManager.Instance.GetPlanetsFromServer();
-        },(data)=>{
+            int nodeCounter = nodeInformation.nextNode.Count;
+            if (nodeCounter > 0)
+                foreach (var nextNode in nodeInformation.nextNode)
+                {
+                    nodeCounter--;
+                    NodeProcessOOP nodeProcessOOPNextNode = new NodeProcessOOP
+                    {
+                        userId = DataManager.Instance.UserData.userInformation.userID,
+                        nodeId = nextNode.nodeId,
+                        isNodeFinish = false,
+                        nodeScore = 0
+                    };
+                    Debug.Log("next nodeid: " + nextNode.nodeId);
+                    NetworkManager.Instance.PostUpdateUserProcess(nodeProcessOOPNextNode, (data) =>
+                    {
+                        if (nodeCounter <= 0)
+                            NetworkManager.Instance.GetUserInformationFromServer(DataManager.Instance.UserData.userInformation.email);
+                        Debug.Log("Updated next nodes!");
+                    }, (data) =>
+                    {
+                        Debug.LogError("Updated next nodes false!");
+                    });
+                }
+            else
+                NetworkManager.Instance.GetUserInformationFromServer(DataManager.Instance.UserData.userInformation.email);
+        }, (data) =>
+        {
             Debug.LogWarning(data);
         });
     }

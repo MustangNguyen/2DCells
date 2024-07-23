@@ -12,7 +12,7 @@ using System.Linq;
 public class GameManager : Singleton<GameManager>
 {
     public CinemachineVirtualCamera virtualCamera;
-    public string nodeId;
+    public MapNodeInformation nodeInformation;
     public int maximumEnemies = 50;
     public Mutation mutation;
     public Transform powerUpHolder;
@@ -44,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     {
         // spawn player's mutation here
         Debug.Log(DataManager.Instance.listMutation.Count);
-        nodeId = SceneLoadManager.Instance.nodeSelected;
+        nodeInformation = SceneLoadManager.Instance.mapNodeInformation;
         mutation = LeanPool.Spawn(DataManager.Instance.listMutation[0]);
         EnemySpawner.Instance.playerPosition = mutation.transform;
         virtualCamera.Follow = mutation.transform;
@@ -100,7 +100,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     public void OnWin(){
-        gameStateMachine.ChangeState(new GameStateWin(nodeId,0));
+        gameStateMachine.ChangeState(new GameStateWin(nodeInformation,0));
     }
     public IEnumerator IEWaitForChoosingPowerUp(){
         returnPowerIdUpChosen += AddPowerUpToMutation;

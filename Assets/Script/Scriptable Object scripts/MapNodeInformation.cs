@@ -23,6 +23,6 @@ public class NodeOOP{
 public class NodeProcessOOP{
     public string userId;
     public string nodeId;
-    public bool isFinish;
+    public bool isNodeFinish;
     public int nodeScore;
 }

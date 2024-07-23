@@ -14,7 +14,7 @@ public partial class NetworkManager {
             webRequest.SetRequestHeader("Authorization","Bearer " + accessToken.accessToken);
             yield return webRequest.SendWebRequest();
             if(webRequest.result != UnityWebRequest.Result.Success){
-                Debug.Log("Error while fetch from API: " + requestAPI + " " + webRequest.error);
+                Debug.LogError("Error while fetch from API: " + requestAPI + " " + webRequest.error);
                 onFail?.Invoke();
             }
             else{
@@ -37,7 +37,6 @@ public partial class NetworkManager {
             if(isRequireAuthorize)
                 request.SetRequestHeader("Authorization","Bearer " + accessToken.accessToken);
             yield return request.SendWebRequest();
-            Debug.Log(request.responseCode);
             long responseCode = request.responseCode;
             if (request.result != UnityWebRequest.Result.Success)
             {

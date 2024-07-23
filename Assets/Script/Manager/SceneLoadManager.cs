@@ -9,7 +9,7 @@ public class SceneLoadManager : Singleton<SceneLoadManager>
     [SerializeField] private float waitBeforeLoad = 0.5f;
     private const string NameAnimStartLoad = "start";
     public string lastScene = "";
-    public string nodeSelected = "";
+    public MapNodeInformation mapNodeInformation;
     private void Start() {
         sceneLoadAnimator.enabled = false;
     }
