@@ -27,6 +27,7 @@ public class CampaignManager : Singleton<CampaignManager> {
     // private float pixels = 100;
     private int seed = 0;
     private bool override_time = false;
+    private bool isSwitchButtonMoving = false;
     private List<Color> colors = new List<Color>();
     private List<GameObject> colorBtns = new List<GameObject>();
     private int selectedColorButtonID = 0;
@@ -163,7 +164,7 @@ public class CampaignManager : Singleton<CampaignManager> {
             if(listSelectPlanets[i] == selectPlanet){
                 selectedPlanet = listSelectPlanets[i];
                 planetIndex = i;
-                StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[i].transform,cameraSize,moveCameraDuration));
+                StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[i].transform.position,cameraSize,moveCameraDuration));
                 if(!isZoom)
                     StartCoroutine(IEMoveSwitchButton(moveCameraDuration));
             }
@@ -173,18 +174,18 @@ public class CampaignManager : Singleton<CampaignManager> {
     {
         selectedPlanet = listSelectPlanets[index];
         planetIndex = index;
-        StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[index].transform, cameraSize, moveCameraDuration));
+        StartCoroutine(IEMoveCameraToTarget(listSelectPlanets[index].transform.position, cameraSize, moveCameraDuration));
     }
     private void ZoomOutCamera(){
+        if(isSwitchButtonMoving) return;
         if (isZoom)
         {
             StartCoroutine(IEMoveSwitchButton(moveCameraDuration));
-            var tempRect = new GameObject();
-            tempRect.transform.position = Vector3.zero;
-            StartCoroutine(IEMoveCameraToTarget(tempRect.transform, 25, moveCameraDuration));
+            StartCoroutine(IEMoveCameraToTarget(Vector3.zero, 25, moveCameraDuration));
         }
     }
     private IEnumerator IEMoveSwitchButton(float duration = 2f){
+        isSwitchButtonMoving = true;
         Vector3 lastLeftSwitchButton =  leftSwitchButton.anchoredPosition;
         Vector3 lastRightSwitchButton =  rightSwitchButton.anchoredPosition;
         float elapsedTime  = 0f;
@@ -199,19 +200,20 @@ public class CampaignManager : Singleton<CampaignManager> {
         }
         leftSwitchButton.anchoredPosition = new Vector2(lastLeftSwitchButton.x + 200f * direction, lastLeftSwitchButton.y);
         rightSwitchButton.anchoredPosition = new Vector2(lastRightSwitchButton.x - 200f * direction, lastRightSwitchButton.y);
+        isSwitchButtonMoving = false;
     }
-    private IEnumerator IEMoveCameraToTarget(Transform target, float cameraSize,float duration = 2f){
+    private IEnumerator IEMoveCameraToTarget(Vector3 target, float cameraSize,float duration = 2f){
         Camera mainCamera = Camera.main;
         Vector3 lastCameraPosition = mainCamera.transform.position;
         float defaultCameraSize = mainCamera.orthographicSize;
         float elapsedTime  = 0f;
         while(elapsedTime < duration){
-            mainCamera.transform.position = Vector2.Lerp(lastCameraPosition, target.position, elapsedTime / duration);
+            mainCamera.transform.position = Vector2.Lerp(lastCameraPosition, target, elapsedTime / duration);
             mainCamera.orthographicSize = Mathf.Lerp(defaultCameraSize, cameraSize, elapsedTime / duration);
             yield return new WaitForSeconds(Time.deltaTime);
             elapsedTime += Time.deltaTime;
         }
-        mainCamera.transform.position = new Vector3(target.position.x,target.position.y,-10f);
+        mainCamera.transform.position = new Vector3(target.x,target.y,-10f);
         mainCamera.orthographicSize = cameraSize;
     }
 
