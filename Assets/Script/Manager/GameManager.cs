@@ -35,6 +35,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Game State")]
     public StateMachine gameStateMachine;
     public bool isPause = false;
+    public EnemyCell finalBoss;
     private void Start()
     {
         Init();

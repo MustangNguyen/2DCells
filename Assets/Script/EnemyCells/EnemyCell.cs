@@ -39,6 +39,7 @@ public class EnemyCell : CellsBase
     [Header("Wave")]
     [SerializeField] public int wave;
     [SerializeField] public bool dotStatus = false;
+    public Action OnDeadTrigger;
     #region Initial & Update
     protected override void Start()
     {
@@ -187,6 +188,8 @@ public class EnemyCell : CellsBase
         animator.SetTrigger("Destroy");
         model.color = new Color(0, 0, 0, 0);
         EffectManager.Instance.SpawnObs(gameObject, XpObs);
+        OnDeadTrigger?.Invoke();
+        OnDeadTrigger = null;
         stateMachine.ChangeStatusState(new StatusStateNormal(this));
         LeanTween.delayedCall(1f, () =>
         {

@@ -27,3 +27,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 992b41dcd3b75324886a5cd941e362af, type: 2}
   - {fileID: 11400000, guid: e0abd96c614aa3649aa1ddbf66a3d6bc, type: 2}
   - {fileID: 11400000, guid: c40ab876685315245b999ebb51ecc01b, type: 2}
+  listEnemyBoss:
+  - enemyBoss: {fileID: 8725309217468484491, guid: 5fa1656ffccc4264386062b4da39aa6c, type: 3}
+    timeSpawn: 10
+    isSpawned: 1
+    isFinalBoss: 1

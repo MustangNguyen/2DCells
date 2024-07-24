@@ -9,7 +9,7 @@ using System.Threading;
 
 public class EnemySpawner : Singleton<EnemySpawner>
 {
-    [SerializeField] private float missionTime = 0f;
+    [SerializeField] private float missionTime = 0;
     [SerializeField] private float spawnTime = 1f;
     [SerializeField] private Transform enemyHoder;
     // [SerializeField] private float respawnDistance = 20f;
@@ -40,13 +40,16 @@ public class EnemySpawner : Singleton<EnemySpawner>
         // UpdateWave();
         waveDurationLeft -= Time.fixedDeltaTime;
         missionTime += Time.fixedDeltaTime;
+
     }
 
     private void Initialize()
     {
         var campaignLevels = Resources.LoadAll<CampaignLevel>("Scriptable Object/Spawn/Campaign Levels");
-        foreach(var level in campaignLevels){
-            if (level.nodeId == SceneLoadManager.Instance.mapNodeInformation.nodeId){
+        foreach (var level in campaignLevels)
+        {
+            if (level.nodeId == SceneLoadManager.Instance.mapNodeInformation.nodeId)
+            {
                 campaignLevel = level;
                 break;
             }
@@ -97,7 +100,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
             }
             isOnChangeWave = false;
         }
-        
+
     }
     private void SpawnEnemies()
     {
@@ -134,6 +137,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
             UpdateWave();
             if (isOnChangeWave) yield return new WaitForFixedUpdate();
             //Debug.Log("spawning");
+            BossSpawn();
             if (counterDict[currentWave].Count == 0)
             {
                 enemyCell = LeanPool.Spawn(campaignLevel.waves[currentWave].listSpawn[0].enemyCells, SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
@@ -170,10 +174,34 @@ public class EnemySpawner : Singleton<EnemySpawner>
             enemiesCounter[index][1]--;
         }
     }
-    public void SiegeSpawn(){
+    public void SiegeSpawn()
+    {
 
     }
-    public void BossSpawn(){
-        
+    public void BossSpawn()
+    {
+        foreach (var boss in campaignLevel.listEnemyBoss)
+        {
+            if (!boss.isSpawned && boss.timeSpawn < missionTime)
+            {
+                EnemyCell enemyBoss = LeanPool.Spawn(boss.enemyBoss, Vector3.zero, quaternion.identity, enemyHoder);
+                enemyBoss.isBoss = true;
+                counterDict[currentWave][enemyBoss] = 0;
+                enemyBoss.wave = currentWave;
+                boss.isSpawned = true;
+                if(boss.isFinalBoss){
+                    enemyBoss.OnDeadTrigger += GameManager.Instance.OnWin;
+                }
+            }
+        }
     }
+}
+
+[Serializable]
+public class BossSchadule
+{
+    public EnemyCell enemyBoss;
+    public float timeSpawn;
+    public bool isSpawned = false;
+    public bool isFinalBoss = false;
 }
