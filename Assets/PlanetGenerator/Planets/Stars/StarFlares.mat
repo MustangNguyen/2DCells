@@ -156,7 +156,7 @@ Material:
     - storm_dither_width: 0
     - storm_width: 0.3
     - stretch: 2.001
-    - time: 92.75273
+    - time: 20.557999
     - time_speed: 1.1990646
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

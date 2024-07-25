@@ -28,10 +28,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
     private bool isOnChangeWave = false;
 
     private int enemiesSpawned = 0;
-    private void Start()
+    private IEnumerator Start()
     {
         spawnPos = enemyHoder;
         Initialize();
+        yield return new WaitForSeconds(3f);
         SpawnEnemies();
     }
     private void FixedUpdate()
