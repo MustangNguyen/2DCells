@@ -33,7 +33,7 @@ public class FogTileMap : MonoBehaviour
     }
     private IEnumerator IEStartCleanFog(){
         yield return new WaitForSeconds(0.5f);
-        for (int i = 0; i < listTileFog.Count; i++)
+        for (int i = 0; i < Mathf.Sqrt(listTileFog.Count); i++)
         {
             for (int j = 0; j <= i; j++)
             {
