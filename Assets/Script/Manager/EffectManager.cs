@@ -104,4 +104,7 @@ public class EffectManager : Singleton<EffectManager>
             }
         }
     }
+    public void MoveXDurationYParabolaSpeed(RectTransform start,RectTransform finish,float duration){
+        
+    }
 }

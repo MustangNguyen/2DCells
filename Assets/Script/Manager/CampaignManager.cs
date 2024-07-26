@@ -36,11 +36,6 @@ public class CampaignManager : Singleton<CampaignManager> {
     {
         OnChangeSeedRandom();
         GetColors();
-        //AudioManager.Instance.StartCampaignBackGround();
-        listSelectPlanets = new();
-        foreach(var planet in planets){
-            listSelectPlanets.Add(planet.gameObject?.GetComponent<SelectedPlanet>());
-        }
         InitStartChart();
     }
 
@@ -218,8 +213,13 @@ public class CampaignManager : Singleton<CampaignManager> {
     }
 
     public void InitStartChart(){
+        listSelectPlanets = new();
+        foreach(var planet in planets){
+            listSelectPlanets.Add(planet.gameObject?.GetComponent<SelectedPlanet>());
+        }
         leftSwitchButton.anchoredPosition = new Vector2(-1000,0);
         rightSwitchButton.anchoredPosition = new Vector2(1000,0);
+        AudioManager.Instance.StartCampaignBackGround();
     }
 
     public void OnChangePlanetButtonLeftClick(){

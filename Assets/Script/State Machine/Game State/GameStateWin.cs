@@ -9,6 +9,9 @@ public class GameStateWin : GameState{
     public override void Enter()
     {
         base.Enter();
+        EnemySpawner.Instance.isSpawning = false;
+        UpdateManager.Instance.DestroyAllCell();
+        PopupWin.Show();
         NodeProcessOOP nodeProcessOOP = new NodeProcessOOP{
             userId = DataManager.Instance.UserData.userInformation.userID,
             nodeId = this.nodeInformation.nodeId,

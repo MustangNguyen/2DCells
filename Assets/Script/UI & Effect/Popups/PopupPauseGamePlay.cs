@@ -21,7 +21,7 @@ public class PopupPauseGamePlay : Popups
 
     public void OnYesButtonClicked()
     {
-        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,true);
+        SceneLoadManager.Instance.LoadScene(SceneName.Campaign,true);
         GameManager.Instance.OnPauseClick();
         Hide();
     }

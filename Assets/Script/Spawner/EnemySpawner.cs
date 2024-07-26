@@ -23,6 +23,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
     [SerializeField] private float waveDurationLeft = 0f;
     // 1 dictionary for each wave
     [SerializeField] private List<Dictionary<EnemyCell, int>> counterDict;
+    [SerializeField] public bool isSpawning = true;
     private Transform spawnPos;
     private int totalWeight = 0;
     private bool isOnChangeWave = false;
@@ -32,7 +33,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
     {
         spawnPos = enemyHoder;
         Initialize();
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         SpawnEnemies();
     }
     private void FixedUpdate()
@@ -68,7 +69,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
             enemiesCounter[i] = new int[2];
             enemiesCounter[i][0] = campaignLevel.waves[currentWave].listSpawn[i].weight;
             enemiesCounter[i][1] = 0;
-            // counterDict[campaignLevel.waves[currentWave].listSpawn[i].enemyCells] = i;
             counterDict.Add(new Dictionary<EnemyCell, int>());
             totalWeight += enemiesCounter[i][0];
         }
@@ -90,7 +90,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
                     enemiesCounter[i] = new int[2];
                     enemiesCounter[i][0] = campaignLevel.waves[currentWave].listSpawn[i].weight;
                     totalWeight += enemiesCounter[i][0];
-                    // counterDict[campaignLevel.waves[currentWave].listSpawn[i].enemyCells] = i;
                 }
 
             }
@@ -105,7 +104,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
     }
     private void SpawnEnemies()
     {
-        //StartCoroutine(IESpawnSchedule());
         StartCoroutine(IESpawnByLevelScript());
     }
     public Vector3 SetTargetCyclePos(float spawnRadius, Vector3 playerPos)
@@ -118,22 +116,11 @@ public class EnemySpawner : Singleton<EnemySpawner>
         Vector3 position = new Vector3(spawnX, spawnY, 0);
         return position;
     }
-    private IEnumerator IESpawnSchedule()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(spawnTime);
-            if (enemiesSpawned < GameManager.Instance.maximumEnemies - 1)
-                LeanPool.Spawn(listEnemyCell[0], SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
-            yield return new WaitForSeconds(spawnTime);
-            if (enemiesSpawned < GameManager.Instance.maximumEnemies - 1)
-                LeanPool.Spawn(listEnemyCell[1], SetTargetCyclePos(spawnRadius, playerPosition.position), quaternion.identity, enemyHoder);
-        }
-    }
+
     private IEnumerator IESpawnByLevelScript()
     {
         EnemyCell enemyCell;
-        while (true)
+        while (isSpawning)
         {
             UpdateWave();
             if (isOnChangeWave) yield return new WaitForFixedUpdate();
@@ -171,7 +158,6 @@ public class EnemySpawner : Singleton<EnemySpawner>
         if (enemyCell.wave == currentWave)
         {
             int index = counterDict[currentWave][enemyCell];
-            // Debug.Log(index);
             enemiesCounter[index][1]--;
         }
     }
@@ -191,6 +177,7 @@ public class EnemySpawner : Singleton<EnemySpawner>
                 enemyBoss.wave = currentWave;
                 boss.isSpawned = true;
                 if(boss.isFinalBoss){
+                    GameManager.Instance.finalBoss = enemyBoss;
                     enemyBoss.OnDeadTrigger += GameManager.Instance.OnWin;
                 }
             }

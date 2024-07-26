@@ -125,10 +125,12 @@ public class EnemyCell : CellsBase
         //     Vector3 distance = (GameManager.Instance.mutation.transform.position - transform.position).normalized * rangeController.range;
         //     moveDirection = (moveDirection - (distance + transform.position)).normalized;
         // }
-        if(equipment == Equipment.Range){
+        if (equipment == Equipment.Range)
+        {
             float directionMagnitude = (GameManager.Instance.mutation.transform.position - transform.position).magnitude;
             moveDirection *= directionMagnitude > rangeController.range ? 1 : -1;
-            if(Mathf.Abs(directionMagnitude- rangeController.range)<rangeController.range/10){
+            if (Mathf.Abs(directionMagnitude - rangeController.range) < rangeController.range / 10)
+            {
                 moveDirection = Vector3.zero;
             }
         }
@@ -190,6 +192,7 @@ public class EnemyCell : CellsBase
         EffectManager.Instance.SpawnObs(gameObject, XpObs);
         OnDeadTrigger?.Invoke();
         OnDeadTrigger = null;
+        GameManager.Instance.score += maxHealth;
         stateMachine.ChangeStatusState(new StatusStateNormal(this));
         LeanTween.delayedCall(1f, () =>
         {

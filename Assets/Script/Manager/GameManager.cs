@@ -23,6 +23,7 @@ public class GameManager : Singleton<GameManager>
     public bool isChoosingPowerUp = false;
     public Transform bulletHolder;
     public Action<string> returnPowerIdUpChosen;
+    public int score;
     [Space(10)]
     [Header("Game UI")]
     public MutationHealthBar healthBar;
@@ -35,6 +36,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Game State")]
     public StateMachine gameStateMachine;
     public bool isPause = false;
+    public bool isWin = false;
     public EnemyCell finalBoss;
     private void Start()
     {
@@ -91,7 +93,7 @@ public class GameManager : Singleton<GameManager>
         xpBar.value = (float)currentXp/xpRequire;
     }
     public void OnLevelUp(){
-        if (!isPause)
+        if (!isPause&&!isWin)
         {
             gameStateMachine.ChangeState(new GameStatePause());
             isChoosingPowerUp = true;
@@ -101,6 +103,7 @@ public class GameManager : Singleton<GameManager>
         }
     }
     public void OnWin(){
+        isWin = true;
         gameStateMachine.ChangeState(new GameStateWin(nodeInformation,0));
     }
     public IEnumerator IEWaitForChoosingPowerUp(){

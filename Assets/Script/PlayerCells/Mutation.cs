@@ -43,8 +43,8 @@ public class Mutation : CellsBase
         }
         PlayerMovement();
         PlayerRotation();
-        ShieldRecharge();
         ShieldDelay();
+        ShieldRecharge();
     }
     protected override void Start(){
         base.Start();
