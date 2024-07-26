@@ -61,9 +61,21 @@ public class LoginManager : Singleton<LoginManager>
             notification.text = "";
             NetworkManager.Instance.PostRequestLogin(new UserLogin(userEmail.text, userPassword.text), () =>
             {
-                loginPanel.gameObject.SetActive(false);
-                startBtn.gameObject.SetActive(true);
-                NetworkManager.Instance.GetUserInformationFromServer(userEmail.text);
+                int conditionRequire = 4;
+                int conditionResponded = 0;
+                NetworkManager.Instance.GetUserInformationFromServer(userEmail.text, ()=>{conditionResponded++;
+                    NetworkManager.Instance.GetUserGunFromServer(DataManager.Instance.UserData.userInformation.userID, () => { conditionResponded++; });
+                    NetworkManager.Instance.GetUserEquipedGunFromServer(DataManager.Instance.UserData.userInformation.userID, () => { conditionResponded++; });
+                    NetworkManager.Instance.GetUserMutattionFromServer(DataManager.Instance.UserData.userInformation.userID, ()=>{conditionResponded++;});
+                });
+                StartCoroutine(IEWaitForAllResponse());
+                IEnumerator IEWaitForAllResponse(){
+                    while(conditionResponded<conditionRequire){
+                        yield return new WaitForSeconds(Time.deltaTime);
+                    }
+                    loginPanel.gameObject.SetActive(false);
+                    startBtn.gameObject.SetActive(true);
+                }
             }, () =>
             {
                 submitBtn.interactable = true;
@@ -186,9 +198,7 @@ public class LoginManager : Singleton<LoginManager>
         /* #if UNITY_EDITOR
              SceneLoadManager.Instance.LoadScene(SceneName.GamePlay);
          #else */
-        NetworkManager.Instance.GetUserGunFromServer(DataManager.Instance.UserData.userInformation.userID);
-        NetworkManager.Instance.GetUserEquipedGunFromServer(DataManager.Instance.UserData.userInformation.userID);
-        NetworkManager.Instance.GetUserMutattionFromServer(DataManager.Instance.UserData.userInformation.userID);
+    
         SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,true);
         //  #endif
     }

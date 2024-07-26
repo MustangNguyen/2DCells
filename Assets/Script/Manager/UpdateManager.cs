@@ -49,6 +49,12 @@ public class UpdateManager : Singleton<UpdateManager>
         transformPoolCount--;
         enemiesCount--;
     }
+    public void DealDamageToAll(int damage){
+        for(int i = 0 ;i<transformsPool.Length;i++){
+            if (transformsPool[i] == null) continue;
+            transformsPool[i].TakeDamage(damage,0);
+        }
+    }
     public void DestroyAllCell(){
         for(int i = 0 ;i<transformsPool.Length;i++){
             if (transformsPool[i] == null) continue;

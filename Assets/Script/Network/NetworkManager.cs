@@ -22,76 +22,87 @@ public partial class NetworkManager : Singleton<NetworkManager>
         // PostNewUserToServer(user);
     }
     #region Get
-    public void GetIngameLevelConfigsFromServer(){
+    public void GetIngameLevelConfigsFromServer(Action onFinish = null){
         StartCoroutine(CreateWebGetRequest(HOST + GET_INGAME_LEVEL_CONFIGS,(string data)=>{
             DataManager.Instance.GetIngameLevelConfigs(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetMutationDataFromServer()
+    public void GetMutationDataFromServer(Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_MUTATION_API, (string data) =>
         {
             DataManager.Instance.GetMutationData(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetEnemyDataFromServer(){
+    public void GetEnemyDataFromServer(Action onFinish = null){
         StartCoroutine(CreateWebGetRequest(HOST + GET_ENEMY_API,(string data) => 
         {
             DataManager.Instance.GetEnemydata(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetAbilityDataFromServer()
+    public void GetAbilityDataFromServer(Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_ABILITY_API, (string data) =>
         {
             DataManager.Instance.GetAbilityData(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetBulletDataFromServer()
+    public void GetBulletDataFromServer(Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_BULLET_API, (string data) =>
         {
             DataManager.Instance.GetBulletData(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetUserInformationFromServer(string email){
+    public void GetUserInformationFromServer(string email,Action onFinish = null){
         StartCoroutine(CreateWebGetRequest(HOST + GET_USER_INFORMATION + email, (string data) =>
         {
             DataManager.Instance.GetUserInformationData(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetUserGunFromServer(string userId)
+    public void GetUserGunFromServer(string userId,Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_USER_GUN + userId, (string data) => 
         {
             DataManager.Instance.GetUserGunInformationData(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetGunFromServer()
+    public void GetGunFromServer(Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_GUN_API, (string data) =>
         {
             DataManager.Instance.GetGunData(data);   
+            onFinish?.Invoke();
         }));
     }
-    public void GetUserEquipedGunFromServer(string userId)
+    public void GetUserEquipedGunFromServer(string userId,Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_USER_EQUIPED_GUN + userId , (string data) =>
         {
             DataManager.Instance.GetUserEquipedGunInfor(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetUserMutattionFromServer(string userId)
+    public void GetUserMutattionFromServer(string userId,Action onFinish = null)
     {
         StartCoroutine(CreateWebGetRequest(HOST + GET_USER_MUTATION + userId, (string data) =>
         {
             DataManager.Instance.GetUserMutationInfor(data);
+            onFinish?.Invoke();
         }));
     }
-    public void GetPlanetsFromServer(){
+    public void GetPlanetsFromServer(Action onFinish = null){
         StartCoroutine(CreateWebGetRequest(HOST + GET_PLANETS_API, (string data) =>
         {
             DataManager.Instance.GetPlanetsData(data);
+            onFinish?.Invoke();
         }));
     }
     #endregion

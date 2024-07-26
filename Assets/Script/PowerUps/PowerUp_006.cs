@@ -22,6 +22,6 @@ public class PowerUp_006 : PowerUp
     }
     private void OnBurst(){
         // Debug.Log("nuke all them");
-        UpdateManager.Instance.DestroyAllCell();
+        UpdateManager.Instance.DealDamageToAll(500);
     }
 }
