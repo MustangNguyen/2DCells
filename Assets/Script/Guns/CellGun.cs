@@ -52,6 +52,7 @@ public class CellGun : MonoBehaviour
         }
     }
     protected virtual void SetFire(){
+        if(!GameManager.Instance.mutation.gameObject.activeSelf) return;
         if(isGunReady){
             isGunReady = false;
             StartCoroutine(OnFire());

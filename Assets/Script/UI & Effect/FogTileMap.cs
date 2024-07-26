@@ -9,6 +9,7 @@ public class FogTileMap : MonoBehaviour
 {
     [SerializeField] Tilemap fogTilemap;
     [SerializeField] float effectDuration = 0.15f;
+    [SerializeField] float delayDuration = 0.75f;
     private List<TileBase> listTileFog;
     private void Start()
     {
@@ -55,6 +56,7 @@ public class FogTileMap : MonoBehaviour
     private IEnumerator SetTileColor(Vector3Int position)
     {
         fogTilemap.SetTileFlags(position,TileFlags.None);
+        yield return new WaitForSeconds(UnityEngine.Random.Range(0,delayDuration));
         float timeElapse = 0;
         while (timeElapse < effectDuration)
         {
