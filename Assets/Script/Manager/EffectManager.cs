@@ -104,7 +104,37 @@ public class EffectManager : Singleton<EffectManager>
             }
         }
     }
-    public void MoveXDurationYParabolaSpeed(RectTransform start,RectTransform finish,float duration){
-        
+    public void MoveXDurationYParabolaSpeed(RectTransform start,Vector3 finish,float duration){
+        Vector3 lastRectPosition = new Vector3(start.anchoredPosition.x, start.anchoredPosition.y);
+        duration *= 2;
+        StartCoroutine(IEParabolaMoveRect());
+        IEnumerator IEParabolaMoveRect()
+        {
+            float timeElapse = 0f;
+            while (timeElapse < duration / 2)
+            {
+                start.anchoredPosition = new Vector3(lastRectPosition.x + (finish.x * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))), lastRectPosition.y + (finish.y * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))), 0);
+                timeElapse += Time.deltaTime;
+                yield return new WaitForSeconds(Time.deltaTime);
+
+            }
+            start.anchoredPosition = new Vector2(lastRectPosition.x + finish.x,lastRectPosition.y + finish.y);
+        }
+    }
+    public void RectXDurationYParabolaSpeed(RectTransform start,Vector3 finish,float duration){
+        Vector2 lastRect = new Vector2(start.sizeDelta.x, start.sizeDelta.y);
+        duration *= 2;
+        StartCoroutine(IEParabolaMoveRect());
+        IEnumerator IEParabolaMoveRect()
+        {
+            float timeElapse = 0f;
+            while (timeElapse < duration / 2)
+            {
+                start.sizeDelta = new Vector2(lastRect.x + (finish.x * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))), lastRect.y + (finish.y * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))));
+                timeElapse += Time.deltaTime;
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+            start.sizeDelta = new Vector2(lastRect.x + finish.x,lastRect.y + finish.y);
+        }
     }
 }

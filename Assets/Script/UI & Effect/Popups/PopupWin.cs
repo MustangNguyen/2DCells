@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Hellmade.Sound;
+using Unity.VisualScripting;
 
 public class PopupWin : Popups
 {
@@ -22,14 +23,19 @@ public class PopupWin : Popups
     [Space(10)]
     [Header("Battle Information")]
     [SerializeField] RectTransform informationPanel;
+    [SerializeField] RectTransform informationTitle;
+    [SerializeField] List<TitleScorePair> listTitleScorePair;
 
-    private Vector3 lastBannerPosition;
-    private Vector3 lastBannerSize;
+    private Vector2 lastBannerPosition;
+    private Vector2 lastBannerSize;
+    private Vector2 lastInformationTitlePosition;
     #region FUNCTION
 
     private void Start() {
         lastBannerPosition = winBanner.rectTransform.anchoredPosition;
         lastBannerSize = winBanner.rectTransform.sizeDelta;
+        lastInformationTitlePosition = informationTitle.anchoredPosition;
+        informationTitle.anchoredPosition = new Vector2(informationTitle.anchoredPosition.x,informationTitle.anchoredPosition.y + 500f);
         InitUI();
     }
     [ContextMenu("Re-init UI")]
@@ -48,19 +54,22 @@ public class PopupWin : Popups
     {
         yield return new WaitForSeconds(0.5f);
         float timeElapse = 0f;
+        // EffectManager.Instance.MoveXDurationYParabolaSpeed(winBanner.rectTransform,new Vector3(4000f,0),bannerFloatInDuration);
         bannerFloatInDuration *= 2;
+        // yield return new WaitForSeconds(bannerFloatInDuration / 2);
         while (timeElapse < bannerFloatInDuration / 2)
         {
-            // winBanner.rectTransform.anchoredPosition = Vector3.Lerp(lastBannerPosition, Vector3.zero, Mathf.Clamp01(timeElapse / bannerFloatInDuration));
             winBanner.rectTransform.anchoredPosition = new Vector3(lastBannerPosition.x + Mathf.Abs((lastBannerPosition.x - 0) * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / bannerFloatInDuration) - 1, 2))), 0, 0);
             timeElapse += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
 
         }
+        GameManager.Instance.mutation.gameObject.SetActive(false);
+        // timeElapse = bannerFloatInDuration/2;
         yield return new WaitForSeconds(bannerTextWaitDuration);
+
         while (timeElapse < bannerFloatInDuration)
         {
-            // winBanner.rectTransform.anchoredPosition = Vector3.Lerp(lastBannerPosition, Vector3.zero, Mathf.Clamp01(timeElapse / bannerFloatInDuration));
             winBanner.rectTransform.sizeDelta = new Vector3(lastBannerSize.x, lastBannerSize.y + Mathf.Abs((4000f - lastBannerSize.y) * Mathf.Pow(2 * Mathf.Clamp01(timeElapse / bannerFloatInDuration) - 1, 2)), 0);
             timeElapse += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
@@ -68,6 +77,13 @@ public class PopupWin : Popups
         bannerFloatInDuration /=2;  
         informationPanel.gameObject.SetActive(true);
 
+        EffectManager.Instance.MoveXDurationYParabolaSpeed(informationTitle,lastInformationTitlePosition - informationTitle.anchoredPosition,0.2f);
+
+        yield return new WaitForSeconds(Time.deltaTime);
+        foreach(var item in listTitleScorePair){
+            item.StartAnimation();
+            yield return new WaitForSeconds(bannerFloatInDuration/2);
+        }
     }
     public void BackToStarChart(){
         Debug.Log("button clicked!");
