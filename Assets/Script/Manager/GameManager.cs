@@ -90,43 +90,58 @@ public class GameManager : Singleton<GameManager>
                 currentXp = 0;
             }
         }
-        xpBar.value = (float)currentXp/xpRequire;
+        xpBar.value = (float)currentXp / xpRequire;
     }
-    public void OnLevelUp(){
-        if (!isPause&&!isWin)
+    public void OnLevelUp()
+    {
+        if (!isPause && !isWin)
         {
             gameStateMachine.ChangeState(new GameStatePause());
             isChoosingPowerUp = true;
             StartCoroutine(IEWaitForChoosingPowerUp());
             PopupChoosePowerUp.Show();
-            
+
         }
     }
-    public void OnWin(){
+    public void OnWin()
+    {
         isWin = true;
-        gameStateMachine.ChangeState(new GameStateWin(nodeInformation,0));
+        gameStateMachine.ChangeState(new GameStateWin(nodeInformation, 0));
     }
-    public IEnumerator IEWaitForChoosingPowerUp(){
+    public IEnumerator IEWaitForChoosingPowerUp()
+    {
         returnPowerIdUpChosen += AddPowerUpToMutation;
-        yield return new WaitUntil(()=>!isChoosingPowerUp);
+        yield return new WaitUntil(() => !isChoosingPowerUp);
         returnPowerIdUpChosen -= AddPowerUpToMutation;
         gameStateMachine.ChangeState(new GameStatePlay());
     }
-    public void AddPowerUpToMutation(string powerUpId){
+    public void AddPowerUpToMutation(string powerUpId)
+    {
         // Debug.Log("power up choose: " + powerUpId);
         isChoosingPowerUp = false;
         bool isExistPowerUp = listPowerUpDatas.Exists(x => x.id == powerUpId);
-        if (isExistPowerUp){
-            PowerUp powerUp = listPowerUpDatas.Find(x=>x.id == powerUpId).powerUp;
-            PowerUp temp = LeanPool.Spawn(powerUp,powerUpHolder);
+        if (isExistPowerUp)
+        {
+            PowerUp powerUp = listPowerUpDatas.Find(x => x.id == powerUpId).powerUp;
+            PowerUp temp = LeanPool.Spawn(powerUp, powerUpHolder);
             listPlayerPowerUpDatas.Add(listPowerUpDatas.Find(x => x.id == powerUpId));
             listPlayerPowerUps.Add(temp);
             listPowerUpDatas.Remove(listPowerUpDatas.Find(x => x.id == powerUpId));
         }
-        else{
-            PowerUp powerUp = listPlayerPowerUps.Find(x=>x.id == powerUpId);
-            powerUp.OnLevelUp(powerUp.lv+1);
+        else
+        {
+            PowerUp powerUp = listPlayerPowerUps.Find(x => x.id == powerUpId);
+            powerUp.OnLevelUp(powerUp.lv + 1);
         }
+    }
+    public int TotalCurrentXp()
+    {
+        int totalXp = 0;
+        for (int i = 0; i < currentLv; i++)
+        {
+            totalXp += DataManager.Instance.Data.listIngameLevelConfig[i].xpRequire;
+        }
+        return totalXp + currentXp;
     }
 }
 [Serializable]
@@ -136,7 +151,8 @@ public class IngameLevelConfigsOOP
     public int xpRequire;
 }
 [Serializable]
-public enum PowerUpRarity{
+public enum PowerUpRarity
+{
     Common,
     Uncommon,
     Rare,

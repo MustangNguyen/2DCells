@@ -31,7 +31,7 @@ public class GameStateWin : GameState{
                         userId = DataManager.Instance.UserData.userInformation.userID,
                         nodeId = nextNode.nodeId,
                         isNodeFinish = false,
-                        nodeScore = 0
+                        nodeScore = GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + 10000
                     };
                     Debug.Log("next nodeid: " + nextNode.nodeId);
                     NetworkManager.Instance.PostUpdateUserProcess(nodeProcessOOPNextNode, (data) =>

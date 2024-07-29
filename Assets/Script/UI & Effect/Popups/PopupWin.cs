@@ -31,11 +31,12 @@ public class PopupWin : Popups
     private Vector2 lastInformationTitlePosition;
     #region FUNCTION
 
-    private void Start() {
+    private void Start()
+    {
         lastBannerPosition = winBanner.rectTransform.anchoredPosition;
         lastBannerSize = winBanner.rectTransform.sizeDelta;
         lastInformationTitlePosition = informationTitle.anchoredPosition;
-        informationTitle.anchoredPosition = new Vector2(informationTitle.anchoredPosition.x,informationTitle.anchoredPosition.y + 500f);
+        informationTitle.anchoredPosition = new Vector2(informationTitle.anchoredPosition.x, informationTitle.anchoredPosition.y + 500f);
         InitUI();
     }
     [ContextMenu("Re-init UI")]
@@ -46,8 +47,9 @@ public class PopupWin : Popups
         informationPanel.gameObject.SetActive(false);
         AppearBanner();
     }
-    
-    public void AppearBanner(){
+
+    public void AppearBanner()
+    {
         StartCoroutine(IEMoveBannerIn());
     }
     public IEnumerator IEMoveBannerIn()
@@ -74,18 +76,28 @@ public class PopupWin : Popups
             timeElapse += Time.deltaTime;
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        bannerFloatInDuration /=2;  
+        bannerFloatInDuration /= 2;
         informationPanel.gameObject.SetActive(true);
 
-        EffectManager.Instance.MoveXDurationYParabolaSpeed(informationTitle,lastInformationTitlePosition - informationTitle.anchoredPosition,0.2f);
+        EffectManager.Instance.MoveXDurationYParabolaSpeed(informationTitle, lastInformationTitlePosition - informationTitle.anchoredPosition, 0.2f);
 
         yield return new WaitForSeconds(Time.deltaTime);
-        foreach(var item in listTitleScorePair){
+        foreach (var item in listTitleScorePair)
+        {
             item.StartAnimation();
-            yield return new WaitForSeconds(bannerFloatInDuration/2);
+            yield return new WaitForSeconds(bannerFloatInDuration / 2);
         }
+        listTitleScorePair[0].StartCounting(GameManager.Instance.score, bannerFloatInDuration);
+        yield return new WaitForSeconds(bannerFloatInDuration / 4);
+        listTitleScorePair[1].StartCounting(GameManager.Instance.TotalCurrentXp(), bannerFloatInDuration );
+        yield return new WaitForSeconds(bannerFloatInDuration / 4);
+        listTitleScorePair[2].StartCounting(10000, bannerFloatInDuration);
+        yield return new WaitForSeconds(bannerFloatInDuration / 4);
+        listTitleScorePair[3].StartCounting(GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + 10000, bannerFloatInDuration);
+        yield return new WaitForSeconds(bannerFloatInDuration / 4);
     }
-    public void BackToStarChart(){
+    public void BackToStarChart()
+    {
         Debug.Log("button clicked!");
         SceneLoadManager.Instance.LoadScene(SceneName.Campaign);
     }
@@ -116,7 +128,7 @@ public class PopupWin : Popups
             };
 
         }
-        else        
+        else
         {
             if (completed != null)
             {
@@ -152,7 +164,8 @@ public class PopupWin : Popups
     public void Disappear()
     {
         //Background.gameObject.SetActive(false);
-        base.Disappear(()=>{
+        base.Disappear(() =>
+        {
             Panel.gameObject.SetActive(false);
         });
     }

@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 5903494555119438271}
   duration: 0.5
+  scoreText: {fileID: 6320558927735738712}
+  score: 0
 --- !u!1 &6392605376626936767
 GameObject:
   m_ObjectHideFlags: 0

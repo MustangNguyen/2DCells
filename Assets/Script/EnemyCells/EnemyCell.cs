@@ -192,7 +192,7 @@ public class EnemyCell : CellsBase
         EffectManager.Instance.SpawnObs(gameObject, XpObs);
         OnDeadTrigger?.Invoke();
         OnDeadTrigger = null;
-        GameManager.Instance.score += maxHealth;
+        GameManager.Instance.score += XpObs*3;
         stateMachine.ChangeStatusState(new StatusStateNormal(this));
         LeanTween.delayedCall(1f, () =>
         {
