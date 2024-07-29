@@ -15,6 +15,8 @@ public class Mutation : CellsBase
     [SerializeField] protected List<CellAbility> mutationAbilities;
     [SerializeField] protected LayerMask layerAffectByShieldPulse;
     [SerializeField] protected int layerObs;
+    [SerializeField] protected Animator animator;
+    [SerializeField] protected GameObject destroyAnimation;
     public float obsCollectRange {get;protected set;} = 5f;
     public float obsCollectRangeAddIn = 0f;
     private float impactField = 10f;
@@ -133,6 +135,11 @@ public class Mutation : CellsBase
         }
         if(currentArmor.shieldPoint >= baseCellArmor.shieldPoint)
             isShieldPulseCharged = true;
+    } 
+
+    public void PlayDeadAnimation(){
+        destroyAnimation.SetActive(true);
+        animator.SetTrigger("Destroy");
     }
     protected void StateMachineMonitor(){
         if(playerRigidbody2d.velocity==Vector2.zero){
@@ -140,6 +147,9 @@ public class Mutation : CellsBase
         }
         else if(playerRigidbody2d.velocity!=Vector2.zero){
             stateMachine.ChangeState(new PlayerStateMove(this));
+        }
+        if(healPoint<=0){
+            stateMachine.ChangeState(new PlayerStateDead(this));
         }
     }
     

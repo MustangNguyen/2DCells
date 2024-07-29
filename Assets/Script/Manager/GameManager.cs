@@ -106,7 +106,11 @@ public class GameManager : Singleton<GameManager>
     public void OnWin()
     {
         isWin = true;
-        gameStateMachine.ChangeState(new GameStateWin(nodeInformation, 0));
+        gameStateMachine.ChangeState(new GameStateWin(nodeInformation));
+    }
+    public void OnLose()
+    {
+        gameStateMachine.ChangeState(new GameStateLose(nodeInformation));
     }
     public IEnumerator IEWaitForChoosingPowerUp()
     {

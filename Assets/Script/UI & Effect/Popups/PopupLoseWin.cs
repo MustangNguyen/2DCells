@@ -7,9 +7,9 @@ using System;
 using Hellmade.Sound;
 using Unity.VisualScripting;
 
-public class PopupWin : Popups
+public class PopupLoseWin : Popups
 {
-    public static PopupWin Instance;
+    public static PopupLoseWin Instance;
     #region DEFINE VARIABLES
     private Action<bool> _onResult;
     #endregion
@@ -20,6 +20,7 @@ public class PopupWin : Popups
     [SerializeField] TextMeshProUGUI bannerTextUpper;
     [SerializeField] TextMeshProUGUI bannerTextLower;
     [SerializeField] float bannerTextWaitDuration = 1f;
+    [SerializeField] bool isWin = false;
     [Space(10)]
     [Header("Battle Information")]
     [SerializeField] RectTransform informationPanel;
@@ -37,14 +38,16 @@ public class PopupWin : Popups
         lastBannerSize = winBanner.rectTransform.sizeDelta;
         lastInformationTitlePosition = informationTitle.anchoredPosition;
         informationTitle.anchoredPosition = new Vector2(informationTitle.anchoredPosition.x, informationTitle.anchoredPosition.y + 500f);
-        InitUI();
     }
     [ContextMenu("Re-init UI")]
-    void InitUI()
+    void InitUI(bool isWin)
     {
         // winBanner.rectTransform.anchoredPosition = lastBannerPosition;
         // winBanner.rectTransform.sizeDelta = lastBannerSize;
+        this.isWin = isWin;
         informationPanel.gameObject.SetActive(false);
+        bannerTextLower.gameObject.SetActive(this.isWin);
+        bannerTextUpper.gameObject.SetActive(this.isWin);
         AppearBanner();
     }
 
@@ -68,7 +71,8 @@ public class PopupWin : Popups
         }
         GameManager.Instance.mutation.gameObject.SetActive(false);
         // timeElapse = bannerFloatInDuration/2;
-        yield return new WaitForSeconds(bannerTextWaitDuration);
+        if(isWin)
+            yield return new WaitForSeconds(bannerTextWaitDuration);
 
         while (timeElapse < bannerFloatInDuration)
         {
@@ -91,9 +95,9 @@ public class PopupWin : Popups
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
         listTitleScorePair[1].StartCounting(GameManager.Instance.TotalCurrentXp(), bannerFloatInDuration );
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
-        listTitleScorePair[2].StartCounting(10000, bannerFloatInDuration);
+        listTitleScorePair[2].StartCounting(isWin ? 10000 : 0, bannerFloatInDuration);
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
-        listTitleScorePair[3].StartCounting(GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + 10000, bannerFloatInDuration);
+        listTitleScorePair[3].StartCounting(GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + (isWin ? 10000 : 0), bannerFloatInDuration);
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
     }
     public void BackToStarChart()
@@ -109,11 +113,11 @@ public class PopupWin : Popups
         if (Instance == null)
         {
 
-            var loadAsset = Resources.LoadAsync<PopupWin>("Prefab/UI/PopupPrefabs/PopupWin" +
+            var loadAsset = Resources.LoadAsync<PopupLoseWin>("Prefab/UI/PopupPrefabs/PopupLoseWin" +
                 "");
             loadAsset.completed += (result) =>
             {
-                var asset = loadAsset.asset as PopupWin;
+                var asset = loadAsset.asset as PopupLoseWin;
                 if (asset != null)
                 {
                     Instance = Instantiate(asset,
@@ -137,13 +141,13 @@ public class PopupWin : Popups
         }
     }
 
-    public static void Show()//
+    public static void Show(bool isWin = false)//
     {
 
         CheckInstance(() =>
         {
             Instance.Appear();
-            Instance.InitUI();
+            Instance.InitUI(isWin);
         });
 
     }

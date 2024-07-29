@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 880841616915612640}
   - component: {fileID: 3185273942342914559}
   m_Layer: 10
-  m_Name: PopupWin
+  m_Name: PopupLoseWin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

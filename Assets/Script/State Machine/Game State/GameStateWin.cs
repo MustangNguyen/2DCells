@@ -1,22 +1,20 @@
 using UnityEngine;
 public class GameStateWin : GameState{
     public MapNodeInformation nodeInformation;
-    public int nodeScore;
-    public GameStateWin(MapNodeInformation nodeInformation, int nodeScore){
+    public GameStateWin(MapNodeInformation nodeInformation){
         this.nodeInformation = nodeInformation;
-        this.nodeScore = nodeScore;
     }
     public override void Enter()
     {
         base.Enter();
         EnemySpawner.Instance.isSpawning = false;
         UpdateManager.Instance.DestroyAllCell();
-        PopupWin.Show();
+        PopupLoseWin.Show(true);
         NodeProcessOOP nodeProcessOOP = new NodeProcessOOP{
             userId = DataManager.Instance.UserData.userInformation.userID,
             nodeId = this.nodeInformation.nodeId,
             isNodeFinish = true,
-            nodeScore = this.nodeScore
+            nodeScore = GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + 10000
         };
 
         NetworkManager.Instance.PostUpdateUserProcess(nodeProcessOOP,(data)=>{
@@ -31,7 +29,7 @@ public class GameStateWin : GameState{
                         userId = DataManager.Instance.UserData.userInformation.userID,
                         nodeId = nextNode.nodeId,
                         isNodeFinish = false,
-                        nodeScore = GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + 10000
+                        nodeScore = 0
                     };
                     Debug.Log("next nodeid: " + nextNode.nodeId);
                     NetworkManager.Instance.PostUpdateUserProcess(nodeProcessOOPNextNode, (data) =>
