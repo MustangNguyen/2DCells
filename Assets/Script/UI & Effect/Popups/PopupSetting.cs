@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using Hellmade.Sound;
+using System.Linq;
 
 public class PopupSetting : Popups
 {
@@ -92,6 +93,16 @@ public class PopupSetting : Popups
                 UserUIManager.Instance.ChangeUIColor(GameStatic.USER_UI_COLOR_PURPLE);
                 Frame.color = UserUIManager.Instance.currentUIColor;
                 break;
+        }
+        CustomButton []customButtons = FindObjectsOfType<CustomButton>();
+        for (int i = 0; i < customButtons.Length; i++)
+        {
+            customButtons[i].ChangeButtonColor();
+        }
+        CustomUIColor []customUIColor = FindObjectsOfType<CustomUIColor>();
+        for (int i = 0; i < customUIColor.Length; i++)
+        {
+            customUIColor[i].ChangeButtonColor();
         }
     }
 
