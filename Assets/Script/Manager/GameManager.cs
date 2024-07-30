@@ -147,6 +147,7 @@ public class GameManager : Singleton<GameManager>
         }
         return totalXp + currentXp;
     }
+    
 }
 [Serializable]
 public class IngameLevelConfigsOOP

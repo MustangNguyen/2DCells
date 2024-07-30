@@ -161,6 +161,9 @@ public partial class NetworkManager : Singleton<NetworkManager>
         apiRequest.body = JsonConvert.SerializeObject(data);
         return apiRequest;
     }
+    public void PostUpdateUserEquipment(){
+
+    }
     public void PostUpdateUserProcess(NodeProcessOOP nodeProcessOOP,Action<string> onComplete,Action<string> onFail){
         APIRequest aPIRequest = new();
         apiRequest.url = HOST + POST_UPDATE_USER_PROCESS;

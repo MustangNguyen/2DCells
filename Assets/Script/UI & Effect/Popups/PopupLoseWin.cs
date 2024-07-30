@@ -25,6 +25,10 @@ public class PopupLoseWin : Popups
     [Header("Battle Information")]
     [SerializeField] RectTransform informationPanel;
     [SerializeField] RectTransform informationTitle;
+    [SerializeField] TextMeshProUGUI loseWinDecleration;
+    [SerializeField] float shakeDuration = 0.3f;
+    [SerializeField] float shakeStrength = 1000f;
+    [SerializeField] AnimationCurve shakeCurve;
     [SerializeField] List<TitleScorePair> listTitleScorePair;
 
     private Vector2 lastBannerPosition;
@@ -71,7 +75,7 @@ public class PopupLoseWin : Popups
         }
         GameManager.Instance.mutation.gameObject.SetActive(false);
         // timeElapse = bannerFloatInDuration/2;
-        if(isWin)
+        if (isWin)
             yield return new WaitForSeconds(bannerTextWaitDuration);
 
         while (timeElapse < bannerFloatInDuration)
@@ -93,13 +97,45 @@ public class PopupLoseWin : Popups
         }
         listTitleScorePair[0].StartCounting(GameManager.Instance.score, bannerFloatInDuration);
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
-        listTitleScorePair[1].StartCounting(GameManager.Instance.TotalCurrentXp(), bannerFloatInDuration );
+        listTitleScorePair[1].StartCounting(GameManager.Instance.TotalCurrentXp(), bannerFloatInDuration);
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
         listTitleScorePair[2].StartCounting(isWin ? 10000 : 0, bannerFloatInDuration);
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
         listTitleScorePair[3].StartCounting(GameManager.Instance.score + GameManager.Instance.TotalCurrentXp() + (isWin ? 10000 : 0), bannerFloatInDuration);
         yield return new WaitForSeconds(bannerFloatInDuration / 4);
+
+        loseWinDecleration.text = isWin ? "Victory" : "You are a loser";
+        yield return new WaitForSeconds(1);
+        timeElapse = 0;
+        bannerFloatInDuration /= 2;
+        while (timeElapse < bannerFloatInDuration)
+        {
+            loseWinDecleration.color = new Color(1, 1, 1, Mathf.Clamp01(timeElapse / bannerFloatInDuration));
+            timeElapse += Time.deltaTime;
+            loseWinDecleration.fontSize = 72 + 144 * Mathf.Clamp01(1 - timeElapse / bannerFloatInDuration);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        // EffectManager.Instance.ShakeCamera();
+        loseWinDecleration.color = new Color(1, 1, 1, 1);
+        loseWinDecleration.fontSize = 72;
+        bannerFloatInDuration *= 2;
+        yield return StartCoroutine(Shaking());
     }
+    public IEnumerator Shaking()
+    {
+        float timeElapse = 0;
+        Vector3 startPosition = Frame.rectTransform.anchoredPosition;
+        while (timeElapse < shakeDuration)
+        {
+            timeElapse += Time.deltaTime;
+            float strength = shakeCurve.Evaluate(Mathf.Clamp01(timeElapse / shakeDuration)) * shakeStrength;
+            Frame.rectTransform.anchoredPosition = startPosition + UnityEngine.Random.insideUnitSphere * strength;
+            Debug.Log(Frame.rectTransform.anchoredPosition);
+            yield return null;
+        }
+        Frame.rectTransform.anchoredPosition = startPosition;
+    }
+
     public void BackToStarChart()
     {
         Debug.Log("button clicked!");

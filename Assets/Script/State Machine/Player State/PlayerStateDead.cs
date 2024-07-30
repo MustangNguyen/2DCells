@@ -9,6 +9,7 @@ public class PlayerStateDead : PlayerState{
         base.Enter();
         mutation.PlayDeadAnimation();
         mutation.gameObject.SetActive(false);
+        EffectManager.Instance.ShakeCamera();
         GameManager.Instance.OnLose();
 
     }

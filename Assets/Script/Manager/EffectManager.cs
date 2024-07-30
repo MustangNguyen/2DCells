@@ -4,6 +4,7 @@ using static GameStatic;
 using UnityEngine;
 using Lean.Pool;
 using TMPro;
+using Cinemachine;
 using System.Linq;
 using Unity.Collections;
 
@@ -14,18 +15,20 @@ public class EffectManager : Singleton<EffectManager>
     public StatusEffect statusEffect;
     public GameObject effectHolder;
     public List<XPObs> listXpObs = new();
-    public List<int> listXpPerObs = new(){1000,500,200,100,50,20,10,1};
+    public List<int> listXpPerObs = new() { 1000, 500, 200, 100, 50, 20, 10, 1 };
     public GameObject FireBlashVFX;
+    public CinemachineImpulseSource impulseSource;
     private void Start()
     {
         // listXpObs = new();
         // listXpObs = Resources.LoadAll<XPObs>("Prefab/Obs").ToList();
         FireBlashVFX = Resources.Load<GameObject>("Prefab/UI/VFX/Fire_blash_VFX");
     }
-    public void ShowFireBlashVFX(Transform transform){
-         Vector2 temp;
+    public void ShowFireBlashVFX(Transform transform)
+    {
+        Vector2 temp;
         temp = new Vector2(transform.position.x, transform.position.y);
-        GameObject fireballVFX = LeanPool.Spawn(FireBlashVFX, temp, Quaternion.identity,effectHolder.transform);
+        GameObject fireballVFX = LeanPool.Spawn(FireBlashVFX, temp, Quaternion.identity, effectHolder.transform);
         LeanTween.delayedCall(1.5f, () => { LeanPool.Despawn(fireballVFX); });
     }
     public void ShowDamageInfict(int damage, int criticalTier, Transform transform, string status = null)
@@ -93,10 +96,13 @@ public class EffectManager : Singleton<EffectManager>
     public void SpawnObs(GameObject objectSpawn, int amount)
     {
         int divide;
-        for(int i = 0;i<listXpPerObs.Count;i++){
+        for (int i = 0; i < listXpPerObs.Count; i++)
+        {
             divide = amount / listXpPerObs[i];
-            if (divide > 0){
-                for (int j = 0; j < divide; j++){
+            if (divide > 0)
+            {
+                for (int j = 0; j < divide; j++)
+                {
                     LeanPool.Spawn(listXpObs[i], EnemySpawner.Instance.SetTargetCyclePos(0.1f, objectSpawn.transform.position), Quaternion.identity, effectHolder.transform);
 
                 }
@@ -104,7 +110,11 @@ public class EffectManager : Singleton<EffectManager>
             }
         }
     }
-    public void MoveXDurationYParabolaSpeed(RectTransform start,Vector3 finish,float duration){
+    public void ShakeCamera(){
+        impulseSource.GenerateImpulse();
+    }
+    public void MoveXDurationYParabolaSpeed(RectTransform start, Vector3 finish, float duration)
+    {
         Vector3 lastRectPosition = new Vector3(start.anchoredPosition.x, start.anchoredPosition.y);
         duration *= 2;
         StartCoroutine(IEParabolaMoveRect());
@@ -118,23 +128,38 @@ public class EffectManager : Singleton<EffectManager>
                 yield return new WaitForSeconds(Time.deltaTime);
 
             }
-            start.anchoredPosition = new Vector2(lastRectPosition.x + finish.x,lastRectPosition.y + finish.y);
+            start.anchoredPosition = new Vector2(lastRectPosition.x + finish.x, lastRectPosition.y + finish.y);
         }
     }
-    public void RectXDurationYParabolaSpeed(RectTransform start,Vector3 finish,float duration){
+    public void RectXDurationYParabolaSpeed(RectTransform start, Vector3 finish, float duration, bool isRevertSpeed = false)
+    {
         Vector2 lastRect = new Vector2(start.sizeDelta.x, start.sizeDelta.y);
         duration *= 2;
         StartCoroutine(IEParabolaMoveRect());
         IEnumerator IEParabolaMoveRect()
         {
-            float timeElapse = 0f;
-            while (timeElapse < duration / 2)
+            if (!isRevertSpeed)
             {
-                start.sizeDelta = new Vector2(lastRect.x + (finish.x * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))), lastRect.y + (finish.y * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))));
-                timeElapse += Time.deltaTime;
-                yield return new WaitForSeconds(Time.deltaTime);
+                float timeElapse = 0f;
+                while (timeElapse < duration / 2)
+                {
+                    start.sizeDelta = new Vector2(lastRect.x + (finish.x * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))), lastRect.y + (finish.y * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))));
+                    timeElapse += Time.deltaTime;
+                    yield return new WaitForSeconds(Time.deltaTime);
+                }
+                start.sizeDelta = new Vector2(lastRect.x + finish.x, lastRect.y + finish.y);
             }
-            start.sizeDelta = new Vector2(lastRect.x + finish.x,lastRect.y + finish.y);
+            else
+            {
+                float timeElapse = duration / 2;
+                while (timeElapse < duration)
+                {
+                    start.sizeDelta = new Vector2(lastRect.x + (finish.x * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))), lastRect.y + (finish.y * (1 - Mathf.Pow(2 * Mathf.Clamp01(timeElapse / duration) - 1, 2))));
+                    timeElapse += Time.deltaTime;
+                    yield return new WaitForSeconds(Time.deltaTime);
+                }
+                start.sizeDelta = new Vector2(lastRect.x + finish.x, lastRect.y + finish.y);
+            }
         }
     }
 }

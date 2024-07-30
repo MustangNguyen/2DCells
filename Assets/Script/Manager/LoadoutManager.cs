@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
 
-public class LayoutManager : Singleton<LayoutManager>
+public class LoadoutManager : Singleton<LoadoutManager>
 {
     public GunItem gunItem1;
     public GunItem gunItem2;

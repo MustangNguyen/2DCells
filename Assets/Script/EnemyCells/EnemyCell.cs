@@ -67,17 +67,20 @@ public class EnemyCell : CellsBase
         SetStatusMachine(PrimaryElement.None);
         meleeController.gameObject.SetActive(equipment == Equipment.Melee ? true : false);
     }
+    // Update function
     public void CellUpdate()
     {
         // healthText.text = healPoint.ToString();
         stateMachine.StateMachineUpdate();
-        Spawner.Instance.Reposition(transform);
+        if(!isBoss)
+            Spawner.Instance.Reposition(transform);
         if (equipment == Equipment.Melee)
         {
             meleeRangeRenderer?.DrawArc();
             meleeController?.SlashCheck();
         }
     }
+    // FixedUpdate function
     public void CellFixedUpdate()
     {
         // need to upgrade to grand overshield (may be overguard for health too)
