@@ -12,7 +12,6 @@ public class ABIL_001 : CellAbility
     }
     protected override void AbilityBehavior()
     {
-        base.AbilityBehavior();
         Debug.Log(this.GetType().Name);
         mutation.moveSpeed*=10;
         LeanTween.delayedCall(3f,()=>{

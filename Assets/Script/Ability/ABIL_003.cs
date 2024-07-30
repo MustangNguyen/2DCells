@@ -12,7 +12,6 @@ public class ABIL_003 : CellAbility
     }
     protected override void AbilityBehavior()
     {
-        base.AbilityBehavior();
         Debug.Log("ability 3");
     }
 }

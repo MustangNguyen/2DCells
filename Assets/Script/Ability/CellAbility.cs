@@ -5,17 +5,27 @@ using Unity.Collections;
 using UnityEngine;
 
 
-public class CellAbility : MonoBehaviour
+public abstract class CellAbility : MonoBehaviour
 {
+
     public Mutation mutation;
     public string abilityId;
     public string abilityName;
     public string mutationId;
-    public int energyConsumption = 25;
+    [Space(10)]
+    [Header("Upgrade Property")]
     public int strength = 100; 
     public int duration = 100;
     public int range = 100;
     public int efficiency = 100;
+    public bool isChanneling = false;
+    public bool isRecastable = false;
+    [Space(10)]
+    [Header("Ingame Property")]
+    public float inGameDuration = 0;
+    public float inGameRange = 0;
+    public int energyConsumption = 25;
+    public float durationLeft;
     public AbilityOrder abilityOrder = AbilityOrder.Skill1;
     public CellAbility(){}
     public CellAbility(AbilityOOP abilityOOP){
@@ -29,11 +39,23 @@ public class CellAbility : MonoBehaviour
         mutationId =  DataManager.Instance.Data.listAbilities.Find(x => x.abilityId == abilityId).mutationId;
     }
 
-    public virtual void AbilityCast(){
-        mutation.currentEnery -= energyConsumption;
-        AbilityBehavior();
+    protected virtual void FixedUpdate(){
+        if(durationLeft>0){
+            durationLeft-=Time.fixedDeltaTime;
+        }
     }
-    protected virtual void AbilityBehavior(){
+
+    public virtual void AbilityCast(){
+        if(durationLeft<=0)
+            AbilityBehavior();
+        else
+            if(isRecastable)
+                AbilityBehavior();
+    }
+    abstract protected void AbilityBehavior();
+    protected void SetUpBasicPropertiesOnCast(){
+        mutation.currentEnery -= energyConsumption;
+        durationLeft = inGameDuration;
 
     }
 }
