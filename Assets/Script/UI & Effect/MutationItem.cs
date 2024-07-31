@@ -4,16 +4,33 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class MutationItem : MonoBehaviour
+public class MutationItem : SelectItem
 {
-    [SerializeField] public Image icon;
-    [SerializeField] private SpriteAtlas mutation;
-    [SerializeField] private string mutationId;
+    public UserMutaitonInfor mutationInfomation;
 
-    public void InitIcon(MutationOOP _data)
+
+    //EquipedGun Parameters
+
+    public void InitIcon()
     {
-        Sprite sprite = mutation.GetSprite(_data.mutationID);
-        mutationId = _data.mutationID;
-        icon.sprite = sprite;
+        if(mutationInfomation == null){
+            selectedBorder.enabled = false;
+            icon.sprite = itemSpriteAtlas.GetSprite("off2");
+            icon.color = Color.gray;
+        }
+        else{
+            // Sprite sprite = itemSpriteAtlas.GetSprite(cellgunInfomation.gunId);
+            var gunData = DataManager.Instance.Data.listMutations.Find(x => x.mutationID == mutationInfomation.mutationId);
+            icon.sprite = itemSpriteAtlas.GetSprite(mutationInfomation.mutationId);
+            selectedBorder.enabled = false;
+        }
+    }
+
+    public void OnClick()
+    {
+        // EquipmentManager.Instance.bulletId = bulletId;
+        // EquipmentManager.Instance.gunOwnedId = gunOwenredId;
+        // EquipmentManager.Instance.OnClickShowInfor(gunId);
+        // Debug.Log(gunOwenredId);
     }
 }

@@ -4,44 +4,35 @@ using UnityEngine;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-public class GunItem : MonoBehaviour
+public class GunItem : SelectItem
 {
-    [SerializeField] public Image icon;
-    [SerializeField] private SpriteAtlas gun;
-    [SerializeField] Button chooseButton;
-    [SerializeField] public string gunId;
-    [SerializeField] public string gunOwenredId = "";
+    public UserGunInformation cellgunInfomation;
     [SerializeField] public string bulletId;
-    [SerializeField] public Image selectedBorder;
 
 
     //EquipedGun Parameters
 
-    public void InitIcon(UserGunInformation cellgun)
+    public void InitIcon()
     {
-        Sprite sprite = gun.GetSprite(cellgun.gunId);
-        gunId = cellgun.gunId;
-        gunOwenredId = cellgun.ownerShipId;
-        var gunData = DataManager.Instance.Data.listGun.Find(x => x.gunId == gunId);
-        bulletId = gunData.bulletId;
-        icon.sprite = sprite;
-        selectedBorder.enabled = false;
+        if(cellgunInfomation == null){
+            selectedBorder.enabled = false;
+            icon.sprite = itemSpriteAtlas.GetSprite("off2");
+            icon.color = Color.gray;
+        }
+        else{
+            // Sprite sprite = itemSpriteAtlas.GetSprite(cellgunInfomation.gunId);
+            var gunData = DataManager.Instance.Data.listGun.Find(x => x.gunId == cellgunInfomation.gunId);
+            bulletId = gunData.bulletId;
+            icon.sprite = itemSpriteAtlas.GetSprite(cellgunInfomation.gunId);
+            selectedBorder.enabled = false;
+        }
     }
-    public void InitEquipIcon(UserGunInformation cellgun)
-    {
-        Sprite sprite = gun.GetSprite(cellgun.gunId);
-        gunId = cellgun.gunId;
-        gunOwenredId = cellgun.ownerShipId;
-        var gunData = DataManager.Instance.Data.listGun.Find(x => x.gunId == gunId);
-        bulletId = gunData.bulletId;
-        icon.sprite = sprite;
-        selectedBorder.enabled = false;
-    }
+
     public void OnClick()
     {
-        EquipmentManager.Instance.bulletId = bulletId;
-        EquipmentManager.Instance.gunOwnedId = gunOwenredId;
-        EquipmentManager.Instance.OnClickShowInfor(gunId);
-        Debug.Log(gunOwenredId);
+        // EquipmentManager.Instance.bulletId = bulletId;
+        // EquipmentManager.Instance.gunOwnedId = gunOwenredId;
+        // EquipmentManager.Instance.OnClickShowInfor(gunId);
+        // Debug.Log(gunOwenredId);
     }
 }

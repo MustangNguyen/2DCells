@@ -26,7 +26,7 @@ public class EquipmentManager : Singleton<EquipmentManager>
         for (int i = 0; i < userGunInformations.Count; i++)
         {
             var gunSprite = Instantiate(gunItem,itemHolder);
-            gunSprite.InitIcon(userGunInformations[i]);
+            gunSprite.InitIcon();
             //Debug.Log(userGunInformation[i].gunId);
             gunItems.Add(gunSprite);
             var button = gunSprite.GetComponent<Button>();
@@ -46,7 +46,7 @@ public class EquipmentManager : Singleton<EquipmentManager>
         bulletName.text = $"Bullet: {bullet.bulletName}";
         for (int i = 0; i < gunItems.Count; i++)
         {
-          if (gunItems[i].gunOwenredId == gunOwnedId.ownerShipId)
+          if (gunItems[i].cellgunInfomation.ownerShipId == gunOwnedId.ownerShipId)
             {
                 gunItems[i].selectedBorder.enabled = true;
             }

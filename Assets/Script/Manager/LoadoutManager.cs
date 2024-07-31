@@ -27,8 +27,8 @@ public class LoadoutManager : Singleton<LoadoutManager>
         equipmentSlot1 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId1);
         equipmentSlot2 = DataManager.Instance.UserData.userGunInformation.Find(x => x.ownerShipId == userSetEquipmentInfor.gunOwnershipId2);
         var mutation = DataManager.Instance.UserData.userMutationInfor.Find(x => x.ownerShipId == userSetEquipmentInfor.mutationOwnershipId);
-        gunItem1.InitIcon(equipmentSlot1);
-        gunItem2.InitIcon(equipmentSlot2);
+        gunItem1.InitIcon();
+        gunItem2.InitIcon();
         mutationItem.InitCharIcon(mutation);
         gunEquipId1 = equipmentSlot1.ownerShipId;
         gunEquipId2 = equipmentSlot2.ownerShipId;
