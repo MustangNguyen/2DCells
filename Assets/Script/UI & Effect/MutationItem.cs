@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class MutationItem : SelectItem
     public void InitIcon()
     {
         if(mutationInfomation == null){
-            selectedBorder.enabled = false;
+            selectedBorder.gameObject.SetActive(false);
             icon.sprite = itemSpriteAtlas.GetSprite("off2");
             icon.color = Color.gray;
         }
@@ -22,15 +23,18 @@ public class MutationItem : SelectItem
             // Sprite sprite = itemSpriteAtlas.GetSprite(cellgunInfomation.gunId);
             var gunData = DataManager.Instance.Data.listMutations.Find(x => x.mutationID == mutationInfomation.mutationId);
             icon.sprite = itemSpriteAtlas.GetSprite(mutationInfomation.mutationId);
-            selectedBorder.enabled = false;
+            selectedBorder.gameObject.SetActive(false);
         }
     }
 
-    public void OnClick()
+    public override void IsChoosing(bool IsChoosing){
+        base.IsChoosing(IsChoosing);
+    }
+    public override void OnPointerClick(PointerEventData eventData){
+        OnButtonClick();
+    }
+    public void OnButtonClick()
     {
-        // EquipmentManager.Instance.bulletId = bulletId;
-        // EquipmentManager.Instance.gunOwnedId = gunOwenredId;
-        // EquipmentManager.Instance.OnClickShowInfor(gunId);
-        // Debug.Log(gunOwenredId);
+        EquipmentManager.Instance.OnChangeCurrentItem(this);
     }
 }

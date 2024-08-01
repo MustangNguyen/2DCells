@@ -18,6 +18,7 @@ public class InventoryTable : MonoBehaviour
     [SerializeField] private List<SelectItem> itemsToShow;
     [SerializeField] private List<GunItem> gunItems;
     [SerializeField] private List<MutationItem> mutationItems;
+    public SelectItem currentItem;
     private void Awake() {
         foreach(var item in itemTabs){
             item.gameObject.SetActive(false);
@@ -37,6 +38,9 @@ public class InventoryTable : MonoBehaviour
         foreach(var item in gunItems){
             itemsToShow.Add(LeanPool.Spawn(item,itemHolder));
         }
+    }
+    public void OnChangeCurrentItem(SelectItem incomeSelectItem){
+
     }
     private void InitWeaponSlots(){
         var userGunInformations = DataManager.Instance.UserData.userGunInformation;
@@ -89,6 +93,7 @@ public class InventoryTable : MonoBehaviour
     public void ChangeCurrentTab(EquipmentTab incomeEquipmentTab){
         if(incomeEquipmentTab == currentEquipmentTab) return;
         currentEquipmentTab = incomeEquipmentTab;
+        EquipmentManager.Instance.OnChangeCurrentItem(null);
         switch (currentEquipmentTab)
         {
             case EquipmentTab.Weapon:

@@ -35,7 +35,9 @@ public abstract class SelectItem : MonoBehaviour,IPointerDownHandler,IPointerUpH
             }
         }
     }
-
+    public virtual void IsChoosing(bool IsChoosing){
+        selectedBorder.gameObject.SetActive(IsChoosing);
+    }
     public virtual void OnPointerUp(PointerEventData eventData)
     {
         isHolding = false;
