@@ -8,6 +8,10 @@ public class ToxinSplash : MonoBehaviour
     [SerializeField] public int damage;
     [SerializeField] private float damageInterval = 0.5f;
     [SerializeField] private float timer = 0f;
+    public float duration = 2f; 
+    private float timerSpawn = 0f; 
+    public float targetScale = 25f;
+
     // [SerializeField] private float despawnTimer = 0f;
     EnemyCell cell;
 
@@ -16,7 +20,12 @@ public class ToxinSplash : MonoBehaviour
     {
         StartCoroutine(Destroy());
     }
- 
+    private void Update()
+    {
+        timerSpawn += Time.deltaTime;
+        float scale = Mathf.Lerp(0f, targetScale, timerSpawn / duration); 
+        transform.localScale = Vector3.one * scale;
+    }
     public void OnTriggerEnter2D(Collider2D collision)
     {
         
@@ -41,7 +50,7 @@ public class ToxinSplash : MonoBehaviour
     }
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(10f);
         Destroy(gameObject);
     }
 }
