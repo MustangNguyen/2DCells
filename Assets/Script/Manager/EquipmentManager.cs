@@ -9,9 +9,11 @@ public class EquipmentManager : Singleton<EquipmentManager>
     public SelectItem currentSelectItem;
 
     public GunItem gunItem;
+    public UserSetEquipmentInfor currentSet;
+    public MutationItem currentMutation;
+    public GunItem currentGun1;
+    public GunItem currentGun2;
     [SerializeField] private Transform itemHolder;
-    [SerializeField] private List<GunItem> gunItems = new();
-    [SerializeField] private List<UserGunInformation> userGunInformations = new();
     [SerializeField] private TextMeshProUGUI gunName;
     [SerializeField] private TextMeshProUGUI fireRate;
     [SerializeField] private TextMeshProUGUI accuracy;
@@ -23,15 +25,8 @@ public class EquipmentManager : Singleton<EquipmentManager>
     
     private void Start()
     {
-        // userGunInformations = DataManager.Instance.UserData.userGunInformation;
-        // for (int i = 0; i < userGunInformations.Count; i++)
-        // {
-        //     var gunSprite = Instantiate(gunItem,itemHolder);
-        //     gunSprite.InitIcon();
-        //     //Debug.Log(userGunInformation[i].gunId);
-        //     gunItems.Add(gunSprite);
-        //     var button = gunSprite.GetComponent<Button>();
-        // }
+        currentSet = DataManager.Instance.UserData.usersetEquipmentInfor[0];
+        UpdateLoadOutUI();
     }
     public void ShowItemInfor()
     {
@@ -46,17 +41,28 @@ public class EquipmentManager : Singleton<EquipmentManager>
     }
     public void OnClickBackToMenu()
     {
-        SceneLoadManager.Instance.LoadScene(SceneName.MainMenu,false);
+        NetworkManager.Instance.PostUpdateUserEquipment(currentSet,(data)=>{
+            SceneLoadManager.Instance.LoadScene(SceneName.MainMenu, false);
+        },(data)=>{});
     }
-
+    public void UpdateLoadOutUI(){
+        currentMutation.mutationInfomation = DataManager.Instance.UserData.userMutationInfor.Find(x=>x.ownerShipId == currentSet.mutationOwnershipId);
+        currentMutation.InitIcon();
+        currentGun1.cellgunInfomation = DataManager.Instance.UserData.userGunInformation.Find(x=>x.ownerShipId == currentSet.gunOwnershipId1);
+        currentGun1.InitIcon();
+        currentGun2.cellgunInfomation = DataManager.Instance.UserData.userGunInformation.Find(x=>x.ownerShipId == currentSet.gunOwnershipId2);
+        currentGun2.InitIcon();
+    }
     public void OnChangeCurrentItem(SelectItem incomeSelectItem)
     {
-        if(incomeSelectItem == null){
+        if (incomeSelectItem == null)
+        {
             currentSelectItem?.IsChoosing(false);
             currentSelectItem = null;
         }
-        else{
-        if (currentSelectItem == null)
+        else
+        {
+            if (currentSelectItem == null)
             {
                 currentSelectItem = incomeSelectItem;
                 currentSelectItem.IsChoosing(true);
@@ -67,7 +73,8 @@ public class EquipmentManager : Singleton<EquipmentManager>
                 currentSelectItem = incomeSelectItem;
                 currentSelectItem.IsChoosing(true);
             }
-            ShowItemInfor();
+            if (currentSelectItem is GunItem)
+                ShowItemInfor();
         }
     }
 }

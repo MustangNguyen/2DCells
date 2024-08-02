@@ -161,8 +161,17 @@ public partial class NetworkManager : Singleton<NetworkManager>
         apiRequest.body = JsonConvert.SerializeObject(data);
         return apiRequest;
     }
-    public void PostUpdateUserEquipment(){
-
+    public void PostUpdateUserEquipment(UserSetEquipmentInfor userSetEquipmentInfor,Action<string> onComplete,Action<string> onFail){
+        APIRequest aPIRequest = new();
+        apiRequest.url = HOST + POST_UPDATE_USER_EQUIPMENT;
+        string jsonData = JsonConvert.SerializeObject(userSetEquipmentInfor);
+        apiRequest.body = jsonData;
+        StartCoroutine(CreateWebPostRequest(apiRequest,(string data)=>{
+            JSONObject json = new JSONObject(data);
+            onComplete?.Invoke(data);
+        },(data)=>{
+            onFail?.Invoke(data);
+        },true));
     }
     public void PostUpdateUserProcess(NodeProcessOOP nodeProcessOOP,Action<string> onComplete,Action<string> onFail){
         APIRequest aPIRequest = new();

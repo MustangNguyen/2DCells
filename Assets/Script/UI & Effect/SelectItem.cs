@@ -25,8 +25,10 @@ public abstract class SelectItem : MonoBehaviour,IPointerDownHandler,IPointerUpH
                 if(timeElapse>=holdDuration){
                     if(isLeft){
                         Debug.Log("Hold left");
+                        OnLeftHoldChosen();
                     }else{
                         Debug.Log("Hold right");
+                        OnRightHoldChosen();
                     }
                     isHolding = false;
                 }
@@ -37,6 +39,12 @@ public abstract class SelectItem : MonoBehaviour,IPointerDownHandler,IPointerUpH
     }
     public virtual void IsChoosing(bool IsChoosing){
         selectedBorder.gameObject.SetActive(IsChoosing);
+    }
+    public virtual void OnLeftHoldChosen(){
+
+    }
+    public virtual void OnRightHoldChosen(){
+
     }
     public virtual void OnPointerUp(PointerEventData eventData)
     {
