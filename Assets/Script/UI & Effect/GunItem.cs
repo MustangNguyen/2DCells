@@ -33,6 +33,7 @@ public class GunItem : SelectItem
         base.IsChoosing(IsChoosing);
     }
     public override void OnPointerClick(PointerEventData eventData){
+        base.OnPointerClick(eventData);
         OnButtonClick();
     }
     public void OnButtonClick()

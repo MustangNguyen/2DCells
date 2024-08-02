@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class EquipmentManager : Singleton<EquipmentManager>
 {
     public SelectItem currentSelectItem;
-
     public GunItem gunItem;
     public UserSetEquipmentInfor currentSet;
     public MutationItem currentMutation;
@@ -21,6 +20,7 @@ public class EquipmentManager : Singleton<EquipmentManager>
     [SerializeField] private TextMeshProUGUI critMultiple;
     [SerializeField] private TextMeshProUGUI bulletName;
     [SerializeField] public string gunOwnedId;
+    [SerializeField] private TextMeshProUGUI loadoutButtonText; 
 
     
     private void Start()
@@ -41,9 +41,17 @@ public class EquipmentManager : Singleton<EquipmentManager>
     }
     public void OnClickBackToMenu()
     {
-        NetworkManager.Instance.PostUpdateUserEquipment(currentSet,(data)=>{
-            SceneLoadManager.Instance.LoadScene(SceneName.MainMenu, false);
-        },(data)=>{});
+        int loadoutCount = DataManager.Instance.UserData.usersetEquipmentInfor.Count;
+        for(int i = 0;i<DataManager.Instance.UserData.usersetEquipmentInfor.Count;i++){
+            NetworkManager.Instance.PostUpdateUserEquipment(DataManager.Instance.UserData.usersetEquipmentInfor[i], (data) =>
+            {
+                loadoutCount--;
+                if (loadoutCount==0){
+                    SceneLoadManager.Instance.LoadScene(SceneName.MainMenu, false);
+                }
+            }, (data) =>{});
+
+        }
     }
     public void UpdateLoadOutUI(){
         currentMutation.mutationInfomation = DataManager.Instance.UserData.userMutationInfor.Find(x=>x.ownerShipId == currentSet.mutationOwnershipId);
@@ -52,6 +60,8 @@ public class EquipmentManager : Singleton<EquipmentManager>
         currentGun1.InitIcon();
         currentGun2.cellgunInfomation = DataManager.Instance.UserData.userGunInformation.Find(x=>x.ownerShipId == currentSet.gunOwnershipId2);
         currentGun2.InitIcon();
+        loadoutButtonText.text = "Loadout " + currentSet.userEquipmentId[currentSet.userEquipmentId.Length - 1];
+
     }
     public void OnChangeCurrentItem(SelectItem incomeSelectItem)
     {

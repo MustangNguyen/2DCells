@@ -45,7 +45,6 @@ public class UserGunInformation
 public class UserSetEquipmentInfor
 {
     public string userEquipmentId;
-    public string userId;
     public string mutationOwnershipId;
     public string gunOwnershipId1;
     public string gunOwnershipId2;

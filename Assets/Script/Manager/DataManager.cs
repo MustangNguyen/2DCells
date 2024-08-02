@@ -65,7 +65,6 @@ public class DataManager : Singleton<DataManager>
         {
             UserSetEquipmentInfor userSetEquipment = new UserSetEquipmentInfor();
             userSetEquipment.userEquipmentId = item["userEquipmentId"].str;
-            userSetEquipment.userId = item["userId"].str;
             userSetEquipment.mutationOwnershipId = item["mutationOwnershipId"].str;
             userSetEquipment.gunOwnershipId1 = item["gunOwnershipId1"].str;
             userSetEquipment.gunOwnershipId2 = item["gunOwnershipId2"].str;
