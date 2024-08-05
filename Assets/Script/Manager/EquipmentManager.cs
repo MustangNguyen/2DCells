@@ -28,7 +28,7 @@ public class EquipmentManager : Singleton<EquipmentManager>
         currentSet = DataManager.Instance.UserData.usersetEquipmentInfor[0];
         UpdateLoadOutUI();
     }
-    public void ShowItemInfor()
+    public void ShowGunInfor()
     {
         CellGunOOP gun = DataManager.Instance.Data.listGun.Find(x=>x.gunId == ((GunItem)currentSelectItem).cellgunInfomation.gunId) ;
         var bullet = DataManager.Instance.Data.listBullet.Find(x => x.bulletId == gun.bulletId);
@@ -38,6 +38,16 @@ public class EquipmentManager : Singleton<EquipmentManager>
         critRate.text = $"Crite rate: {gun.criticalRate}";
         critMultiple.text = $"Crit damage: {gun.criticalMultiple}";
         bulletName.text = $"Bullet: {bullet.bulletName}";
+    }
+    public void ShowMutationInfor()
+    {
+        MutationOOP mutation = DataManager.Instance.Data.listMutations.Find(x=>x.mutationID == ((MutationItem)currentSelectItem).mutationInfomation.mutationId) ;
+        gunName.text = $"Name: {mutation.mutationName}";
+        fireRate.text = $"Heal point: {mutation.maxHealth}";
+        accuracy.text = $"Shield point: {mutation.baseCellProtection.shieldPoint}";
+        critRate.text = $"Shield type: {mutation.baseCellProtection.shieldType}";
+        critMultiple.text = $"Max energy: {mutation.maxEnery}";
+        bulletName.text = $"Move speed: {mutation.moveSpeed}";
     }
     public void OnClickBackToMenu()
     {
@@ -84,7 +94,9 @@ public class EquipmentManager : Singleton<EquipmentManager>
                 currentSelectItem.IsChoosing(true);
             }
             if (currentSelectItem is GunItem)
-                ShowItemInfor();
+                ShowGunInfor();
+            if (currentSelectItem is MutationItem)
+                ShowMutationInfor();
         }
     }
 }

@@ -632,6 +632,7 @@ GameObject:
   - component: {fileID: 294464067}
   - component: {fileID: 294464066}
   - component: {fileID: 294464065}
+  - component: {fileID: 294464068}
   m_Layer: 5
   m_Name: Adjust button
   m_TagString: Untagged
@@ -741,6 +742,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 294464063}
   m_CullTransparentMesh: 1
+--- !u!114 &294464068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294464063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5f46acaf0ead541a00d592873d33b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGround: {fileID: 294464066}
+  colorLight: 0.75
 --- !u!1 &334376202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,6 +2394,7 @@ GameObject:
   - component: {fileID: 971106636}
   - component: {fileID: 971106635}
   - component: {fileID: 971106634}
+  - component: {fileID: 971106637}
   m_Layer: 5
   m_Name: UnEquipt button
   m_TagString: Untagged
@@ -2488,6 +2504,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971106632}
   m_CullTransparentMesh: 1
+--- !u!114 &971106637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971106632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5f46acaf0ead541a00d592873d33b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGround: {fileID: 971106635}
+  colorLight: 0.75
 --- !u!1001 &973280796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3970,6 +4000,7 @@ GameObject:
   - component: {fileID: 1676187033}
   - component: {fileID: 1676187032}
   - component: {fileID: 1676187031}
+  - component: {fileID: 1676187034}
   m_Layer: 5
   m_Name: Dropdown button
   m_TagString: Untagged
@@ -4091,6 +4122,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1676187029}
   m_CullTransparentMesh: 1
+--- !u!114 &1676187034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676187029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5f46acaf0ead541a00d592873d33b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backGround: {fileID: 1676187032}
+  colorLight: 0.75
 --- !u!1 &1772034772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4177,7 +4222,7 @@ GameObject:
   - component: {fileID: 1796677675}
   - component: {fileID: 1796677676}
   m_Layer: 5
-  m_Name: Slot dropdown
+  m_Name: Loadout dropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
